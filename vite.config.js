@@ -11,4 +11,11 @@ export default defineConfig({
             refresh: true,
         }),
     ],
+    build: {
+        outDir: 'public/dist', // Specify the output directory here
+        manifest: true,
+        base: '/',
+        root: './src',
+        assetsDir: 'public/dist', // This can be adjusted based on your project structure
+    },
 });
