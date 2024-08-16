@@ -107,7 +107,7 @@ class PayrollController extends Controller
 
                 'id'      => $request->id,
                 'name'    => $request->name,
-                'salary'  => $request->salary,
+                // 'salary'  => $request->salary,
                 'basic'   => $request->basic,
                 'da'      => $request->da,
                 'hra'     => $request->hra,
@@ -134,7 +134,7 @@ class PayrollController extends Controller
             return redirect()->back();
         }
     }
-
+    
     /** delete record */
     public function deleteRecord(Request $request)
     {

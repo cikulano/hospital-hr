@@ -393,54 +393,54 @@
                                         </span>
                                     @enderror
                                 </div>
-                                <div class="col-sm-6"> 
+                                <!-- <div class="col-sm-6"> 
                                     <label>Net Salary</label>
                                     <input class="form-control" type="text" name="salary" id="e_salary" value="">
-                                </div>
+                                </div> -->
                             </div>
                             <div class="row"> 
                                 <div class="col-sm-6"> 
                                     <h4 class="text-primary">Earnings</h4>
                                     <div class="form-group">
-                                        <label>Basic</label>
-                                        <input class="form-control" type="text" name="basic" id="e_basic" value="">
+                                        <label>THP</label>
+                                        <input class="form-control" type="text" name="basic" id="e_basic" value="" >
                                     </div>
                                     <div class="form-group">
-                                        <label>DA(40%)</label>
+                                        <label>Jam Lembur (Jam)</label>
                                         <input class="form-control" type="text"  name="da" id="e_da" value="">
                                     </div>
                                     <div class="form-group">
-                                        <label>HRA(15%)</label>
+                                        <label>Hari Shift (Hari)</label>
                                         <input class="form-control" type="text"  name="hra" id="e_hra" value="">
                                     </div>
                                     <div class="form-group">
-                                        <label>Conveyance</label>
+                                        <label>Kompensasi Onsite</label>
                                         <input class="form-control" type="text"  name="conveyance" id="e_conveyance" value="">
                                     </div>
                                     <div class="form-group">
-                                        <label>Allowance</label>
+                                        <label>Rate Lembur</label>
                                         <input class="form-control" type="text"  name="allowance" id="e_allowance" value="">
                                     </div>
                                     <div class="form-group">
-                                        <label>Medical  Allowance</label>
+                                        <label>Rate Shift</label>
                                         <input class="form-control" type="text" name="medical_allowance" id="e_medical_allowance" value="">
                                     </div>
                                 </div>
                                 <div class="col-sm-6">  
                                     <h4 class="text-primary">Deductions</h4>
                                     <div class="form-group">
-                                        <label>TDS</label>
+                                        <label>Pajak (%)</label>
                                         <input class="form-control" type="text" name="tds" id="e_tds" value="">
                                     </div> 
                                     <div class="form-group">
-                                        <label>ESI</label>
+                                        <label>Proporsional (Hari)</label>
                                         <input class="form-control" type="text" name="esi" id="e_esi" value="">
                                     </div>
-                                    <div class="form-group">
+                                    <!-- <div class="form-group">
                                         <label>PF</label>
                                         <input class="form-control" type="text" name="pf" id="e_pf" value="">
-                                    </div>
-                                    <div class="form-group">
+                                    </div> -->
+                                    <!-- <div class="form-group">
                                         <label>Leave</label>
                                         <input class="form-control" type="text" name="leave" id="e_leave" value="">
                                     </div>
@@ -451,7 +451,7 @@
                                     <div class="form-group">
                                         <label>Loan</label>
                                         <input class="form-control" type="text" name="labour_welfare" id="e_labour_welfare" value="">
-                                    </div>
+                                    </div> -->
                                 </div>
                             </div>
                             <div class="submit-section">
@@ -463,7 +463,7 @@
             </div>
         </div>
         <!-- /Edit Salary Modal -->
-        
+         
         <!-- Delete Salary Modal -->
         <div class="modal custom-modal fade" id="delete_salary" role="dialog">
             <div class="modal-dialog modal-dialog-centered">
