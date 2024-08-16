@@ -99,8 +99,8 @@
                                     <th hidden></th>
                                     <th hidden></th>
                                     <th>Email</th>
-                                    <th>Join Date</th>
-                                    <th>Role</th>
+                                    <th>Department</th>
+                                    <!-- <th>Role</th> -->
                                     <th>Salary</th>
                                     <th hidden></th>
                                     <th>Payslip</th>
@@ -132,8 +132,8 @@
                                     <td hidden class="prof_tax">{{ $items->prof_tax }}</td>
                                     <td hidden class="labour_welfare">{{ $items->labour_welfare }}</td>
                                     <td>{{ $items->email }}</td>
-                                    <td>{{ $items->join_date }}</td>
-                                    <td>{{ $items->role_name }}</td>
+                                    <td>{{ $items->department }}</td>
+                                    <!-- <td>{{ $items->role_name }}</td> -->
                                     <td>Rp {{ number_format($items->basic, 0, ',', '.') }}</td>
                                     <td hidden class="salary">{{ $items->basic }}</td>
                                     <td><a class="btn btn-sm btn-primary" href="{{ url('form/salary/view/'.$items->user_id) }}" target="_blank">Generate Slip</a></td>
@@ -157,8 +157,8 @@
         </div>
         <!-- /Page Content -->
 
-        <!-- Add Salary Modal -->
-        <div id="add_salary" class="modal custom-modal fade" role="dialog">
+                <!-- Add Salary Modal -->
+                <div id="add_salary" class="modal custom-modal fade" role="dialog">
             <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -188,7 +188,7 @@
                                     @enderror
                                 </div>
                                 <input class="form-control" type="hidden" name="user_id" id="employee_id" readonly>
-                                <div class="col-sm-6"> 
+                                <!-- <div class="col-sm-6"> 
                                     <label>Net Salary</label>
                                     <input class="form-control @error('salary') is-invalid @enderror" type="number" name="salary" id="salary" value="{{ old('salary') }}" placeholder="Enter net salary">
                                     @error('salary')
@@ -196,23 +196,39 @@
                                             <strong>{{ $message }}</strong>
                                         </span>
                                     @enderror
-                                </div>
+                                </div> -->
                             </div>
                             <div class="row"> 
                                 <div class="col-sm-6"> 
                                     <h4 class="text-primary">Earnings</h4>
+                                    
                                     <div class="form-group">
-                                        <label>Basic</label>
-                                        <input class="form-control @error('basic') is-invalid @enderror" type="number" name="basic" id="basic" value="{{ old('basic') }}" placeholder="Enter basic">
+                                        <label>THP</label>
+                                        <input 
+                                            class="form-control @error('basic') is-invalid @enderror" 
+                                            type="text" 
+                                            name="basic" 
+                                            id="basic" 
+                                            value="{{ old('basic') }}" 
+                                            placeholder="Masukan THP"
+                                            inputmode="numeric"
+                                            data-type="currency">
                                         @error('basic')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
                                             </span>
                                         @enderror
                                     </div>
+
                                     <div class="form-group">
-                                        <label>DA(40%)</label>
-                                        <input class="form-control @error('da') is-invalid @enderror" type="number"  name="da" id="da" value="{{ old('da') }}" placeholder="Enter DA(40%)">
+                                        <label>Jam Lembur</label>
+                                        <input 
+                                        class="form-control @error('da') is-invalid @enderror" 
+                                        type="number"  
+                                        name="da" 
+                                        id="da" 
+                                        value="{{ old('da') }}" 
+                                        placeholder="Masukan Jam Lembur">
                                         @error('da')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
@@ -220,8 +236,14 @@
                                         @enderror
                                     </div>
                                     <div class="form-group">
-                                        <label>HRA(15%)</label>
-                                        <input class="form-control @error('hra') is-invalid @enderror" type="number"  name="hra" id="hra" value="{{ old('hra') }}" placeholder="Enter HRA(15%)">
+                                        <label>Hari Shift</label>
+                                        <input 
+                                        class="form-control @error('hra') is-invalid @enderror" 
+                                        type="number"  
+                                        name="hra" 
+                                        id="hra" 
+                                        value="{{ old('hra') }}" 
+                                        placeholder="Masukan Hari Shift">
                                         @error('hra')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
@@ -229,8 +251,15 @@
                                         @enderror
                                     </div>
                                     <div class="form-group">
-                                        <label>Conveyance</label>
-                                        <input class="form-control @error('conveyance') is-invalid @enderror" type="number"  name="conveyance" id="conveyance" value="{{ old('conveyance') }}" placeholder="Enter conveyance">
+                                        <label>Kompensasi Onsite</label>
+                                        <input 
+                                        class="form-control @error('conveyance') is-invalid @enderror" 
+                                        type="text"  
+                                        name="conveyance" 
+                                        id="conveyance" 
+                                        value="{{ old('conveyance') }}" 
+                                        placeholder="Masukan Jumlah Kompensasi"
+                                        data-type="currency">
                                         @error('conveyance')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
@@ -238,8 +267,15 @@
                                         @enderror
                                     </div>
                                     <div class="form-group">
-                                        <label>Allowance</label>
-                                        <input class="form-control @error('allowance') is-invalid @enderror" type="number"  name="allowance" id="allowance" value="{{ old('allowance') }}" placeholder="Enter allowance">
+                                        <label>Masukan Rate Lembur (Per Jam)</label>
+                                        <input 
+                                        class="form-control @error('allowance') is-invalid @enderror" 
+                                        type="text"  
+                                        name="allowance" 
+                                        id="allowance" 
+                                        value="{{ old('allowance') }}" 
+                                        placeholder="Masukan Rate Lembur"
+                                        data-type="currency">
                                         @error('allowance')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
@@ -247,8 +283,15 @@
                                         @enderror
                                     </div>
                                     <div class="form-group">
-                                        <label>Medical  Allowance</label>
-                                        <input class="form-control @error('medical_allowance') is-invalid @enderror" type="number" name="medical_allowance" id="medical_allowance" value="{{ old('medical_allowance') }}" placeholder="Enter medical  allowance">
+                                        <label>Masukan Rate Shift (Per Hari)</label>
+                                        <input 
+                                        class="form-control @error('medical_allowance') is-invalid @enderror" 
+                                        type="text" 
+                                        name="medical_allowance" 
+                                        id="medical_allowance" 
+                                        value="{{ old('medical_allowance') }}" 
+                                        placeholder="Masukan Rate Shift"
+                                        data-type="currency">
                                         @error('medical_allowance')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
@@ -257,10 +300,10 @@
                                     </div>
                                 </div>
                                 <div class="col-sm-6">  
-                                    <h4 class="text-primary">Deductions</h4>
+                                    <h4 class="text-primary">Deduction</h4>
                                     <div class="form-group">
-                                        <label>TDS</label>
-                                        <input class="form-control @error('tds') is-invalid @enderror" type="number" name="tds" id="tds" value="{{ old('tds') }}" placeholder="Enter TDS">
+                                        <label>Pajak (Dalam %)</label>
+                                        <input class="form-control @error('tds') is-invalid @enderror" type="number" name="tds" id="tds" value="{{ old('tds') }}" placeholder="Masukan Pajak %">
                                         @error('tds')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
@@ -268,15 +311,15 @@
                                         @enderror
                                     </div> 
                                     <div class="form-group">
-                                        <label>ESI</label>
-                                        <input class="form-control @error('esi') is-invalid @enderror" type="number" name="esi" id="esi" value="{{ old('esi') }}" placeholder="Enter ESI">
+                                        <label>Proporsional (Dalam Hari)</label>
+                                        <input class="form-control @error('esi') is-invalid @enderror" type="number" name="esi" id="esi" value="{{ old('esi') }}" placeholder="Masukan Hari Proporsional">
                                         @error('esi')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
                                             </span>
                                         @enderror
                                     </div>
-                                    <div class="form-group">
+                                    <!-- <div class="form-group">
                                         <label>PF</label>
                                         <input class="form-control @error('pf') is-invalid @enderror" type="number" name="pf" id="pf" value="{{ old('pf') }}" placeholder="Enter PF">
                                         @error('pf')
@@ -311,7 +354,7 @@
                                                 <strong>{{ $message }}</strong>
                                             </span>
                                         @enderror
-                                    </div>
+                                    </div> -->
                                 </div>
                             </div>
                             <div class="submit-section">
@@ -497,5 +540,67 @@
             $('.e_id').val(_this.find('.id').text());
         });
     </script>
+
+    {{-- Curency js --}}
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Select all input fields with data-type="currency"
+            var currencyInputs = document.querySelectorAll('input[data-type="currency"]');
+
+            currencyInputs.forEach(function(input) {
+                input.addEventListener('keyup', function() {
+                    formatCurrency(this);
+                });
+
+                input.addEventListener('blur', function() {
+                    formatCurrency(this, 'blur');
+                });
+            });
+
+            function formatNumber(n) {
+                // format number 1000000 to 1,234,567
+                return n.replace(/\D/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+            }
+
+            function formatCurrency(input, blur) {
+                var input_val = input.value;
+
+                if (input_val === "") { return; }
+
+                var original_len = input_val.length;
+                var caret_pos = input.selectionStart;
+
+                if (input_val.indexOf(".") >= 0) {
+                    var decimal_pos = input_val.indexOf(".");
+                    var left_side = input_val.substring(0, decimal_pos);
+                    var right_side = input_val.substring(decimal_pos);
+
+                    left_side = formatNumber(left_side);
+                    right_side = formatNumber(right_side);
+
+                    if (blur === "blur") {
+                        right_side += "00";
+                    }
+
+                    right_side = right_side.substring(0, 2);
+                    input_val = "Rp " + left_side + "." + right_side;
+
+                } else {
+                    input_val = formatNumber(input_val);
+                    input_val = "Rp " + input_val;
+
+                    if (blur === "blur") {
+                        input_val += ".00";
+                    }
+                }
+
+                input.value = input_val;
+
+                var updated_len = input_val.length;
+                caret_pos = updated_len - original_len + caret_pos;
+                input.setSelectionRange(caret_pos, caret_pos);
+            }
+        });
+        </script>
     @endsection
 @endsection
