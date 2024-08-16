@@ -8,148 +8,192 @@
             size: A4;
             margin: 2cm;
         }
-
         body {
-            margin: 0;
             font-family: Arial, sans-serif;
-            font-size: 14px;
+            font-size: 12px;
+            line-height: 1.4;
+            color: #333;
         }
-
-        table, tr, td {
-            padding: 10px;
-            border-collapse: collapse;
-        }
-
-        table {
-            width: 100%;
-        }
-
-        td {
-            vertical-align: middle;
-        }
-
-        .container {
-            padding: 0;
-        }
-
-        .payslip-title {
+        .header {
             margin-bottom: 20px;
+        }
+        .logo {
+            width: 100%;
+            max-width: 150px;
+            height: auto;
+        }
+        .company-info {
+            flex: 1;
             text-align: center;
-            text-decoration: underline;
-            text-transform: uppercase;
-            font-size: 20px;
         }
-
-        .personal-info, .salary-info {
-            margin-bottom: 20px;
-        }
-
-        .personal-info table, .salary-info table {
-            border: 1px solid #ddd;
-            width: 100%;
-        }
-
-        .personal-info td, .salary-info td {
-            border: 1px solid #ddd;
-            padding: 12px;
-        }
-
-        .personal-info td {
-            font-weight: bold;
-            font-size: 14px;
-        }
-
-        .salary-info td {
-            text-align: right;
-            font-size: 14px;
-        }
-
-        .salary-info .header {
-            font-weight: bold;
-            text-align: left;
+        .company-info h2 {
+            color: #006400;
+            margin: 0;
             font-size: 16px;
         }
-
+        .divider {
+            border-top: 1px solid #006400;
+            margin: 10px 0;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        td {
+            padding: 5px;
+            border-bottom: 1px solid #eee;
+        }
+        .section-header {
+            background-color: #e0f0e0;
+            font-weight: bold;
+            text-transform: uppercase;
+            padding: 5px;
+        }
+        .amount {
+            text-align: right;
+        }
         .footer {
-            margin-top: 40px;
-            text-align: center;
-            font-size: 14px;
+            margin-top: 20px;
+            text-align: right;
         }
-
-        /* Styling for the two-column layout */
-        .personal-info .info-row {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 10px;
-        }
-
-        .personal-info .info-row div {
-            width: 48%;
-        }
-
-        .personal-info .info-row div strong {
-            display: block;
-            margin-bottom: 5px;
+        .watermark {
+            position: fixed;
+            bottom: 0;
+            right: 0;
+            opacity: 0.1;
+            z-index: -1;
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <!-- Payslip Title -->
-        <div class="payslip-title">
-            <h4>Payslip for the month of {{ \Carbon\Carbon::now()->format('F Y') }}</h4>
-        </div>
+    <div class="header">
+        <table width="100%">
+            <tr>
+                <td width="30%" style="vertical-align: middle;">
+                    <img src="D:\Sy\hr_ms_laravel_11\public\assets\img\logo.png" alt="Company Logo" class="logo">
+                </td>
+                <td width="80%" style="vertical-align: middle;">
+                    <div class="company-info">
+                        <h2>PT. PERTAMINA BINA MEDIKA</h2>
+                        <h2>(P E R T A M E D I K A)</h2>
+                        <h2>S L I P U P A H</h2>
+                    </div>
+                </td>
+            </tr>
+        </table>
+    </div>
 
-        <!-- Personal Information -->
-        <div class="personal-info">
-            <h4>Personal Information</h4>
-            <table>
-                <tr>
-                    <td>Name:</td>
-                    <td>{{ $users->name }}</td>
-                    <td>NoPeg:</td>
-                    <td>{{ $users->user_id }}</td>
-                </tr>
-                <tr>
-                    <td>Position:</td>
-                    <td>{{ $users->position }}</td>
-                    <td>Department:</td>
-                    <td>{{ $users->department }}</td>
-                </tr>
-            </table>
-        </div>
+    <div class="divider"></div>
 
-        <!-- Salary Information -->
-        <div class="salary-info">
-            <h4>Salary Details</h4>
-            <table>
-                <tr>
-                    <td class="header">Description</td>
-                    <td class="header">Amount</td>
-                </tr>
-                <tr>
-                    <td>Basic Salary</td>
-                    <td>Rp {{ number_format($users->basic, 2) }}</td>
-                </tr>
-                <tr>
-                    <td>House Rent Allowance (H.R.A.)</td>
-                    <td>Rp {{ number_format($users->hra, 2) }}</td>
-                </tr>
-                <tr>
-                    <td>Other Allowances</td>
-                    <td>Rp {{ number_format($users->basic, 2) }}</td>
-                </tr>
-                <tr>
-                    <td><strong>Total Salary</strong></td>
-                    <td><strong>Rp {{ number_format($users->basic, 2) }}</strong></td>
-                </tr>
-            </table>
-        </div>
+    <!-- Personal Information -->
+    <table>
+        <tr>
+            <td>Nopeg</td>
+            <td>: {{ $users->user_id }}</td>
+            <td>Nama Pekerja</td>
+            <td>: {{ $users->name }}</td>
+        </tr>
+        <tr>
+            <td>Fungsi</td>
+            <td>: {{ $users->position }}</td>
+            <td>Unit</td>
+            <td>: {{ $users->department }}</td>
+        </tr>
+        <tr>
+            <td>Periode SLIP Upah</td>
+            <td colspan="3">: {{ \Carbon\Carbon::now()->locale('id')->isoFormat('MMMM YYYY') }}</td>
+        </tr>
+    </table>
 
-        <!-- Footer -->
-        <div class="footer">
-            <p>SDM RSPJ</p>
-        </div>
+    <div class="divider"></div>
+
+    <!-- Keep your existing salary and deduction tables here -->
+    <!-- Salary Information -->
+    
+    <?php
+        $lembur = (int)$users->da * (int)$users->conveyance;
+        $shift = (int)$users->hra * (int)$users->allowance;
+        $onsite = (int)$users->medical_allowance;
+        $totalPendapatan = (int)$users->basic + $lembur + $shift + $onsite
+    ?>
+
+    <div class="salary-info">
+        <h4 class="section-header">Informasi Pendapatan</h4>
+        <table>
+            <tr>
+                <td class="salary-info-label">THP</td>
+                <td class="salary-info-value">Rp {{ number_format($users->basic) }}</td>
+            </tr>
+            <tr>
+                <td class="salary-info-label">Tunjangan Lembur</td>
+                <td class="salary-info-value">Rp {{ number_format($lembur) }}</td>
+            </tr>
+            <tr>
+                <td class="salary-info-label">Tunjangan Shift</td>
+                <td class="salary-info-value">Rp {{ number_format($shift) }}</td>
+            </tr>
+            <tr>
+                <td class="salary-info-label">Tunjangan OnSite</td>
+                <td class="salary-info-value">Rp {{ number_format($onsite) }}</td>
+            </tr>
+            <tr>
+                <td class="salary-info-label"><strong>Total Salary</strong></td>
+                <td class="salary-info-value"><strong>Rp {{ number_format($totalPendapatan) }}</strong></td>
+            </tr>
+        </table>
+    </div>
+
+    <?php
+        $pajak = ((int)$users->tds/100) * (int)$users->basic;
+        $JHT = (int)$users->basic * 0.02;
+        $JP = (int)$users->basic * 0.01;
+        $BPJSKes = (int)$users->basic * 0.01;
+        $totalPotongan = $pajak + $JHT + $JP + $BPJSKes;
+        $total = $totalPendapatan - $totalPotongan
+    ?>
+
+    <!-- Potongan Information -->
+    <div class="salary-info">
+        <h4 class="section-header">Informasi Potongan</h4>
+        <table>
+            <tr>
+                <td class="salary-info-label"> Iuran Pajak {{ ($users->tds) }} %</td>
+                <td class="salary-info-value">Rp {{ number_format($pajak) }}</td>
+            </tr>
+            <tr>
+                <td class="salary-info-label">Iuran JHT 2%</td>
+                <td class="salary-info-value">Rp {{ number_format($JHT) }}</td>
+            </tr>
+            <tr>
+                <td class="salary-info-label">Iuran JP 1%</td>
+                <td class="salary-info-value">Rp {{ number_format($JP) }}</td>
+            </tr>
+            <tr>
+                <td class="salary-info-label">Iuran BPJS Kesehatan 1%</td>
+                <td class="salary-info-value">Rp {{ number_format($BPJSKes) }}</td>
+            </tr>
+            <tr>
+                <td class="salary-info-label"><strong>Total Potongan</strong></td>
+                <td class="salary-info-value"><strong>Rp {{ number_format($totalPotongan) }}</strong></td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="section-header">
+        <table>
+            <tr>
+                <td class="salary-info-label"><strong>Total Pendapatan</strong></td>
+                <td class="salary-info-value"><strong>Rp {{ number_format($total) }}</strong></td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="footer">
+        SDM RSPJ
+    </div>
+
+    <div class="watermark">
+        <img src="D:\Sy\hr_ms_laravel_11\public\assets\img\logo.png" alt="Watermark">
     </div>
 </body>
 </html>

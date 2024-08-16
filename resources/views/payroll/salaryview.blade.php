@@ -66,65 +66,75 @@
                                         <h4 class="m-b-10"><strong>Earnings</strong></h4>
                                         <table class="table table-bordered">
                                             <tbody>
-                                                <?php
-                                                    $a =  (int)$users->basic;
-                                                    $b =  (int)$users->hra;
-                                                    $c =  (int)$users->conveyance;
-                                                    $e =  (int)$users->allowance;
-                                                    $Total_Earnings   = $a + $b + $c + $e;
-                                                ?>
-                                                <tr>
-                                                    <td><strong>Basic Salary</strong> <span class="float-right">${{ $users->basic }}</span></td>
-                                                </tr>
-                                                <tr>
-                                                    <td><strong>House Rent Allowance (H.R.A.)</strong> <span class="float-right">${{ $users->hra }}</span></td>
-                                                </tr>
-                                                <tr>
-                                                    <td><strong>Conveyance</strong> <span class="float-right">${{ $users->conveyance }}</span></td>
-                                                </tr>
-                                                <tr>
-                                                    <td><strong>Other Allowance</strong> <span class="float-right">${{ $users->allowance }}</span></td>
-                                                </tr>
-                                                <tr>
-                                                    <td><strong>Total Earnings</strong> <span class="float-right"><strong>$ <?php echo $Total_Earnings ?></strong></span></td>
-                                                </tr>
+                                            <?php
+                                                $lembur = (int)$users->da * (int)$users->conveyance;
+                                                $shift = (int)$users->hra * (int)$users->allowance;
+                                                $onsite = (int)$users->medical_allowance;
+                                                $totalPendapatan = (int)$users->basic + $lembur + $shift + $onsite
+                                            ?>
+                                            <tr>
+                                                <td><strong>THP
+                                                <span class="float-right">Rp {{ number_format($users->basic) }}</span></td></strong>
+                                            </tr>
+                                            <tr>
+                                                <td><strong>Tunjangan Lembur
+                                                <span class="float-right">Rp {{ number_format($lembur) }}</span></td></strong>
+                                            </tr>
+                                            <tr>
+                                                <td><strong>Tunjangan Shift
+                                                <span class="float-right">Rp {{ number_format($shift) }}</span></td></strong>
+                                            </tr>
+                                            <tr>
+                                                <td><strong>Tunjangan OnSite
+                                                <span class="float-right">Rp {{ number_format($onsite) }}</span></td></strong>
+                                            </tr>
+                                            <tr>
+                                                <td><strong>Total Salary</strong>
+                                                <span class="float-right"><strong>Rp {{ number_format($totalPendapatan) }}</strong></span></td>
+                                            </tr>
                                             </tbody>
                                         </table>
                                     </div>
                                 </div>
                                 <div class="col-sm-6">
                                     <div>
-                                        <h4 class="m-b-10"><strong>Deductions</strong></h4>
+                                        <h4 class="m-b-10"><strong>Potongan</strong></h4>
                                         <table class="table table-bordered">
                                             <tbody>
-                                                <?php
-                                                    $a =  (int)$users->tds;
-                                                    $b =  (int)$users->prof_tax;
-                                                    $c =  (int)$users->esi;
-                                                    $e =  (int)$users->labour_welfare;
-                                                    $Total_Deductions   = $a + $b + $c + $e;
-                                                ?>
-                                                <tr>
-                                                    <td><strong>Tax Deducted at Source (T.D.S.)</strong> <span class="float-right">${{ $users->tds }}</span></td>
-                                                </tr>
-                                                <tr>
-                                                    <td><strong>Provident Fund</strong> <span class="float-right">${{ $users->prof_tax }}</span></td>
-                                                </tr>
-                                                <tr>
-                                                    <td><strong>ESI</strong> <span class="float-right">${{ $users->esi }}</span></td>
-                                                </tr>
-                                                <tr>
-                                                    <td><strong>Loan</strong> <span class="float-right">${{ $users->labour_welfare }}</span></td>
-                                                </tr>
-                                                <tr>
-                                                    <td><strong>Total Deductions</strong> <span class="float-right"><strong>$<?php echo $Total_Deductions;?></strong></span></td>
-                                                </tr>
+                                            <?php
+                                                $pajak = ((int)$users->tds/100) * (int)$users->basic;
+                                                $JHT = (int)$users->basic * 0.02;
+                                                $JP = (int)$users->basic * 0.01;
+                                                $BPJSKes = (int)$users->basic * 0.01;
+                                                $totalPotongan = $pajak + $JHT + $JP + $BPJSKes;
+                                                $total = $totalPendapatan - $totalPotongan
+                                            ?>
+                                            <tr>
+                                                <td><strong>Iuran Pajak {{ ($users->tds) }} %
+                                                <span class="float-right">Rp {{ number_format($pajak) }}</span></td></strong>
+                                            </tr>
+                                            <tr>
+                                                <td><strong>Iuran JHT 2%
+                                                <span class="float-right">Rp {{ number_format($JHT) }}</span></td></strong>
+                                            </tr>
+                                            <tr>
+                                                <td><strong>Iuran JP 1%
+                                                <span class="float-right">Rp {{ number_format($JP) }}</span></td></strong>
+                                            </tr>
+                                            <tr>
+                                                <td><strong>Iuran BPJS Kesehatan 1%
+                                                <span class="float-right">Rp {{ number_format($BPJSKes) }}</span></td></strong>
+                                            </tr>
+                                            <tr>
+                                                <td><strong>Total Potongan</strong>
+                                                <span class="float-right"><strong>Rp {{ number_format($totalPotongan) }}</strong></span></td>
+                                            </tr>
                                             </tbody>
                                         </table>
                                     </div>
                                 </div>
                                 <div class="col-sm-12" >
-                                    <p><strong>Net Salary: ${{ $users->salary }}</strong> (Fifty nine thousand six hundred and ninety eight only.)</p>
+                                    <p><strong>Net Salary: Rp {{ number_format($total) }}</strong></p>
                                 </div>
                             </div>
                         </div>
