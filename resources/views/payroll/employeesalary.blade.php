@@ -25,7 +25,7 @@
             </div>
 
             <!-- Search Filter -->
-            <div class="row filter-row">
+            <!-- <div class="row filter-row">
                 <div class="col-sm-6 col-md-3 col-lg-3 col-xl-2 col-12">  
                     <div class="form-group form-focus">
                         <input type="text" class="form-control floating">
@@ -72,8 +72,10 @@
                 <div class="col-sm-6 col-md-3 col-lg-3 col-xl-2 col-12">  
                     <a href="#" class="btn btn-success btn-block"> Search </a>  
                 </div>     
-            </div>
-            <!-- /Search Filter -->  
+            </div> -->
+            <!-- /Search Filter --> 
+             
+            <!-- /Page Content -->
             <div class="row">
                 <div class="col-md-12">
                     <div class="table-responsive">
@@ -132,8 +134,8 @@
                                     <td>{{ $items->email }}</td>
                                     <td>{{ $items->join_date }}</td>
                                     <td>{{ $items->role_name }}</td>
-                                    <td>${{ $items->salary }}</td>
-                                    <td hidden class="salary">{{ $items->salary }}</td>
+                                    <td>Rp {{ number_format($items->basic, 0, ',', '.') }}</td>
+                                    <td hidden class="salary">{{ $items->basic }}</td>
                                     <td><a class="btn btn-sm btn-primary" href="{{ url('form/salary/view/'.$items->user_id) }}" target="_blank">Generate Slip</a></td>
                                     <td class="text-right">
                                         <div class="dropdown dropdown-action">

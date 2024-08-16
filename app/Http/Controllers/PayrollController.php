@@ -76,15 +76,17 @@ class PayrollController extends Controller
     {
         $users = DB::table('users')
                 ->join('staff_salaries', 'users.user_id', 'staff_salaries.user_id')
-                ->join('profile_information', 'users.user_id', 'profile_information.user_id')
-                ->select('users.*', 'staff_salaries.*','profile_information.*')
+                // ->join('profile_information', 'users.user_id', 'profile_information.user_id')
+                ->select('users.*', 'staff_salaries.*')
                 ->where('staff_salaries.user_id',$user_id)->first();
-        if (!empty($users)) {
-            return view('payroll.salaryview',compact('users'));
-        } else {
-            Toastr::warning('Please update information user :)','Warning');
-            return redirect()->route('profile_user');
-        }
+        // if (!empty($users)) {
+        //     return view('payroll.salaryview',compact('users'));
+        // } else {
+        //     Toastr::warning('Please update information user :)','Warning');
+        //     return redirect()->route('profile_user');
+        // }
+
+        return view('payroll.salaryview',compact('users'));
     }
 
     /** update record */
@@ -155,12 +157,18 @@ class PayrollController extends Controller
         $user_id = $request->user_id;
         $users = DB::table('users')
             ->join('staff_salaries', 'users.user_id', 'staff_salaries.user_id')
-            ->join('profile_information', 'users.user_id', 'profile_information.user_id')
-            ->select('users.*', 'staff_salaries.*','profile_information.*')
-            ->where('staff_salaries.user_id',$user_id)->first();
+            ->select('users.*', 'staff_salaries.*')
+            ->where('staff_salaries.user_id', $user_id)
+            ->first();
+    
+        // Change paper size to A4 and orientation to portrait
+        $pdf = PDF::loadView('report_template.salary_pdf', compact('users'))
+                   ->setPaper('a4', 'portrait');
+        
+        // Construct the PDF file name
+        $fileName = "Slip Upah {$users->name}.pdf";
 
-            $pdf = PDF::loadView('report_template.salary_pdf',compact('users'))->setPaper('a4', 'landscape');
-            return $pdf->download('ReportDetailSalary'.'.pdf');
+        return $pdf->download($fileName);
     }
 
     /** export Excel */

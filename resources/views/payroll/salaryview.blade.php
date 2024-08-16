@@ -35,11 +35,11 @@
                                     @if(!empty($users->avatar))
                                     <img src="{{ URL::to('/assets/images/'. $users->avatar) }}" class="inv-logo" alt="{{ $users->name }}">
                                     @endif
-                                    <ul class="list-unstyled mb-0">
+
+                                    <!-- <ul class="list-unstyled mb-0">
                                         <li>{{ $users->name }}</li>
-                                        <li>{{ $users->address }}</li>
-                                        <li>{{ $users->country }}</li>
-                                    </ul>
+                                    </ul> -->
+                                    
                                 </div>
                                 <div class="col-sm-6 m-b-20">
                                     <div class="invoice-details">
@@ -56,7 +56,7 @@
                                         <li><h5 class="mb-0"><strong>{{ $users->name }}</strong></h5></li>
                                         <li><span>{{ $users->position }}</span></li>
                                         <li>Employee ID: {{ $users->user_id }}</li>
-                                        <li>Joining Date: {{ $users->join_date }}</li>
+                                        <!-- <li>Joining Date: {{ $users->join_date }}</li> -->
                                     </ul>
                                 </div>
                             </div>

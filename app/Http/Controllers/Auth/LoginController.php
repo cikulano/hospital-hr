@@ -103,25 +103,13 @@ class LoginController extends Controller
     /** logout and forget session */
     public function logout(Request $request)
     {
-        $dt         = Carbon::now();
-        $todayDate  = $dt->toDayDateTimeString();
-
-        $activityLog = ['name'=> Session::get('name'),'email'=> Session::get('email'),'description' => 'Has log out','date_time'=> $todayDate,];
-        DB::table('activity_logs')->insert($activityLog);
-        // forget login session
-        $request->session()->forget('name');
-        $request->session()->forget('email');
-        $request->session()->forget('user_id');
-        $request->session()->forget('join_date');
-        $request->session()->forget('phone_number');
-        $request->session()->forget('status');
-        $request->session()->forget('role_name');
-        $request->session()->forget('avatar');
-        $request->session()->forget('position');
-        $request->session()->forget('department');
-        $request->session()->flush();
+        // Logout the user
         Auth::logout();
-        Toastr::success('Logout successfully :)','Success');
+        
+        // Flush the session (this will remove all session data)
+        $request->session()->flush();
+        
+        Toastr::success('Logout successful :)', 'Success');
         return redirect('login');
     }
 

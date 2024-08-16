@@ -1,29 +1,22 @@
 <!DOCTYPE html>
 <html>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <title>Employee Salary Report</title>
     <style>
         @page {
-            footer: page-footer;
-            margin: 0;
-            margin-top: 20px;
-            margin-bottom: 50px;
-        }
-
-        @page :first {
-            margin-top: 0;
+            size: A4;
+            margin: 2cm;
         }
 
         body {
             margin: 0;
-            font-family: Khmeros;
+            font-family: Arial, sans-serif;
+            font-size: 14px;
         }
 
-        table,
-        tr,
-        td {
-            padding: 5px;
+        table, tr, td {
+            padding: 10px;
             border-collapse: collapse;
         }
 
@@ -32,284 +25,131 @@
         }
 
         td {
-            vertical-align: center;
-        }
-
-        .page-break-before {
-            page-break-before: always;
+            vertical-align: middle;
         }
 
         .container {
-            padding: 0 10pt;
+            padding: 0;
         }
 
-        main .container {
-            margin-top: 2em;
-        }
-
-        main h2 {
-            margin: 0 0 .8em;
-            page-break-after: avoid;
-        }
-
-        main p,
-        main .table-wrapper {
-            margin: 0 0 1em;
-        }
-
-        .clearfix {
-            clear: botd;
-        }
-
-        .text-center {
-            text-align: center;
-        }
-
-        .vertical-bar {
-            display: block;
-            width: 100px;
-            border-bottom: 1px solid #45B6FE;
-            margin: 0 auto;
-        }
-
-        .col1 {
-            width: 8.33333%;
-        }
-
-        .col2 {
-            width: 16.66667%;
-        }
-
-        .col3 {
-            width: 25%;
-        }
-
-        .col4 {
-            width: 33.33333%;
-        }
-
-        .col5 {
-            width: 41.66667%;
-        }
-
-        .col6 {
-            width: 50%;
-        }
-
-        .col7 {
-            width: 58.33333%;
-        }
-
-        .col8 {
-            width: 66.66667%;
-        }
-
-        .col9 {
-            width: 75%;
-        }
-
-        .col10 {
-            width: 83.33333%;
-        }
-
-        .col11 {
-            width: 91.66667%;
-        }
-
-        .col12 {
-            width: 100%;
-        }
-
-        .request-payment label {
-            font-size: 14px;
-            font-weight: bold;
-            text-transform: uppercase;
-        }
-
-        .request-payment span {
-            font-size: 12px;
-            color: gray;
-            font-style: italic;
-        }
-
-        .currency {
-            margin-top: 5px;
-            border: 1px solid;
-            display: flex;
-        }
-
-        .currency .cur-label {
-            border-right: 1px solid;
-            padding: 5px;
-            font-size: 12px;
-            background-color: #dad0be;
-        }
-
-        .currency .sub-cur-label {
-            width: 100px;
-            padding: 5px;
-            text-align: center;
-            font-size: 12px;
-        }
-
-
-        .table-border td {
-            border: 1px solid #ddd;
-            padding: 5px;
-            text-align: center;
-            vertical-align: middle;
-        }
-
-        .margin-top-10 {
-            margin-top: 10px;
-        }
-
-        .main {
-            padding: 10px;
-        }
-
-        .department {
-            width: 250px;
-            border: 1px solid;
-        }
-
-        ul {
-            padding: 10px;
-            margin: 0;
-        }
-
-        ul li {
-            list-style: none;
-        }
-
-        .vertical-middle td{
-            vertical-align: middle;
-            text-align: center;
-        }
-        .table-left td{
-            text-align: left;
-        }
-        .no-border{
-            border-style: hidden !important;
-        }
-        .table-space{
-            background-color: white !important;
-            border-top: hidden !important;
-            border-bottom: hidden !important;
-            width: 1% !important;
-        }
-        .table-header{
-            vertical-align: middle !important;
-            font-weight: bold !important;
-            font-size: 13px !important;
-        }
-        .td-border-top{
-            border-top: 1px solid #45B6FE;
-        }
-        .td-border-left{
-            border-left: 1px solid #45B6FE;
-        }
-        .td-border-right{
-            border-right: 1px solid #45B6FE;
-        }
-        .td-border-bottom{
-            border-bottom: 1px solid #45B6FE;
-        }
-        
         .payslip-title {
             margin-bottom: 20px;
             text-align: center;
             text-decoration: underline;
             text-transform: uppercase;
-        }
-        
-        h4, .h4 {
-            font-size: 1.125rem;
+            font-size: 20px;
         }
 
-        .row {
-            display: -ms-flexbox;
-            display: flex;
-            -ms-flex-wrap: wrap;
-            flex-wrap: wrap;
-            margin-right: -15px;
-            margin-left: -15px;
-        }
-        .m-b-20 {
-            margin-bottom: 20px !important;
-        }
-        .inv-logo {
-            height: auto;
+        .personal-info, .salary-info {
             margin-bottom: 20px;
-            max-height: 100px;
-            width: auto;
-        }
-        .invoice-details, .invoice-payment-details > li span {
-            float: right;
-            text-align: right;
-        }
-        .list-unstyled {
-            padding-left: 0;
-            list-style: none;
-        }
-        li {
-            display: list-item;
-            text-align: -webkit-match-parent;
         }
 
+        .personal-info table, .salary-info table {
+            border: 1px solid #ddd;
+            width: 100%;
+        }
+
+        .personal-info td, .salary-info td {
+            border: 1px solid #ddd;
+            padding: 12px;
+        }
+
+        .personal-info td {
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        .salary-info td {
+            text-align: right;
+            font-size: 14px;
+        }
+
+        .salary-info .header {
+            font-weight: bold;
+            text-align: left;
+            font-size: 16px;
+        }
+
+        .footer {
+            margin-top: 40px;
+            text-align: center;
+            font-size: 14px;
+        }
+
+        /* Styling for the two-column layout */
+        .personal-info .info-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+
+        .personal-info .info-row div {
+            width: 48%;
+        }
+
+        .personal-info .info-row div strong {
+            display: block;
+            margin-bottom: 5px;
+        }
     </style>
 </head>
-
-<body style="font-size: 10px;">
+<body>
     <div class="container">
-        <table>
-            <tr style="text-align: center;font-weight: bolder;">
-                <td><h4 class="payslip-title">Payslip for the month of {{ \Carbon\Carbon::now()->format('M') }}   {{ \Carbon\Carbon::now()->year }}</h4></td>
-            </tr>
-            <tr>
-                <td>
-                    <div class="row">
-                        <div class="col-sm-6 m-b-20">
-                           Logo
-                            <ul class="list-unstyled mb-0">
-                                <li>{{ $users->name }}</li>
-                                <li>{{ $users->address }}</li>
-                                <li>{{ $users->country }}</li>
-                            </ul>
-                        </div>
-                        {{-- <div class="col-sm-6 m-b-20">
-                            <div class="invoice-details">
-                                <h3 class="text-uppercase">Payslip #49029</h3>
-                                <ul class="list-unstyled">
-                                    <li>Salary Month: <span>{{ \Carbon\Carbon::now()->format('M') }}  , {{ \Carbon\Carbon::now()->year }} </span></li>
-                                </ul>
-                                <br>
-                            </div>
-                        </div> --}}
-                    </div>
-                </td>
-            </tr>
-        </table>
+        <!-- Payslip Title -->
+        <div class="payslip-title">
+            <h4>Payslip for the month of {{ \Carbon\Carbon::now()->format('F Y') }}</h4>
+        </div>
+
+        <!-- Personal Information -->
+        <div class="personal-info">
+            <h4>Personal Information</h4>
+            <table>
+                <tr>
+                    <td>Name:</td>
+                    <td>{{ $users->name }}</td>
+                    <td>NoPeg:</td>
+                    <td>{{ $users->user_id }}</td>
+                </tr>
+                <tr>
+                    <td>Position:</td>
+                    <td>{{ $users->position }}</td>
+                    <td>Department:</td>
+                    <td>{{ $users->department }}</td>
+                </tr>
+            </table>
+        </div>
+
+        <!-- Salary Information -->
+        <div class="salary-info">
+            <h4>Salary Details</h4>
+            <table>
+                <tr>
+                    <td class="header">Description</td>
+                    <td class="header">Amount</td>
+                </tr>
+                <tr>
+                    <td>Basic Salary</td>
+                    <td>Rp {{ number_format($users->basic, 2) }}</td>
+                </tr>
+                <tr>
+                    <td>House Rent Allowance (H.R.A.)</td>
+                    <td>Rp {{ number_format($users->hra, 2) }}</td>
+                </tr>
+                <tr>
+                    <td>Other Allowances</td>
+                    <td>Rp {{ number_format($users->basic, 2) }}</td>
+                </tr>
+                <tr>
+                    <td><strong>Total Salary</strong></td>
+                    <td><strong>Rp {{ number_format($users->basic, 2) }}</strong></td>
+                </tr>
+            </table>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            <p>SDM RSPJ</p>
+        </div>
     </div>
-    <div class="container" style="padding-top: 8px; ">
-        <table class="table-border">
-            <tr style="font-weight: bold;">
-                <td><strong style="float: left;">Basic Salary</strong> <span style="float: right;">$4</span></td>
-                <td><strong style="float: left;">Basic Salary</strong> <span style="float: right;">$4</span></td>
-                <td>Manual Title</td>
-            </tr>
-            <tr style="font-weight: bold;">
-                <td><strong style="float: left;">House Rent Allowance (H.R.A.)</strong> <span style="float: right;">$4</span></td>
-                <td><strong style="float: left;">Basic Salary</strong> <span style="float: right;">$4</span></td>
-                <td>Manual Title</td>
-            </tr>
-            <tr style="font-weight: bold;">
-                <td><strong style="float: left;">House Rent Allowance (H.R.A.)</strong> <span style="float: right;">$4</span></td>
-                <td><strong style="float: left;">Basic Salary</strong> <span style="float: right;">$4</span></td>
-                <td>Manual Title</td>
-            </tr>
-        </table>
-    </div>
-   
 </body>
 </html>
