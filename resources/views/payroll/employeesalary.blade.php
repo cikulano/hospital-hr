@@ -41,6 +41,35 @@
         font-size: 16px; /* Adjust icon size as needed */
     }
 
+    .dropdown-menu {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        z-index: 1000;
+        display: none;
+        float: left;
+        min-width: 10rem;
+        padding: .5rem 0;
+        margin: .125rem 0 0;
+        font-size: 1rem;
+        color: #212529;
+        text-align: left;
+        list-style: none;
+        background-color: #fff;
+        background-clip: padding-box;
+        border: 1px solid rgba(0,0,0,.15);
+        border-radius: .25rem;
+    }
+    .dropdown-menu li {
+        padding: .25rem 1.5rem;
+        cursor: pointer;
+    }
+    .dropdown-menu li:hover {
+        background-color: #f8f9fa;
+    }
+    .text-muted {
+        color: #6c757d;
+    }
 
     </style>
 
@@ -65,54 +94,19 @@
             </div>
 
             <!-- Search Filter -->
-            <!-- <div class="row filter-row">
+            <div class="row filter-row">
                 <div class="col-sm-6 col-md-3 col-lg-3 col-xl-2 col-12">  
                     <div class="form-group form-focus">
-                        <input type="text" class="form-control floating">
-                        <label class="focus-label">Employee Name</label>
+                        <input type="text" id="employeeSearch" class="form-control floating" autocomplete="off">
+                        <label class="focus-label">Search Employee</label>
+                        <ul id="employeeList" class="dropdown-menu" style="display:none;"></ul>
                     </div>
                 </div>
-                <div class="col-sm-6 col-md-3 col-lg-3 col-xl-2 col-12">  
-                    <div class="form-group form-focus select-focus">
-                        <select class="select floating"> 
-                            <option value=""> -- Select -- </option>
-                            <option value="">Employee</option>
-                            <option value="1">Manager</option>
-                        </select>
-                        <label class="focus-label">Role</label>
-                    </div>
-                </div>
-                <div class="col-sm-6 col-md-3 col-lg-3 col-xl-2 col-12"> 
-                    <div class="form-group form-focus select-focus">
-                        <select class="select floating"> 
-                            <option> -- Select -- </option>
-                            <option> Pending </option>
-                            <option> Approved </option>
-                            <option> Rejected </option>
-                        </select>
-                        <label class="focus-label">Leave Status</label>
-                    </div>
-                </div>
-                <div class="col-sm-6 col-md-3 col-lg-3 col-xl-2 col-12">  
-                    <div class="form-group form-focus">
-                        <div class="cal-icon">
-                            <input class="form-control floating datetimepicker" type="text">
-                        </div>
-                        <label class="focus-label">From</label>
-                    </div>
-                </div>
-                <div class="col-sm-6 col-md-3 col-lg-3 col-xl-2 col-12">  
-                    <div class="form-group form-focus">
-                        <div class="cal-icon">
-                            <input class="form-control floating datetimepicker" type="text">
-                        </div>
-                        <label class="focus-label">To</label>
-                    </div>
-                </div>
+                                
                 <div class="col-sm-6 col-md-3 col-lg-3 col-xl-2 col-12">  
                     <a href="#" class="btn btn-success btn-block"> Search </a>  
                 </div>     
-            </div> -->
+            </div>
             <!-- /Search Filter --> 
              
             <!-- /Page Content -->
@@ -156,7 +150,7 @@
                                             <a href="{{ url('employee/profile/'.$items->user_id) }}">{{ $items->name }}<span>{{ $items->position }}</span></a>
                                         </h2>
                                     </td>
-                                    <td class="text-center">{{ $items->user_id }}</td>
+                                    <td >{{ $items->user_id }}</td>
                                     <td hidden class="id">{{ $items->id }}</td>
                                     <td hidden class="name">{{ $items->name }}</td>
                                     <td hidden class="basic">{{ $items->basic }}</td>
@@ -656,6 +650,60 @@
                 input.setSelectionRange(caret_pos, caret_pos);
             }
         });
-        </script>
+    </script>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+    $(document).ready(function() {
+        var $table = $('table.datatable');
+        var $rows = $table.find('tbody tr');
+
+        $('#employeeSearch').on('input', function() {
+            var input = $(this).val().toLowerCase();
+            var results = [];
+
+            $rows.each(function() {
+                var $row = $(this);
+                var name = $row.find('td:eq(0) a:last').text().toLowerCase();
+                var noPeg = $row.find('td:eq(1)').text().toLowerCase();
+
+                if (name.indexOf(input) > -1 || noPeg.indexOf(input) > -1) {
+                    results.push({ name: name, noPeg: noPeg, $element: $row });
+                }
+            });
+
+            var $list = $('#employeeList');
+            $list.empty();
+
+            if (results.length > 0 && input.length > 0) {
+                $.each(results, function(i, result) {
+                    $('<li>', {
+                        html: result.name + ' <span class="text-muted">(' + result.noPeg + ')</span>',
+                        click: function() {
+                            $('#employeeSearch').val(result.name + ' (' + result.noPeg + ')');
+                            $list.hide();
+                            $rows.hide();
+                            result.$element.show();
+                        }
+                    }).appendTo($list);
+                });
+                $list.show();
+            } else {
+                $list.hide();
+                if (input.length === 0) {
+                    $rows.show();
+                } else {
+                    $rows.hide();
+                }
+            }
+        });
+
+        $(document).on('click', function(e) {
+            if (!$(e.target).closest('.form-group').length) {
+                $('#employeeList').hide();
+            }
+        });
+    });
+    </script>
     @endsection
 @endsection

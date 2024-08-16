@@ -10,6 +10,7 @@ use Maatwebsite\Excel\Facades\Excel;
 use App\Models\StaffSalary;
 use Brian2694\Toastr\Facades\Toastr;
 
+
 class PayrollController extends Controller
 {
     /** view page salary */
@@ -134,7 +135,7 @@ class PayrollController extends Controller
             return redirect()->back();
         }
     }
-    
+
     /** delete record */
     public function deleteRecord(Request $request)
     {
@@ -191,5 +192,6 @@ class PayrollController extends Controller
             ->where('staff_salaries.user_id',$user_id)->get();
             
             return Excel::download(new SalaryExcel($user_id),'ReportDetailSalary'.'.xlsx');
-    }
+    }  
+
 }
