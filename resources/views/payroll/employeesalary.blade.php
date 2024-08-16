@@ -4,6 +4,46 @@
     {{-- message --}}
     {!! Toastr::message() !!}
 
+    <style>
+
+    .btn-edit, .btn-delete {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 30px; /* Adjust size as needed */
+        height: 30px; /* Adjust size as needed */
+        border-radius: 50%;
+        color: #fff;
+        font-size: 14px; /* Adjust size as needed */
+        text-align: center;
+        line-height: 30px; /* Adjust to center icon vertically */
+        text-decoration: none;
+        transition: background-color 0.3s;
+    }
+
+    .btn-edit {
+        background-color: #007bff; /* Blue color */
+    }
+
+    .btn-edit:hover {
+        background-color: #0056b3; /* Darker blue for hover */
+    }
+
+    .btn-delete {
+        background-color: #dc3545; /* Red color */
+    }
+
+    .btn-delete:hover {
+        background-color: #c82333; /* Darker red for hover */
+    }
+
+    .btn-edit i, .btn-delete i {
+        font-size: 16px; /* Adjust icon size as needed */
+    }
+
+
+    </style>
+
     <!-- Page Wrapper -->
     <div class="page-wrapper">
         <!-- Page Content -->
@@ -82,8 +122,8 @@
                         <table class="table table-striped custom-table datatable" style="width: 100%">
                             <thead>
                                 <tr>
-                                    <th>Employee</th>
-                                    <th>Employee ID</th>
+                                    <th class="text-center">Employee</th>
+                                    <th class="text-center">NoPeg</th>
                                     <th hidden></th>
                                     <th hidden></th>
                                     <th hidden></th>
@@ -98,13 +138,13 @@
                                     <th hidden></th>
                                     <th hidden></th>
                                     <th hidden></th>
-                                    <th>Email</th>
-                                    <th>Department</th>
+                                    <th class="text-center">Email</th>
+                                    <th class="text-center">Department</th>
                                     <!-- <th>Role</th> -->
-                                    <th>Salary</th>
+                                    <th class="text-center">Salary</th>
                                     <th hidden></th>
-                                    <th>Payslip</th>
-                                    <th class="text-right">Action</th>
+                                    <th class="text-center">Payslip</th>
+                                    <th class="text-center">Action</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -116,7 +156,7 @@
                                             <a href="{{ url('employee/profile/'.$items->user_id) }}">{{ $items->name }}<span>{{ $items->position }}</span></a>
                                         </h2>
                                     </td>
-                                    <td>{{ $items->user_id }}</td>
+                                    <td class="text-center">{{ $items->user_id }}</td>
                                     <td hidden class="id">{{ $items->id }}</td>
                                     <td hidden class="name">{{ $items->name }}</td>
                                     <td hidden class="basic">{{ $items->basic }}</td>
@@ -131,13 +171,14 @@
                                     <td hidden class="leave">{{ $items->leave }}</td>
                                     <td hidden class="prof_tax">{{ $items->prof_tax }}</td>
                                     <td hidden class="labour_welfare">{{ $items->labour_welfare }}</td>
-                                    <td>{{ $items->email }}</td>
-                                    <td>{{ $items->department }}</td>
+                                    <td class="text-center">{{ $items->email }}</td>
+                                    <td class="text-center">{{ $items->department }}</td>
                                     <!-- <td>{{ $items->role_name }}</td> -->
-                                    <td>Rp {{ number_format($items->basic, 0, ',', '.') }}</td>
+                                    <td class="text-center">Rp {{ number_format($items->basic, 0, ',', '.') }}</td>
                                     <td hidden class="salary">{{ $items->basic }}</td>
-                                    <td><a class="btn btn-sm btn-primary" href="{{ url('form/salary/view/'.$items->user_id) }}" target="_blank">Generate Slip</a></td>
-                                    <td class="text-right">
+                                    <td class="text-center"><a class="btn btn-sm btn-primary" href="{{ url('form/salary/view/'.$items->user_id) }}" target="_blank">Generate Slip</a></td>
+                                    
+                                    <!-- <td class="text-center">
                                         <div class="dropdown dropdown-action">
                                             <a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="material-icons">more_vert</i></a>
                                             <div class="dropdown-menu dropdown-menu-right">
@@ -145,7 +186,21 @@
                                                 <a class="dropdown-item salaryDelete" href="#" data-toggle="modal" data-target="#delete_salary"><i class="fa fa-trash-o m-r-5"></i> Delete</a>
                                             </div>
                                         </div>
+                                    </td> -->
+
+                                    <td class="text-center">
+                                        <!-- Edit Button -->
+                                        <a class="userSalary btn-edit" href="#" data-toggle="modal" data-target="#edit_salary">
+                                            <i class="fa fa-pencil"></i>
+                                        </a>
+                                        
+                                        <!-- Delete Button -->
+                                        <a class="salaryDelete btn-delete" href="#" data-toggle="modal" data-target="#delete_salary">
+                                            <i class="fa fa-trash-o"></i>
+                                        </a>
                                     </td>
+
+
                                 </tr>
                                 @endforeach
                             </tbody>
@@ -463,7 +518,7 @@
             </div>
         </div>
         <!-- /Edit Salary Modal -->
-         
+
         <!-- Delete Salary Modal -->
         <div class="modal custom-modal fade" id="delete_salary" role="dialog">
             <div class="modal-dialog modal-dialog-centered">
