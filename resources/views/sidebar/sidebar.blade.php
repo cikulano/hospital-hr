@@ -7,17 +7,21 @@
                 <li class="menu-title">
                     <span>Main</span>
                 </li>
-                <li class="{{set_active(['home','em/dashboard'])}} submenu">
+
+                <li class="{{ set_active(['home','em/dashboard']) }}">
                     <a href="#" class="{{ set_active(['home','em/dashboard']) ? 'noti-dot' : '' }}">
                         <i class="la la-dashboard"></i>
                         <span> Dashboard</span> <span class="menu-arrow"></span>
                     </a>
                     <ul style="{{ request()->is('/*') ? 'display: block;' : 'display: none;' }}">
-                        <li><a class="{{set_active(['home'])}}" href="{{ route('home') }}">Admin Dashboard</a></li>
-                        <li><a class="{{set_active(['em/dashboard'])}}" href="{{ route('em/dashboard') }}">Employee Dashboard</a></li>
+                        @if(Auth::user()->role_name == 'Admin')
+                            <li><a class="{{ set_active(['home']) }}" href="{{ route('home') }}">Admin Dashboard</a></li>
+                        @else
+                            <li><a class="{{ set_active(['em/dashboard']) }}" href="{{ route('em/dashboard') }}">Employee Dashboard</a></li>
+                        @endif
                     </ul>
                 </li>
-                @if (Auth::user()->role_name=='Admin')
+                                @if (Auth::user()->role_name=='Admin')
                     <li class="menu-title"> <span>Authentication</span> </li>
                     <li class="{{set_active(['search/user/list','userManagement','activity/log','activity/login/logout'])}} submenu">
                         <a href="#" class="{{ set_active(['search/user/list','userManagement','activity/log','activity/login/logout']) ? 'noti-dot' : '' }}">
