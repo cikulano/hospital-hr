@@ -10,6 +10,7 @@ use Maatwebsite\Excel\Facades\Excel;
 use App\Models\StaffSalary;
 use Brian2694\Toastr\Facades\Toastr;
 
+
 class PayrollController extends Controller
 {
     /** view page salary */
@@ -107,7 +108,7 @@ class PayrollController extends Controller
 
                 'id'      => $request->id,
                 'name'    => $request->name,
-                'salary'  => $request->salary,
+                // 'salary'  => $request->salary,
                 'basic'   => $request->basic,
                 'da'      => $request->da,
                 'hra'     => $request->hra,
@@ -191,5 +192,6 @@ class PayrollController extends Controller
             ->where('staff_salaries.user_id',$user_id)->get();
             
             return Excel::download(new SalaryExcel($user_id),'ReportDetailSalary'.'.xlsx');
-    }
+    }  
+
 }

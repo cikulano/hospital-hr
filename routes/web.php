@@ -94,7 +94,7 @@ Route::group(['namespace' => 'App\Http\Controllers'],function()
         Route::get('email/settings/page', 'emailSettingsIndex')->middleware('auth')->name('email/settings/page'); /** index page email settings */
     });
 
-    // ----------------------------- manage users -------d-----------------------//
+    // ----------------------------- manage users -------------------------------//
     Route::controller(UserManagementController::class)->group(function () {
         Route::get('profile_user', 'profile')->middleware('auth')->name('profile_user');
         Route::post('profile/information/save', 'profileInformation')->name('profile/information/save');
@@ -221,7 +221,8 @@ Route::group(['namespace' => 'App\Http\Controllers'],function()
         Route::get('form/payroll/items', 'payrollItems')->middleware('auth')->name('form/payroll/items');    
         Route::get('extra/report/pdf', 'reportPDF')->middleware('auth');    
         Route::get('extra/report/excel', 'reportExcel')->middleware('auth');    
-    });
+
+     });
 
     // ---------------------------- reports  ----------------------------//
     Route::controller(ExpenseReportsController::class)->group(function () {

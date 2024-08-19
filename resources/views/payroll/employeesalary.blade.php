@@ -4,6 +4,88 @@
     {{-- message --}}
     {!! Toastr::message() !!}
 
+    <style>
+
+    .btn-edit, .btn-delete {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 30px; /* Adjust size as needed */
+        height: 30px; /* Adjust size as needed */
+        border-radius: 50%;
+        color: #fff;
+        font-size: 14px; /* Adjust size as needed */
+        text-align: center;
+        line-height: 30px; /* Adjust to center icon vertically */
+        text-decoration: none;
+        transition: background-color 0.3s;
+    }
+
+    .btn-edit {
+        background-color: #007bff; /* Blue color */
+    }
+
+    .btn-edit:hover {
+        background-color: #0056b3; /* Darker blue for hover */
+    }
+
+    .btn-delete {
+        background-color: #dc3545; /* Red color */
+    }
+
+    .btn-delete:hover {
+        background-color: #c82333; /* Darker red for hover */
+    }
+
+    .btn-edit i, .btn-delete i {
+        font-size: 16px; /* Adjust icon size as needed */
+    }
+
+    .dropdown-menu {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        z-index: 1000;
+        display: none;
+        float: left;
+        min-width: 10rem;
+        padding: .5rem 0;
+        margin: .125rem 0 0;
+        font-size: 1rem;
+        color: #212529;
+        text-align: left;
+        list-style: none;
+        background-color: #fff;
+        background-clip: padding-box;
+        border: 1px solid rgba(0,0,0,.15);
+        border-radius: .25rem;
+    }
+    .dropdown-menu li {
+        padding: .25rem 1.5rem;
+        cursor: pointer;
+    }
+    .dropdown-menu li:hover {
+        background-color: #f8f9fa;
+    }
+    .text-muted {
+        color: #6c757d;
+    }
+
+    .custom-blue {
+    background-color: #007bff; /* Example blue color */
+    color: white;
+    }
+
+    .custom-blue:hover {
+        background-color: #0056b3; /* Darker shade of blue on hover */
+    }
+
+    .custom-select {
+    width: 100%; /* Full width */
+    max-width: 300px; /* Adjust to a standard width */
+    }
+    </style>
+
     <!-- Page Wrapper -->
     <div class="page-wrapper">
         <!-- Page Content -->
@@ -18,61 +100,29 @@
                             <li class="breadcrumb-item active">Salary</li>
                         </ul>
                     </div>
+
                     <div class="col-auto float-right ml-auto">
-                        <a href="#" class="btn add-btn" data-toggle="modal" data-target="#add_salary"><i class="fa fa-plus"></i> Add Salary</a>
+                        <a href="#" class="btn custom-blue" data-toggle="modal" data-target="#add_salary">
+                            <i class="fa fa-plus"></i> Add Salary
+                        </a>
                     </div>
                 </div>
             </div>
 
             <!-- Search Filter -->
-            <!-- <div class="row filter-row">
+            <div class="row filter-row">
                 <div class="col-sm-6 col-md-3 col-lg-3 col-xl-2 col-12">  
                     <div class="form-group form-focus">
-                        <input type="text" class="form-control floating">
-                        <label class="focus-label">Employee Name</label>
+                        <input type="text" id="employeeSearch" class="form-control floating" autocomplete="off">
+                        <label class="focus-label">Search Employee</label>
+                        <ul id="employeeList" class="dropdown-menu" style="display:none;"></ul>
                     </div>
                 </div>
-                <div class="col-sm-6 col-md-3 col-lg-3 col-xl-2 col-12">  
-                    <div class="form-group form-focus select-focus">
-                        <select class="select floating"> 
-                            <option value=""> -- Select -- </option>
-                            <option value="">Employee</option>
-                            <option value="1">Manager</option>
-                        </select>
-                        <label class="focus-label">Role</label>
-                    </div>
-                </div>
-                <div class="col-sm-6 col-md-3 col-lg-3 col-xl-2 col-12"> 
-                    <div class="form-group form-focus select-focus">
-                        <select class="select floating"> 
-                            <option> -- Select -- </option>
-                            <option> Pending </option>
-                            <option> Approved </option>
-                            <option> Rejected </option>
-                        </select>
-                        <label class="focus-label">Leave Status</label>
-                    </div>
-                </div>
-                <div class="col-sm-6 col-md-3 col-lg-3 col-xl-2 col-12">  
-                    <div class="form-group form-focus">
-                        <div class="cal-icon">
-                            <input class="form-control floating datetimepicker" type="text">
-                        </div>
-                        <label class="focus-label">From</label>
-                    </div>
-                </div>
-                <div class="col-sm-6 col-md-3 col-lg-3 col-xl-2 col-12">  
-                    <div class="form-group form-focus">
-                        <div class="cal-icon">
-                            <input class="form-control floating datetimepicker" type="text">
-                        </div>
-                        <label class="focus-label">To</label>
-                    </div>
-                </div>
+                                
                 <div class="col-sm-6 col-md-3 col-lg-3 col-xl-2 col-12">  
                     <a href="#" class="btn btn-success btn-block"> Search </a>  
                 </div>     
-            </div> -->
+            </div>
             <!-- /Search Filter --> 
              
             <!-- /Page Content -->
@@ -82,8 +132,8 @@
                         <table class="table table-striped custom-table datatable" style="width: 100%">
                             <thead>
                                 <tr>
-                                    <th>Employee</th>
-                                    <th>Employee ID</th>
+                                    <th class="text-center">Employee</th>
+                                    <th class="text-center">NoPeg</th>
                                     <th hidden></th>
                                     <th hidden></th>
                                     <th hidden></th>
@@ -98,13 +148,13 @@
                                     <th hidden></th>
                                     <th hidden></th>
                                     <th hidden></th>
-                                    <th>Email</th>
-                                    <th>Department</th>
+                                    <th class="text-center">Email</th>
+                                    <th class="text-center">Department</th>
                                     <!-- <th>Role</th> -->
-                                    <th>Salary</th>
+                                    <th class="text-center">Salary</th>
                                     <th hidden></th>
-                                    <th>Payslip</th>
-                                    <th class="text-right">Action</th>
+                                    <th class="text-center">Payslip</th>
+                                    <th class="text-center">Action</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -116,7 +166,7 @@
                                             <a href="{{ url('employee/profile/'.$items->user_id) }}">{{ $items->name }}<span>{{ $items->position }}</span></a>
                                         </h2>
                                     </td>
-                                    <td>{{ $items->user_id }}</td>
+                                    <td >{{ $items->user_id }}</td>
                                     <td hidden class="id">{{ $items->id }}</td>
                                     <td hidden class="name">{{ $items->name }}</td>
                                     <td hidden class="basic">{{ $items->basic }}</td>
@@ -131,21 +181,26 @@
                                     <td hidden class="leave">{{ $items->leave }}</td>
                                     <td hidden class="prof_tax">{{ $items->prof_tax }}</td>
                                     <td hidden class="labour_welfare">{{ $items->labour_welfare }}</td>
-                                    <td>{{ $items->email }}</td>
-                                    <td>{{ $items->department }}</td>
-                                    <!-- <td>{{ $items->role_name }}</td> -->
-                                    <td>Rp {{ number_format($items->basic, 0, ',', '.') }}</td>
+                                    <td >{{ $items->email }}</td>
+                                    <td >{{ $items->department }}</td>
+                                    <td >Rp {{ number_format($items->basic, 0, ',', '.') }}</td>
                                     <td hidden class="salary">{{ $items->basic }}</td>
-                                    <td><a class="btn btn-sm btn-primary" href="{{ url('form/salary/view/'.$items->user_id) }}" target="_blank">Generate Slip</a></td>
-                                    <td class="text-right">
-                                        <div class="dropdown dropdown-action">
-                                            <a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="material-icons">more_vert</i></a>
-                                            <div class="dropdown-menu dropdown-menu-right">
-                                                <a class="dropdown-item userSalary" href="#" data-toggle="modal" data-target="#edit_salary"><i class="fa fa-pencil m-r-5"></i> Edit</a>
-                                                <a class="dropdown-item salaryDelete" href="#" data-toggle="modal" data-target="#delete_salary"><i class="fa fa-trash-o m-r-5"></i> Delete</a>
-                                            </div>
-                                        </div>
+
+                                    <td class="text-center">
+                                        <a class="btn btn-sm btn-success" href="{{ url('form/salary/view/'.$items->user_id) }}" target="_blank">Generate Slip</a>
                                     </td>
+
+                                    <td class="text-center">
+                                        <!-- Edit Button -->
+                                        <a class="userSalary btn-edit" href="#" data-toggle="modal" data-target="#edit_salary">
+                                            <i class="fa fa-pencil"></i>
+                                        </a>
+                                        
+                                        <!-- Delete Button -->
+                                        <a class="salaryDelete btn-delete" href="#" data-toggle="modal" data-target="#delete_salary">
+                                            <i class="fa fa-trash-o"></i>
+                                        </a>
+                                    </td>                                   
                                 </tr>
                                 @endforeach
                             </tbody>
@@ -153,16 +208,15 @@
                     </div>
                 </div>
             </div>
-
         </div>
         <!-- /Page Content -->
 
-                <!-- Add Salary Modal -->
-                <div id="add_salary" class="modal custom-modal fade" role="dialog">
+        <!-- Add Salary Modal -->
+        <div id="add_salary" class="modal custom-modal fade" role="dialog">
             <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title">Add Staff Salary</h5>
+                        <h5 class="modal-title">Tambah Upah Pekerja</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -173,11 +227,11 @@
                             <div class="row"> 
                                 <div class="col-sm-6"> 
                                     <div class="form-group">
-                                        <label>Select Staff</label>
-                                        <select class="select select2s-hidden-accessible @error('name') is-invalid @enderror" style="width: 100%;" tabindex="-1" aria-hidden="true" id="name" name="name">
+                                        <label>Pilih Pekerja</label>
+                                        <select class="select select2s-hidden-accessible @error('name') is-invalid @enderror custom-select" tabindex="-1" aria-hidden="true" id="name" name="name">
                                             <option value="">-- Select --</option>
                                             @foreach ($userList as $key=>$user )
-                                                <option value="{{ $user->name }}" data-employee_id={{ $user->user_id }}>{{ $user->name }}</option>
+                                                <option value="{{ $user->name }}" data-employee_id="{{ $user->user_id }}">{{ $user->name }}</option>
                                             @endforeach
                                         </select>
                                     </div>
@@ -187,8 +241,8 @@
                                         </span>
                                     @enderror
                                 </div>
-                                <input class="form-control" type="hidden" name="user_id" id="employee_id" readonly>
-                                <!-- <div class="col-sm-6"> 
+                                <!-- <input class="form-control" type="hidden" name="user_id" id="employee_id" readonly>
+                                <div class="col-sm-6"> 
                                     <label>Net Salary</label>
                                     <input class="form-control @error('salary') is-invalid @enderror" type="number" name="salary" id="salary" value="{{ old('salary') }}" placeholder="Enter net salary">
                                     @error('salary')
@@ -393,54 +447,54 @@
                                         </span>
                                     @enderror
                                 </div>
-                                <div class="col-sm-6"> 
+                                <!-- <div class="col-sm-6"> 
                                     <label>Net Salary</label>
                                     <input class="form-control" type="text" name="salary" id="e_salary" value="">
-                                </div>
+                                </div> -->
                             </div>
                             <div class="row"> 
                                 <div class="col-sm-6"> 
                                     <h4 class="text-primary">Earnings</h4>
                                     <div class="form-group">
-                                        <label>Basic</label>
-                                        <input class="form-control" type="text" name="basic" id="e_basic" value="">
+                                        <label>THP</label>
+                                        <input class="form-control" type="text" name="basic" id="e_basic" value="" >
                                     </div>
                                     <div class="form-group">
-                                        <label>DA(40%)</label>
+                                        <label>Jam Lembur (Jam)</label>
                                         <input class="form-control" type="text"  name="da" id="e_da" value="">
                                     </div>
                                     <div class="form-group">
-                                        <label>HRA(15%)</label>
+                                        <label>Hari Shift (Hari)</label>
                                         <input class="form-control" type="text"  name="hra" id="e_hra" value="">
                                     </div>
                                     <div class="form-group">
-                                        <label>Conveyance</label>
+                                        <label>Kompensasi Onsite</label>
                                         <input class="form-control" type="text"  name="conveyance" id="e_conveyance" value="">
                                     </div>
                                     <div class="form-group">
-                                        <label>Allowance</label>
+                                        <label>Rate Lembur</label>
                                         <input class="form-control" type="text"  name="allowance" id="e_allowance" value="">
                                     </div>
                                     <div class="form-group">
-                                        <label>Medical  Allowance</label>
+                                        <label>Rate Shift</label>
                                         <input class="form-control" type="text" name="medical_allowance" id="e_medical_allowance" value="">
                                     </div>
                                 </div>
                                 <div class="col-sm-6">  
                                     <h4 class="text-primary">Deductions</h4>
                                     <div class="form-group">
-                                        <label>TDS</label>
+                                        <label>Pajak (%)</label>
                                         <input class="form-control" type="text" name="tds" id="e_tds" value="">
                                     </div> 
                                     <div class="form-group">
-                                        <label>ESI</label>
+                                        <label>Proporsional (Hari)</label>
                                         <input class="form-control" type="text" name="esi" id="e_esi" value="">
                                     </div>
-                                    <div class="form-group">
+                                    <!-- <div class="form-group">
                                         <label>PF</label>
                                         <input class="form-control" type="text" name="pf" id="e_pf" value="">
-                                    </div>
-                                    <div class="form-group">
+                                    </div> -->
+                                    <!-- <div class="form-group">
                                         <label>Leave</label>
                                         <input class="form-control" type="text" name="leave" id="e_leave" value="">
                                     </div>
@@ -451,7 +505,7 @@
                                     <div class="form-group">
                                         <label>Loan</label>
                                         <input class="form-control" type="text" name="labour_welfare" id="e_labour_welfare" value="">
-                                    </div>
+                                    </div> -->
                                 </div>
                             </div>
                             <div class="submit-section">
@@ -463,7 +517,7 @@
             </div>
         </div>
         <!-- /Edit Salary Modal -->
-        
+
         <!-- Delete Salary Modal -->
         <div class="modal custom-modal fade" id="delete_salary" role="dialog">
             <div class="modal-dialog modal-dialog-centered">
@@ -601,6 +655,60 @@
                 input.setSelectionRange(caret_pos, caret_pos);
             }
         });
-        </script>
+    </script>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+    $(document).ready(function() {
+        var $table = $('table.datatable');
+        var $rows = $table.find('tbody tr');
+
+        $('#employeeSearch').on('input', function() {
+            var input = $(this).val().toLowerCase();
+            var results = [];
+
+            $rows.each(function() {
+                var $row = $(this);
+                var name = $row.find('td:eq(0) a:last').text().toLowerCase();
+                var noPeg = $row.find('td:eq(1)').text().toLowerCase();
+
+                if (name.indexOf(input) > -1 || noPeg.indexOf(input) > -1) {
+                    results.push({ name: name, noPeg: noPeg, $element: $row });
+                }
+            });
+
+            var $list = $('#employeeList');
+            $list.empty();
+
+            if (results.length > 0 && input.length > 0) {
+                $.each(results, function(i, result) {
+                    $('<li>', {
+                        html: result.name + ' <span class="text-muted">(' + result.noPeg + ')</span>',
+                        click: function() {
+                            $('#employeeSearch').val(result.name + ' (' + result.noPeg + ')');
+                            $list.hide();
+                            $rows.hide();
+                            result.$element.show();
+                        }
+                    }).appendTo($list);
+                });
+                $list.show();
+            } else {
+                $list.hide();
+                if (input.length === 0) {
+                    $rows.show();
+                } else {
+                    $rows.hide();
+                }
+            }
+        });
+
+        $(document).on('click', function(e) {
+            if (!$(e.target).closest('.form-group').length) {
+                $('#employeeList').hide();
+            }
+        });
+    });
+    </script>
     @endsection
 @endsection
