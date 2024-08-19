@@ -21,7 +21,7 @@
     <!-- Datetimepicker CSS -->
     <link rel="stylesheet" href="{{ asset('assets/css/bootstrap-datetimepicker.min.css') }}">
     <!-- Main CSS -->
-    <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
+    <link rel="stylesheet" href="{{ asset('build/assets/css/style.css') }}">
     {{-- message toastr --}}
     <link rel="stylesheet" href="{{ asset('assets/css/toastr.min.css') }}">
     <script src="{{ asset('assets/js/toastr_jquery.min.js') }}"></script>
