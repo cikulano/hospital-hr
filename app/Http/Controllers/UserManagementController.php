@@ -304,6 +304,7 @@ class UserManagementController extends Controller
     /** save new user */
     public function addNewUserSave(Request $request)
     {
+        // Validate the request
         $request->validate([
             'name'      => 'required|string|max:255',
             'email'     => 'required|string|email|max:255|unique:users',
@@ -312,17 +313,23 @@ class UserManagementController extends Controller
             'position'  => 'required|string|max:255',
             'department'=> 'required|string|max:255',
             'status'    => 'required|string|max:255',
-            'image'     => 'required|image',
+            'image'     => 'nullable|image', // Changed to nullable
             'password'  => 'required|string|min:8|confirmed',
             'password_confirmation' => 'required',
         ]);
+
         DB::beginTransaction();
-        try{
+        try {
             $dt       = Carbon::now();
             $todayDate = $dt->toDayDateTimeString();
 
-            $image = time().'.'.$request->image->extension();  
-            $request->image->move(public_path('assets/images'), $image);
+            // Check if image is provided
+            if ($request->hasFile('image')) {
+                $image = time().'.'.$request->image->extension();  
+                $request->image->move(public_path('assets/images'), $image);
+            } else {
+                $image = 'photo_defaults.jpg'; // Default image
+            }
 
             $user = new User;
             $user->name         = $request->name;
@@ -337,10 +344,11 @@ class UserManagementController extends Controller
             $user->avatar       = $image;
             $user->password     = Hash::make($request->password);
             $user->save();
+
             DB::commit();
             Toastr::success('Create new account successfully :)','Success');
             return redirect()->route('userManagement');
-        }catch(\Exception $e) {
+        } catch(\Exception $e) {
             DB::rollback();
             \Log::info($e);
             Toastr::error('User add new account fail :)','Error');
@@ -352,112 +360,101 @@ class UserManagementController extends Controller
     public function update(Request $request)
     {
         DB::beginTransaction();
-        try{
-            $user_id       = $request->user_id;
-            $name         = $request->name;
-            $email        = $request->email;
-            $role_name    = $request->role_name;
-            $position     = $request->position;
-            $phone        = $request->phone;
-            $department   = $request->department;
-            $status       = $request->status;
 
-            $dt       = Carbon::now();
-            $todayDate = $dt->toDayDateTimeString();
-            $image_name = $request->hidden_image;
-            $image = $request->file('images');
-            if($image_name =='photo_defaults.jpg') {
-                if (empty($image)) {
-                    $image_name = $image_name;
-                } else {
-                    $image_name = rand() . '.' . $image->getClientOriginalExtension();
-                    $image->move(public_path('/assets/images/'), $image_name);
-                }
-            } else {
-                if (!empty($image)) {
-                    unlink('assets/images/'.$image_name);
-                    $image_name = rand() . '.' . $image->getClientOriginalExtension();
-                    $image->move(public_path('/assets/images/'), $image_name);
-                }
-            }
+        try {
+            // Validate the request
+            $request->validate([
+                'user_id'    => 'required|string|exists:users,user_id', // Ensure user_id exists
+                'name'       => 'required|string|max:255',
+                'email'      => 'required|string|email|max:255|unique:users,email,' . $request->user_id . ',user_id',
+                'phone'      => 'required|min:11|numeric',
+                'role_name'  => 'required|string|max:255',
+                'position'   => 'required|string|max:255',
+                'department' => 'required|string|max:255',
+                'status'     => 'required|string|max:255',
+                'image'      => 'nullable|image',
+            ]);
             
-            $update = [
 
-                'user_id'       => $user_id,
-                'name'         => $name,
-                'role_name'    => $role_name,
-                'email'        => $email,
-                'position'     => $position,
-                'phone_number' => $phone,
-                'department'   => $department,
-                'status'       => $status,
+            // Find the user by user_id
+            $user = User::where('user_id', $request->user_id)->firstOrFail();
+
+            $image_name = $user->avatar;
+            $image = $request->file('image');  // Ensure 'image' matches the form field name
+
+            if ($image) {
+                // Remove old image if it's not the default one
+                if ($image_name != 'photo_defaults.jpg') {
+                    $oldImagePath = public_path('assets/images/' . $image_name);
+                    if (file_exists($oldImagePath) && is_file($oldImagePath)) {
+                        unlink($oldImagePath);
+                    }
+                }
+
+                // Upload new image
+                $image_name = time() . '.' . $image->getClientOriginalExtension();
+                $image->move(public_path('assets/images/'), $image_name);
+            }
+
+            // Update user details
+            $user->update([
+                'name'         => $request->name,
+                'email'        => $request->email,
+                'role_name'    => $request->role_name,
+                'position'     => $request->position,
+                'phone_number' => $request->phone,
+                'department'   => $request->department,
+                'status'       => $request->status,
                 'avatar'       => $image_name,
-            ];
+            ]);
 
-            $activityLog = [
-                'user_name'    => $name,
-                'email'        => $email,
-                'phone_number' => $phone,
-                'status'       => $status,
-                'role_name'    => $role_name,
-                'modify_user'  => 'Update',
-                'date_time'    => $todayDate,
-            ];
-
-            DB::table('user_activity_logs')->insert($activityLog);
-            User::where('user_id',$request->user_id)->update($update);
             DB::commit();
-            Toastr::success('User updated successfully :)','Success');
+            Toastr::success('User updated successfully :)', 'Success');
             return redirect()->route('userManagement');
 
-        } catch(\Exception $e){
+        } catch (\Exception $e) {
             DB::rollback();
-            Toastr::error('User update fail :)','Error');
-            return redirect()->back();
+            \Log::error('User update failed: ' . $e->getMessage());
+            Toastr::error('User update failed: ' . $e->getMessage(), 'Error');
+            return redirect()->back()->withErrors(['error' => $e->getMessage()]);
         }
     }
 
+    
     /** delete record */
     public function delete(Request $request)
     {
         DB::beginTransaction();
         try {
+            $user = User::findOrFail($request->id);
 
-            $dt        = Carbon::now();
-            $todayDate = $dt->toDayDateTimeString();
-
-            $activityLog = [
-                'user_name'    => Session::get('name'),
-                'email'        => Session::get('email'),
-                'phone_number' => Session::get('phone_number'),
-                'status'       => Session::get('status'),
-                'role_name'    => Session::get('role_name'),
-                'modify_user'  => 'Delete',
-                'date_time'    => $todayDate,
-            ];
-
-            DB::table('user_activity_logs')->insert($activityLog);
-
-            if ($request->avatar == 'photo_defaults.jpg') { /** remove all information user */
-                User::destroy($request->id);
-                PersonalInformation::destroy($request->id);
-                UserEmergencyContact::destroy($request->id);
-            } else {
-                User::destroy($request->id);
-                unlink('assets/images/'.$request->avatar);
-                PersonalInformation::destroy($request->id);
-                UserEmergencyContact::destroy($request->id);
+            if ($user->avatar && $user->avatar != 'photo_defaults.jpg') {
+                // Delete the user's avatar file if it's not the default
+                $avatarPath = public_path('assets/images/' . $user->avatar);
+                if (file_exists($avatarPath) && is_file($avatarPath)) {
+                    unlink($avatarPath);
+                }
             }
 
+            // Delete related records
+            PersonalInformation::where('user_id', $request->id)->delete();
+            UserEmergencyContact::where('user_id', $request->id)->delete();
+
+            // Delete the user
+            $user->delete();
+
             DB::commit();
-            Toastr::success('User deleted successfully :)','Success');
-           return redirect()->back();
+            Toastr::success('User deleted successfully :)', 'Success');
+            return redirect()->back();
         } catch(\Exception $e) {
             DB::rollback();
-            Toastr::error('User deleted fail :)','Error');
+            \Log::error('User deletion failed: ' . $e->getMessage());
+            Toastr::error('User deletion failed: ' . $e->getMessage(), 'Error');
             return redirect()->back();
         }
     }
+    
+
 
     /** view change password */
     public function changePasswordView()

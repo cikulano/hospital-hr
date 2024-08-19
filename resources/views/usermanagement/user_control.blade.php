@@ -424,8 +424,9 @@
         $(document).on('click','.userDelete',function()
         {
             var _this = $(this).parents('tr');
-            $('.e_id').val(_this.find('.id').data('id'));
-            $('#e_avatar').val(_this.find('.avatar').data('avatar'));
+            var id = _this.find('.id').data('id');
+            console.log('Deleting user with ID:', id);
+            $('.e_id').val(id);
         });
     </script>
 

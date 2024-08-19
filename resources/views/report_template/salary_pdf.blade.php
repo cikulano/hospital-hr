@@ -63,6 +63,12 @@
             opacity: 0.1;
             z-index: -1;
         }
+
+        .personal-title {
+        font-weight: bold;
+        padding-right: 10px; /* Adjust spacing as needed */
+        width: 19%;
+    }
     </style>
 </head>
 <body>
@@ -87,23 +93,23 @@
 
     <!-- Personal Information -->
     <table>
-        <tr>
-            <td>Nopeg</td>
-            <td>: {{ $users->user_id }}</td>
-            <td>Nama Pekerja</td>
-            <td>: {{ $users->name }}</td>
-        </tr>
-        <tr>
-            <td>Fungsi</td>
-            <td>: {{ $users->position }}</td>
-            <td>Unit</td>
-            <td>: {{ $users->department }}</td>
-        </tr>
-        <tr>
-            <td>Periode SLIP Upah</td>
-            <td colspan="3">: {{ \Carbon\Carbon::now()->locale('id')->isoFormat('MMMM YYYY') }}</td>
-        </tr>
-    </table>
+    <tr>
+        <td class="personal-title">Nopeg</td>
+        <td>: {{ $users->user_id }}</td>
+        <td class="personal-title">Nama Pekerja</td>
+        <td>: {{ $users->name }}</td>
+    </tr>
+    <tr>
+        <td class="personal-title">Fungsi</td>
+        <td>: {{ $users->position }}</td>
+        <td class="personal-title">Unit</td>
+        <td>: {{ $users->department }}</td>
+    </tr>
+    <tr>
+        <td class="personal-title">Periode Slip Upah</td>
+        <td colspan="3">: {{ \Carbon\Carbon::now()->locale('id')->isoFormat('MMMM YYYY') }}</td>
+    </tr>
+</table>
 
     <div class="divider"></div>
 
@@ -119,7 +125,7 @@
 
     <div class="salary-info">
         <h4 class="section-header">Informasi Pendapatan</h4>
-        <table>
+        <table >
             <tr>
                 <td class="salary-info-label">THP</td>
                 <td class="salary-info-value">Rp {{ number_format($users->basic) }}</td>
@@ -166,7 +172,7 @@
             </tr>
             <tr>
                 <td class="salary-info-label">Iuran JP 1%</td>
-                <td class="salary-info-value">Rp {{ number_format($JP) }}</td>
+                <td><span class="float-right">Rp {{ number_format($JP) }}</span></td></strong>
             </tr>
             <tr>
                 <td class="salary-info-label">Iuran BPJS Kesehatan 1%</td>

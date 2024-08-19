@@ -71,6 +71,19 @@
         color: #6c757d;
     }
 
+    .custom-blue {
+    background-color: #007bff; /* Example blue color */
+    color: white;
+    }
+
+    .custom-blue:hover {
+        background-color: #0056b3; /* Darker shade of blue on hover */
+    }
+
+    .custom-select {
+    width: 100%; /* Full width */
+    max-width: 300px; /* Adjust to a standard width */
+    }
     </style>
 
     <!-- Page Wrapper -->
@@ -87,8 +100,11 @@
                             <li class="breadcrumb-item active">Salary</li>
                         </ul>
                     </div>
+
                     <div class="col-auto float-right ml-auto">
-                        <a href="#" class="btn add-btn" data-toggle="modal" data-target="#add_salary"><i class="fa fa-plus"></i> Add Salary</a>
+                        <a href="#" class="btn custom-blue" data-toggle="modal" data-target="#add_salary">
+                            <i class="fa fa-plus"></i> Add Salary
+                        </a>
                     </div>
                 </div>
             </div>
@@ -165,22 +181,14 @@
                                     <td hidden class="leave">{{ $items->leave }}</td>
                                     <td hidden class="prof_tax">{{ $items->prof_tax }}</td>
                                     <td hidden class="labour_welfare">{{ $items->labour_welfare }}</td>
-                                    <td class="text-center">{{ $items->email }}</td>
-                                    <td class="text-center">{{ $items->department }}</td>
-                                    <!-- <td>{{ $items->role_name }}</td> -->
-                                    <td class="text-center">Rp {{ number_format($items->basic, 0, ',', '.') }}</td>
+                                    <td >{{ $items->email }}</td>
+                                    <td >{{ $items->department }}</td>
+                                    <td >Rp {{ number_format($items->basic, 0, ',', '.') }}</td>
                                     <td hidden class="salary">{{ $items->basic }}</td>
-                                    <td class="text-center"><a class="btn btn-sm btn-primary" href="{{ url('form/salary/view/'.$items->user_id) }}" target="_blank">Generate Slip</a></td>
-                                    
-                                    <!-- <td class="text-center">
-                                        <div class="dropdown dropdown-action">
-                                            <a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="material-icons">more_vert</i></a>
-                                            <div class="dropdown-menu dropdown-menu-right">
-                                                <a class="dropdown-item userSalary" href="#" data-toggle="modal" data-target="#edit_salary"><i class="fa fa-pencil m-r-5"></i> Edit</a>
-                                                <a class="dropdown-item salaryDelete" href="#" data-toggle="modal" data-target="#delete_salary"><i class="fa fa-trash-o m-r-5"></i> Delete</a>
-                                            </div>
-                                        </div>
-                                    </td> -->
+
+                                    <td class="text-center">
+                                        <a class="btn btn-sm btn-success" href="{{ url('form/salary/view/'.$items->user_id) }}" target="_blank">Generate Slip</a>
+                                    </td>
 
                                     <td class="text-center">
                                         <!-- Edit Button -->
@@ -192,9 +200,7 @@
                                         <a class="salaryDelete btn-delete" href="#" data-toggle="modal" data-target="#delete_salary">
                                             <i class="fa fa-trash-o"></i>
                                         </a>
-                                    </td>
-
-
+                                    </td>                                   
                                 </tr>
                                 @endforeach
                             </tbody>
@@ -202,16 +208,15 @@
                     </div>
                 </div>
             </div>
-
         </div>
         <!-- /Page Content -->
 
-                <!-- Add Salary Modal -->
-                <div id="add_salary" class="modal custom-modal fade" role="dialog">
+        <!-- Add Salary Modal -->
+        <div id="add_salary" class="modal custom-modal fade" role="dialog">
             <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title">Add Staff Salary</h5>
+                        <h5 class="modal-title">Tambah Upah Pekerja</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -222,11 +227,11 @@
                             <div class="row"> 
                                 <div class="col-sm-6"> 
                                     <div class="form-group">
-                                        <label>Select Staff</label>
-                                        <select class="select select2s-hidden-accessible @error('name') is-invalid @enderror" style="width: 100%;" tabindex="-1" aria-hidden="true" id="name" name="name">
+                                        <label>Pilih Pekerja</label>
+                                        <select class="select select2s-hidden-accessible @error('name') is-invalid @enderror custom-select" tabindex="-1" aria-hidden="true" id="name" name="name">
                                             <option value="">-- Select --</option>
                                             @foreach ($userList as $key=>$user )
-                                                <option value="{{ $user->name }}" data-employee_id={{ $user->user_id }}>{{ $user->name }}</option>
+                                                <option value="{{ $user->name }}" data-employee_id="{{ $user->user_id }}">{{ $user->name }}</option>
                                             @endforeach
                                         </select>
                                     </div>
@@ -236,8 +241,8 @@
                                         </span>
                                     @enderror
                                 </div>
-                                <input class="form-control" type="hidden" name="user_id" id="employee_id" readonly>
-                                <!-- <div class="col-sm-6"> 
+                                <!-- <input class="form-control" type="hidden" name="user_id" id="employee_id" readonly>
+                                <div class="col-sm-6"> 
                                     <label>Net Salary</label>
                                     <input class="form-control @error('salary') is-invalid @enderror" type="number" name="salary" id="salary" value="{{ old('salary') }}" placeholder="Enter net salary">
                                     @error('salary')
