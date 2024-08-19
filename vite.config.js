@@ -11,20 +11,7 @@ export default defineConfig({
             refresh: true,
         }),
     ],
-    resolve: {
-        alias: {
-            '@': 'resources/js',
-            '@sass': 'resources/sass',
-        },
-    },
     build: {
-        outDir: 'public/build/assets',
-        emptyOutDir: true,
-        rollupOptions: {
-            output: {
-                chunkFileNames: 'js/[name]-[hash].js',
-                entryFileNames: 'js/[name]-[hash].js',
-            },
-        },
+        outDir: 'public/build',
     },
 });
