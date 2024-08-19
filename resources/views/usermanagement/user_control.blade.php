@@ -74,11 +74,11 @@
                                     <th>Email</th>
                                     <th>Position</th>
                                     <th>Phone</th>
-                                    <th>Join Date</th>
-                                    <th>Last Login</th>
-                                    <th>Role</th>
+                                    <!-- <th>Join Date</th> -->
+                                    <!-- <th>Last Login</th> -->
+                                    <!-- <th>Role</th> -->
                                     <th>Status</th>
-                                    <th>Departement</th>
+                                    <th class="text-center">Lokasi</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
@@ -244,7 +244,7 @@
                                     </div>
                                 </div>
                                 <div class="col-sm-6"> 
-                                    <label>Department</label>
+                                    <label>Unit</label>
                                     <select class="select" name="department" id="e_department">
                                         @foreach ($department as $departments )
                                         <option value="{{ $departments->department }}">{{ $departments->department }}</option>
@@ -370,18 +370,18 @@
                         data: 'phone_number',
                         name: 'phone_number'
                     },
-                    {
-                        data: 'join_date',
-                        name: 'join_date',
-                    },
-                    {
-                        data: 'last_login',
-                        name: 'last_login',
-                    },
-                    {
-                        data: 'role_name',
-                        name: 'role_name',
-                    },
+                    // {
+                    //     data: 'join_date',
+                    //     name: 'join_date',
+                    // },
+                    // {
+                    //     data: 'last_login',
+                    //     name: 'last_login',
+                    // },
+                    // {
+                    //     data: 'role_name',
+                    //     name: 'role_name',
+                    // },
                     {
                         data: 'status',
                         name: 'status',
