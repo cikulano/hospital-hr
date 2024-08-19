@@ -25,7 +25,6 @@ class CreatePositionTypesTable extends Migration
             ['position' => 'Non Medical'],
             ['position' => 'Paramedic'],
             ['position' => 'IT'],
-
         ]);
     }
 
