@@ -19,9 +19,19 @@ class CreateDepartmentsTable extends Migration
             $table->timestamps();
         });
         DB::table('departments')->insert([
-            ['department' => 'Web Department'],
-            ['department' => 'IT Management'],
-            ['department' => 'Marketing'],
+            ['department' => 'KANTOR PUSAT PERTAMINA'],
+            ['department' => 'RS PERTAMINA JAYA'],
+            ['department' => 'PERTAMINA HULU ROKAN'],
+            ['department' => 'DCU MARINE'],
+            ['department' => 'DCU PMTC'],
+            ['department' => 'KANTOR PUSAT PERTAMINA-RTC PULOGADUNG'],
+            ['department' => 'PATRA NIAGA'],
+            ['department' => 'PATRAJASA TOWER'],
+            ['department' => 'PERTAMINA AREA SHIPPING'],
+            ['department' => 'PERTAMINA SOPODEL'],
+            ['department' => 'PERTAMINA TANJUNG SEKONG'],
+            ['department' => 'PTK'],
+            ['department' => 'SEKONG /CIWANDAN'],
         ]);
     }
 
