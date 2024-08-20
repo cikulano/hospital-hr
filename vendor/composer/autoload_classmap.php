@@ -6,6 +6,7 @@ $vendorDir = dirname(__DIR__);
 $baseDir = dirname($vendorDir);
 
 return array(
+    'App\\Exports\\SalaryExcel' => $baseDir . '/app/Exports/SalaryExcel.php',
     'App\\Http\\Controllers\\Auth\\ConfirmPasswordController' => $baseDir . '/app/Http/Controllers/Auth/ConfirmPasswordController.php',
     'App\\Http\\Controllers\\Auth\\ForgotPasswordController' => $baseDir . '/app/Http/Controllers/Auth/ForgotPasswordController.php',
     'App\\Http\\Controllers\\Auth\\LoginController' => $baseDir . '/app/Http/Controllers/Auth/LoginController.php',
@@ -70,6 +71,7 @@ return array(
     'App\\Providers\\BroadcastServiceProvider' => $baseDir . '/app/Providers/BroadcastServiceProvider.php',
     'App\\Providers\\EventServiceProvider' => $baseDir . '/app/Providers/EventServiceProvider.php',
     'App\\Providers\\RouteServiceProvider' => $baseDir . '/app/Providers/RouteServiceProvider.php',
+    'App\\Rules\\MatchOldPassword' => $baseDir . '/app/Rules/MatchOldPassword.php',
     'Attribute' => $vendorDir . '/symfony/polyfill-php80/Resources/stubs/Attribute.php',
     'Barryvdh\\DomPDF\\Facade\\Pdf' => $vendorDir . '/barryvdh/laravel-dompdf/src/Facade/Pdf.php',
     'Barryvdh\\DomPDF\\PDF' => $vendorDir . '/barryvdh/laravel-dompdf/src/PDF.php',
@@ -2708,6 +2710,14 @@ return array(
     'Illuminate\\View\\ViewFinderInterface' => $vendorDir . '/laravel/framework/src/Illuminate/View/ViewFinderInterface.php',
     'Illuminate\\View\\ViewName' => $vendorDir . '/laravel/framework/src/Illuminate/View/ViewName.php',
     'Illuminate\\View\\ViewServiceProvider' => $vendorDir . '/laravel/framework/src/Illuminate/View/ViewServiceProvider.php',
+    'Laravel\\Homestead\\MakeCommand' => $vendorDir . '/laravel/homestead/src/MakeCommand.php',
+    'Laravel\\Homestead\\Settings\\HomesteadSettings' => $vendorDir . '/laravel/homestead/src/Settings/HomesteadSettings.php',
+    'Laravel\\Homestead\\Settings\\JsonSettings' => $vendorDir . '/laravel/homestead/src/Settings/JsonSettings.php',
+    'Laravel\\Homestead\\Settings\\YamlSettings' => $vendorDir . '/laravel/homestead/src/Settings/YamlSettings.php',
+    'Laravel\\Homestead\\Traits\\GeneratesSlugs' => $vendorDir . '/laravel/homestead/src/Traits/GeneratesSlugs.php',
+    'Laravel\\Homestead\\WslApplyFeatures' => $vendorDir . '/laravel/homestead/src/WslApplyFeatures.php',
+    'Laravel\\Homestead\\WslCreateDatabaseCommand' => $vendorDir . '/laravel/homestead/src/WslCreateDatabaseCommand.php',
+    'Laravel\\Homestead\\WslCreateSiteCommand' => $vendorDir . '/laravel/homestead/src/WslCreateSiteCommand.php',
     'Laravel\\Prompts\\Concerns\\Colors' => $vendorDir . '/laravel/prompts/src/Concerns/Colors.php',
     'Laravel\\Prompts\\Concerns\\Cursor' => $vendorDir . '/laravel/prompts/src/Concerns/Cursor.php',
     'Laravel\\Prompts\\Concerns\\Erase' => $vendorDir . '/laravel/prompts/src/Concerns/Erase.php',

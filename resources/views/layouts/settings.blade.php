@@ -10,25 +10,25 @@
     
     <title>Jobs - HRMS admin dashboard</title>
     <!-- Favicon -->
-    <link rel="shortcut icon" type="image/x-icon" href="{{ asset('assets/img/favicon.png') }}">
+    <link rel="shortcut icon" type="image/x-icon" href="{{ secure_asset('assets/img/favicon.png') }}">
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="{{ asset('assets/css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ secure_asset('assets/css/bootstrap.min.css') }}">
     <!-- Fontawesome CSS -->
-    <link rel="stylesheet" href="{{ asset('assets/css/font-awesome.min.css') }}">
+    <link rel="stylesheet" href="{{ secure_asset('assets/css/font-awesome.min.css') }}">
     <!-- Lineawesome CSS -->
-    <link rel="stylesheet" href="{{ asset('assets/css/line-awesome.min.css') }}">
+    <link rel="stylesheet" href="{{ secure_asset('assets/css/line-awesome.min.css') }}">
     <!-- Datatable CSS -->
-    <link rel="stylesheet" href="{{ asset('assets/css/dataTables.bootstrap4.min.css') }}">
+    <link rel="stylesheet" href="{{ secure_asset('assets/css/dataTables.bootstrap4.min.css') }}">
     <!-- Select2 CSS -->
-    <link rel="stylesheet" href="{{ asset('assets/css/select2.min.css') }}">
+    <link rel="stylesheet" href="{{ secure_asset('assets/css/select2.min.css') }}">
     <!-- Datetimepicker CSS -->
-    <link rel="stylesheet" href="{{ asset('assets/css/bootstrap-datetimepicker.min.css') }}">
+    <link rel="stylesheet" href="{{ secure_asset('assets/css/bootstrap-datetimepicker.min.css') }}">
     <!-- Main CSS -->
-    <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
+    <link rel="stylesheet" href="{{ secure_asset('assets/css/style.css') }}">
     {{-- message toastr --}}
-    <link rel="stylesheet" href="{{ asset('assets/css/toastr.min.css') }}">
-    <script src="{{ asset('assets/js/toastr_jquery.min.js') }}"></script>
-    <script src="{{ asset('assets/js/toastr.min.js') }}"></script>
+    <link rel="stylesheet" href="{{ secure_asset('assets/css/toastr.min.css') }}">
+    <script src="{{ secure_asset('assets/js/toastr_jquery.min.js') }}"></script>
+    <script src="{{ secure_asset('assets/js/toastr.min.js') }}"></script>
 
     @yield('style')
     <style>
@@ -194,7 +194,7 @@
 											<div class="list-item">
 												<div class="list-left">
 													<span class="avatar">
-														<img alt="" src="{{ URL::to('assets/img/profiles/avatar-09.jpg') }}">
+														<img alt="" src="{{ asset('assets/img/profiles/avatar-09.jpg') }}">
 													</span>
 												</div>
 												<div class="list-body">
@@ -211,7 +211,7 @@
 											<div class="list-item">
 												<div class="list-left">
 													<span class="avatar">
-														<img alt="" src="{{ URL::to('assets/img/profiles/avatar-02.jpg') }}">
+														<img alt="" src="{{ asset('assets/img/profiles/avatar-02.jpg') }}">
 													</span>
 												</div>
 												<div class="list-body">
@@ -228,7 +228,7 @@
 											<div class="list-item">
 												<div class="list-left">
 													<span class="avatar">
-														<img alt="" src="{{ URL::to('assets/img/profiles/avatar-03.jpg') }}">
+														<img alt="" src="{{ asset('assets/img/profiles/avatar-03.jpg') }}">
 													</span>
 												</div>
 												<div class="list-body">
@@ -245,7 +245,7 @@
 											<div class="list-item">
 												<div class="list-left">
 													<span class="avatar">
-														<img alt="" src="{{ URL::to('assets/img/profiles/avatar-05.jpg') }}">
+														<img alt="" src="{{ asset('assets/img/profiles/avatar-05.jpg') }}">
 													</span>
 												</div>
 												<div class="list-body">
@@ -262,7 +262,7 @@
 											<div class="list-item">
 												<div class="list-left">
 													<span class="avatar">
-														<img alt="" src="{{ URL::to('assets/img/profiles/avatar-08.jpg') }}">
+														<img alt="" src="{{ asset('assets/img/profiles/avatar-08.jpg') }}">
 													</span>
 												</div>
 												<div class="list-body">
@@ -285,7 +285,7 @@
                     <li class="nav-item dropdown has-arrow main-drop">
                         <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
                             <span class="user-img">
-                            <img src="{{ URL::to('/assets/images/'. Auth::user()->avatar) }}" alt="{{ Auth::user()->name }}">
+                            <img src="{{ asset('/assets/images/'. Auth::user()->avatar) }}" alt="{{ Auth::user()->name }}">
                             <span class="status online"></span></span>
                             <span>{{ Auth::user()->name }}</span>
                         </a>
@@ -319,24 +319,24 @@
 		<!-- /Main Wrapper -->
 
 		<!-- jQuery -->
-		<script src="{{ asset('assets/js/jquery-3.5.1.min.js') }}"></script>
-		<!-- Bootstrap Core JS -->
-		<script src="{{ asset('assets/js/popper.min.js') }}"></script>
-		<script src="{{ asset('assets/js/bootstrap.min.js') }}"></script>
-		<!-- Slimscroll JS -->
-		<script src="{{ asset('assets/js/jquery.slimscroll.min.js') }}"></script>
-		<!-- Select2 JS -->
-		<script src="{{ asset('assets/js/select2.min.js') }}"></script>
-		<!-- Datatable JS -->
-		<script src="{{ asset('assets/js/jquery.dataTables.min.js') }}"></script>
-		<script src="{{ asset('assets/js/dataTables.bootstrap4.min.js') }}"></script>
-		<!-- Datetimepicker JS -->
-		<script src="{{ asset('assets/js/moment.min.js') }}"></script>
-		<script src="{{ asset('assets/js/bootstrap-datetimepicker.min.js') }}"></script>
-		<!-- validation-->
-		<script src="{{ asset('assets/js/jquery.validate.js') }}"></script>
-		<!-- Custom JS -->
-		<script src="{{ asset('assets/js/app.js') }}"></script>
-		@yield('script')
+		<script src="{{ secure_asset('assets/js/jquery-3.5.1.min.js') }}"></script>
+    <!-- Bootstrap Core JS -->
+    <script src="{{ secure_asset('assets/js/popper.min.js') }}"></script>
+    <script src="{{ secure_asset('assets/js/bootstrap.min.js') }}"></script>
+    <!-- Slimscroll JS -->
+    <script src="{{ secure_asset('assets/js/jquery.slimscroll.min.js') }}"></script>
+    <!-- Select2 JS -->
+    <script src="{{ secure_asset('assets/js/select2.min.js') }}"></script>
+    <!-- Datatable JS -->
+    <script src="{{ secure_asset('assets/js/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ secure_asset('assets/js/dataTables.bootstrap4.min.js') }}"></script>
+    <!-- Datetimepicker JS -->
+    <script src="{{ secure_asset('assets/js/moment.min.js') }}"></script>
+    <script src="{{ secure_asset('assets/js/bootstrap-datetimepicker.min.js') }}"></script>
+    <!-- validation-->
+    <script src="{{ secure_asset('assets/js/jquery.validate.js') }}"></script>
+    <!-- Custom JS -->
+    <script src="{{ secure_asset('assets/js/app.js') }}"></script>
+    @yield('script')
     </body>
 </html>
