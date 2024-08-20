@@ -241,8 +241,8 @@
                                         </span>
                                     @enderror
                                 </div>
-                                <!-- <input class="form-control" type="hidden" name="user_id" id="employee_id" readonly>
-                                <div class="col-sm-6"> 
+                                <input class="form-control" type="hidden" name="user_id" id="employee_id" readonly>
+                                <!-- <div class="col-sm-6"> 
                                     <label>Net Salary</label>
                                     <input class="form-control @error('salary') is-invalid @enderror" type="number" name="salary" id="salary" value="{{ old('salary') }}" placeholder="Enter net salary">
                                     @error('salary')
