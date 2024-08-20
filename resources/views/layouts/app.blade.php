@@ -24,7 +24,7 @@
     <!-- Main CSS -->
     <link rel="stylesheet" href="{{ secure_asset('assets/css/style.css') }}">
     {{-- message toastr --}}
-    <link rel="stylesheet" href="{{ asecure_asset('assets/css/toastr.min.css') }}">
+    <link rel="stylesheet" href="{{ secure_asset('assets/css/toastr.min.css') }}">
     <script src="{{ secure_asset('assets/js/toastr_jquery.min.js') }}"></script>
     <script src="{{ secure_asset('assets/js/toastr.min.js') }}"></script>
 </head>

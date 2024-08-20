@@ -10,7 +10,7 @@
     
     <title>Reports</title>
     <!-- Favicon -->
-    <link rel="shortcut icon" type="image/x-icon" href="{ secure_asset('assets/img/favicon.png') }}">
+    <link rel="shortcut icon" type="image/x-icon" href="{{ secure_asset('assets/img/favicon.png') }}">
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="{{ secure_asset('assets/css/bootstrap.min.css') }}">
     <!-- Fontawesome CSS -->
@@ -24,7 +24,7 @@
     <!-- Datetimepicker CSS -->
     <link rel="stylesheet" href="{{ secure_asset('assets/css/bootstrap-datetimepicker.min.css') }}">
     <!-- Chart CSS -->
-    <link rel="stylesheet" href="{{ secure_asset('ssets/plugins/morris/morris.css') }}">
+    <link rel="stylesheet" href="{{ secure_asset('assets/plugins/morris/morris.css') }}">
     <!-- Main CSS -->
     <link rel="stylesheet" href="{{ secure_asset('assets/css/style.css') }}">
 
