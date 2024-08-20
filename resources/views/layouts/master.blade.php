@@ -30,8 +30,8 @@
 
 	{{-- message toastr --}}
 	<link rel="stylesheet" href="{{ secure_asset('assets/css/toastr.min.css') }}">
-	<script src="{{ URL::to('assets/js/toastr_jquery.min.js') }}"></script>
-	<script src="{{ URL::to('assets/js/toastr.min.js') }}"></script>
+	<script src="{{ secure_asset('assets/js/toastr_jquery.min.js') }}"></script>
+	<script src="{{ secure_asset('assets/js/toastr.min.js') }}"></script>
 </head>
 
 <body>
