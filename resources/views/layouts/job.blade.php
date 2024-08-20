@@ -32,7 +32,7 @@
 
     @yield('style')
     <style>
-        .error{
+        .error {
             color: red;
         }
     </style>
@@ -58,7 +58,7 @@
     <!-- Datetimepicker JS -->
     <script src="{{ secure_asset('assets/js/moment.min.js') }}"></script>
     <script src="{{ secure_asset('assets/js/bootstrap-datetimepicker.min.js') }}"></script>
-    <!-- validation-->
+    <!-- Validation -->
     <script src="{{ secure_asset('assets/js/jquery.validate.js') }}"></script>
     <!-- Custom JS -->
     <script src="{{ secure_asset('assets/js/app.js') }}"></script>
