@@ -7,6 +7,7 @@
     <meta name="keywords" content="admin, estimates, bootstrap, business, corporate, creative, management, minimal, modern, accounts, invoice, html5, responsive, CRM, Projects">
     <meta name="author" content="soengsouy">
     <meta name="robots" content="noindex, nofollow">
+    @vite(['resources/sass/app.scss', 'resources/js/app.js'])
     <title>Login HRMS</title>
     <!-- Favicon -->
     <link rel="shortcut icon" type="image/x-icon" href="{{ asset('assets/img/favicon.png') }}">
@@ -21,7 +22,7 @@
     <!-- Datetimepicker CSS -->
     <link rel="stylesheet" href="{{ asset('assets/css/bootstrap-datetimepicker.min.css') }}">
     <!-- Main CSS -->
-    <link rel="stylesheet" href="{{ asset('build/assets/css/style.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
     {{-- message toastr --}}
     <link rel="stylesheet" href="{{ asset('assets/css/toastr.min.css') }}">
     <script src="{{ asset('assets/js/toastr_jquery.min.js') }}"></script>
