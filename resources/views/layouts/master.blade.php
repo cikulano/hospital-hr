@@ -24,7 +24,7 @@
 	<!-- Datetimepicker CSS -->
 	<link rel="stylesheet" href="{{ URL::to('assets/css/bootstrap-datetimepicker.min.css') }}">
 	<!-- Chart CSS -->
-	<link rel="stylesheet" href="{{ URL::to('ssets/plugins/morris/morris.css') }}">
+	<link rel="stylesheet" href="{{ URL::to('assets/plugins/morris/morris.css') }}">
 	<!-- Main CSS -->
 	<link rel="stylesheet" href="{{ URL::to('assets/css/style.css') }}">
 
@@ -338,34 +338,45 @@
 		<!-- /Page Wrapper -->
 	</div>
 	<!-- /Main Wrapper -->
+</body>
 
 	<!-- jQuery -->
 	<script src="{{ URL::to('assets/js/jquery-3.5.1.min.js') }}"></script>
+	
 	<!-- Bootstrap Core JS -->
 	<script src="{{ URL::to('assets/js/popper.min.js') }}"></script>
 	<script src="{{ URL::to('assets/js/bootstrap.min.js') }}"></script>
+
 	<!-- Chart JS -->
 	<script src="{{ URL::to('assets/plugins/morris/morris.min.js') }}"></script>
 	<script src="{{ URL::to('assets/plugins/raphael/raphael.min.js') }}"></script>
 	<script src="{{ URL::to('assets/js/chart.js') }}"></script>
 	<script src="{{ URL::to('assets/js/Chart.min.js') }}"></script>
 	<script src="{{ URL::to('assets/js/line-chart.js') }}"></script>	
+
 	<!-- Slimscroll JS -->
 	<script src="{{ URL::to('assets/js/jquery.slimscroll.min.js') }}"></script>
+
 	<!-- Select2 JS -->
 	<script src="{{ URL::to('assets/js/select2.min.js') }}"></script>
+
 	<!-- Datetimepicker JS -->
 	<script src="{{ URL::to('assets/js/moment.min.js') }}"></script>
 	<script src="{{ URL::to('assets/js/bootstrap-datetimepicker.min.js') }}"></script>
+
 	<!-- Datatable JS -->
 	<script src="{{ URL::to('assets/js/jquery.dataTables.min.js') }}"></script>
 	<script src="{{ URL::to('assets/js/dataTables.bootstrap4.min.js') }}"></script>
+
 	<!-- Multiselect JS -->
 	<script src="{{ URL::to('assets/js/multiselect.min.js') }}"></script>
+
 	<!-- validation-->
 	<script src="{{ URL::to('assets/js/jquery.validate.js') }}"></script>	
+
 	<!-- Custom JS -->
 	<script src="{{ URL::to('assets/js/app.js') }}"></script>
+	
 	@yield('script')
-</body>
+
 </html>

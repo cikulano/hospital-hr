@@ -133,7 +133,7 @@
                             <thead>
                                 <tr>
                                     <th class="text-center">Employee</th>
-                                    <th class="text-center">NoPeg</th>
+                                    <th >NoPeg</th>
                                     <th hidden></th>
                                     <th hidden></th>
                                     <th hidden></th>
@@ -148,10 +148,10 @@
                                     <th hidden></th>
                                     <th hidden></th>
                                     <th hidden></th>
-                                    <th class="text-center">Email</th>
-                                    <th class="text-center">Department</th>
+                                    <th >Email</th>
+                                    <th >Department</th>
                                     <!-- <th>Role</th> -->
-                                    <th class="text-center">Salary</th>
+                                    <th >Salary</th>
                                     <th hidden></th>
                                     <th class="text-center">Payslip</th>
                                     <th class="text-center">Action</th>
