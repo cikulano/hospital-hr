@@ -1,4 +1,5 @@
 @extends('layouts.master')
+
 @section('content')
     <?php  
         $hour   = date ("G");
@@ -25,7 +26,7 @@
             <div class="page-header">
                 <div class="row">
                     <div class="col-sm-12">
-                        <h3 class="page-title">{{ $greet }} Welcome, {{ Session::get('name') }}!</h3>
+                        <h3 class="page-title">{{ $greet }} {{ Session::get('name') }}!</h3>
                         <ul class="breadcrumb">
                             <li class="breadcrumb-item active">Dashboard</li>
                         </ul>
@@ -115,7 +116,7 @@
                                     <div> <span class="d-block">Earnings</span> </div>
                                     <div> <span class="text-success">+12.5%</span> </div>
                                 </div>
-                                <h3 class="mb-3">$1,42,300</h3>
+                                <h3 class="mb-3">Rp 1,42,300</h3>
                                 <div class="progress mb-2" style="height: 5px;">
                                     <div class="progress-bar bg-primary" role="progressbar" style="width: 70%;" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100"></div>
                                 </div>
@@ -128,7 +129,7 @@
                                     <div> <span class="d-block">Expenses</span> </div>
                                     <div> <span class="text-danger">-2.8%</span> </div>
                                 </div>
-                                <h3 class="mb-3">$8,500</h3>
+                                <h3 class="mb-3">Rp 8,500</h3>
                                 <div class="progress mb-2" style="height: 5px;">
                                     <div class="progress-bar bg-primary" role="progressbar" style="width: 70%;" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100"></div>
                                 </div>
@@ -141,7 +142,7 @@
                                     <div> <span class="d-block">Profit</span> </div>
                                     <div> <span class="text-danger">-75%</span> </div>
                                 </div>
-                                <h3 class="mb-3">$1,12,000</h3>
+                                <h3 class="mb-3">Rp 1,12,000</h3>
                                 <div class="progress mb-2" style="height: 5px;">
                                     <div class="progress-bar bg-primary" role="progressbar" style="width: 70%;" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100"></div>
                                 </div>
@@ -155,7 +156,7 @@
             {!! Toastr::message() !!}
             <!-- Statistics Widget -->
             <div class="row">
-                <div class="col-md-12 col-lg-12 col-xl-4 d-flex">
+                <!-- <div class="col-md-12 col-lg-12 col-xl-4 d-flex">
                     <div class="card flex-fill dash-statistics">
                         <div class="card-body">
                             <h5 class="card-title">Statistics</h5>
@@ -193,7 +194,7 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> -->
                 <div class="col-md-12 col-lg-6 col-xl-4 d-flex">
                     <div class="card flex-fill">
                         <div class="card-body">
@@ -267,7 +268,7 @@
                 </div>
             </div>
             <!-- /Statistics Widget -->
-            <div class="row">
+            <!-- <div class="row">
                 <div class="col-md-6 d-flex">
                     <div class="card card-table flex-fill">
                         <div class="card-header">
@@ -375,9 +376,9 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> -->
             <div class="row">
-                <div class="col-md-6 d-flex">
+                <!-- <div class="col-md-6 d-flex">
                     <div class="card card-table flex-fill">
                         <div class="card-header">
                             <h3 class="card-title mb-0">Clients</h3>
@@ -579,8 +580,8 @@
                         </div>
                         <div class="card-footer"> <a href="clients.html">View all clients</a> </div>
                     </div>
-                </div>
-                <div class="col-md-6 d-flex">
+                </div> -->
+                <!-- <div class="col-md-6 d-flex">
                     <div class="card card-table flex-fill">
                         <div class="card-header">
                             <h3 class="card-title mb-0">Recent Projects</h3> </div>
@@ -749,7 +750,7 @@
                             <a href="projects.html">View all projects</a>
                         </div>
                     </div>
-                </div>
+                </div> -->
             </div>
         </div>
         <!-- /Page Content -->
