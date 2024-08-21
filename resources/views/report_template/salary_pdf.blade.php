@@ -139,7 +139,7 @@
                 <td class="salary-info-value">Rp {{ number_format($shift) }}</td>
             </tr>
             <tr>
-                <td class="salary-info-label">Tunjangan OnSite</td>
+                <td class="salary-info-label">Kompensasi OnSite</td>
                 <td class="salary-info-value">Rp {{ number_format($onsite) }}</td>
             </tr>
             <tr>

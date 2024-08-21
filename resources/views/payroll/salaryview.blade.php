@@ -63,7 +63,7 @@
                             <div class="row">
                                 <div class="col-sm-6">
                                     <div>
-                                        <h4 class="m-b-10"><strong>Earnings</strong></h4>
+                                        <h4 class="m-b-10"><strong>Pendapatan</strong></h4>
                                         <table class="table table-bordered">
                                             <tbody>
                                             <?php
@@ -85,7 +85,7 @@
                                                 <span class="float-right">Rp {{ number_format($shift) }}</span></td></strong>
                                             </tr>
                                             <tr>
-                                                <td><strong>Tunjangan OnSite
+                                                <td><strong>Kompensasi OnSite
                                                 <span class="float-right">Rp {{ number_format($onsite) }}</span></td></strong>
                                             </tr>
                                             <tr>
