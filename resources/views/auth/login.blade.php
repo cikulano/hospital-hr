@@ -18,7 +18,7 @@
                             <p class="account-subtitle">Access to our dashboard</p>
 
                             <!-- Account Form -->
-                            <form method="POST" action="secure_url(route('login'))">
+                            <form method="POST" action="{{ secure_url(route('login')) }}">
                                 @csrf
                                 <div class="form-group">
                                     <label>Email</label>
