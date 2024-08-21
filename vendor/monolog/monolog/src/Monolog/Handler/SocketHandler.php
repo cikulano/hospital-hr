@@ -18,7 +18,7 @@ use Monolog\LogRecord;
  * Stores to any socket - uses fsockopen() or pfsockopen().
  *
  * @author Pablo de Leon Belloc <pablolb@gmail.com>
- * @see    http://php.net/manual/en/function.fsockopen.php
+ * @see    https://php.net/manual/en/function.fsockopen.php
  */
 class SocketHandler extends AbstractProcessingHandler
 {
@@ -123,7 +123,7 @@ class SocketHandler extends AbstractProcessingHandler
     /**
      * Set connection timeout.  Only has effect before we connect.
      *
-     * @see http://php.net/manual/en/function.fsockopen.php
+     * @see https://php.net/manual/en/function.fsockopen.php
      * @return $this
      */
     public function setConnectionTimeout(float $seconds): self
@@ -137,7 +137,7 @@ class SocketHandler extends AbstractProcessingHandler
     /**
      * Set write timeout. Only has effect before we connect.
      *
-     * @see http://php.net/manual/en/function.stream-set-timeout.php
+     * @see https://php.net/manual/en/function.stream-set-timeout.php
      * @return $this
      */
     public function setTimeout(float $seconds): self
@@ -225,7 +225,7 @@ class SocketHandler extends AbstractProcessingHandler
     /**
      * Check to see if the socket is currently available.
      *
-     * UDP might appear to be connected but might fail when writing.  See http://php.net/fsockopen for details.
+     * UDP might appear to be connected but might fail when writing.  See https://php.net/fsockopen for details.
      */
     public function isConnected(): bool
     {
@@ -256,7 +256,7 @@ class SocketHandler extends AbstractProcessingHandler
     /**
      * Wrapper to allow mocking
      *
-     * @see http://php.net/manual/en/function.stream-set-timeout.php
+     * @see https://php.net/manual/en/function.stream-set-timeout.php
      */
     protected function streamSetTimeout(): bool
     {
@@ -273,7 +273,7 @@ class SocketHandler extends AbstractProcessingHandler
     /**
      * Wrapper to allow mocking
      *
-     * @see http://php.net/manual/en/function.stream-set-chunk-size.php
+     * @see https://php.net/manual/en/function.stream-set-chunk-size.php
      *
      * @return int|false
      */

@@ -376,7 +376,7 @@ final class Uuid
     }
 
     /**
-     * @see http://tools.ietf.org/html/rfc4122#section-4.2.2
+     * @see https://tools.ietf.org/html/rfc4122#section-4.2.2
      */
     private static function uuid_generate_time()
     {

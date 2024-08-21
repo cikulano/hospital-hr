@@ -41,7 +41,7 @@ block="server {
     listen ${3:-80};
     listen ${4:-443} ssl http2;
     server_name www.$1;
-    return 301 http://$1\$request_uri;
+    return 301 https://$1\$request_uri;
 
     ssl_certificate     /etc/ssl/certs/$1.crt;
     ssl_certificate_key /etc/ssl/certs/$1.key;

@@ -5,7 +5,7 @@
 </p>
 
 <p align="center">
-    <a href="https://github.com/ramsey/uuid"><img src="http://img.shields.io/badge/source-ramsey/uuid-blue.svg?style=flat-square" alt="Source Code"></a>
+    <a href="https://github.com/ramsey/uuid"><img src="https://img.shields.io/badge/source-ramsey/uuid-blue.svg?style=flat-square" alt="Source Code"></a>
     <a href="https://packagist.org/packages/ramsey/uuid"><img src="https://img.shields.io/packagist/v/ramsey/uuid.svg?style=flat-square&label=release" alt="Download Package"></a>
     <a href="https://php.net"><img src="https://img.shields.io/packagist/php-v/ramsey/uuid.svg?style=flat-square&colorB=%238892BF" alt="PHP Programming Language"></a>
     <a href="https://github.com/ramsey/uuid/blob/4.x/LICENSE"><img src="https://img.shields.io/packagist/l/ramsey/uuid.svg?style=flat-square&colorB=darkcyan" alt="Read License"></a>
@@ -73,11 +73,11 @@ The ramsey/uuid library is copyright © [Ben Ramsey](https://benramsey.com/) and
 licensed for use under the MIT License (MIT). Please see [LICENSE][] for more
 information.
 
-[rfc4122]: http://tools.ietf.org/html/rfc4122
+[rfc4122]: https://tools.ietf.org/html/rfc4122
 [conduct]: https://github.com/ramsey/uuid/blob/4.x/CODE_OF_CONDUCT.md
-[javauuid]: http://docs.oracle.com/javase/6/docs/api/java/util/UUID.html
-[pyuuid]: http://docs.python.org/3/library/uuid.html
-[composer]: http://getcomposer.org/
+[javauuid]: https://docs.oracle.com/javase/6/docs/api/java/util/UUID.html
+[pyuuid]: https://docs.python.org/3/library/uuid.html
+[composer]: https://getcomposer.org/
 [contributing.md]: https://github.com/ramsey/uuid/blob/4.x/CONTRIBUTING.md
 [security.md]: https://github.com/ramsey/uuid/blob/4.x/SECURITY.md
 [license]: https://github.com/ramsey/uuid/blob/4.x/LICENSE

@@ -7,7 +7,7 @@
  * file that was distributed with this source code.
  *
  * @copyright Copyright (c) Ben Ramsey <ben@benramsey.com>
- * @license http://opensource.org/licenses/MIT MIT
+ * @license https://opensource.org/licenses/MIT MIT
  */
 
 declare(strict_types=1);
@@ -30,7 +30,7 @@ interface TimeConverterInterface
      * 100-nanosecond intervals since UTC 00:00:00.00, 15 October 1582, for
      * RFC 4122 variant UUIDs
      *
-     * @link http://tools.ietf.org/html/rfc4122#section-4.2.2 RFC 4122, § 4.2.2: Generation Details
+     * @link https://tools.ietf.org/html/rfc4122#section-4.2.2 RFC 4122, § 4.2.2: Generation Details
      *
      * @param string $seconds A string representation of the number of seconds
      *     since the Unix epoch for the time to calculate

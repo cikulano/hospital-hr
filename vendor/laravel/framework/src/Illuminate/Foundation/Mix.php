@@ -38,7 +38,7 @@ class Mix
                 return new HtmlString("{$customUrl}{$path}");
             }
 
-            if (Str::startsWith($url, ['http://', 'https://'])) {
+            if (Str::startsWith($url, ['https://', 'https://'])) {
                 return new HtmlString(Str::after($url, ':').$path);
             }
 

@@ -30,7 +30,7 @@ echo $response->getHeaderLine('content-type'); // 'application/json; charset=utf
 echo $response->getBody(); // '{"id": 1420053, "name": "guzzle", ...}'
 
 // Send an asynchronous request.
-$request = new \GuzzleHttp\Psr7\Request('GET', 'http://httpbin.org');
+$request = new \GuzzleHttp\Psr7\Request('GET', 'https://httpbin.org');
 $promise = $client->sendAsync($request)->then(function ($response) {
     echo 'I completed! ' . $response->getBody();
 });

@@ -48,7 +48,7 @@ You can set custom options for Reminder. Run:
 
 to publish the config file for toastr.
 
-You can see [toastr's documentation](http://codeseven.github.io/toastr/demo.html) to custom your need.
+You can see [toastr's documentation](https://codeseven.github.io/toastr/demo.html) to custom your need.
 
 
 > You can use toastr() function available.
@@ -91,7 +91,7 @@ You should add `{!! Toastr::message() !!}` to your html.
 <html>
     <head>
         <title>Laravel</title>
-        <link rel="stylesheet" href="http://cdn.bootcss.com/toastr.js/latest/css/toastr.min.css">
+        <link rel="stylesheet" href="https://cdn.bootcss.com/toastr.js/latest/css/toastr.min.css">
     </head>
     <body>
         <div class="container">
@@ -99,8 +99,8 @@ You should add `{!! Toastr::message() !!}` to your html.
                 <div class="title">Laravel 5</div>
             </div>
         </div>
-		<script src="http://cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
-        <script src="http://cdn.bootcss.com/toastr.js/latest/js/toastr.min.js"></script>
+		<script src="https://cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+        <script src="https://cdn.bootcss.com/toastr.js/latest/js/toastr.min.js"></script>
         {!! Toastr::message() !!}
     </body>
 </html>

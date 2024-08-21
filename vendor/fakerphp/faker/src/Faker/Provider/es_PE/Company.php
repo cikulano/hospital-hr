@@ -77,7 +77,7 @@ class Company extends \Faker\Provider\Company
      *
      * @param bool $isNaturalPerson If set to false or empty, RUC starts with 20 and otherwise with 10
      *
-     * @see http://www2.sunat.gob.pe/pdt/pdtModulos/independientes/p695/TipoDoc.htm
+     * @see https://www2.sunat.gob.pe/pdt/pdtModulos/independientes/p695/TipoDoc.htm
      */
     public static function ruc(bool $isNaturalPerson = false): string
     {

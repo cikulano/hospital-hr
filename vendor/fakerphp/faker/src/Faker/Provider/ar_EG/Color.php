@@ -11,7 +11,7 @@ class Color extends \Faker\Provider\Color
     ];
 
     /**
-     * @see http://r7eq.com/Service/Design/ColorName/
+     * @see https://r7eq.com/Service/Design/ColorName/
      */
     protected static $allColorNames = [
         'أخضر فاتح',

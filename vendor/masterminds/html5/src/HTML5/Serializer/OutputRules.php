@@ -17,19 +17,19 @@ use Masterminds\HTML5\Elements;
 class OutputRules implements RulesInterface
 {
     /**
-     * Defined in http://www.w3.org/TR/html51/infrastructure.html#html-namespace-0.
+     * Defined in https://www.w3.org/TR/html51/infrastructure.html#html-namespace-0.
      */
-    const NAMESPACE_HTML = 'http://www.w3.org/1999/xhtml';
+    const NAMESPACE_HTML = 'https://www.w3.org/1999/xhtml';
 
-    const NAMESPACE_MATHML = 'http://www.w3.org/1998/Math/MathML';
+    const NAMESPACE_MATHML = 'https://www.w3.org/1998/Math/MathML';
 
-    const NAMESPACE_SVG = 'http://www.w3.org/2000/svg';
+    const NAMESPACE_SVG = 'https://www.w3.org/2000/svg';
 
-    const NAMESPACE_XLINK = 'http://www.w3.org/1999/xlink';
+    const NAMESPACE_XLINK = 'https://www.w3.org/1999/xlink';
 
-    const NAMESPACE_XML = 'http://www.w3.org/XML/1998/namespace';
+    const NAMESPACE_XML = 'https://www.w3.org/XML/1998/namespace';
 
-    const NAMESPACE_XMLNS = 'http://www.w3.org/2000/xmlns/';
+    const NAMESPACE_XMLNS = 'https://www.w3.org/2000/xmlns/';
 
     /**
      * Holds the HTML5 element names that causes a namespace switch.
@@ -70,15 +70,15 @@ class OutputRules implements RulesInterface
     protected $nonBooleanAttributes = array(
         /*
         array(
-            'nodeNamespace'=>'http://www.w3.org/1999/xhtml',
-            'attrNamespace'=>'http://www.w3.org/1999/xhtml',
+            'nodeNamespace'=>'https://www.w3.org/1999/xhtml',
+            'attrNamespace'=>'https://www.w3.org/1999/xhtml',
 
             'nodeName'=>'img', 'nodeName'=>array('img', 'a'),
             'attrName'=>'alt', 'attrName'=>array('title', 'alt'),
         ),
         */
         array(
-            'nodeNamespace' => 'http://www.w3.org/1999/xhtml',
+            'nodeNamespace' => 'https://www.w3.org/1999/xhtml',
             'attrName' => array('href',
                 'hreflang',
                 'http-equiv',
@@ -152,7 +152,7 @@ class OutputRules implements RulesInterface
             ),
         ),
         array(
-            'nodeNamespace' => 'http://www.w3.org/1999/xhtml',
+            'nodeNamespace' => 'https://www.w3.org/1999/xhtml',
             'xpath' => 'starts-with(local-name(), \'data-\')',
         ),
     );
@@ -479,7 +479,7 @@ class OutputRules implements RulesInterface
      *
      * The named character references are listed in section 8.5.
      *
-     * @see http://www.w3.org/TR/2013/CR-html5-20130806/syntax.html#named-character-references True encoding will turn all named character references into their entities.
+     * @see https://www.w3.org/TR/2013/CR-html5-20130806/syntax.html#named-character-references True encoding will turn all named character references into their entities.
      *      This includes such characters as +.# and many other common ones. By default
      *      encoding here will just escape &'<>".
      *
@@ -523,7 +523,7 @@ class OutputRules implements RulesInterface
      * &quot;, and when not in attribute mode the < and > should be converted to
      * &lt; and &gt;.
      *
-     * @see http://www.w3.org/TR/2013/CR-html5-20130806/syntax.html#escapingString
+     * @see https://www.w3.org/TR/2013/CR-html5-20130806/syntax.html#escapingString
      *
      * @param string $text      Text to escape.
      * @param bool   $attribute True if we are escaping an attrubute, false otherwise.

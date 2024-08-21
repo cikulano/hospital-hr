@@ -51,7 +51,7 @@ final class DocumentRenderer implements NodeRendererInterface, XmlNodeRendererIn
     public function getXmlAttributes(Node $node): array
     {
         return [
-            'xmlns' => 'http://commonmark.org/xml/1.0',
+            'xmlns' => 'https://commonmark.org/xml/1.0',
         ];
     }
 }

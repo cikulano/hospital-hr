@@ -1,6 +1,6 @@
 # ChangeLog
 
-All notable changes are documented in this file using the [Keep a CHANGELOG](http://keepachangelog.com/) principles.
+All notable changes are documented in this file using the [Keep a CHANGELOG](https://keepachangelog.com/) principles.
 
 ## [11.0.3] - 2024-03-12
 

@@ -10,7 +10,7 @@ server {
     listen 443 ssl default_server;
 
     location / {
-        proxy_pass http://homesteadup;
+        proxy_pass https://homesteadup;
         proxy_set_header HOST \$host;
         proxy_set_header X-Forwarded-Proto \$scheme;
         proxy_set_header X-Real-IP \$remote_addr;

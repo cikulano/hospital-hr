@@ -3,7 +3,7 @@
 ### Laravel wrapper for [Dompdf HTML to PDF Converter](https://github.com/dompdf/dompdf)
 
 [![Tests](https://github.com/barryvdh/laravel-dompdf/workflows/Tests/badge.svg)](https://github.com/barryvdh/laravel-dompdf/actions)
-[![Packagist License](https://poser.pugx.org/barryvdh/laravel-dompdf/license.png)](http://choosealicense.com/licenses/mit/)
+[![Packagist License](https://poser.pugx.org/barryvdh/laravel-dompdf/license.png)](https://choosealicense.com/licenses/mit/)
 [![Latest Stable Version](https://poser.pugx.org/barryvdh/laravel-dompdf/version.png)](https://packagist.org/packages/barryvdh/laravel-dompdf)
 [![Total Downloads](https://poser.pugx.org/barryvdh/laravel-dompdf/d/total.png)](https://packagist.org/packages/barryvdh/laravel-dompdf)
 [![Fruitcake](https://img.shields.io/badge/Powered%20By-Fruitcake-b2bc35.svg)](https://fruitcake.nl/)
@@ -127,4 +127,4 @@ You can use the CSS `page-break-before`/`page-break-after` properties to create 
     
 ### License
 
-This DOMPDF Wrapper for Laravel is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT)
+This DOMPDF Wrapper for Laravel is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT)

@@ -114,7 +114,7 @@ Check out the other cool things people are doing with `league/commonmark`: <http
 
 ## 🏷️ Versioning
 
-[SemVer](http://semver.org/) is followed closely. Minor and patch releases should not introduce breaking changes to the codebase; however, they might change the resulting AST or HTML output of parsed Markdown (due to bug fixes, spec changes, etc.)  As a result, you might get slightly different HTML, but any custom code built onto this library should still function correctly.
+[SemVer](https://semver.org/) is followed closely. Minor and patch releases should not introduce breaking changes to the codebase; however, they might change the resulting AST or HTML output of parsed Markdown (due to bug fixes, spec changes, etc.)  As a result, you might get slightly different HTML, but any custom code built onto this library should still function correctly.
 
 Any classes or methods marked `@internal` are not intended for use outside of this library and are subject to breaking changes at any time, so please avoid using them.
 
@@ -204,11 +204,11 @@ This project is used by [Drupal](https://www.drupal.org/project/markdown), [Lara
 	</sub>
 </div>
 
-[CommonMark]: http://commonmark.org/
-[CommonMark spec]: http://spec.commonmark.org/
+[CommonMark]: https://commonmark.org/
+[CommonMark spec]: https://spec.commonmark.org/
 [commonmark.js]: https://github.com/jgm/commonmark.js
 [GitHub-Flavored Markdown]: https://github.github.com/gfm/
-[John MacFarlane]: http://johnmacfarlane.net
+[John MacFarlane]: https://johnmacfarlane.net
 [docs]: https://commonmark.thephpleague.com/
 [docs-examples]: https://commonmark.thephpleague.com/customization/overview/#examples
 [docs-example-twitter]: https://commonmark.thephpleague.com/customization/inline-parsing#example-1---twitter-handles

@@ -278,7 +278,7 @@ class ServeCommand extends Command
                     if ($this->serverRunningHasBeenDisplayed === false) {
                         $this->serverRunningHasBeenDisplayed = true;
 
-                        $this->components->info("Server running on [http://{$this->host()}:{$this->port()}].");
+                        $this->components->info("Server running on [https://{$this->host()}:{$this->port()}].");
                         $this->comment('  <fg=yellow;options=bold>Press Ctrl+C to stop the server</>');
 
                         $this->newLine();

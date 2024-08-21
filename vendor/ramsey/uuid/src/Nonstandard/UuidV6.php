@@ -7,7 +7,7 @@
  * file that was distributed with this source code.
  *
  * @copyright Copyright (c) Ben Ramsey <ben@benramsey.com>
- * @license http://opensource.org/licenses/MIT MIT
+ * @license https://opensource.org/licenses/MIT MIT
  */
 
 declare(strict_types=1);
@@ -32,7 +32,7 @@ use Ramsey\Uuid\Uuid as BaseUuid;
  * @deprecated Use {@see \Ramsey\Uuid\Rfc4122\UuidV6} instead.
  *
  * @link https://github.com/uuid6/uuid6-ietf-draft UUID version 6 IETF draft
- * @link http://gh.peabody.io/uuidv6/ "Version 6" UUIDs
+ * @link https://gh.peabody.io/uuidv6/ "Version 6" UUIDs
  *
  * @psalm-immutable
  */

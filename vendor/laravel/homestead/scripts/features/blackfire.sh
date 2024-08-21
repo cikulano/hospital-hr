@@ -21,7 +21,7 @@ touch /home/$WSL_USER_NAME/.homestead-features/blackfire
 chown -Rf $WSL_USER_NAME:$WSL_USER_GROUP /home/$WSL_USER_NAME/.homestead-features
 
 curl -fsSL https://packages.blackfire.io/gpg.key | sudo gpg --dearmor -o /etc/apt/keyrings/blackfire.gpg
-echo "deb [signed-by=/etc/apt/keyrings/blackfire.gpg] http://packages.blackfire.io/debian any main" | sudo tee /etc/apt/sources.list.d/blackfire.list
+echo "deb [signed-by=/etc/apt/keyrings/blackfire.gpg] https://packages.blackfire.io/debian any main" | sudo tee /etc/apt/sources.list.d/blackfire.list
 
 # Install Blackfire
 sudo DEBIAN_FRONTEND=noninteractive apt-get update

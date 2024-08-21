@@ -30,7 +30,7 @@ use PhpConsole\Storage;
  * 1. Install Google Chrome extension [now dead and removed from the chrome store]
  * 2. See overview https://github.com/barbushin/php-console#overview
  * 3. Install PHP Console library https://github.com/barbushin/php-console#installation
- * 4. Example (result will looks like http://i.hizliresim.com/vg3Pz4.png)
+ * 4. Example (result will looks like https://i.hizliresim.com/vg3Pz4.png)
  *
  *      $logger = new \Monolog\Logger('all', array(new \Monolog\Handler\PHPConsoleHandler()));
  *      \Monolog\ErrorHandler::register($logger);
@@ -111,7 +111,7 @@ class PHPConsoleHandler extends AbstractProcessingHandler
         'dumperItemSizeLimit' => 5000, // int Maximum length of any string or dumped array item
         'dumperDumpSizeLimit' => 500000, // int Maximum approximate size of dumped vars result formatted in JSON
         'detectDumpTraceAndSource' => false, // bool Autodetect and append trace data to debug
-        'dataStorage' => null, // \PhpConsole\Storage|null Fixes problem with custom $_SESSION handler(see http://goo.gl/Ne8juJ)
+        'dataStorage' => null, // \PhpConsole\Storage|null Fixes problem with custom $_SESSION handler(see https://goo.gl/Ne8juJ)
     ];
 
     private Connector $connector;

@@ -1,6 +1,6 @@
 # Changelog
 
-All notable changes to phar-io/manifest are documented in this file using the [Keep a CHANGELOG](http://keepachangelog.com/) principles.
+All notable changes to phar-io/manifest are documented in this file using the [Keep a CHANGELOG](https://keepachangelog.com/) principles.
 
 ## [2.0.4] - 03-03-2024
 

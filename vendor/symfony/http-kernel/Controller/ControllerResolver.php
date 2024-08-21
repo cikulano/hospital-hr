@@ -21,7 +21,7 @@ use Symfony\Component\HttpKernel\Attribute\AsController;
  * the controller to execute.
  *
  * @author Fabien Potencier <fabien@symfony.com>
- * @author Tobias Schultze <http://tobion.de>
+ * @author Tobias Schultze <https://tobion.de>
  */
 class ControllerResolver implements ControllerResolverInterface
 {

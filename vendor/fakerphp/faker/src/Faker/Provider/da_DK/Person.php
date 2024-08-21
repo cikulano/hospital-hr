@@ -5,7 +5,7 @@ namespace Faker\Provider\da_DK;
 use Faker\Provider\DateTime;
 
 /**
- * @see http://www.danskernesnavne.navneforskning.ku.dk/Personnavne.asp
+ * @see https://www.danskernesnavne.navneforskning.ku.dk/Personnavne.asp
  */
 class Person extends \Faker\Provider\Person
 {
@@ -181,8 +181,8 @@ class Person extends \Faker\Provider\Person
     /**
      * Randomly return a danish CPR number (Personnal identification number) format.
      *
-     * @see http://cpr.dk/cpr/site.aspx?p=16
-     * @see http://en.wikipedia.org/wiki/Personal_identification_number_%28Denmark%29
+     * @see https://cpr.dk/cpr/site.aspx?p=16
+     * @see https://en.wikipedia.org/wiki/Personal_identification_number_%28Denmark%29
      *
      * @return string
      */

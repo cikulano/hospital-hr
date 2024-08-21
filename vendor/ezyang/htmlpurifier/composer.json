@@ -3,13 +3,13 @@
     "description": "Standards compliant HTML filter written in PHP",
     "type": "library",
     "keywords": ["html"],
-    "homepage": "http://htmlpurifier.org/",
+    "homepage": "https://htmlpurifier.org/",
     "license": "LGPL-2.1-or-later",
     "authors": [
         {
             "name": "Edward Z. Yang",
             "email": "admin@htmlpurifier.org",
-            "homepage": "http://ezyang.com"
+            "homepage": "https://ezyang.com"
         }
     ],
     "require": {

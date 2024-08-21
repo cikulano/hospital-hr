@@ -7,7 +7,7 @@
  * file that was distributed with this source code.
  *
  * @copyright Copyright (c) Ben Ramsey <ben@benramsey.com>
- * @license http://opensource.org/licenses/MIT MIT
+ * @license https://opensource.org/licenses/MIT MIT
  */
 
 declare(strict_types=1);
@@ -145,7 +145,7 @@ interface CollectionInterface extends ArrayInterface
      * This will always leave the original collection untouched and will return
      * a new one.
      *
-     * See the {@link http://php.net/manual/en/function.array-filter.php PHP array_filter() documentation}
+     * See the {@link https://php.net/manual/en/function.array-filter.php PHP array_filter() documentation}
      * for examples of how the `$callback` parameter works.
      *
      * @param callable(T): bool $callback A callable to use for filtering elements.
@@ -181,7 +181,7 @@ interface CollectionInterface extends ArrayInterface
      * collection is created by mapping the callback to each item of the
      * original collection.
      *
-     * See the {@link http://php.net/manual/en/function.array-map.php PHP array_map() documentation}
+     * See the {@link https://php.net/manual/en/function.array-map.php PHP array_map() documentation}
      * for examples of how the `$callback` parameter works.
      *
      * @param callable(T): TCallbackReturn $callback A callable to apply to each
@@ -197,7 +197,7 @@ interface CollectionInterface extends ArrayInterface
      * Apply a given callback method on each item of the collection
      * to reduce it to a single value.
      *
-     * See the {@link http://php.net/manual/en/function.array-reduce.php PHP array_reduce() documentation}
+     * See the {@link https://php.net/manual/en/function.array-reduce.php PHP array_reduce() documentation}
      * for examples of how the `$callback` and `$initial` parameters work.
      *
      * @param callable(TCarry, T): TCarry $callback A callable to apply to each

@@ -96,7 +96,7 @@ class Person extends \Faker\Provider\Person
     /**
      * Return a random Icelandic Kennitala (Social Security number).
      *
-     * @see http://en.wikipedia.org/wiki/Kennitala
+     * @see https://en.wikipedia.org/wiki/Kennitala
      *
      * @return string
      */

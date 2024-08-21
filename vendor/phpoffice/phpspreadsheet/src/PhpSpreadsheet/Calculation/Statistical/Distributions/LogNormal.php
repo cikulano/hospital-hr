@@ -112,7 +112,7 @@ class LogNormal
      *
      * @TODO    Try implementing P J Acklam's refinement algorithm for greater
      *            accuracy if I can get my head round the mathematics
-     *            (as described at) http://home.online.no/~pjacklam/notes/invnorm/
+     *            (as described at) https://home.online.no/~pjacklam/notes/invnorm/
      */
     public static function inverse($probability, $mean, $stdDev)
     {

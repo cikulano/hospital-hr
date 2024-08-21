@@ -6,7 +6,7 @@ class Internet extends \Faker\Provider\Internet
 {
     /**
      * @see https://www.statista.com/statistics/446418/most-popular-e-mail-providers-germany/
-     * @see http://blog.shuttlecloud.com/the-10-most-popular-email-providers-in-germany
+     * @see https://blog.shuttlecloud.com/the-10-most-popular-email-providers-in-germany
      */
     protected static $freeEmailDomain = [
         'web.de',

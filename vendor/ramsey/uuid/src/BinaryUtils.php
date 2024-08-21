@@ -7,7 +7,7 @@
  * file that was distributed with this source code.
  *
  * @copyright Copyright (c) Ben Ramsey <ben@benramsey.com>
- * @license http://opensource.org/licenses/MIT MIT
+ * @license https://opensource.org/licenses/MIT MIT
  */
 
 declare(strict_types=1);
@@ -22,7 +22,7 @@ class BinaryUtils
     /**
      * Applies the RFC 4122 variant field to the 16-bit clock sequence
      *
-     * @link http://tools.ietf.org/html/rfc4122#section-4.1.1 RFC 4122, § 4.1.1: Variant
+     * @link https://tools.ietf.org/html/rfc4122#section-4.1.1 RFC 4122, § 4.1.1: Variant
      *
      * @param int $clockSeq The 16-bit clock sequence value before the RFC 4122
      *     variant is applied
@@ -42,7 +42,7 @@ class BinaryUtils
     /**
      * Applies the RFC 4122 version number to the 16-bit `time_hi_and_version` field
      *
-     * @link http://tools.ietf.org/html/rfc4122#section-4.1.3 RFC 4122, § 4.1.3: Version
+     * @link https://tools.ietf.org/html/rfc4122#section-4.1.3 RFC 4122, § 4.1.3: Version
      *
      * @param int $timeHi The value of the 16-bit `time_hi_and_version` field
      *     before the RFC 4122 version is applied

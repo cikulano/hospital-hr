@@ -9,7 +9,7 @@ namespace Masterminds\HTML5\Parser;
  *
 * Based on code from html5lib:
 
-Copyright 2009 Geoffrey Sneddon <http://gsnedders.com/>
+Copyright 2009 Geoffrey Sneddon <https://gsnedders.com/>
 
 Permission is hereby granted, free of charge, to any person obtaining a
 copy of this software and associated documentation files (the
@@ -36,7 +36,7 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 // - /* */ indicates verbatim text from the HTML 5 specification
 //   MPB: Not sure which version of the spec. Moving from HTML5lib to
 //   HTML5-PHP, I have been using this version:
-//   http://www.w3.org/TR/2012/CR-html5-20121217/Overview.html#contents
+//   https://www.w3.org/TR/2012/CR-html5-20121217/Overview.html#contents
 //
 // - // indicates regular comments
 

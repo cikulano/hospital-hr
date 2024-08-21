@@ -95,11 +95,11 @@ class XliffUtils
                 @unlink($tmpfile);
             });
             $schema = '<?xml version="1.0" encoding="utf-8"?>
-<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<xsd:schema xmlns:xsd="https://www.w3.org/2001/XMLSchema">
   <xsd:include schemaLocation="file:///'.str_replace('\\', '/', $tmpfile).'" />
 </xsd:schema>';
             file_put_contents($tmpfile, '<?xml version="1.0" encoding="utf-8"?>
-<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<xsd:schema xmlns:xsd="https://www.w3.org/2001/XMLSchema">
   <xsd:element name="test" type="testType" />
   <xsd:complexType name="testType"/>
 </xsd:schema>');
@@ -130,7 +130,7 @@ class XliffUtils
     {
         if ('1.2' === $xliffVersion) {
             $schemaSource = file_get_contents(__DIR__.'/../Resources/schemas/xliff-core-1.2-transitional.xsd');
-            $xmlUri = 'http://www.w3.org/2001/xml.xsd';
+            $xmlUri = 'https://www.w3.org/2001/xml.xsd';
         } elseif ('2.0' === $xliffVersion) {
             $schemaSource = file_get_contents(__DIR__.'/../Resources/schemas/xliff-core-2.0.xsd');
             $xmlUri = 'informativeCopiesOf3rdPartySchemas/w3c/xml.xsd';

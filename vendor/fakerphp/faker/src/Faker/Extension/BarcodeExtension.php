@@ -24,7 +24,7 @@ interface BarcodeExtension extends Extension
     /**
      * Get a random ISBN-10 code
      *
-     * @see http://en.wikipedia.org/wiki/International_Standard_Book_Number
+     * @see https://en.wikipedia.org/wiki/International_Standard_Book_Number
      *
      * @example '4881416324'
      */
@@ -33,7 +33,7 @@ interface BarcodeExtension extends Extension
     /**
      * Get a random ISBN-13 code
      *
-     * @see http://en.wikipedia.org/wiki/International_Standard_Book_Number
+     * @see https://en.wikipedia.org/wiki/International_Standard_Book_Number
      *
      * @example '9790404436093'
      */

@@ -89,7 +89,7 @@ class Person extends \Faker\Provider\Person
     /**
      * National Personal Identity Number (Henkilötunnus)
      *
-     * @see http://www.finlex.fi/fi/laki/ajantasa/2010/20100128
+     * @see https://www.finlex.fi/fi/laki/ajantasa/2010/20100128
      *
      * @param string $gender Person::GENDER_MALE || Person::GENDER_FEMALE
      *

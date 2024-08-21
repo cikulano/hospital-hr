@@ -29,7 +29,7 @@ class CliDumper extends AbstractDumper
     protected bool $colors;
     protected int $maxStringWidth = 0;
     protected array $styles = [
-        // See http://en.wikipedia.org/wiki/ANSI_escape_code#graphics
+        // See https://en.wikipedia.org/wiki/ANSI_escape_code#graphics
         'default' => '0;38;5;208',
         'num' => '1;38;5;38',
         'const' => '1;38;5;208',

@@ -9,7 +9,7 @@ class File extends Base
      *
      * @var array Map of MIME types => file extension(s)
      *
-     * @see http://svn.apache.org/repos/asf/httpd/httpd/trunk/docs/conf/mime.types
+     * @see https://svn.apache.org/repos/asf/httpd/httpd/trunk/docs/conf/mime.types
      */
     protected static $mimeTypes = [
         'application/atom+xml' => 'atom',

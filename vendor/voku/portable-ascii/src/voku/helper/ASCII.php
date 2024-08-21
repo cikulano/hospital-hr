@@ -511,7 +511,7 @@ final class ASCII
         bool $normalize_msword = true,
         bool $remove_invisible_characters = true
     ): string {
-        // http://stackoverflow.com/questions/1401317/remove-non-utf8-characters-from-string
+        // https://stackoverflow.com/questions/1401317/remove-non-utf8-characters-from-string
         // caused connection reset problem on larger strings
 
         $regex = '/

@@ -26,7 +26,7 @@ final readonly class UpdateSchemaLocation implements Migration
         assert($root instanceof DOMElement);
 
         $root->setAttributeNS(
-            'http://www.w3.org/2001/XMLSchema-instance',
+            'https://www.w3.org/2001/XMLSchema-instance',
             'xsi:noNamespaceSchemaLocation',
             'https://schema.phpunit.de/' . Version::series() . '/phpunit.xsd',
         );

@@ -16,7 +16,7 @@ final class EnglishInflector implements InflectorInterface
     /**
      * Map English plural to singular suffixes.
      *
-     * @see http://english-zone.com/spelling/plurals.html
+     * @see https://english-zone.com/spelling/plurals.html
      */
     private const PLURAL_MAP = [
         // First entry: plural suffix, reversed
@@ -157,7 +157,7 @@ final class EnglishInflector implements InflectorInterface
     /**
      * Map English singular to plural suffixes.
      *
-     * @see http://english-zone.com/spelling/plurals.html
+     * @see https://english-zone.com/spelling/plurals.html
      */
     private const SINGULAR_MAP = [
         // First entry: singular suffix, reversed

@@ -24,7 +24,7 @@ use Webmozart\Assert\Assert;
  * minute [0-59], hour [0-23], day of month, month [1-12|JAN-DEC], day of week
  * [1-7|MON-SUN], and an optional year.
  *
- * @see http://en.wikipedia.org/wiki/Cron
+ * @see https://en.wikipedia.org/wiki/Cron
  */
 class CronExpression
 {

@@ -2,7 +2,7 @@
 /**
  * @package dompdf
  * @link    https://github.com/dompdf/dompdf
- * @license http://www.gnu.org/copyleft/lesser.html GNU Lesser General Public License
+ * @license https://www.gnu.org/copyleft/lesser.html GNU Lesser General Public License
  */
 
 // FIXME: Need to sanity check inputs to this class
@@ -26,7 +26,7 @@ use FontLib\Exception\FontNotFoundException;
  * coordinate origin is in the top left corner, and y values increase
  * downwards.
  *
- * See {@link http://www.ros.co.nz/pdf/} for more complete documentation
+ * See {@link https://www.ros.co.nz/pdf/} for more complete documentation
  * on the underlying {@link Cpdf} class.
  *
  * @package dompdf

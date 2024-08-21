@@ -28,8 +28,8 @@ curl -1sLf "https://packagecloud.io/rabbitmq/rabbitmq-server/gpgkey" | sudo gpg 
 
 ## Add apt repositories maintained by Team RabbitMQ
 tee /etc/apt/sources.list.d/rabbitmq.list <<EOF
-deb [signed-by=/etc/apt/keyrings/net.launchpad.ppa.rabbitmq.erlang.gpg] http://ppa.launchpad.net/rabbitmq/rabbitmq-erlang/ubuntu jammy main
-deb-src [signed-by=/etc/apt/keyrings/net.launchpad.ppa.rabbitmq.erlang.gpg] http://ppa.launchpad.net/rabbitmq/rabbitmq-erlang/ubuntu jammy main
+deb [signed-by=/etc/apt/keyrings/net.launchpad.ppa.rabbitmq.erlang.gpg] https://ppa.launchpad.net/rabbitmq/rabbitmq-erlang/ubuntu jammy main
+deb-src [signed-by=/etc/apt/keyrings/net.launchpad.ppa.rabbitmq.erlang.gpg] https://ppa.launchpad.net/rabbitmq/rabbitmq-erlang/ubuntu jammy main
 deb [signed-by=/etc/apt/keyrings/io.packagecloud.rabbitmq.gpg] https://packagecloud.io/rabbitmq/rabbitmq-server/ubuntu/ jammy main
 deb-src [signed-by=/etc/apt/keyrings/io.packagecloud.rabbitmq.gpg] https://packagecloud.io/rabbitmq/rabbitmq-server/ubuntu/ jammy main
 EOF
@@ -55,5 +55,5 @@ rabbitmqctl set_permissions -p / homestead ".*" ".*" ".*"
 rabbitmqctl set_topic_permissions -p / homestead ".*" ".*" ".*"
 
 # Install rabbitmqadmin CLI tool - https://www.rabbitmq.com/management-cli.html
-wget -q http://localhost:15672/cli/rabbitmqadmin -O /usr/local/bin/rabbitmqadmin
+wget -q https://localhost:15672/cli/rabbitmqadmin -O /usr/local/bin/rabbitmqadmin
 chmod +x /usr/local/bin/rabbitmqadmin

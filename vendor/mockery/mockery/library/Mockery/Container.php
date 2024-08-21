@@ -184,7 +184,7 @@ class Container
     }
 
     /**
-     * see http://php.net/manual/en/language.oop5.basic.php
+     * see https://php.net/manual/en/language.oop5.basic.php
      *
      * @param string $className
      *

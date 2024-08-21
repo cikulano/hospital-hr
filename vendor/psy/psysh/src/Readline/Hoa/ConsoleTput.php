@@ -41,8 +41,8 @@ namespace Psy\Readline\Hoa;
  *
  * Query terminfo database.
  * Resources:
- *     • http://man.cx/terminfo(5),
- *     • http://pubs.opengroup.org/onlinepubs/7908799/xcurses/terminfo.html,
+ *     • https://man.cx/terminfo(5),
+ *     • https://pubs.opengroup.org/onlinepubs/7908799/xcurses/terminfo.html,
  */
 class ConsoleTput
 {

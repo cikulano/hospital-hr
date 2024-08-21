@@ -4,7 +4,7 @@ namespace Faker\Provider\ro_RO;
 
 class Person extends \Faker\Provider\Person
 {
-    // http://en.wikipedia.org/wiki/Romanian_name, prefixes are for more formal purposes
+    // https://en.wikipedia.org/wiki/Romanian_name, prefixes are for more formal purposes
     protected static $maleNameFormats = [
         '{{firstNameMale}} {{lastName}}',
         '{{firstNameMale}} {{lastName}}',
@@ -19,7 +19,7 @@ class Person extends \Faker\Provider\Person
         '{{titleFemale}} {{firstNameFemale}} {{lastName}}',
     ];
 
-    //http://ro.wikipedia.org/wiki/List%C4%83_de_prenume_rom%C3%A2ne%C8%99ti#Feminine
+    //https://ro.wikipedia.org/wiki/List%C4%83_de_prenume_rom%C3%A2ne%C8%99ti#Feminine
     protected static $firstNameFemale = [
         'Ada', 'Adela', 'Adelaida', 'Adelina', 'Adina', 'Adriana', 'Agata', 'Aglaia', 'Agripina', 'Aida', 'Alberta', 'Albertina', 'Alexandra', 'Alexandrina', 'Alida', 'Alina', 'Alice', 'Alis', 'Alma',
         'Amalia', 'Amelia', 'Amanda', 'Ana', 'Anabela', 'Anaida', 'Anamaria', 'Anastasia', 'Anca', 'Ancuța', 'Anda', 'Andra', 'Andrada', 'Andreea', 'Anemona', 'Aneta', 'Angela', 'Anghelina', 'Anica',
@@ -44,7 +44,7 @@ class Person extends \Faker\Provider\Person
         'Veronica', 'Veta', 'Vicenția', 'Victoria', 'Violeta', 'Viorela', 'Viorica', 'Virginia', 'Viviana', 'Voichița', 'Xenia', 'Zaharia', 'Zamfira', 'Zaraza', 'Zenobia', 'Zenovia', 'Zina', 'Zoe',
     ];
 
-    //http://ro.wikipedia.org/wiki/List%C4%83_de_prenume_rom%C3%A2ne%C8%99ti#Feminine
+    //https://ro.wikipedia.org/wiki/List%C4%83_de_prenume_rom%C3%A2ne%C8%99ti#Feminine
     protected static $firstNameMale = [
         'Achim', 'Adam', 'Adelin', 'Adonis', 'Adrian', 'Adi', 'Agnos', 'Albert', 'Alex', 'Alexandru', 'Alexe', 'Aleodor', 'Alin', 'Alistar', 'Amedeu', 'Amza', 'Anatolie', 'Andrei', 'Angel', 'Anghel', 'Antim',
         'Anton', 'Antonie', 'Antoniu', 'Arian', 'Aristide', 'Arsenie', 'Augustin', 'Aurel', 'Aurelian', 'Aurică', 'Avram', 'Axinte', 'Barbu', 'Bartolomeu', 'Basarab', 'Bănel', 'Bebe', 'Beniamin', 'Benone',
@@ -104,7 +104,7 @@ class Person extends \Faker\Provider\Person
     /**
      * Personal Numerical Code (CNP)
      *
-     * @see http://ro.wikipedia.org/wiki/Cod_numeric_personal
+     * @see https://ro.wikipedia.org/wiki/Cod_numeric_personal
      *
      * @example 1111111111118
      *

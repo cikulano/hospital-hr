@@ -5,7 +5,7 @@ namespace Faker\Provider\fr_CH;
 class Person extends \Faker\Provider\fr_FR\Person
 {
     /**
-     * @see http://www.bfs.admin.ch/bfs/portal/de/index/themen/01/02/blank/dos/prenoms/02.html
+     * @see https://www.bfs.admin.ch/bfs/portal/de/index/themen/01/02/blank/dos/prenoms/02.html
      */
     protected static $firstNameMale = [
         'Adrian', 'Adrien', 'Alain', 'Albert', 'Alberto', 'Alessandro', 'Alex', 'Alexander', 'Alexandre', 'Alexis', 'Alfred', 'Ali', 'Andrea', 'André', 'Angelo', 'Anthony', 'Antoine', 'Antonio', 'António', 'Arnaud', 'Arthur', 'Aurélien', 'Axel',
@@ -34,7 +34,7 @@ class Person extends \Faker\Provider\fr_FR\Person
     ];
 
     /**
-     * @see http://www.bfs.admin.ch/bfs/portal/de/index/themen/01/02/blank/dos/prenoms/02.html
+     * @see https://www.bfs.admin.ch/bfs/portal/de/index/themen/01/02/blank/dos/prenoms/02.html
      */
     protected static $firstNameFemale = [
         'Agnès', 'Alexandra', 'Alice', 'Alicia', 'Aline', 'Amélie', 'Ana', 'Anaïs', 'Andrea', 'Andrée', 'Angela', 'Anita', 'Anna', 'Anne', 'Anne-Marie', 'Antoinette', 'Ariane', 'Arlette', 'Audrey', 'Aurélie',
@@ -62,7 +62,7 @@ class Person extends \Faker\Provider\fr_FR\Person
     ];
 
     /**
-     * @see http://blog.tagesanzeiger.ch/datenblog/index.php/6859
+     * @see https://blog.tagesanzeiger.ch/datenblog/index.php/6859
      */
     protected static $lastName = [
         'Aebischer', 'Aeby', 'Andrey', 'Aubert', 'Aubry',

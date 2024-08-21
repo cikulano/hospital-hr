@@ -4,7 +4,7 @@
  * any requirement for additional modules.
  *
  * @author  Wayne Munro
- * @license http://creativecommons.org/licenses/publicdomain/ Public Domain
+ * @license https://creativecommons.org/licenses/publicdomain/ Public Domain
  * @package Cpdf
  */
 namespace Dompdf;
@@ -923,7 +923,7 @@ class Cpdf
                     // for more information.
                     //
                     // All of this code is adapted from the excellent changes made to
-                    // transform FPDF to TCPDF (http://tcpdf.sourceforge.net/)
+                    // transform FPDF to TCPDF (https://tcpdf.sourceforge.net/)
 
                     $toUnicodeId = ++$this->numObj;
                     $this->o_toUnicode($toUnicodeId, 'new');
@@ -973,7 +973,7 @@ class Cpdf
                     // for more information.
                     //
                     // All of this code is adapted from the excellent changes made to
-                    // transform FPDF to TCPDF (http://tcpdf.sourceforge.net/)
+                    // transform FPDF to TCPDF (https://tcpdf.sourceforge.net/)
 
                     $res = "\n$id 0 obj\n<</Type /Font\n/Subtype /Type0\n";
                     $res .= "/BaseFont /" . $o['info']['name'] . "\n";
@@ -4855,14 +4855,14 @@ EOT;
      * string passed in.
      *
      * based on the excellent TCPDF code by Nicola Asuni and the
-     * RFC for UTF-8 at http://www.faqs.org/rfcs/rfc3629.html
+     * RFC for UTF-8 at https://www.faqs.org/rfcs/rfc3629.html
      *
      * @param string $text UTF-8 string to process
      * @return array UTF-8 codepoints array for the string
      */
     function utf8toCodePointsArray(&$text)
     {
-        $length = mb_strlen($text, '8bit'); // http://www.php.net/manual/en/function.mb-strlen.php#77040
+        $length = mb_strlen($text, '8bit'); // https://www.php.net/manual/en/function.mb-strlen.php#77040
         $unicode = []; // array containing unicode values
         $bytes = []; // array containing single character byte sequences
         $numbytes = 1; // number of octets needed to represent the UTF-8 character
@@ -4925,7 +4925,7 @@ EOT;
      * at the front if required.
      *
      * based on the excellent TCPDF code by Nicola Asuni and the
-     * RFC for UTF-8 at http://www.faqs.org/rfcs/rfc3629.html
+     * RFC for UTF-8 at https://www.faqs.org/rfcs/rfc3629.html
      *
      * @param string  $text UTF-8 string to process
      * @param boolean $bom  whether to add the byte order marker
@@ -5835,7 +5835,7 @@ EOT;
             $bit_depth = $meta["bitDepth"];
             $color_type = $meta["colorType"];
 
-            // http://www.w3.org/TR/PNG/#11IHDR
+            // https://www.w3.org/TR/PNG/#11IHDR
             // 3 => indexed
             // 4 => greyscale with alpha
             // 6 => fullcolor with alpha

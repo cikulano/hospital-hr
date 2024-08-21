@@ -20,8 +20,8 @@ interface DateTimeExtension
      * @param string|null          $timezone zone timezone for generated date, fallback to `DateTime::$defaultTimezone` and `date_default_timezone_get()`.
      *
      * @see \DateTimeZone
-     * @see http://php.net/manual/en/timezones.php
-     * @see http://php.net/manual/en/function.date-default-timezone-get.php
+     * @see https://php.net/manual/en/timezones.php
+     * @see https://php.net/manual/en/function.date-default-timezone-get.php
      *
      * @example DateTime('2005-08-16 20:39:21')
      */
@@ -35,8 +35,8 @@ interface DateTimeExtension
      *
      * @example DateTime('1265-03-22 21:15:52')
      *
-     * @see http://php.net/manual/en/timezones.php
-     * @see http://php.net/manual/en/function.date-default-timezone-get.php
+     * @see https://php.net/manual/en/timezones.php
+     * @see https://php.net/manual/en/function.date-default-timezone-get.php
      */
     public function dateTimeAD($until = 'now', string $timezone = null): \DateTime;
 
@@ -49,8 +49,8 @@ interface DateTimeExtension
      * @param string|null          $timezone zone timezone for generated date, fallback to `DateTime::$defaultTimezone` and `date_default_timezone_get()`.
      *
      * @see \DateTimeZone
-     * @see http://php.net/manual/en/timezones.php
-     * @see http://php.net/manual/en/function.date-default-timezone-get.php
+     * @see https://php.net/manual/en/timezones.php
+     * @see https://php.net/manual/en/function.date-default-timezone-get.php
      */
     public function dateTimeBetween($from = '-30 years', $until = 'now', string $timezone = null): \DateTime;
 
@@ -63,8 +63,8 @@ interface DateTimeExtension
      * @param string|null          $timezone zone timezone for generated date, fallback to `DateTime::$defaultTimezone` and `date_default_timezone_get()`.
      *
      * @see \DateTimeZone
-     * @see http://php.net/manual/en/timezones.php
-     * @see http://php.net/manual/en/function.date-default-timezone-get.php
+     * @see https://php.net/manual/en/timezones.php
+     * @see https://php.net/manual/en/function.date-default-timezone-get.php
      */
     public function dateTimeInInterval($from = '-30 years', string $interval = '+5 days', string $timezone = null): \DateTime;
 
@@ -75,8 +75,8 @@ interface DateTimeExtension
      * @param string|null          $timezone zone timezone for generated date, fallback to `DateTime::$defaultTimezone` and `date_default_timezone_get()`.
      *
      * @see \DateTimeZone
-     * @see http://php.net/manual/en/timezones.php
-     * @see http://php.net/manual/en/function.date-default-timezone-get.php
+     * @see https://php.net/manual/en/timezones.php
+     * @see https://php.net/manual/en/function.date-default-timezone-get.php
      */
     public function dateTimeThisWeek($until = 'now', string $timezone = null): \DateTime;
 
@@ -87,8 +87,8 @@ interface DateTimeExtension
      * @param string|null          $timezone timezone for generated date, fallback to `DateTime::$defaultTimezone` and `date_default_timezone_get()`.
      *
      * @see \DateTimeZone
-     * @see http://php.net/manual/en/timezones.php
-     * @see http://php.net/manual/en/function.date-default-timezone-get.php
+     * @see https://php.net/manual/en/timezones.php
+     * @see https://php.net/manual/en/function.date-default-timezone-get.php
      */
     public function dateTimeThisMonth($until = 'now', string $timezone = null): \DateTime;
 
@@ -99,8 +99,8 @@ interface DateTimeExtension
      * @param string|null          $timezone timezone for generated date, fallback to `DateTime::$defaultTimezone` and `date_default_timezone_get()`.
      *
      * @see \DateTimeZone
-     * @see http://php.net/manual/en/timezones.php
-     * @see http://php.net/manual/en/function.date-default-timezone-get.php
+     * @see https://php.net/manual/en/timezones.php
+     * @see https://php.net/manual/en/function.date-default-timezone-get.php
      */
     public function dateTimeThisYear($until = 'now', string $timezone = null): \DateTime;
 
@@ -111,8 +111,8 @@ interface DateTimeExtension
      * @param string|null          $timezone timezone for generated date, fallback to `DateTime::$defaultTimezone` and `date_default_timezone_get()`.
      *
      * @see \DateTimeZone
-     * @see http://php.net/manual/en/timezones.php
-     * @see http://php.net/manual/en/function.date-default-timezone-get.php
+     * @see https://php.net/manual/en/timezones.php
+     * @see https://php.net/manual/en/function.date-default-timezone-get.php
      */
     public function dateTimeThisDecade($until = 'now', string $timezone = null): \DateTime;
 
@@ -123,8 +123,8 @@ interface DateTimeExtension
      * @param string|null          $timezone timezone for generated date, fallback to `DateTime::$defaultTimezone` and `date_default_timezone_get()`.
      *
      * @see \DateTimeZone
-     * @see http://php.net/manual/en/timezones.php
-     * @see http://php.net/manual/en/function.date-default-timezone-get.php
+     * @see https://php.net/manual/en/timezones.php
+     * @see https://php.net/manual/en/function.date-default-timezone-get.php
      */
     public function dateTimeThisCentury($until = 'now', string $timezone = null): \DateTime;
 

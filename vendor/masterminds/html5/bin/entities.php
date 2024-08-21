@@ -4,7 +4,7 @@
  */
 
 // The URL to the official entities JSON file.
-$ENTITIES_URL = 'http://www.w3.org/TR/2012/CR-html5-20121217/entities.json';
+$ENTITIES_URL = 'https://www.w3.org/TR/2012/CR-html5-20121217/entities.json';
 
 $payload = file_get_contents($ENTITIES_URL);
 $json = json_decode($payload);

@@ -3063,7 +3063,7 @@ EOT;
 
     ***** This file should be named 55752-8.txt or 55752-8.zip *****
     This and all associated files of various formats will be found in:
-            http://www.gutenberg.org/5/5/7/5/55752/
+            https://www.gutenberg.org/5/5/7/5/55752/
 
     Produced by Laura Natal Rodriguez & Marc D'Hooghe at Free
     Literature (online soon in an extended version,also linking

@@ -253,8 +253,8 @@ class PhoneNumber extends Base
     /**
      * International Mobile Equipment Identity (IMEI)
      *
-     * @see http://en.wikipedia.org/wiki/International_Mobile_Station_Equipment_Identity
-     * @see http://imei-number.com/imei-validation-check/
+     * @see https://en.wikipedia.org/wiki/International_Mobile_Station_Equipment_Identity
+     * @see https://imei-number.com/imei-validation-check/
      *
      * @example '720084494799532'
      *

@@ -5,7 +5,7 @@
 </p>
 
 <p align="center">
-    <a href="https://github.com/ramsey/collection"><img src="http://img.shields.io/badge/source-ramsey/collection-blue.svg?style=flat-square" alt="Source Code"></a>
+    <a href="https://github.com/ramsey/collection"><img src="https://img.shields.io/badge/source-ramsey/collection-blue.svg?style=flat-square" alt="Source Code"></a>
     <a href="https://packagist.org/packages/ramsey/collection"><img src="https://img.shields.io/packagist/v/ramsey/collection.svg?style=flat-square&label=release" alt="Download Package"></a>
     <a href="https://php.net"><img src="https://img.shields.io/packagist/php-v/ramsey/collection.svg?style=flat-square&colorB=%238892BF" alt="PHP Programming Language"></a>
     <a href="https://github.com/ramsey/collection/blob/master/LICENSE"><img src="https://img.shields.io/packagist/l/ramsey/collection.svg?style=flat-square&colorB=darkcyan" alt="Read License"></a>
@@ -66,5 +66,5 @@ and licensed for use under the terms of the
 MIT License (MIT). Please see [LICENSE](LICENSE) for more information.
 
 
-[java]: http://docs.oracle.com/javase/8/docs/technotes/guides/collections/index.html
+[java]: https://docs.oracle.com/javase/8/docs/technotes/guides/collections/index.html
 [security.md]: https://github.com/ramsey/collection/blob/main/SECURITY.md

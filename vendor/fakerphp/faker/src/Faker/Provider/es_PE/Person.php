@@ -96,7 +96,7 @@ class Person extends \Faker\Provider\Person
      *
      * @example '83367512'
      *
-     * @see http://www2.sunat.gob.pe/pdt/pdtModulos/independientes/p695/TipoDoc.htm
+     * @see https://www2.sunat.gob.pe/pdt/pdtModulos/independientes/p695/TipoDoc.htm
      */
     public static function dni()
     {

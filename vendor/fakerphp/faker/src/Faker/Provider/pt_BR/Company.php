@@ -19,7 +19,7 @@ class Company extends \Faker\Provider\Company
     /**
      * A random CNPJ number.
      *
-     * @see http://en.wikipedia.org/wiki/CNPJ
+     * @see https://en.wikipedia.org/wiki/CNPJ
      *
      * @param bool $formatted If the number should have dots/slashes/dashes or not.
      *

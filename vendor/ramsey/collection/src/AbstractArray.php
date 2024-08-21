@@ -7,7 +7,7 @@
  * file that was distributed with this source code.
  *
  * @copyright Copyright (c) Ben Ramsey <ben@benramsey.com>
- * @license http://opensource.org/licenses/MIT MIT
+ * @license https://opensource.org/licenses/MIT MIT
  */
 
 declare(strict_types=1);
@@ -52,7 +52,7 @@ abstract class AbstractArray implements ArrayInterface
     /**
      * Returns an iterator for this array.
      *
-     * @link http://php.net/manual/en/iteratoraggregate.getiterator.php IteratorAggregate::getIterator()
+     * @link https://php.net/manual/en/iteratoraggregate.getiterator.php IteratorAggregate::getIterator()
      *
      * @return Traversable<array-key, T>
      */
@@ -64,7 +64,7 @@ abstract class AbstractArray implements ArrayInterface
     /**
      * Returns `true` if the given offset exists in this array.
      *
-     * @link http://php.net/manual/en/arrayaccess.offsetexists.php ArrayAccess::offsetExists()
+     * @link https://php.net/manual/en/arrayaccess.offsetexists.php ArrayAccess::offsetExists()
      *
      * @param array-key $offset The offset to check.
      */
@@ -76,7 +76,7 @@ abstract class AbstractArray implements ArrayInterface
     /**
      * Returns the value at the specified offset.
      *
-     * @link http://php.net/manual/en/arrayaccess.offsetget.php ArrayAccess::offsetGet()
+     * @link https://php.net/manual/en/arrayaccess.offsetget.php ArrayAccess::offsetGet()
      *
      * @param array-key $offset The offset for which a value should be returned.
      *
@@ -91,7 +91,7 @@ abstract class AbstractArray implements ArrayInterface
     /**
      * Sets the given value to the given offset in the array.
      *
-     * @link http://php.net/manual/en/arrayaccess.offsetset.php ArrayAccess::offsetSet()
+     * @link https://php.net/manual/en/arrayaccess.offsetset.php ArrayAccess::offsetSet()
      *
      * @param array-key | null $offset The offset to set. If `null`, the value
      *     may be set at a numerically-indexed offset.
@@ -109,7 +109,7 @@ abstract class AbstractArray implements ArrayInterface
     /**
      * Removes the given offset and its value from the array.
      *
-     * @link http://php.net/manual/en/arrayaccess.offsetunset.php ArrayAccess::offsetUnset()
+     * @link https://php.net/manual/en/arrayaccess.offsetunset.php ArrayAccess::offsetUnset()
      *
      * @param array-key $offset The offset to remove from the array.
      */
@@ -144,7 +144,7 @@ abstract class AbstractArray implements ArrayInterface
     /**
      * Returns the number of items in this array.
      *
-     * @link http://php.net/manual/en/countable.count.php Countable::count()
+     * @link https://php.net/manual/en/countable.count.php Countable::count()
      */
     public function count(): int
     {

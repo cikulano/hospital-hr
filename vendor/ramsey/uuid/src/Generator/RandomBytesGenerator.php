@@ -7,7 +7,7 @@
  * file that was distributed with this source code.
  *
  * @copyright Copyright (c) Ben Ramsey <ben@benramsey.com>
- * @license http://opensource.org/licenses/MIT MIT
+ * @license https://opensource.org/licenses/MIT MIT
  */
 
 declare(strict_types=1);
@@ -21,7 +21,7 @@ use Throwable;
  * RandomBytesGenerator generates strings of random binary data using the
  * built-in `random_bytes()` PHP function
  *
- * @link http://php.net/random_bytes random_bytes()
+ * @link https://php.net/random_bytes random_bytes()
  */
 class RandomBytesGenerator implements RandomGeneratorInterface
 {

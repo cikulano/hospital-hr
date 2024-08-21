@@ -2,7 +2,7 @@
 /**
  * @package dompdf
  * @link    https://github.com/dompdf/dompdf
- * @license http://www.gnu.org/copyleft/lesser.html GNU Lesser General Public License
+ * @license https://www.gnu.org/copyleft/lesser.html GNU Lesser General Public License
  */
 namespace Dompdf\Frame;
 
@@ -49,7 +49,7 @@ class FrameTree implements IteratorAggregate
     /**
      * The main DomDocument
      *
-     * @see http://ca2.php.net/manual/en/ref.dom.php
+     * @see https://ca2.php.net/manual/en/ref.dom.php
      * @var DOMDocument
      */
     protected $_dom;

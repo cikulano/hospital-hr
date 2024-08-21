@@ -115,7 +115,7 @@ wpConfigReplaceStr="\$table_prefix = 'wp_';\\n\
 \\n\
 // Define the default HOME/SITEURL constants and set them to our root domain\\n\
 if ( ! defined( 'WP_HOME' ) ) {\\n\
-	define( 'WP_HOME', 'http://$1' );\\n\
+	define( 'WP_HOME', 'https://$1' );\\n\
 }\\n\
 if ( ! defined( 'WP_SITEURL' ) ) {\\n\
 	define( 'WP_SITEURL', WP_HOME );\\n\

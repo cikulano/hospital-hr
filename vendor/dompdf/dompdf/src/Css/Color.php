@@ -3,7 +3,7 @@
 /**
  * @package dompdf
  * @link    https://github.com/dompdf/dompdf
- * @license http://www.gnu.org/copyleft/lesser.html GNU Lesser General Public License
+ * @license https://www.gnu.org/copyleft/lesser.html GNU Lesser General Public License
  */
 namespace Dompdf\Css;
 
@@ -275,7 +275,7 @@ class Color
         }
 
         // cmyk( c,m,y,k ) format
-        // http://www.w3.org/TR/css3-gcpm/#cmyk-colors
+        // https://www.w3.org/TR/css3-gcpm/#cmyk-colors
         if (mb_substr($color, 0, 5) === "cmyk(") {
             $i = mb_strpos($color, "(");
             $j = mb_strpos($color, ")");

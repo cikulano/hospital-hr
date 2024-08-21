@@ -166,7 +166,7 @@ class Dumper
 
         // If the first line (that is neither empty nor contains only spaces)
         // starts with a space character, the spec requires a block indentation indicator
-        // http://www.yaml.org/spec/1.2/spec.html#id2793979
+        // https://www.yaml.org/spec/1.2/spec.html#id2793979
         foreach ($lines as $line) {
             if ('' !== trim($line, ' ')) {
                 return str_starts_with($line, ' ') ? (string) $this->indentation : '';

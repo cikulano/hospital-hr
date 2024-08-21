@@ -39,9 +39,9 @@ namespace Psy\Readline\Hoa;
 /**
  * This class represents a UTF-8 string.
  * Please, see:
- *   * http://www.ietf.org/rfc/rfc3454.txt,
- *   * http://unicode.org/reports/tr9/,
- *   * http://www.unicode.org/Public/6.0.0/ucd/UnicodeData.txt.
+ *   * https://www.ietf.org/rfc/rfc3454.txt,
+ *   * https://unicode.org/reports/tr9/,
+ *   * https://www.unicode.org/Public/6.0.0/ucd/UnicodeData.txt.
  */
 class Ustring
 {
@@ -58,7 +58,7 @@ class Ustring
      *
      * This is a PHP implementation of wcwidth() and wcswidth() (defined in IEEE
      * Std 1002.1-2001) for Unicode, by Markus Kuhn. Please, see
-     * http://www.cl.cam.ac.uk/~mgk25/ucs/wcwidth.c.
+     * https://www.cl.cam.ac.uk/~mgk25/ucs/wcwidth.c.
      *
      * The wcwidth(wc) function shall either return 0 (if wc is a null
      * wide-character code), or return the number of column positions to be

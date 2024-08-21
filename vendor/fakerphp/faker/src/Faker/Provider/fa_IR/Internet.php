@@ -23,7 +23,7 @@ class Internet extends \Faker\Provider\Internet
     ];
 
     /**
-     * @see http://en.wikipedia.org/wiki/Category:Iranian-language_surnames
+     * @see https://en.wikipedia.org/wiki/Category:Iranian-language_surnames
      */
     protected static $lastNameAscii = [
         'abdullahi', 'abbasi', 'abedini', 'ahadi', 'ahmadi', 'akbari', 'alizadeh', 'asadi',
@@ -47,7 +47,7 @@ class Internet extends \Faker\Provider\Internet
     ];
 
     /**
-     * @see http://en.wikipedia.org/wiki/Persian_name
+     * @see https://en.wikipedia.org/wiki/Persian_name
      */
     protected static $firstNameAscii = [
         'abbas', 'afshin', 'ahmad', 'ali', 'amir', 'anahita', 'anousheh', 'arash', 'ardeshir', 'arezu', 'aria', 'arian', 'arman', 'ashraf', 'atoosa', 'azadeh', 'azar',

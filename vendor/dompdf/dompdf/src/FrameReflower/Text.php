@@ -2,7 +2,7 @@
 /**
  * @package dompdf
  * @link    https://github.com/dompdf/dompdf
- * @license http://www.gnu.org/copyleft/lesser.html GNU Lesser General Public License
+ * @license https://www.gnu.org/copyleft/lesser.html GNU Lesser General Public License
  */
 namespace Dompdf\FrameReflower;
 
@@ -75,8 +75,8 @@ class Text extends AbstractFrameReflower
     /**
      * Apply text transform and white-space collapse according to style.
      *
-     * * http://www.w3.org/TR/CSS21/text.html#propdef-text-transform
-     * * http://www.w3.org/TR/CSS21/text.html#propdef-white-space
+     * * https://www.w3.org/TR/CSS21/text.html#propdef-text-transform
+     * * https://www.w3.org/TR/CSS21/text.html#propdef-white-space
      *
      * @param string $text
      * @return string
@@ -285,7 +285,7 @@ class Text extends AbstractFrameReflower
         }
 
         // Determine the next line break
-        // http://www.w3.org/TR/CSS21/text.html#propdef-white-space
+        // https://www.w3.org/TR/CSS21/text.html#propdef-white-space
         $white_space = $style->white_space;
         $nowrap = $white_space === "nowrap" || $white_space === "pre";
 

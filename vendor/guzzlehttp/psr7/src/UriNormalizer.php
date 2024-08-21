@@ -29,7 +29,7 @@ final class UriNormalizer
     /**
      * All letters within a percent-encoding triplet (e.g., "%3A") are case-insensitive, and should be capitalized.
      *
-     * Example: http://example.org/a%c2%b1b → http://example.org/a%C2%B1b
+     * Example: https://example.org/a%c2%b1b → https://example.org/a%C2%B1b
      */
     public const CAPITALIZE_PERCENT_ENCODING = 1;
 
@@ -40,14 +40,14 @@ final class UriNormalizer
      * hyphen (%2D), period (%2E), underscore (%5F), or tilde (%7E) should not be created by URI producers and,
      * when found in a URI, should be decoded to their corresponding unreserved characters by URI normalizers.
      *
-     * Example: http://example.org/%7Eusern%61me/ → http://example.org/~username/
+     * Example: https://example.org/%7Eusern%61me/ → https://example.org/~username/
      */
     public const DECODE_UNRESERVED_CHARACTERS = 2;
 
     /**
      * Converts the empty path to "/" for http and https URIs.
      *
-     * Example: http://example.org → http://example.org/
+     * Example: https://example.org → https://example.org/
      */
     public const CONVERT_EMPTY_PATH = 4;
 
@@ -67,7 +67,7 @@ final class UriNormalizer
     /**
      * Removes the default port of the given URI scheme from the URI.
      *
-     * Example: http://example.org:80/ → http://example.org/
+     * Example: https://example.org:80/ → https://example.org/
      */
     public const REMOVE_DEFAULT_PORT = 16;
 
@@ -77,7 +77,7 @@ final class UriNormalizer
      * Dot-segments in relative-path references are not removed as it would
      * change the semantics of the URI reference.
      *
-     * Example: http://example.org/../a/b/../c/./d.html → http://example.org/a/c/d.html
+     * Example: https://example.org/../a/b/../c/./d.html → https://example.org/a/c/d.html
      */
     public const REMOVE_DOT_SEGMENTS = 32;
 
@@ -88,7 +88,7 @@ final class UriNormalizer
      * But in theory those URIs do not need to be equivalent. So this normalization
      * may change the semantics. Encoded slashes (%2F) are not removed.
      *
-     * Example: http://example.org//foo///bar.html → http://example.org/foo/bar.html
+     * Example: https://example.org//foo///bar.html → https://example.org/foo/bar.html
      */
     public const REMOVE_DUPLICATE_SLASHES = 64;
 

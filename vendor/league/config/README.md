@@ -109,7 +109,7 @@ If you need that functionality you should check out other libraries like:
 
 ## 🏷️ Versioning
 
-[SemVer](http://semver.org/) is followed closely. Minor and patch releases should not introduce breaking changes to the codebase.
+[SemVer](https://semver.org/) is followed closely. Minor and patch releases should not introduce breaking changes to the codebase.
 
 Any classes or methods marked `@internal` are not intended for use outside this library and are subject to breaking changes at any time, so please avoid using them.
 

@@ -1036,7 +1036,7 @@ class Configuration
      * to any valid error_reporting value to log only errors which match that
      * level.
      *
-     *     http://php.net/manual/en/function.error-reporting.php
+     *     https://php.net/manual/en/function.error-reporting.php
      */
     public function errorLoggingLevel(): int
     {

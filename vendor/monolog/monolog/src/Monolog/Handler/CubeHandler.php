@@ -96,7 +96,7 @@ class CubeHandler extends AbstractProcessingHandler
             throw new MissingExtensionException('The curl extension is required to use http URLs with the CubeHandler');
         }
 
-        $httpConnection = curl_init('http://'.$this->host.':'.$this->port.'/1.0/event/put');
+        $httpConnection = curl_init('https://'.$this->host.':'.$this->port.'/1.0/event/put');
         if (false === $httpConnection) {
             throw new \LogicException('Unable to connect to ' . $this->host . ':' . $this->port);
         }

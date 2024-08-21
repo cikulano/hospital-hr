@@ -146,7 +146,7 @@ class RgbTint
     /**
      * Tints HLSMAX based luminance.
      *
-     * @see http://ciintelligence.blogspot.co.uk/2012/02/converting-excel-theme-color-and-tint.html
+     * @see https://ciintelligence.blogspot.co.uk/2012/02/converting-excel-theme-color-and-tint.html
      */
     private static function tintLuminance(float $tint, float $luminance): int
     {

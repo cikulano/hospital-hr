@@ -2,7 +2,7 @@
 /**
  * @package dompdf
  * @link    https://github.com/dompdf/dompdf
- * @license http://www.gnu.org/copyleft/lesser.html GNU Lesser General Public License
+ * @license https://www.gnu.org/copyleft/lesser.html GNU Lesser General Public License
  */
 namespace Dompdf\Renderer;
 
@@ -108,7 +108,7 @@ class Text extends AbstractRenderer
         $base = $frame_font_size;
 
         // Handle text decoration:
-        // http://www.w3.org/TR/CSS21/text.html#propdef-text-decoration
+        // https://www.w3.org/TR/CSS21/text.html#propdef-text-decoration
 
         // Draw all applicable text-decorations.  Start with the root and work our way down.
         $p = $frame;

@@ -7,7 +7,7 @@
  * file that was distributed with this source code.
  *
  * @copyright Copyright (c) Ben Ramsey <ben@benramsey.com>
- * @license http://opensource.org/licenses/MIT MIT
+ * @license https://opensource.org/licenses/MIT MIT
  */
 
 declare(strict_types=1);
@@ -51,21 +51,21 @@ class Uuid implements UuidInterface
      * When this namespace is specified, the name string is a fully-qualified
      * domain name
      *
-     * @link http://tools.ietf.org/html/rfc4122#appendix-C RFC 4122, Appendix C: Some Name Space IDs
+     * @link https://tools.ietf.org/html/rfc4122#appendix-C RFC 4122, Appendix C: Some Name Space IDs
      */
     public const NAMESPACE_DNS = '6ba7b810-9dad-11d1-80b4-00c04fd430c8';
 
     /**
      * When this namespace is specified, the name string is a URL
      *
-     * @link http://tools.ietf.org/html/rfc4122#appendix-C RFC 4122, Appendix C: Some Name Space IDs
+     * @link https://tools.ietf.org/html/rfc4122#appendix-C RFC 4122, Appendix C: Some Name Space IDs
      */
     public const NAMESPACE_URL = '6ba7b811-9dad-11d1-80b4-00c04fd430c8';
 
     /**
      * When this namespace is specified, the name string is an ISO OID
      *
-     * @link http://tools.ietf.org/html/rfc4122#appendix-C RFC 4122, Appendix C: Some Name Space IDs
+     * @link https://tools.ietf.org/html/rfc4122#appendix-C RFC 4122, Appendix C: Some Name Space IDs
      */
     public const NAMESPACE_OID = '6ba7b812-9dad-11d1-80b4-00c04fd430c8';
 
@@ -73,7 +73,7 @@ class Uuid implements UuidInterface
      * When this namespace is specified, the name string is an X.500 DN in DER
      * or a text output format
      *
-     * @link http://tools.ietf.org/html/rfc4122#appendix-C RFC 4122, Appendix C: Some Name Space IDs
+     * @link https://tools.ietf.org/html/rfc4122#appendix-C RFC 4122, Appendix C: Some Name Space IDs
      */
     public const NAMESPACE_X500 = '6ba7b814-9dad-11d1-80b4-00c04fd430c8';
 
@@ -81,7 +81,7 @@ class Uuid implements UuidInterface
      * The nil UUID is a special form of UUID that is specified to have all 128
      * bits set to zero
      *
-     * @link http://tools.ietf.org/html/rfc4122#section-4.1.7 RFC 4122, § 4.1.7: Nil UUID
+     * @link https://tools.ietf.org/html/rfc4122#section-4.1.7 RFC 4122, § 4.1.7: Nil UUID
      */
     public const NIL = '00000000-0000-0000-0000-000000000000';
 
@@ -96,28 +96,28 @@ class Uuid implements UuidInterface
     /**
      * Variant: reserved, NCS backward compatibility
      *
-     * @link http://tools.ietf.org/html/rfc4122#section-4.1.1 RFC 4122, § 4.1.1: Variant
+     * @link https://tools.ietf.org/html/rfc4122#section-4.1.1 RFC 4122, § 4.1.1: Variant
      */
     public const RESERVED_NCS = 0;
 
     /**
      * Variant: the UUID layout specified in RFC 4122
      *
-     * @link http://tools.ietf.org/html/rfc4122#section-4.1.1 RFC 4122, § 4.1.1: Variant
+     * @link https://tools.ietf.org/html/rfc4122#section-4.1.1 RFC 4122, § 4.1.1: Variant
      */
     public const RFC_4122 = 2;
 
     /**
      * Variant: reserved, Microsoft Corporation backward compatibility
      *
-     * @link http://tools.ietf.org/html/rfc4122#section-4.1.1 RFC 4122, § 4.1.1: Variant
+     * @link https://tools.ietf.org/html/rfc4122#section-4.1.1 RFC 4122, § 4.1.1: Variant
      */
     public const RESERVED_MICROSOFT = 6;
 
     /**
      * Variant: reserved for future definition
      *
-     * @link http://tools.ietf.org/html/rfc4122#section-4.1.1 RFC 4122, § 4.1.1: Variant
+     * @link https://tools.ietf.org/html/rfc4122#section-4.1.1 RFC 4122, § 4.1.1: Variant
      */
     public const RESERVED_FUTURE = 7;
 
@@ -247,9 +247,9 @@ class Uuid implements UuidInterface
      * use Ramsey\Uuid\Uuid;
      *
      * $timeBasedUuid = Uuid::uuid1();
-     * $namespaceMd5Uuid = Uuid::uuid3(Uuid::NAMESPACE_URL, 'http://php.net/');
+     * $namespaceMd5Uuid = Uuid::uuid3(Uuid::NAMESPACE_URL, 'https://php.net/');
      * $randomUuid = Uuid::uuid4();
-     * $namespaceSha1Uuid = Uuid::uuid5(Uuid::NAMESPACE_URL, 'http://php.net/');
+     * $namespaceSha1Uuid = Uuid::uuid5(Uuid::NAMESPACE_URL, 'https://php.net/');
      * ```
      *
      * @param Rfc4122FieldsInterface $fields The fields from which to construct a UUID

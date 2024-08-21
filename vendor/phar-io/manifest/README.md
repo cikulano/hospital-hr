@@ -1,6 +1,6 @@
 # Manifest
 
-Component for reading [phar.io](https://phar.io/) manifest information from a [PHP Archive (PHAR)](http://php.net/phar).
+Component for reading [phar.io](https://phar.io/) manifest information from a [PHP Archive (PHAR)](https://php.net/phar).
 
 ## Installation
 

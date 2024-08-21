@@ -101,7 +101,7 @@ class CacheAttributeListener implements EventSubscriberInterface
         }
         $response = $event->getResponse();
 
-        // http://tools.ietf.org/html/draft-ietf-httpbis-p4-conditional-12#section-3.1
+        // https://tools.ietf.org/html/draft-ietf-httpbis-p4-conditional-12#section-3.1
         if (!\in_array($response->getStatusCode(), [200, 203, 300, 301, 302, 304, 404, 410])) {
             unset($this->lastModified[$request]);
             unset($this->etags[$request]);

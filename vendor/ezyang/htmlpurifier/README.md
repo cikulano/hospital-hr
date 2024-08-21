@@ -18,7 +18,7 @@ Places to go:
   an in-depth installation guide.
 * See WYSIWYG for information on editors like TinyMCE and FCKeditor
 
-HTML Purifier can be found on the web at: [http://htmlpurifier.org/](http://htmlpurifier.org/)
+HTML Purifier can be found on the web at: [https://htmlpurifier.org/](https://htmlpurifier.org/)
 
 ## Installation
 

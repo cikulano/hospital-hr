@@ -8,7 +8,7 @@ Dompdf
  
 **Dompdf is an HTML to PDF converter**
 
-At its heart, dompdf is (mostly) a [CSS 2.1](http://www.w3.org/TR/CSS2/) compliant
+At its heart, dompdf is (mostly) a [CSS 2.1](https://www.w3.org/TR/CSS2/) compliant
 HTML layout and rendering engine written in PHP. It is a style-driven renderer:
 it will download and read external stylesheets, inline style tags, and the style
 attributes of individual HTML elements. It also supports most presentational
@@ -20,11 +20,11 @@ release. For released code please
 
 ----
 
-**Check out the [demo](http://eclecticgeek.com/dompdf/debug.php) and ask any
+**Check out the [demo](https://eclecticgeek.com/dompdf/debug.php) and ask any
 question on [StackOverflow](https://stackoverflow.com/questions/tagged/dompdf) or
 in [Discussions](https://github.com/dompdf/dompdf/discussions).**
 
-Follow us on [![Twitter](http://twitter-badges.s3.amazonaws.com/twitter-a.png)](http://www.twitter.com/dompdf).
+Follow us on [![Twitter](https://twitter-badges.s3.amazonaws.com/twitter-a.png)](https://www.twitter.com/dompdf).
 
 ---
 
@@ -96,7 +96,7 @@ Make sure that the autoload file from Composer is loaded.
 
 ```php
 // somewhere early in your project's loading, require the Composer autoloader
-// see: http://getcomposer.org/doc/00-intro.md
+// see: https://getcomposer.org/doc/00-intro.md
 require 'vendor/autoload.php';
 
 ```
@@ -109,7 +109,7 @@ directory where dompdf will reside
  * You can download stable copies of dompdf from
    https://github.com/dompdf/dompdf/releases
  * Or download a nightly (the latest, unreleased code) from
-   http://eclecticgeek.com/dompdf
+   https://eclecticgeek.com/dompdf
 
 Use the packaged release autoloader to load dompdf, libraries,
 and helper functions in your PHP:
@@ -226,7 +226,7 @@ Files accessed through the local file system have the following requirement:
  * Does not support CSS Grid.
 ---
 
-[![Donate button](https://www.paypal.com/en_US/i/btn/btn_donate_SM.gif)](http://goo.gl/DSvWf)
+[![Donate button](https://www.paypal.com/en_US/i/btn/btn_donate_SM.gif)](https://goo.gl/DSvWf)
 
 *If you find this project useful, please consider making a donation.
 Any funds donated will be used to help further development on this project.)*

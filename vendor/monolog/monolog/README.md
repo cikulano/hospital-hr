@@ -101,19 +101,19 @@ Bugs and feature request are tracked on [GitHub](https://github.com/Seldaek/mono
 
 - Frameworks and libraries using [PSR-3](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-3-logger-interface.md)
   can be used very easily with Monolog since it implements the interface.
-- [Symfony](http://symfony.com) comes out of the box with Monolog.
-- [Laravel](http://laravel.com/) comes out of the box with Monolog.
-- [Lumen](http://lumen.laravel.com/) comes out of the box with Monolog.
+- [Symfony](https://symfony.com) comes out of the box with Monolog.
+- [Laravel](https://laravel.com/) comes out of the box with Monolog.
+- [Lumen](https://lumen.laravel.com/) comes out of the box with Monolog.
 - [PPI](https://github.com/ppi/framework) comes out of the box with Monolog.
-- [CakePHP](http://cakephp.org/) is usable with Monolog via the [cakephp-monolog](https://github.com/jadb/cakephp-monolog) plugin.
-- [Slim](http://www.slimframework.com/) is usable with Monolog via the [Slim-Monolog](https://github.com/Flynsarmy/Slim-Monolog) log writer.
-- [XOOPS 2.6](http://xoops.org/) comes out of the box with Monolog.
+- [CakePHP](https://cakephp.org/) is usable with Monolog via the [cakephp-monolog](https://github.com/jadb/cakephp-monolog) plugin.
+- [Slim](https://www.slimframework.com/) is usable with Monolog via the [Slim-Monolog](https://github.com/Flynsarmy/Slim-Monolog) log writer.
+- [XOOPS 2.6](https://xoops.org/) comes out of the box with Monolog.
 - [Aura.Web_Project](https://github.com/auraphp/Aura.Web_Project) comes out of the box with Monolog.
-- [Nette Framework](http://nette.org/en/) is usable with Monolog via the [contributte/monolog](https://github.com/contributte/monolog) or [orisai/nette-monolog](https://github.com/orisai/nette-monolog) extensions.
+- [Nette Framework](https://nette.org/en/) is usable with Monolog via the [contributte/monolog](https://github.com/contributte/monolog) or [orisai/nette-monolog](https://github.com/orisai/nette-monolog) extensions.
 - [Proton Micro Framework](https://github.com/alexbilbie/Proton) comes out of the box with Monolog.
-- [FuelPHP](http://fuelphp.com/) comes out of the box with Monolog.
+- [FuelPHP](https://fuelphp.com/) comes out of the box with Monolog.
 - [Equip Framework](https://github.com/equip/framework) comes out of the box with Monolog.
-- [Yii 2](http://www.yiiframework.com/) is usable with Monolog via the [yii2-monolog](https://github.com/merorafael/yii2-monolog) or [yii2-psr-log-target](https://github.com/samdark/yii2-psr-log-target) plugins.
+- [Yii 2](https://www.yiiframework.com/) is usable with Monolog via the [yii2-monolog](https://github.com/merorafael/yii2-monolog) or [yii2-psr-log-target](https://github.com/samdark/yii2-psr-log-target) plugins.
 - [Hawkbit Micro Framework](https://github.com/HawkBitPhp/hawkbit) comes out of the box with Monolog.
 - [SilverStripe 4](https://www.silverstripe.org/) comes out of the box with Monolog.
 - [Drupal](https://www.drupal.org/) is usable with Monolog via the [monolog](https://www.drupal.org/project/monolog) module.
@@ -123,7 +123,7 @@ Bugs and feature request are tracked on [GitHub](https://github.com/Seldaek/mono
 
 ### Author
 
-Jordi Boggiano - <j.boggiano@seld.be> - <http://twitter.com/seldaek><br />
+Jordi Boggiano - <j.boggiano@seld.be> - <https://twitter.com/seldaek><br />
 See also the list of [contributors](https://github.com/Seldaek/monolog/contributors) who participated in this project.
 
 ### License

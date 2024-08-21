@@ -1,7 +1,7 @@
 # The Parser Model
 
 The parser model here follows the model in section
-[8.2.1](http://www.w3.org/TR/2012/CR-html5-20121217/syntax.html#parsing)
+[8.2.1](https://www.w3.org/TR/2012/CR-html5-20121217/syntax.html#parsing)
 of the HTML5 specification, though we do not assume a networking layer.
 
      [ InputStream ]    // Generic support for reading input.

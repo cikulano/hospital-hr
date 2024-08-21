@@ -78,7 +78,7 @@ class EnsureFrontendRequestsAreStateful
         }
 
         $domain = Str::replaceFirst('https://', '', $domain);
-        $domain = Str::replaceFirst('http://', '', $domain);
+        $domain = Str::replaceFirst('https://', '', $domain);
         $domain = Str::endsWith($domain, '/') ? $domain : "{$domain}/";
 
         $stateful = array_filter(config('sanctum.stateful', []));

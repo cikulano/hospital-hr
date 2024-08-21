@@ -11,7 +11,7 @@ class Payment extends \Faker\Provider\Payment
     ];
 
     /**
-     * @see http://www.muamalat.com.my/consumer-banking/internet-banking/popup-ibg.html
+     * @see https://www.muamalat.com.my/consumer-banking/internet-banking/popup-ibg.html
      */
     protected static $bankAccountNumberFormats = [
         '##########',
@@ -102,7 +102,7 @@ class Payment extends \Faker\Provider\Payment
     ];
 
     /**
-     * @see http://www.bankswiftcode.org/malaysia/
+     * @see https://www.bankswiftcode.org/malaysia/
      */
     protected static $swiftCodes = [
         'ABNAMY2AXXX', 'ABNAMYKLPNG', 'ABNAMYKLXXX', 'AFBQMYKLXXX', 'AIBBMYKLXXX',

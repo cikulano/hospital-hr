@@ -22,7 +22,7 @@ use Masterminds\HTML5\Elements;
  * of the HTML5 spec that the code attempts to reproduce. Example: 8.2.4.1.
  * This refers to section 8.2.4.1 of the HTML5 CR specification.
  *
- * @see http://www.w3.org/TR/2012/CR-html5-20121217/
+ * @see https://www.w3.org/TR/2012/CR-html5-20121217/
  */
 class Tokenizer
 {
@@ -490,7 +490,7 @@ class Tokenizer
         // But method "DOMElement::setAttribute" is throwing exception
         // because of it's own internal restriction so these have to be filtered.
         // see issue #23: https://github.com/Masterminds/html5-php/issues/23
-        // and http://www.w3.org/TR/2011/WD-html5-20110525/syntax.html#syntax-attribute-name
+        // and https://www.w3.org/TR/2011/WD-html5-20110525/syntax.html#syntax-attribute-name
         if (preg_match("/[\x1-\x2C\\/\x3B-\x40\x5B-\x5E\x60\x7B-\x7F]/u", $name)) {
             $this->parseError('Unexpected characters in attribute name: %s', $name);
             $isValidAttribute = false;
@@ -498,7 +498,7 @@ class Tokenizer
         // But method "DOMElement::setAttribute" is throwing exception for the
         // characters below so they have to be filtered.
         // see issue #23: https://github.com/Masterminds/html5-php/issues/23
-        // and http://www.w3.org/TR/2011/WD-html5-20110525/syntax.html#syntax-attribute-name
+        // and https://www.w3.org/TR/2011/WD-html5-20110525/syntax.html#syntax-attribute-name
         elseif (preg_match('/^[0-9.-]/u', $name)) {
             $this->parseError('Unexpected character at the begining of attribute name: %s', $name);
             $isValidAttribute = false;

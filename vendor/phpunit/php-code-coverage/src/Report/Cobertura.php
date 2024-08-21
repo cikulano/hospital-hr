@@ -40,7 +40,7 @@ final class Cobertura
         $documentType = $implementation->createDocumentType(
             'coverage',
             '',
-            'http://cobertura.sourceforge.net/xml/coverage-04.dtd',
+            'https://cobertura.sourceforge.net/xml/coverage-04.dtd',
         );
 
         $document               = $implementation->createDocument('', '', $documentType);

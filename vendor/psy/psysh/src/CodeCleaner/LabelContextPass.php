@@ -27,7 +27,7 @@ use Psy\Exception\FatalErrorException;
  * Since this is a simple checker, it does not block real fatal error
  * with complex syntax.  (ex. it does not parse inside function.)
  *
- * @see http://php.net/goto
+ * @see https://php.net/goto
  */
 class LabelContextPass extends CodeCleanerPass
 {

@@ -507,7 +507,7 @@ class Str
         /*
          * This pattern is derived from Symfony\Component\Validator\Constraints\UrlValidator (5.0.7).
          *
-         * (c) Fabien Potencier <fabien@symfony.com> http://symfony.com
+         * (c) Fabien Potencier <fabien@symfony.com> https://symfony.com
          */
         $pattern = '~^
             (LARAVEL_PROTOCOLS)://                                 # protocol

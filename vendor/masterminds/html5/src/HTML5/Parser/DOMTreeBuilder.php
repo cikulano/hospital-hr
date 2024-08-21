@@ -26,19 +26,19 @@ use Masterminds\HTML5\InstructionProcessor;
 class DOMTreeBuilder implements EventHandler
 {
     /**
-     * Defined in http://www.w3.org/TR/html51/infrastructure.html#html-namespace-0.
+     * Defined in https://www.w3.org/TR/html51/infrastructure.html#html-namespace-0.
      */
-    const NAMESPACE_HTML = 'http://www.w3.org/1999/xhtml';
+    const NAMESPACE_HTML = 'https://www.w3.org/1999/xhtml';
 
-    const NAMESPACE_MATHML = 'http://www.w3.org/1998/Math/MathML';
+    const NAMESPACE_MATHML = 'https://www.w3.org/1998/Math/MathML';
 
-    const NAMESPACE_SVG = 'http://www.w3.org/2000/svg';
+    const NAMESPACE_SVG = 'https://www.w3.org/2000/svg';
 
-    const NAMESPACE_XLINK = 'http://www.w3.org/1999/xlink';
+    const NAMESPACE_XLINK = 'https://www.w3.org/1999/xlink';
 
-    const NAMESPACE_XML = 'http://www.w3.org/XML/1998/namespace';
+    const NAMESPACE_XML = 'https://www.w3.org/XML/1998/namespace';
 
-    const NAMESPACE_XMLNS = 'http://www.w3.org/2000/xmlns/';
+    const NAMESPACE_XMLNS = 'https://www.w3.org/2000/xmlns/';
 
     const OPT_DISABLE_HTML_NS = 'disable_html_ns';
 
@@ -217,7 +217,7 @@ class DOMTreeBuilder implements EventHandler
      * This returns a DOMNodeList because a fragment may have zero or more
      * DOMNodes at its root.
      *
-     * @see http://www.w3.org/TR/2012/CR-html5-20121217/syntax.html#concept-frag-parse-context
+     * @see https://www.w3.org/TR/2012/CR-html5-20121217/syntax.html#concept-frag-parse-context
      *
      * @return \DOMDocumentFragment
      */
