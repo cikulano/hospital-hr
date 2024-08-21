@@ -89,7 +89,7 @@
         <table width="100%">
             <tr>
                 <td width="30%" style="vertical-align: middle;">
-                    <img src="{{ $logoPath }}" alt="Company Logo" class="logo">
+                    <img src="D:\Sy\hr_ms_laravel_11\public\assets\img\logo.png" alt="Company Logo" class="logo">
                 </td>
                 <td width="80%" style="vertical-align: middle;">
                     <div class="company-info">
@@ -183,7 +183,7 @@
                 <td class="salary-info-label">Iuran JHT 2%</td>
                 <td class="salary-info-value">Rp {{ number_format($JHT) }}</td>
             </tr>
-            <tr>
+             <tr>
                 <td class="salary-info-label">Iuran JP 1%</td>
                 <td class="salary-info-value">Rp {{ number_format($JP) }}</td>
             </tr>
