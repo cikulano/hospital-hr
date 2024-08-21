@@ -89,7 +89,7 @@
         <table width="100%">
             <tr>
                 <td width="30%" style="vertical-align: middle;">
-                    <img src="D:\Sy\hr_ms_laravel_11\public\assets\img\logo.png" alt="Company Logo" class="logo">
+                    <img src="{{ secure_asset('assets/img/logo2.png') }}" alt="Company Logo" class="logo">
                 </td>
                 <td width="80%" style="vertical-align: middle;">
                     <div class="company-info">
