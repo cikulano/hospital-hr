@@ -14,7 +14,7 @@
 	<!-- Bootstrap CSS -->
 	<link rel="stylesheet" href="{{ URL::to('assets/css/bootstrap.min.css') }}">
 	<!-- Fontawesome CSS -->
-	<link rel="stylesheet" href="{{ URL::to('assets/css/font-awesome.min.css') }}">
+	<link rel="stylesheet" href="{{ asset('assets/css/font-awesome.min.css') }}">
 	<!-- Lineawesome CSS -->
 	<link rel="stylesheet" href="{{ URL::to('assets/css/line-awesome.min.css') }}">
 	<!-- Datatable CSS -->

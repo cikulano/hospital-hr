@@ -6,15 +6,17 @@
                 <div class="container">
                     <!-- Account Logo -->
                     <div class="account-logo">
-                        <a href="index.html"><img src="{{ URL::to('assets/img/logo2.png') }}" alt="RSPJ"></a>
+                        <a href="index.html"><img src="{{ asset('assets/img/logo2.png') }}" alt="RSPJ"></a>
                     </div>
                     {{-- message --}}
                     {!! Toastr::message() !!}
+
                     <!-- /Account Logo -->
                     <div class="account-box">
                         <div class="account-wrapper">
                             <h3 class="account-title">Login</h3>
                             <p class="account-subtitle">Access to our dashboard</p>
+
                             <!-- Account Form -->
                             <form method="POST" action="{{ route('login') }}">
                                 @csrf
@@ -60,6 +62,7 @@
                                 </div>
                             </form>
                             <!-- /Account Form -->
+                             
                         </div>
                     </div>
                 </div>
