@@ -39,9 +39,10 @@
             width: 100%;
             border-collapse: collapse;
         }
-        td {
+        td, th {
             padding: 5px;
             border-bottom: 1px solid #eee;
+            vertical-align: top;
         }
         .section-header {
             background-color: #e0f0e0;
@@ -68,7 +69,19 @@
         font-weight: bold;
         padding-right: 10px; /* Adjust spacing as needed */
         width: 19%;
-    }
+        }
+
+        .personal-value {
+            width: 30%;
+        }
+        .salary-info-label {
+            width: 50%;
+            text-align: left;
+        }
+        .salary-info-value {
+            width: 50%;
+            text-align: right;
+        }
     </style>
 </head>
 <body>
@@ -139,7 +152,7 @@
                 <td class="salary-info-value">Rp {{ number_format($shift) }}</td>
             </tr>
             <tr>
-                <td class="salary-info-label">Kompensasi OnSite</td>
+                <td class="salary-info-label">Tunjangan OnSite</td>
                 <td class="salary-info-value">Rp {{ number_format($onsite) }}</td>
             </tr>
             <tr>
@@ -172,9 +185,8 @@
             </tr>
             <tr>
                 <td class="salary-info-label">Iuran JP 1%</td>
-                <td><span class="float-right">Rp {{ number_format($JP) }}</span></td></strong>
+                <td class="salary-info-value">Rp {{ number_format($JP) }}</td>
             </tr>
-            <tr>
                 <td class="salary-info-label">Iuran BPJS Kesehatan 1%</td>
                 <td class="salary-info-value">Rp {{ number_format($BPJSKes) }}</td>
             </tr>
