@@ -171,9 +171,11 @@ class PayrollController extends Controller
             ->where('staff_salaries.user_id', $user_id)
             ->first();
     
-        // Change paper size to A4 and orientation to portrait
-        $pdf = PDF::loadView('report_template.salary_pdf', compact('users'))
-                   ->setPaper('a4', 'portrait');
+        $pdf = PDF::loadView('report_template.salary_pdf', [
+            'users' => $users,
+            'logoPath' => public_path('assets/img/logo.png')
+        ])->setPaper('a4', 'portrait');
+            
         
         // Construct the PDF file name
         $fileName = "Slip Upah {$users->name}.pdf";
