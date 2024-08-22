@@ -10,30 +10,30 @@
 	<meta name="robots" content="noindex, nofollow">
 	<title>Reports</title>
 	<!-- Favicon -->
-	<link rel="shortcut icon" type="image/x-icon" href="{{ URL::to('assets/img/favicon.png') }}">
+	<link rel="shortcut icon" type="image/x-icon" href="{{ asset_url('assets/img/favicon.png') }}">
 	<!-- Bootstrap CSS -->
-	<link rel="stylesheet" href="{{ URL::to('assets/css/bootstrap.min.css') }}">
+	<link rel="stylesheet" href="{{ asset_url('assets/css/bootstrap.min.css') }}">
 	<!-- Fontawesome CSS -->
-	<link rel="stylesheet" href="{{ URL::to('assets/css/font-awesome.min.css') }}">
+	<link rel="stylesheet" href="{{ asset_url('assets/css/font-awesome.min.css') }}">
 	<!-- Lineawesome CSS -->
-	<link rel="stylesheet" href="{{ URL::to('assets/css/line-awesome.min.css') }}">
+	<link rel="stylesheet" href="{{ asset_url('assets/css/line-awesome.min.css') }}">
 	<!-- Datatable CSS -->
-	<link rel="stylesheet" href="{{ URL::to('assets/css/dataTables.bootstrap4.min.css') }}">
+	<link rel="stylesheet" href="{{ asset_url('assets/css/dataTables.bootstrap4.min.css') }}">
 	<!-- Select2 CSS -->
-	<link rel="stylesheet" href="{{ URL::to('assets/css/select2.min.css') }}">
+	<link rel="stylesheet" href="{{ asset_url('assets/css/select2.min.css') }}">
 	<!-- Datetimepicker CSS -->
-	<link rel="stylesheet" href="{{ URL::to('assets/css/bootstrap-datetimepicker.min.css') }}">
+	<link rel="stylesheet" href="{{ asset_url('assets/css/bootstrap-datetimepicker.min.css') }}">
 	<!-- Chart CSS -->
-	<link rel="stylesheet" href="{{ URL::to('assets/plugins/morris/morris.css') }}">
+	<link rel="stylesheet" href="{{ asset_url('assets/plugins/morris/morris.css') }}">
 	<!-- Main CSS -->
-	<link rel="stylesheet" href="{{ URL::to('assets/css/style.css') }}">
+	<link rel="stylesheet" href="{{ asset_url('assets/css/style.css') }}">
 
 	{{-- message toastr --}}
-	<link rel="stylesheet" href="{{ URL::to('assets/css/toastr.min.css') }}">
-	<script src="{{ URL::to('assets/js/toastr_jquery.min.js') }}"></script>
-	<script src="{{ URL::to('assets/js/toastr.min.js') }}"></script>
+	<link rel="stylesheet" href="{{ asset_url('assets/css/toastr.min.css') }}">
+	<script src="{{ asset_url('assets/js/toastr_jquery.min.js') }}"></script>
+	<script src="{{ asset_url('assets/js/toastr.min.js') }}"></script>
 
-	<script src="{{ URL::to('js/app.js') }}" defer></script>
+	<script src="{{ asset_url('js/app.js') }}" defer></script>
 </head>
 <body>
 	<!-- Main Wrapper -->
