@@ -12,22 +12,22 @@
 		<!-- Favicon -->
         <link rel="shortcut icon" type="image/x-icon" href="{{ URL::to('assets/img/favicon.png') }}">
 		<!-- Bootstrap CSS -->
-        <link rel="stylesheet" href="{{ URL::to('assets/css/bootstrap.min.css') }}">
+        <link rel="stylesheet" href="{{ asset_url('assets/css/bootstrap.min.css') }}">
 		<!-- Fontawesome CSS -->
-        <link rel="stylesheet" href="{{ URL::to('assets/css/font-awesome.min.css') }}">
+        <link rel="stylesheet" href="{{ asset_url('assets/css/font-awesome.min.css') }}">
         <!-- Lineawesome CSS -->
-        <link rel="stylesheet" href="{{ URL::to('assets/css/line-awesome.min.css') }}">
+        <link rel="stylesheet" href="{{ asset_url('assets/css/line-awesome.min.css') }}">
         <!-- Select2 CSS -->
-        <link rel="stylesheet" href="{{ URL::to('assets/css/select2.min.css') }}">
+        <link rel="stylesheet" href="{{ asset_url('assets/css/select2.min.css') }}">
         <!-- Datetimepicker CSS -->
-        <link rel="stylesheet" href="{{ URL::to('assets/css/bootstrap-datetimepicker.min.css') }}">
+        <link rel="stylesheet" href="{{ asset_url('assets/css/bootstrap-datetimepicker.min.css') }}">
 
 		<!-- Main CSS -->
-        <link rel="stylesheet" href="{{ URL::to('assets/css/style.css') }}">
+        <link rel="stylesheet" href="{{ asset_url('assets/css/style.css') }}">
         {{-- message toastr --}}
-        <link rel="stylesheet" href="{{ URL::to('assets/css/toastr.min.css') }}">
-        <script src="{{ URL::to('assets/js/toastr_jquery.min.js') }}"></script>
-        <script src="{{ URL::to('assets/js/toastr.min.js') }}"></script>
+        <link rel="stylesheet" href="{{ asset_url('assets/css/toastr.min.css') }}">
+        <script src="{{ asset_url('assets/js/toastr_jquery.min.js') }}"></script>
+        <script src="{{ asset_url('assets/js/toastr.min.js') }}"></script>
     </head>
     <body class="account-page error-page">
         <style>    
@@ -39,19 +39,19 @@
         @yield('content')
 		<!-- /Main Wrapper -->
 		<!-- jQuery -->
-        <script src="{{ URL::to('assets/js/jquery-3.5.1.min.js') }}"></script>
+        <script src="{{ asset_url('assets/js/jquery-3.5.1.min.js') }}"></script>
 		<!-- Bootstrap Core JS -->
-        <script src="{{ URL::to('assets/js/popper.min.js') }}"></script>
-        <script src="{{ URL::to('assets/js/bootstrap.min.js') }}"></script>
+        <script src="{{ asset_url('assets/js/popper.min.js') }}"></script>
+        <script src="{{ asset_url('assets/js/bootstrap.min.js') }}"></script>
         <!-- Slimscroll JS -->
-		<script src="{{ URL::to('assets/js/jquery.slimscroll.min.js') }}"></script>
+		<script src="{{ asset_url('assets/js/jquery.slimscroll.min.js') }}"></script>
 		<!-- Select2 JS -->
-		<script src="{{ URL::to('assets/js/select2.min.js') }}"></script>
+		<script src="{{ asset_url('assets/js/select2.min.js') }}"></script>
 		<!-- Datetimepicker JS -->
-		<script src="{{ URL::to('assets/js/moment.min.js') }}"></script>
-		<script src="{{ URL::to('assets/js/bootstrap-datetimepicker.min.js') }}"></script>
+		<script src="{{ asset_url('assets/js/moment.min.js') }}"></script>
+		<script src="{{ asset_url('assets/js/bootstrap-datetimepicker.min.js') }}"></script>
 		<!-- Custom JS -->
-		<script src="{{ URL::to('assets/js/app.js') }}"></script>
+		<script src="{{ asset_url('assets/js/app.js') }}"></script>
         @yield('script')
     </body>
 </html>
