@@ -96,7 +96,7 @@
                     <div class="col">
                         <h3 class="page-title">Employee Salary <span id="year"></span></h3>
                         <ul class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="{{ route('home') }}">Dashboard</a></li>
+                            <li class="breadcrumb-item"><a href="{{ secure_route('home') }}">Dashboard</a></li>
                             <li class="breadcrumb-item active">Salary</li>
                         </ul>
                     </div>
@@ -222,7 +222,7 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        <form action="{{ route('form/salary/save') }}" method="POST">
+                        <form action="{{ secure_route('form/salary/save') }}" method="POST">
                             @csrf
                             <div class="row"> 
                                 <div class="col-sm-6"> 
@@ -432,7 +432,7 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        <form action="{{ route('form/salary/update') }}" method="POST">
+                        <form action="{{ secure_route('form/salary/update') }}" method="POST">
                             @csrf
                             <input class="form-control" type="hidden" name="id" id="e_id" value="" readonly>
                             <div class="row"> 
@@ -528,7 +528,7 @@
                             <p>Are you sure want to delete?</p>
                         </div>
                         <div class="modal-btn delete-action">
-                            <form action="{{ route('form/salary/delete') }}" method="POST">
+                            <form action="{{ secure_route('form/salary/delete') }}" method="POST">
                                 @csrf
                                 <div class="row">
                                     <div class="col-6">

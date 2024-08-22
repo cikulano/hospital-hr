@@ -10,7 +10,7 @@
 	<meta name="robots" content="noindex, nofollow">
 	<title>Dashboard - HRMS</title>
 	<!-- Favicon -->
-	<link rel="shortcut icon" type="image/x-icon" href="{{ URL::to('assets/img/favicon.png') }}">
+	<link rel="shortcut icon" type="image/x-icon" href="{{ asset_url('assets/img/favicon.png') }}">
 	<!-- Bootstrap CSS -->
 	<link rel="stylesheet" href="{{ asset_url('assets/css/bootstrap.min.css') }}">
 	<!-- Fontawesome CSS -->
@@ -63,7 +63,7 @@
 		<div class="header">
 			<!-- Logo -->
 			<div class="header-left">
-				<a href="{{ route('home') }}" class="logo">
+				<a href="{{ secure_route('home') }}" class="logo">
 					<img src="{{ asset_url('/assets/images/'. Auth::user()->avatar) }}" width="40" height="40" alt="">
 				</a>
 			</div>
@@ -307,9 +307,9 @@
 						<span>{{ Session::get('name') }}</span>
 					</a>
 					<div class="dropdown-menu">
-						<a class="dropdown-item" href="{{ route('profile_user') }}">My Profile</a>
-						<a class="dropdown-item" href="{{ route('company/settings/page') }}">Settings</a>
-						<a class="dropdown-item" href="{{ route('logout') }}">Logout</a>
+						<a class="dropdown-item" href="{{ secure_route('profile_user') }}">My Profile</a>
+						<a class="dropdown-item" href="{{ secure_route('company/settings/page') }}">Settings</a>
+						<a class="dropdown-item" href="{{ secure_route('logout') }}">Logout</a>
 					</div>
 				</li>
 			</ul>
@@ -321,9 +321,9 @@
 					<i class="fa fa-ellipsis-v"></i>
 				</a>
 				<div class="dropdown-menu dropdown-menu-right">
-					<a class="dropdown-item" href="{{ route('profile_user') }}">My Profile</a>
-					<a class="dropdown-item" href="{{ route('company/settings/page') }}">Settings</a>
-					<a class="dropdown-item" href="{{ route('logout') }}">Logout</a>
+					<a class="dropdown-item" href="{{ secure_route('profile_user') }}">My Profile</a>
+					<a class="dropdown-item" href="{{ secure_route('company/settings/page') }}">Settings</a>
+					<a class="dropdown-item" href="{{ secure_route('logout') }}">Logout</a>
 				</div>
 			</div>
 			<!-- /Mobile Menu -->
