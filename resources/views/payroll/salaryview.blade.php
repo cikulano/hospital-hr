@@ -8,7 +8,7 @@
         <div class="content container-fluid" id="app">
             <!-- Page Header -->
             <div class="page-header">
-
+                
                 <div class="row align-items-center">
                     <div class="col" style="margin-left: -222px;">
                         <h3 class="page-title">Payslip</h3>
@@ -19,10 +19,10 @@
                     </div>
                     <div class="col-auto float-right ml-auto">
                         <div class="btn-group btn-group-sm">
-                            <a href="{{ secure_url('extra/report/excel', ['user_id' => $users->user_id]) }}" class="btn btn-white text-success">
+                            <a href="{{ url('extra/report/excel') }}?user_id={{ $users->user_id }}" class="btn btn-white text-success">
                                 <i class="fa fa-file-excel-o"></i> Excel
                             </a>
-                            <a href="{{ secure_url('extra/report/pdf', ['user_id' => $users->user_id]) }}" class="btn btn-white text-danger">
+                            <a href="{{ url('extra/report/pdf') }}?user_id={{ $users->user_id }}" class="btn btn-white text-danger">
                                 <i class="fa fa-file-pdf-o"></i> PDF
                             </a>
                             <button @click.prevent="printme" class="btn btn-white text-dark">
