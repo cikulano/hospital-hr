@@ -9,6 +9,7 @@ use App\Exports\SalaryExcel;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Models\StaffSalary;
 use Brian2694\Toastr\Facades\Toastr;
+use Illuminate\Support\Facades\Storage;
 
 
 class PayrollController extends Controller
@@ -162,6 +163,7 @@ class PayrollController extends Controller
     }
 
     /** report pdf */
+    
     public function reportPDF(Request $request)
     {
         $user_id = $request->user_id;
@@ -170,22 +172,24 @@ class PayrollController extends Controller
             ->select('users.*', 'staff_salaries.*')
             ->where('staff_salaries.user_id', $user_id)
             ->first();
-
-        // Convert logo to data URI
+    
+        // Prepare the logo
         $logoPath = public_path('img/logo.png');
-        $logoData = base64_encode(file_get_contents($logoPath));
-        $logoSrc = 'data:image/png;base64,' . $logoData;
-
+        $logoType = pathinfo($logoPath, PATHINFO_EXTENSION);
+        $logoData = file_get_contents($logoPath);
+        $logoBase64 = base64_encode($logoData);
+        $logoSrc = 'data:image/' . $logoType . ';base64,' . $logoBase64;
+    
         $pdf = PDF::loadView('report_template.salary_pdf', [
             'users' => $users,
             'logoSrc' => $logoSrc
         ])->setPaper('a4', 'portrait');
             
-        // Construct the PDF file name
         $fileName = "Slip Upah {$users->name}.pdf";
-
+    
         return $pdf->download($fileName);
     }
+    
 
     
 
