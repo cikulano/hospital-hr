@@ -33,7 +33,7 @@
                             <div class="row">
                                 <div class="col-sm-6 m-b-20">
                                     @if(!empty($users->avatar))
-                                    <img src="{{ URL::to('/assets/images/'. $users->avatar) }}" class="inv-logo" alt="{{ $users->name }}">
+                                    <img src="{{ asset_url('/assets/images/'. $users->avatar) }}" class="inv-logo" alt="{{ $users->name }}">
                                     @endif
 
                                     <!-- <ul class="list-unstyled mb-0">
