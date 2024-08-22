@@ -9,3 +9,13 @@ if (!function_exists('asset_url')) {
         return asset($path);
     }
 }
+
+if (!function_exists('secure_route')) {
+    function secure_route($name, $parameters = [], $absolute = true)
+    {
+        if (config('app.env') === 'production') {
+            return str_replace('http://', 'https://', route($name, $parameters, $absolute));
+        }
+        return route($name, $parameters, $absolute);
+    }
+}

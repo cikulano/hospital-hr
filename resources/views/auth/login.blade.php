@@ -18,7 +18,7 @@
                             <p class="account-subtitle">Access to our dashboard</p>
 
                             <!-- Account Form -->
-                            <form method="POST" action="{{ secure_url(route('login')) }}">
+                            <form method="POST" action="{{ secure_route('login') }}">
                                 @csrf
                                 <div class="form-group">
                                     <label>Email</label>
@@ -48,7 +48,7 @@
                                             <label></label>
                                         </div>
                                         <div class="col-auto">
-                                            <a class="text-muted" href="{{ route('forget-password') }}">
+                                            <a class="text-muted" href="{{ secure_route('forget-password') }}">
                                                 Forgot password?
                                             </a>
                                         </div>
@@ -58,7 +58,7 @@
                                     <button class="btn btn-primary account-btn" type="submit">Login</button>
                                 </div>
                                 <div class="account-footer">
-                                    <p>Don't have an account yet? <a href="{{ route('register') }}">Register</a></p>
+                                    <p>Don't have an account yet? <a href="{{ secure_route('register') }}">Register</a></p>
                                 </div>
                             </form>
                             <!-- /Account Form -->

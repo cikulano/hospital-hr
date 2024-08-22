@@ -10,7 +10,7 @@
         <meta name="robots" content="noindex, nofollow">
         <title>Login HRMS</title>
 		<!-- Favicon -->
-        <link rel="shortcut icon" type="image/x-icon" href="{{ URL::to('assets/img/favicon.png') }}">
+        <link rel="shortcut icon" type="image/x-icon" href="{{ asset_url('assets/img/favicon.png') }}">
 		<!-- Bootstrap CSS -->
         <link rel="stylesheet" href="{{ asset_url('assets/css/bootstrap.min.css') }}">
 		<!-- Fontawesome CSS -->
