@@ -635,6 +635,7 @@ class ComposerStaticInit7e8c3c14ff33b199b4a0838993eb8423
         'App\\Http\\Controllers\\TrainingController' => __DIR__ . '/../..' . '/app/Http/Controllers/TrainingController.php',
         'App\\Http\\Controllers\\TrainingTypeController' => __DIR__ . '/../..' . '/app/Http/Controllers/TrainingTypeController.php',
         'App\\Http\\Controllers\\UserManagementController' => __DIR__ . '/../..' . '/app/Http/Controllers/UserManagementController.php',
+        'App\\Http\\Middleware\\ForceHttps' => __DIR__ . '/../..' . '/app/Http/Middleware/ForceHttps.php',
         'App\\Models\\AddJob' => __DIR__ . '/../..' . '/app/Models/AddJob.php',
         'App\\Models\\ApplyForJob' => __DIR__ . '/../..' . '/app/Models/ApplyForJob.php',
         'App\\Models\\BankInformation' => __DIR__ . '/../..' . '/app/Models/BankInformation.php',
