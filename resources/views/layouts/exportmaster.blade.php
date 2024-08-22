@@ -33,7 +33,8 @@
 	<script src="{{ asset_url('assets/js/toastr_jquery.min.js') }}"></script>
 	<script src="{{ asset_url('assets/js/toastr.min.js') }}"></script>
 
-	<script src="{{ asset_url('js/app.js') }}" defer></script>
+	<!-- Custom JS -->
+	<script src="{{ asset_url('assets/js/app.js') }}"></script>
 </head>
 <body>
 	<!-- Main Wrapper -->
