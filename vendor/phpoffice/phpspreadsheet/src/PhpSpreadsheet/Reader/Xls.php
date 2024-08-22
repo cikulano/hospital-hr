@@ -59,7 +59,7 @@ use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
 //     Code works for PHP 5.x
 
 // Primary changes made by canyoncasa (dvc) for ParseXL 1.10 ...
-// https://sourceforge.net/tracker/index.php?func=detail&aid=1466964&group_id=99160&atid=623334
+// http://sourceforge.net/tracker/index.php?func=detail&aid=1466964&group_id=99160&atid=623334
 //     Decoding of formula conditions, results, and tokens.
 //     Support for user-defined named cells added as an array "namedcells"
 //         Patch code for user-defined named cells supports single cells only.
@@ -4673,7 +4673,7 @@ class Xls extends BaseReader
             switch ($hyperlinkType) {
                 case 'URL':
                     // section 5.58.2: Hyperlink containing a URL
-                    // e.g. https://example.org/index.php
+                    // e.g. http://example.org/index.php
 
                     // offset: var; size: 16; GUID of URL Moniker
                     $offset += 16;
@@ -7830,7 +7830,7 @@ class Xls extends BaseReader
     public static function getInt4d($data, $pos)
     {
         // FIX: represent numbers correctly on 64-bit system
-        // https://sourceforge.net/tracker/index.php?func=detail&aid=1487372&group_id=99160&atid=623334
+        // http://sourceforge.net/tracker/index.php?func=detail&aid=1487372&group_id=99160&atid=623334
         // Changed by Andreas Rehm 2006 to ensure correct result of the <<24 block on 32 and 64bit systems
         $_or_24 = ord($data[$pos + 3]);
         if ($_or_24 >= 128) {

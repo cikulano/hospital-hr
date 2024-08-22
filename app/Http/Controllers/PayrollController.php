@@ -171,23 +171,11 @@ class PayrollController extends Controller
             ->where('staff_salaries.user_id', $user_id)
             ->first();
     
-<<<<<<< HEAD
-        // Generate base64 encoded image
-        $path = public_path('img/logo.png');
-        $type = pathinfo($path, PATHINFO_EXTENSION);
-        $data = file_get_contents($path);
-        $base64 = 'data:image/' . $type . ';base64,' . base64_encode($data);
-    
-        // Change paper size to A4 and orientation to portrait
-        $pdf = PDF::loadView('report_template.salary_pdf', compact('users', 'base64'))
-                   ->setPaper('a4', 'portrait');
-=======
         $pdf = PDF::loadView('report_template.salary_pdf', [
             'users' => $users,
             'logoPath' => public_path('assets/img/logo.png')
         ])->setPaper('a4', 'portrait');
             
->>>>>>> parent of 120aaee (back to non logo)
         
         // Construct the PDF file name
         $fileName = "Slip Upah {$users->name}.pdf";

@@ -99,7 +99,7 @@ class StreamContext
 
     /**
      * Set options.
-     * Please, see https://php.net/context.
+     * Please, see http://php.net/context.
      */
     public function setOptions(array $options): bool
     {
@@ -108,7 +108,7 @@ class StreamContext
 
     /**
      * Set parameters.
-     * Please, see https://php.net/context.params.
+     * Please, see http://php.net/context.params.
      */
     public function setParameters(array $parameters): bool
     {

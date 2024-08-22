@@ -1,7 +1,7 @@
 <?php
 /**
  * Whoops - php errors for cool kids
- * @author Filipe Dobreira <https://github.com/filp>
+ * @author Filipe Dobreira <http://github.com/filp>
  */
 
 namespace Whoops\Exception;
@@ -111,7 +111,7 @@ class Inspector implements InspectorInterface
         ];
 
         // php embbeds urls to the manual into the Exception message with the following ini-settings defined
-        // https://php.net/manual/en/errorfunc.configuration.php#ini.docref-root
+        // http://php.net/manual/en/errorfunc.configuration.php#ini.docref-root
         if (!ini_get('html_errors') || !ini_get('docref_root')) {
             return $docref;
         }

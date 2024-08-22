@@ -2,7 +2,7 @@
 /**
  * @package dompdf
  * @link    https://github.com/dompdf/dompdf
- * @license https://www.gnu.org/copyleft/lesser.html GNU Lesser General Public License
+ * @license http://www.gnu.org/copyleft/lesser.html GNU Lesser General Public License
  */
 namespace Dompdf;
 
@@ -79,7 +79,7 @@ class Options
     */
     private $allowedProtocols = [
         "file://" => ["rules" => []],
-        "https://" => ["rules" => []],
+        "http://" => ["rules" => []],
         "https://" => ["rules" => []]
     ];
 
@@ -294,7 +294,7 @@ class Options
      * your license key here.  If you are using PDFlib-Lite or are evaluating
      * the commercial version of PDFlib, comment out this setting.
      *
-     * @link https://www.pdflib.com
+     * @link http://www.pdflib.com
      *
      * If pdflib present in web server and auto or selected explicitly above,
      * a real license code must exist!
@@ -340,7 +340,7 @@ class Options
             ]
         ]);
 
-        $this->setAllowedProtocols(["file://", "https://", "https://"]);
+        $this->setAllowedProtocols(["file://", "http://", "https://"]);
 
         $this->setArtifactPathValidation([$this, "validateArtifactPath"]);
 
@@ -579,7 +579,7 @@ class Options
     /**
      * Adds a new protocol to the allowed protocols collection
      *
-     * @param string $protocol The scheme to add (e.g. "https://")
+     * @param string $protocol The scheme to add (e.g. "http://")
      * @param callable $rule A callable that validates the protocol
      * @return $this
      */
@@ -592,7 +592,7 @@ class Options
                 case "file://":
                     $rules[] = [$this, "validateLocalUri"];
                     break;
-                case "https://":
+                case "http://":
                 case "https://":
                     $rules[] = [$this, "validateRemoteUri"];
                     break;

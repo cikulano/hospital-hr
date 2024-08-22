@@ -2,7 +2,7 @@
 /**
  * @package dompdf
  * @link    https://github.com/dompdf/dompdf
- * @license https://www.gnu.org/copyleft/lesser.html GNU Lesser General Public License
+ * @license http://www.gnu.org/copyleft/lesser.html GNU Lesser General Public License
  */
 namespace Dompdf;
 
@@ -17,7 +17,7 @@ use Dompdf\Positioner\Inline as InlinePositioner;
  * The line box class
  *
  * This class represents a line box
- * https://www.w3.org/TR/CSS2/visuren.html#line-box
+ * http://www.w3.org/TR/CSS2/visuren.html#line-box
  *
  * @package dompdf
  */

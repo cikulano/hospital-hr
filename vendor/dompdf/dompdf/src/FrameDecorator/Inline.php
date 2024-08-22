@@ -2,7 +2,7 @@
 /**
  * @package dompdf
  * @link    https://github.com/dompdf/dompdf
- * @license https://www.gnu.org/copyleft/lesser.html GNU Lesser General Public License
+ * @license http://www.gnu.org/copyleft/lesser.html GNU Lesser General Public License
  */
 namespace Dompdf\FrameDecorator;
 
@@ -32,7 +32,7 @@ class Inline extends AbstractFrameDecorator
      * Vertical padding, border, and margin do not apply when determining the
      * height for inline frames.
      *
-     * https://www.w3.org/TR/CSS21/visudet.html#inline-non-replaced
+     * http://www.w3.org/TR/CSS21/visudet.html#inline-non-replaced
      *
      * The vertical padding, border and margin of an inline, non-replaced box
      * start at the top and bottom of the content area, not the

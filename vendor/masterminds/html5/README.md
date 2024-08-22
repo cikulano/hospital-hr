@@ -38,7 +38,7 @@ HTML5 provides the following features.
 
 ## Installation
 
-Install HTML5-PHP using [composer](https://getcomposer.org/).
+Install HTML5-PHP using [composer](http://getcomposer.org/).
 
 By adding the `masterminds/html5` dependency to your `composer.json` file:
 
@@ -169,7 +169,7 @@ into a string.
 in the correct place.
 
 The serializer (`save()`, `saveHTML()`) follows the
-[section 8.9 of the HTML 5.0 spec](https://www.w3.org/TR/2012/CR-html5-20121217/syntax.html#serializing-html-fragments).
+[section 8.9 of the HTML 5.0 spec](http://www.w3.org/TR/2012/CR-html5-20121217/syntax.html#serializing-html-fragments).
 So tags are serialized according to these rules:
 
 - A tag with children: &lt;foo&gt;CHILDREN&lt;/foo&gt;
@@ -181,7 +181,7 @@ So tags are serialized according to these rules:
 Please check the issue queue for a full list, but the following are
 issues known issues that are not presently on the roadmap:
 
-- Namespaces: HTML5 only [supports a selected list of namespaces](https://www.w3.org/TR/html5/infrastructure.html#namespaces)
+- Namespaces: HTML5 only [supports a selected list of namespaces](http://www.w3.org/TR/html5/infrastructure.html#namespaces)
   and they do not operate in the same way as XML namespaces. A `:` has no special
   meaning.
   By default the parser does not support XML style namespaces via `:`;
@@ -223,9 +223,9 @@ $html = new HTML5(array(
     "xmlNamespaces" => true
 ));
 
-$dom = $html->loadHTML('<t:tag xmlns:t="https://www.example.com"/>');
+$dom = $html->loadHTML('<t:tag xmlns:t="http://www.example.com"/>');
 
-$dom->documentElement->namespaceURI; // https://www.example.com
+$dom->documentElement->namespaceURI; // http://www.example.com
 
 ```
 
@@ -236,13 +236,13 @@ but its elements will be namespaced.
 use Masterminds\HTML5;
 $html = new HTML5(array(
     "implicitNamespaces"=>array(
-        "t"=>"https://www.example.com"
+        "t"=>"http://www.example.com"
     )
 ));
 
 $dom = $html->loadHTML('<t:tag/>');
 
-$dom->documentElement->namespaceURI; // https://www.example.com
+$dom->documentElement->namespaceURI; // http://www.example.com
 
 ```
 

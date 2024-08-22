@@ -140,7 +140,7 @@ server {
         try_files \$fastcgi_script_name =404;
         include fastcgi.conf;
         # Bypass the fact that try_files resets \$fastcgi_path_info
-        # see: https://trac.nginx.org/nginx/ticket/321
+        # see: http://trac.nginx.org/nginx/ticket/321
         set \$path_info \$fastcgi_path_info;
         fastcgi_param PATH_INFO \$path_info;
 
@@ -150,7 +150,7 @@ server {
 
         fastcgi_pass unix:/var/run/php/php$5-fpm.sock;
         # Prevents URIs that include the front controller. This will 404:
-        # https://domain.tld/app.php/some-path
+        # http://domain.tld/app.php/some-path
         # Remove the internal directive to allow URIs like this
         internal;
     }

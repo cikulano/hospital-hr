@@ -3,7 +3,7 @@
 [![Unit Tests](https://github.com/fruitcake/php-cors/actions/workflows/run-tests.yml/badge.svg)](https://github.com/fruitcake/php-cors/actions)
 [![PHPStan Level 9](https://img.shields.io/badge/PHPStan-Level%209-blue)](https://github.com/fruitcake/php-cors/actions)
 [![Code Coverage](https://img.shields.io/badge/CodeCoverage-100%25-brightgreen)](https://github.com/fruitcake/php-cors/actions/workflows/run-coverage.yml)
-[![Packagist License](https://poser.pugx.org/fruitcake/php-cors/license.png)](https://choosealicense.com/licenses/mit/)
+[![Packagist License](https://poser.pugx.org/fruitcake/php-cors/license.png)](http://choosealicense.com/licenses/mit/)
 [![Latest Stable Version](https://poser.pugx.org/fruitcake/php-cors/version.png)](https://packagist.org/packages/fruitcake/php-cors)
 [![Total Downloads](https://poser.pugx.org/fruitcake/php-cors/d/total.png)](https://packagist.org/packages/fruitcake/php-cors)
 [![Fruitcake](https://img.shields.io/badge/Powered%20By-Fruitcake-b2bc35.svg)](https://fruitcake.nl/)
@@ -12,7 +12,7 @@ Library and middleware enabling cross-origin resource sharing for your
 http-{foundation,kernel} using application. It attempts to implement the
 [W3C Recommendation] for cross-origin resource sharing.
 
-[W3C Recommendation]: https://www.w3.org/TR/cors/
+[W3C Recommendation]: http://www.w3.org/TR/cors/
 
 > Note: This is a standalone fork of https://github.com/asm89/stack-cors and is compatible with the options for CorsService.
 ## Installation
@@ -23,7 +23,7 @@ Require `fruitcake/php-cors` using composer.
 
 This package can be used as a library. You can use it in your framework using:
 
- - [Stack middleware](https://stackphp.com/): https://github.com/asm89/stack-cors
+ - [Stack middleware](http://stackphp.com/): https://github.com/asm89/stack-cors
  - [Laravel](https://laravel.com): https://github.com/fruitcake/laravel-cors
  
 
@@ -57,7 +57,7 @@ use Fruitcake\Cors\CorsService;
 $cors = new CorsService([
     'allowedHeaders'         => ['x-allowed-header', 'x-other-allowed-header'],
     'allowedMethods'         => ['DELETE', 'GET', 'POST', 'PUT'],
-    'allowedOrigins'         => ['https://localhost', 'https://*.example.com'],
+    'allowedOrigins'         => ['http://localhost', 'https://*.example.com'],
     'allowedOriginsPatterns' => ['/localhost:\d/'],
     'exposedHeaders'         => ['Content-Encoding'],
     'maxAge'                 => 0,

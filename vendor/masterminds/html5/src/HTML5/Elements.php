@@ -90,7 +90,7 @@ class Elements
     );
 
     /**
-     * The HTML5 elements as defined in https://dev.w3.org/html5/markup/elements.html.
+     * The HTML5 elements as defined in http://dev.w3.org/html5/markup/elements.html.
      *
      * @var array
      */
@@ -225,7 +225,7 @@ class Elements
 
     /**
      * The MathML elements.
-     * See https://www.w3.org/wiki/MathML/Elements.
+     * See http://www.w3.org/wiki/MathML/Elements.
      *
      * In our case we are only concerned with presentation MathML and not content
      * MathML. There is a nice list of this subset at https://developer.mozilla.org/en-US/docs/MathML/Element.
@@ -279,7 +279,7 @@ class Elements
      *
      * The Mozilla documentation has a good list at https://developer.mozilla.org/en-US/docs/SVG/Element.
      * The w3c list appears to be lacking in some areas like filter effect elements.
-     * That list can be found at https://www.w3.org/wiki/SVG/Elements.
+     * That list can be found at http://www.w3.org/wiki/SVG/Elements.
      *
      * Note, FireFox appears to do a better job rendering filter effects than chrome.
      * While they are in the spec I'm not sure how widely implemented they are.

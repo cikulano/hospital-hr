@@ -65,4 +65,4 @@ fi
 
 chmod +x mc
 sudo mv mc /usr/local/bin
-mc config host add homestead https://127.0.1.1:9600 homestead secretkey
+mc config host add homestead http://127.0.1.1:9600 homestead secretkey

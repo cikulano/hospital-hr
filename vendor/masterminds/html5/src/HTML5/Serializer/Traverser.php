@@ -9,7 +9,7 @@ namespace Masterminds\HTML5\Serializer;
  * HTML5 document. It is not intended to be a generic DOMTreeWalker
  * implementation.
  *
- * @see https://www.w3.org/TR/2012/CR-html5-20121217/syntax.html#serializing-html-fragments
+ * @see http://www.w3.org/TR/2012/CR-html5-20121217/syntax.html#serializing-html-fragments
  */
 class Traverser
 {
@@ -17,9 +17,9 @@ class Traverser
      * Namespaces that should be treated as "local" to HTML5.
      */
     protected static $local_ns = array(
-        'https://www.w3.org/1999/xhtml' => 'html',
-        'https://www.w3.org/1998/Math/MathML' => 'math',
-        'https://www.w3.org/2000/svg' => 'svg',
+        'http://www.w3.org/1999/xhtml' => 'html',
+        'http://www.w3.org/1998/Math/MathML' => 'math',
+        'http://www.w3.org/2000/svg' => 'svg',
     );
 
     protected $dom;
@@ -87,7 +87,7 @@ class Traverser
      */
     public function node($node)
     {
-        // A listing of types is at https://php.net/manual/en/dom.constants.php
+        // A listing of types is at http://php.net/manual/en/dom.constants.php
         switch ($node->nodeType) {
             case XML_ELEMENT_NODE:
                 $this->rules->element($node);

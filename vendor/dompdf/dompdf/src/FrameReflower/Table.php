@@ -2,7 +2,7 @@
 /**
  * @package dompdf
  * @link    https://github.com/dompdf/dompdf
- * @license https://www.gnu.org/copyleft/lesser.html GNU Lesser General Public License
+ * @license http://www.gnu.org/copyleft/lesser.html GNU Lesser General Public License
  */
 namespace Dompdf\FrameReflower;
 
@@ -325,7 +325,7 @@ class Table extends AbstractFrameReflower
         $this->_collapse_margins();
 
         // Table layout algorithm:
-        // https://www.w3.org/TR/CSS21/tables.html#auto-table-layout
+        // http://www.w3.org/TR/CSS21/tables.html#auto-table-layout
 
         if (is_null($this->_state)) {
             $this->get_min_max_width();

@@ -7,7 +7,7 @@
  * file that was distributed with this source code.
  *
  * @copyright Copyright (c) Ben Ramsey <ben@benramsey.com>
- * @license https://opensource.org/licenses/MIT MIT
+ * @license http://opensource.org/licenses/MIT MIT
  */
 
 declare(strict_types=1);
@@ -31,7 +31,7 @@ use function substr;
 /**
  * StringCodec encodes and decodes RFC 4122 UUIDs
  *
- * @link https://tools.ietf.org/html/rfc4122
+ * @link http://tools.ietf.org/html/rfc4122
  *
  * @psalm-immutable
  */

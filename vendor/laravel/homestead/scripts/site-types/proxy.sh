@@ -27,11 +27,11 @@ then
         proxy_pass ${2};
         "
     else proxyPass="
-        proxy_pass https://127.0.0.1:$2;
+        proxy_pass http://127.0.0.1:$2;
         "
     fi
 else proxyPass="
-proxy_pass https://127.0.0.1;
+proxy_pass http://127.0.0.1;
 "
 fi
 

@@ -7,7 +7,7 @@
  * file that was distributed with this source code.
  *
  * @copyright Copyright (c) Ben Ramsey <ben@benramsey.com>
- * @license https://opensource.org/licenses/MIT MIT
+ * @license http://opensource.org/licenses/MIT MIT
  */
 
 declare(strict_types=1);
@@ -33,7 +33,7 @@ use Ramsey\Uuid\Type\Hexadecimal;
  * * **node**: The spatially unique node identifier, an unsigned 48-bit
  *   integer
  *
- * @link https://tools.ietf.org/html/rfc4122#section-4.1 RFC 4122, § 4.1: Format
+ * @link http://tools.ietf.org/html/rfc4122#section-4.1 RFC 4122, § 4.1: Format
  *
  * @psalm-immutable
  */
@@ -93,7 +93,7 @@ interface FieldsInterface extends BaseFieldsInterface
      *
      * For RFC 4122 variant UUIDs, this value should always be the integer `2`.
      *
-     * @link https://tools.ietf.org/html/rfc4122#section-4.1.1 RFC 4122, § 4.1.1: Variant
+     * @link http://tools.ietf.org/html/rfc4122#section-4.1.1 RFC 4122, § 4.1.1: Variant
      */
     public function getVariant(): int;
 
@@ -114,7 +114,7 @@ interface FieldsInterface extends BaseFieldsInterface
      * This returns `null` if the UUID is not an RFC 4122 variant, since version
      * is only meaningful for this variant.
      *
-     * @link https://tools.ietf.org/html/rfc4122#section-4.1.3 RFC 4122, § 4.1.3: Version
+     * @link http://tools.ietf.org/html/rfc4122#section-4.1.3 RFC 4122, § 4.1.3: Version
      */
     public function getVersion(): ?int;
 

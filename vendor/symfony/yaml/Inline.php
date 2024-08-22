@@ -805,7 +805,7 @@ class Inline
     /**
      * Gets a regex that matches a YAML date.
      *
-     * @see https://www.yaml.org/spec/1.2/spec.html#id2761573
+     * @see http://www.yaml.org/spec/1.2/spec.html#id2761573
      */
     private static function getTimestampRegex(): string
     {

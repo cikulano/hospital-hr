@@ -21,7 +21,7 @@ chown -Rf $WSL_USER_NAME:$WSL_USER_GROUP /home/$WSL_USER_NAME/.homestead-feature
 
 # Install Openresty
 curl -fsSL https://openresty.org/package/pubkey.gpg | sudo gpg --dearmor -o /etc/apt/keyrings/openresty.gpg
-echo "deb [signed-by=/etc/apt/keyrings/openresty.gpg] https://openresty.org/package/ubuntu jammy main" | sudo tee /etc/apt/sources.list.d/openresty.list
+echo "deb [signed-by=/etc/apt/keyrings/openresty.gpg] http://openresty.org/package/ubuntu jammy main" | sudo tee /etc/apt/sources.list.d/openresty.list
 
 sudo apt-get update
 sudo service nginx stop

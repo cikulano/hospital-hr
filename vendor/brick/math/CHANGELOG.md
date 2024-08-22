@@ -324,7 +324,7 @@ The old methods will be removed in version 0.7.0.
 
 ## [0.5.4](https://github.com/brick/math/releases/tag/0.5.4) - 2016-10-17
 
-`BigNumber` classes now implement [JsonSerializable](https://php.net/manual/en/class.jsonserializable.php).
+`BigNumber` classes now implement [JsonSerializable](http://php.net/manual/en/class.jsonserializable.php).
 The JSON output is always a string.
 
 ## [0.5.3](https://github.com/brick/math/releases/tag/0.5.3) - 2016-03-31

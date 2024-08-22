@@ -343,7 +343,7 @@ class Base
      * twister random generator. This function is therefore more random than
      * PHP's shuffle() function, and it is seedable.
      *
-     * @see https://en.wikipedia.org/wiki/Fisher%E2%80%93Yates_shuffle
+     * @see http://en.wikipedia.org/wiki/Fisher%E2%80%93Yates_shuffle
      *
      * @example $faker->shuffleArray([1, 2, 3]); // [2, 1, 3]
      *
@@ -385,7 +385,7 @@ class Base
      * PHP's shuffle() function, and it is seedable. Additionally, it is
      * UTF8 safe if the mb extension is available.
      *
-     * @see https://en.wikipedia.org/wiki/Fisher%E2%80%93Yates_shuffle
+     * @see http://en.wikipedia.org/wiki/Fisher%E2%80%93Yates_shuffle
      *
      * @example $faker->shuffleString('hello, world'); // 'rlo,h eold!lw'
      *

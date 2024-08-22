@@ -89,7 +89,7 @@ class Properties
                 $cellDataOfficeAttributes = $xmlProperty->attributes();
                 if (isset($cellDataOfficeAttributes['name'])) {
                     $propertyName = (string) $cellDataOfficeAttributes['name'];
-                    $cellDataOfficeChildren = $xmlProperty->children('https://schemas.openxmlformats.org/officeDocument/2006/docPropsVTypes');
+                    $cellDataOfficeChildren = $xmlProperty->children('http://schemas.openxmlformats.org/officeDocument/2006/docPropsVTypes');
 
                     $attributeType = $cellDataOfficeChildren->getName();
                     $attributeValue = (string) $cellDataOfficeChildren->{$attributeType};

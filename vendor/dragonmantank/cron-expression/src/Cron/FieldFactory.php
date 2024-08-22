@@ -9,7 +9,7 @@ use InvalidArgumentException;
 /**
  * CRON field factory implementing a flyweight factory.
  *
- * @see https://en.wikipedia.org/wiki/Cron
+ * @see http://en.wikipedia.org/wiki/Cron
  */
 class FieldFactory implements FieldFactoryInterface
 {

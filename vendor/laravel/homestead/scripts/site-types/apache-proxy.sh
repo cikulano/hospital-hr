@@ -43,8 +43,8 @@ then
         RewriteCond %{HTTP:Upgrade} =websocket [NC]
         RewriteRule /(.*) ws://127.0.0.1:$2/ [P,L]
 
-        ProxyPass / https://127.0.0.1:$2/
-        ProxyPassReverse / https://127.0.0.1:$2/
+        ProxyPass / http://127.0.0.1:$2/
+        ProxyPassReverse / http://127.0.0.1:$2/
         "
     fi
 else proxyPass="
@@ -52,8 +52,8 @@ RewriteEngine On
 RewriteCond %{HTTP:Upgrade} =websocket [NC]
 RewriteRule /(.*) ws://127.0.0.1/ [P,L]
 
-ProxyPass / https://127.0.0.1/
-ProxyPassReverse / https://127.0.0.1/
+ProxyPass / http://127.0.0.1/
+ProxyPassReverse / http://127.0.0.1/
 "
 fi
 

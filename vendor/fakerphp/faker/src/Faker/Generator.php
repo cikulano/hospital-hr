@@ -840,7 +840,7 @@ class Generator
     /**
      * Get a random ISBN-10 code
      *
-     * @see https://en.wikipedia.org/wiki/International_Standard_Book_Number
+     * @see http://en.wikipedia.org/wiki/International_Standard_Book_Number
      *
      * @example '4881416324'
      */
@@ -852,7 +852,7 @@ class Generator
     /**
      * Get a random ISBN-13 code
      *
-     * @see https://en.wikipedia.org/wiki/International_Standard_Book_Number
+     * @see http://en.wikipedia.org/wiki/International_Standard_Book_Number
      *
      * @example '9790404436093'
      */

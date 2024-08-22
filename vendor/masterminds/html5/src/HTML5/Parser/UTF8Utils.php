@@ -5,7 +5,7 @@ namespace Masterminds\HTML5\Parser;
 /*
 Portions based on code from html5lib files with the following copyright:
 
-Copyright 2009 Geoffrey Sneddon <https://gsnedders.com/>
+Copyright 2009 Geoffrey Sneddon <http://gsnedders.com/>
 
 Permission is hereby granted, free of charge, to any person obtaining a
 copy of this software and associated documentation files (the
@@ -69,7 +69,7 @@ class UTF8Utils
      * It should work with ISO-8859-1/-13 and standard Latin Win charsets.
      *
      * @param string $data     The data to convert
-     * @param string $encoding A valid encoding. Examples: https://www.php.net/manual/en/mbstring.supported-encodings.php
+     * @param string $encoding A valid encoding. Examples: http://www.php.net/manual/en/mbstring.supported-encodings.php
      *
      * @return string
      */
@@ -85,7 +85,7 @@ class UTF8Utils
          */
 
         // mb_convert_encoding is chosen over iconv because of a bug. The best
-        // details for the bug are on https://us1.php.net/manual/en/function.iconv.php#108643
+        // details for the bug are on http://us1.php.net/manual/en/function.iconv.php#108643
         // which contains links to the actual but reports as well as work around
         // details.
         if (function_exists('mb_convert_encoding')) {
