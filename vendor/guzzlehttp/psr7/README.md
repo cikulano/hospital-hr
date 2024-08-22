@@ -24,8 +24,8 @@ composer require guzzlehttp/psr7
 
 | Version | Status              | PHP Version  |
 |---------|---------------------|--------------|
-| 1.x     | Security fixes only | >=5.4,<8.1   |
-| 2.x     | Latest              | >=7.2.5,<8.4 |
+| 1.x     | EOL (2024-06-30)    | >=5.4,<8.2   |
+| 2.x     | Latest              | >=7.2.5,<8.5 |
 
 
 ## AppendStream
@@ -79,7 +79,7 @@ then on disk.
 ```php
 use GuzzleHttp\Psr7;
 
-$original = Psr7\Utils::streamFor(fopen('https://www.google.com', 'r'));
+$original = Psr7\Utils::streamFor(fopen('http://www.google.com', 'r'));
 $stream = new Psr7\CachingStream($original);
 
 $stream->read(1024);
@@ -330,7 +330,7 @@ There are various static methods available under the `GuzzleHttp\Psr7` namespace
 Returns the string representation of an HTTP message.
 
 ```php
-$request = new GuzzleHttp\Psr7\Request('GET', 'https://example.com');
+$request = new GuzzleHttp\Psr7\Request('GET', 'http://example.com');
 echo GuzzleHttp\Psr7\Message::toString($request);
 ```
 
@@ -436,7 +436,7 @@ will be parsed into `['foo[a]' => '1', 'foo[b]' => '2'])`.
 
 ## `GuzzleHttp\Psr7\Query::build`
 
-`public static function build(array $params, int|false $encoding = PHP_QUERY_RFC3986): string`
+`public static function build(array $params, int|false $encoding = PHP_QUERY_RFC3986, bool $treatBoolsAsInts = true): string`
 
 Build a query string from an array of key value pairs.
 
@@ -498,9 +498,16 @@ a message.
 
 ## `GuzzleHttp\Psr7\Utils::readLine`
 
-`public static function readLine(StreamInterface $stream, int $maxLength = null): string`
+`public static function readLine(StreamInterface $stream, ?int $maxLength = null): string`
 
 Read a line from the stream up to the maximum allowed buffer length.
+
+
+## `GuzzleHttp\Psr7\Utils::redactUserInfo`
+
+`public static function redactUserInfo(UriInterface $uri): UriInterface`
+
+Redact the password in the user info part of a URI.
 
 
 ## `GuzzleHttp\Psr7\Utils::streamFor`
@@ -674,7 +681,7 @@ termed a relative-path reference.
 
 ### `GuzzleHttp\Psr7\Uri::isSameDocumentReference`
 
-`public static function isSameDocumentReference(UriInterface $uri, UriInterface $base = null): bool`
+`public static function isSameDocumentReference(UriInterface $uri, ?UriInterface $base = null): bool`
 
 Whether the URI is a same-document reference. A same-document reference refers to a URI that is, aside from its
 fragment component, identical to the base URI. When no base URI is given, only an empty URI reference
@@ -771,11 +778,11 @@ One use-case is to use the current request URI as base URI and then generate rel
 to reduce the document size or offer self-contained downloadable document archives.
 
 ```php
-$base = new Uri('https://example.com/a/b/');
-echo UriResolver::relativize($base, new Uri('https://example.com/a/b/c'));  // prints 'c'.
-echo UriResolver::relativize($base, new Uri('https://example.com/a/x/y'));  // prints '../x/y'.
-echo UriResolver::relativize($base, new Uri('https://example.com/a/b/?q')); // prints '?q'.
-echo UriResolver::relativize($base, new Uri('https://example.org/a/b/'));   // prints '//example.org/a/b/'.
+$base = new Uri('http://example.com/a/b/');
+echo UriResolver::relativize($base, new Uri('http://example.com/a/b/c'));  // prints 'c'.
+echo UriResolver::relativize($base, new Uri('http://example.com/a/x/y'));  // prints '../x/y'.
+echo UriResolver::relativize($base, new Uri('http://example.com/a/b/?q')); // prints '?q'.
+echo UriResolver::relativize($base, new Uri('http://example.org/a/b/'));   // prints '//example.org/a/b/'.
 ```
 
 ## Normalization and Comparison
@@ -799,7 +806,7 @@ of normalizations to apply. The following normalizations are available:
 
     All letters within a percent-encoding triplet (e.g., "%3A") are case-insensitive, and should be capitalized.
 
-    Example: `https://example.org/a%c2%b1b` → `https://example.org/a%C2%B1b`
+    Example: `http://example.org/a%c2%b1b` → `http://example.org/a%C2%B1b`
 
 - `UriNormalizer::DECODE_UNRESERVED_CHARACTERS`
 
@@ -808,13 +815,13 @@ of normalizations to apply. The following normalizations are available:
     not be created by URI producers and, when found in a URI, should be decoded to their corresponding unreserved
     characters by URI normalizers.
 
-    Example: `https://example.org/%7Eusern%61me/` → `https://example.org/~username/`
+    Example: `http://example.org/%7Eusern%61me/` → `http://example.org/~username/`
 
 - `UriNormalizer::CONVERT_EMPTY_PATH`
 
     Converts the empty path to "/" for http and https URIs.
 
-    Example: `https://example.org` → `https://example.org/`
+    Example: `http://example.org` → `http://example.org/`
 
 - `UriNormalizer::REMOVE_DEFAULT_HOST`
 
@@ -828,14 +835,14 @@ of normalizations to apply. The following normalizations are available:
 
     Removes the default port of the given URI scheme from the URI.
 
-    Example: `https://example.org:80/` → `https://example.org/`
+    Example: `http://example.org:80/` → `http://example.org/`
 
 - `UriNormalizer::REMOVE_DOT_SEGMENTS`
 
     Removes unnecessary dot-segments. Dot-segments in relative-path references are not removed as it would
     change the semantics of the URI reference.
 
-    Example: `https://example.org/../a/b/../c/./d.html` → `https://example.org/a/c/d.html`
+    Example: `http://example.org/../a/b/../c/./d.html` → `http://example.org/a/c/d.html`
 
 - `UriNormalizer::REMOVE_DUPLICATE_SLASHES`
 
@@ -843,7 +850,7 @@ of normalizations to apply. The following normalizations are available:
     and treat those URIs equivalent. But in theory those URIs do not need to be equivalent. So this normalization
     may change the semantics. Encoded slashes (%2F) are not removed.
 
-    Example: `https://example.org//foo///bar.html` → `https://example.org/foo/bar.html`
+    Example: `http://example.org//foo///bar.html` → `http://example.org/foo/bar.html`
 
 - `UriNormalizer::SORT_QUERY_PARAMETERS`
 

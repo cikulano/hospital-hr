@@ -16,7 +16,7 @@ use Monolog\Formatter\FormatterInterface;
 use Monolog\LogRecord;
 
 /**
- * Simple FirePHP Handler (https://www.firephp.org/), which uses the Wildfire protocol.
+ * Simple FirePHP Handler (http://www.firephp.org/), which uses the Wildfire protocol.
  *
  * @author Eric Clemmons (@ericclemmons) <eric@uxdriven.com>
  */
@@ -27,17 +27,17 @@ class FirePHPHandler extends AbstractProcessingHandler
     /**
      * WildFire JSON header message format
      */
-    protected const PROTOCOL_URI = 'https://meta.wildfirehq.org/Protocol/JsonStream/0.2';
+    protected const PROTOCOL_URI = 'http://meta.wildfirehq.org/Protocol/JsonStream/0.2';
 
     /**
      * FirePHP structure for parsing messages & their presentation
      */
-    protected const STRUCTURE_URI = 'https://meta.firephp.org/Wildfire/Structure/FirePHP/FirebugConsole/0.1';
+    protected const STRUCTURE_URI = 'http://meta.firephp.org/Wildfire/Structure/FirePHP/FirebugConsole/0.1';
 
     /**
      * Must reference a "known" plugin, otherwise headers won't display in FirePHP
      */
-    protected const PLUGIN_URI = 'https://meta.firephp.org/Wildfire/Plugin/FirePHP/Library-FirePHPCore/0.3';
+    protected const PLUGIN_URI = 'http://meta.firephp.org/Wildfire/Plugin/FirePHP/Library-FirePHPCore/0.3';
 
     /**
      * Header prefix for Wildfire to recognize & parse headers

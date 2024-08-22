@@ -344,7 +344,7 @@ class DeclarationBlock extends RuleSet
             return;
         }
         $oRule = $aRules['font'];
-        // reset properties to 'normal' per https://www.w3.org/TR/21/fonts.html#font-shorthand
+        // reset properties to 'normal' per http://www.w3.org/TR/21/fonts.html#font-shorthand
         $aFontProperties = [
             'font-style' => 'normal',
             'font-variant' => 'normal',
@@ -403,7 +403,7 @@ class DeclarationBlock extends RuleSet
      * (e.g. `background: url("chess.png") gray 50% repeat fixed;`)
      * into their constituent parts.
      *
-     * @see https://www.w3.org/TR/21/colors.html#propdef-background
+     * @see http://www.w3.org/TR/21/colors.html#propdef-background
      *
      * @return void
      */

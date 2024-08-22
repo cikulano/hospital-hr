@@ -20,7 +20,7 @@ use Monolog\Level;
 use Monolog\LogRecord;
 
 /**
- * Amazon DynamoDB handler (https://aws.amazon.com/dynamodb/)
+ * Amazon DynamoDB handler (http://aws.amazon.com/dynamodb/)
  *
  * @link https://github.com/aws/aws-sdk-php/
  * @author Andrew Lawson <adlawson@gmail.com>

@@ -171,8 +171,10 @@ class AboutCommand extends Command
             'Composer Version' => $this->composer->getVersion() ?? '<fg=yellow;options=bold>-</>',
             'Environment' => $this->laravel->environment(),
             'Debug Mode' => static::format(config('app.debug'), console: $formatEnabledStatus),
-            'URL' => Str::of(config('app.url'))->replace(['https://', 'https://'], ''),
+            'URL' => Str::of(config('app.url'))->replace(['http://', 'https://'], ''),
             'Maintenance Mode' => static::format($this->laravel->isDownForMaintenance(), console: $formatEnabledStatus),
+            'Timezone' => config('app.timezone'),
+            'Locale' => config('app.locale'),
         ]);
 
         static::addToSection('Cache', fn () => [

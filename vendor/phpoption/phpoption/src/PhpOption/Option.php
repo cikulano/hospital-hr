@@ -7,7 +7,7 @@
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- * https://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -62,13 +62,13 @@ abstract class Option implements IteratorAggregate
      * @template S
      *
      * @param array<string|int,S>|ArrayAccess<string|int,S>|null $array A potential array or \ArrayAccess value.
-     * @param string                                             $key   The key to check.
+     * @param string|int|null                                    $key   The key to check.
      *
      * @return Option<S>
      */
     public static function fromArraysValue($array, $key)
     {
-        if (!(is_array($array) || $array instanceof ArrayAccess) || !isset($array[$key])) {
+        if ($key === null || !(is_array($array) || $array instanceof ArrayAccess) || !isset($array[$key])) {
             return None::create();
         }
 

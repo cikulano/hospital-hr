@@ -34,7 +34,7 @@ use Symfony\Contracts\Service\ResetInterface;
  * AbstractSessionListener::NO_AUTO_CACHE_CONTROL_HEADER on the response.
  *
  * @author Johannes M. Schmitt <schmittjoh@gmail.com>
- * @author Tobias Schultze <https://tobion.de>
+ * @author Tobias Schultze <http://tobion.de>
  */
 abstract class AbstractSessionListener implements EventSubscriberInterface, ResetInterface
 {

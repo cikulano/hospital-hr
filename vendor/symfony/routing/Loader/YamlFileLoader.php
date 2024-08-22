@@ -25,7 +25,7 @@ use Symfony\Component\Yaml\Yaml;
  * YamlFileLoader loads Yaml routing files.
  *
  * @author Fabien Potencier <fabien@symfony.com>
- * @author Tobias Schultze <https://tobion.de>
+ * @author Tobias Schultze <http://tobion.de>
  */
 class YamlFileLoader extends FileLoader
 {

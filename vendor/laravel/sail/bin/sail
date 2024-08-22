@@ -332,8 +332,8 @@ elif [ "$1" == "dusk" ]; then
     if [ "$EXEC" == "yes" ]; then
         ARGS+=(exec -u sail)
         [ ! -t 0 ] && ARGS+=(-T)
-        ARGS+=(-e "APP_URL=https://${APP_SERVICE}")
-        ARGS+=(-e "DUSK_DRIVER_URL=https://selenium:4444/wd/hub")
+        ARGS+=(-e "APP_URL=http://${APP_SERVICE}")
+        ARGS+=(-e "DUSK_DRIVER_URL=http://selenium:4444/wd/hub")
         ARGS+=("$APP_SERVICE" php artisan dusk "$@")
     else
         sail_is_not_running
@@ -346,8 +346,8 @@ elif [ "$1" == "dusk:fails" ]; then
     if [ "$EXEC" == "yes" ]; then
         ARGS+=(exec -u sail)
         [ ! -t 0 ] && ARGS+=(-T)
-        ARGS+=(-e "APP_URL=https://${APP_SERVICE}")
-        ARGS+=(-e "DUSK_DRIVER_URL=https://selenium:4444/wd/hub")
+        ARGS+=(-e "APP_URL=http://${APP_SERVICE}")
+        ARGS+=(-e "DUSK_DRIVER_URL=http://selenium:4444/wd/hub")
         ARGS+=("$APP_SERVICE" php artisan dusk:fails "$@")
     else
         sail_is_not_running
@@ -541,7 +541,7 @@ elif [ "$1" == "share" ]; then
     shift 1
 
     if [ "$EXEC" == "yes" ]; then
-        docker run --init --rm -p "$SAIL_SHARE_DASHBOARD":4040 -t beyondcodegmbh/expose-server:latest share https://host.docker.internal:"$APP_PORT" \
+        docker run --init --rm -p "$SAIL_SHARE_DASHBOARD":4040 -t beyondcodegmbh/expose-server:latest share http://host.docker.internal:"$APP_PORT" \
             --server-host="$SAIL_SHARE_SERVER_HOST" \
             --server-port="$SAIL_SHARE_SERVER_PORT" \
             --auth="$SAIL_SHARE_TOKEN" \

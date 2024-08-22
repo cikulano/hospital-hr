@@ -780,7 +780,7 @@ class Route
     public function getDomain()
     {
         return isset($this->action['domain'])
-                ? str_replace(['https://', 'https://'], '', $this->action['domain']) : null;
+                ? str_replace(['http://', 'https://'], '', $this->action['domain']) : null;
     }
 
     /**
@@ -796,7 +796,7 @@ class Route
     /**
      * Add a prefix to the route URI.
      *
-     * @param  string  $prefix
+     * @param  string|null  $prefix
      * @return $this
      */
     public function prefix($prefix)

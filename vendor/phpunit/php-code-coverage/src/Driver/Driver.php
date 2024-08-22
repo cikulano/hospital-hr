@@ -22,35 +22,35 @@ abstract class Driver
     /**
      * @var int
      *
-     * @see https://xdebug.org/docs/code_coverage
+     * @see http://xdebug.org/docs/code_coverage
      */
     public const LINE_NOT_EXECUTABLE = -2;
 
     /**
      * @var int
      *
-     * @see https://xdebug.org/docs/code_coverage
+     * @see http://xdebug.org/docs/code_coverage
      */
     public const LINE_NOT_EXECUTED = -1;
 
     /**
      * @var int
      *
-     * @see https://xdebug.org/docs/code_coverage
+     * @see http://xdebug.org/docs/code_coverage
      */
     public const LINE_EXECUTED = 1;
 
     /**
      * @var int
      *
-     * @see https://xdebug.org/docs/code_coverage
+     * @see http://xdebug.org/docs/code_coverage
      */
     public const BRANCH_NOT_HIT = 0;
 
     /**
      * @var int
      *
-     * @see https://xdebug.org/docs/code_coverage
+     * @see http://xdebug.org/docs/code_coverage
      */
     public const BRANCH_HIT                    = 1;
     private bool $collectBranchAndPathCoverage = false;

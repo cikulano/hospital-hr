@@ -920,17 +920,17 @@ URLs no longer have a default path value of '/' if no path was specified.
 Before:
 
 ```php
-$request = $client->get('https://www.foo.com');
+$request = $client->get('http://www.foo.com');
 echo $request->getUrl();
-// >> https://www.foo.com/
+// >> http://www.foo.com/
 ```
 
 After:
 
 ```php
-$request = $client->get('https://www.foo.com');
+$request = $client->get('http://www.foo.com');
 echo $request->getUrl();
-// >> https://www.foo.com
+// >> http://www.foo.com
 ```
 
 ### Less verbose BadResponseException

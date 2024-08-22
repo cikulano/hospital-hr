@@ -81,6 +81,13 @@ trait InteractsWithDockerComposeServices
                 ->all();
         }
 
+        // Update the dependencies if the MariaDB service is used...
+        if (in_array('mariadb', $services)) {
+            $compose['services']['laravel.test']['depends_on'] = array_map(function ($dependedItem) {
+                return $dependedItem;
+            }, $compose['services']['laravel.test']['depends_on']);
+        }
+
         // Add the services to the docker-compose.yml...
         collect($services)
             ->filter(function ($service) use ($compose) {
@@ -166,7 +173,7 @@ trait InteractsWithDockerComposeServices
 
         if (in_array('meilisearch', $services)) {
             $environment .= "\nSCOUT_DRIVER=meilisearch";
-            $environment .= "\nMEILISEARCH_HOST=https://meilisearch:7700\n";
+            $environment .= "\nMEILISEARCH_HOST=http://meilisearch:7700\n";
             $environment .= "\nMEILISEARCH_NO_ANALYTICS=false\n";
         }
 

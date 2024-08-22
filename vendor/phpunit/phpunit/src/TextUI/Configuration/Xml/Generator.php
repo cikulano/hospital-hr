@@ -12,6 +12,8 @@ namespace PHPUnit\TextUI\XmlConfiguration;
 use function str_replace;
 
 /**
+ * @no-named-arguments Parameter names are not covered by the backward compatibility promise for PHPUnit
+ *
  * @internal This class is not covered by the backward compatibility promise for PHPUnit
  */
 final readonly class Generator
@@ -21,11 +23,12 @@ final readonly class Generator
      */
     private const TEMPLATE = <<<'EOT'
 <?xml version="1.0" encoding="UTF-8"?>
-<phpunit xmlns:xsi="https://www.w3.org/2001/XMLSchema-instance"
+<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/{phpunit_version}/phpunit.xsd"
          bootstrap="{bootstrap_script}"
          cacheDirectory="{cache_directory}"
          executionOrder="depends,defects"
+         shortenArraysForExportThreshold="10"
          requireCoverageMetadata="true"
          beStrictAboutCoverageMetadata="true"
          beStrictAboutOutputDuringTests="true"

@@ -40,7 +40,7 @@ final class Cobertura
         $documentType = $implementation->createDocumentType(
             'coverage',
             '',
-            'https://cobertura.sourceforge.net/xml/coverage-04.dtd',
+            'http://cobertura.sourceforge.net/xml/coverage-04.dtd',
         );
 
         $document               = $implementation->createDocument('', '', $documentType);
@@ -116,10 +116,6 @@ final class Cobertura
             foreach ($classes as $className => $class) {
                 $complexity        += $class['ccn'];
                 $packageComplexity += $class['ccn'];
-
-                if (!empty($class['package']['namespace'])) {
-                    $className = $class['package']['namespace'] . '\\' . $className;
-                }
 
                 $linesValid   = $class['executableLines'];
                 $linesCovered = $class['executedLines'];

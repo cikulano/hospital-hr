@@ -13,17 +13,17 @@
         {
             "name": "Nils Adermann",
             "email": "naderman@naderman.de",
-            "homepage": "https://www.naderman.de"
+            "homepage": "http://www.naderman.de"
         },
         {
             "name": "Jordi Boggiano",
             "email": "j.boggiano@seld.be",
-            "homepage": "https://seld.be"
+            "homepage": "http://seld.be"
         },
         {
             "name": "Rob Bast",
             "email": "rob.bast@gmail.com",
-            "homepage": "https://robbast.nl"
+            "homepage": "http://robbast.nl"
         }
     ],
     "support": {

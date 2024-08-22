@@ -29,7 +29,7 @@ class CliDumper extends AbstractDumper
     protected bool $colors;
     protected int $maxStringWidth = 0;
     protected array $styles = [
-        // See https://en.wikipedia.org/wiki/ANSI_escape_code#graphics
+        // See http://en.wikipedia.org/wiki/ANSI_escape_code#graphics
         'default' => '0;38;5;208',
         'num' => '1;38;5;38',
         'const' => '1;38;5;208',
@@ -587,7 +587,7 @@ class CliDumper extends AbstractDumper
         }
 
         // Follow https://no-color.org/
-        if (isset($_SERVER['NO_COLOR']) || false !== getenv('NO_COLOR')) {
+        if ('' !== ($_SERVER['NO_COLOR'] ?? getenv('NO_COLOR') ?: '')) {
             return false;
         }
 

@@ -770,10 +770,10 @@ class Request
      *
      * Suppose this request is instantiated from /mysite on localhost:
      *
-     *  * https://localhost/mysite              returns an empty string
-     *  * https://localhost/mysite/about        returns '/about'
-     *  * https://localhost/mysite/enco%20ded   returns '/enco%20ded'
-     *  * https://localhost/mysite/about?var=1  returns '/about'
+     *  * http://localhost/mysite              returns an empty string
+     *  * http://localhost/mysite/about        returns '/about'
+     *  * http://localhost/mysite/enco%20ded   returns '/enco%20ded'
+     *  * http://localhost/mysite/about?var=1  returns '/about'
      *
      * @return string The raw path (i.e. not urldecoded)
      */
@@ -787,10 +787,10 @@ class Request
      *
      * Suppose that an index.php file instantiates this request object:
      *
-     *  * https://localhost/index.php         returns an empty string
-     *  * https://localhost/index.php/page    returns an empty string
-     *  * https://localhost/web/index.php     returns '/web'
-     *  * https://localhost/we%20b/index.php  returns '/we%20b'
+     *  * http://localhost/index.php         returns an empty string
+     *  * http://localhost/index.php/page    returns an empty string
+     *  * http://localhost/web/index.php     returns '/web'
+     *  * http://localhost/we%20b/index.php  returns '/we%20b'
      *
      * @return string The raw path (i.e. not urldecoded)
      */
