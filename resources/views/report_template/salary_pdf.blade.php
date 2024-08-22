@@ -89,9 +89,7 @@
         <table width="100%">
             <tr>
                 <td width="30%" style="vertical-align: middle;">
-                    <img src="data:image/png;base64,{{ base64_encode(file_get_contents(public_path('assets/img/logo2.png'))) }}"
-                         alt="Company Logo" 
-                         class="logo">
+                    <img src="https://imgur.com/a/KMZoww9" alt="Company Logo" class="logo">
                 </td>
                 <td width="80%" style="vertical-align: middle;">
                     <div class="company-info">
@@ -213,8 +211,7 @@
     </div>
 
     <div class="watermark">
-        <img src="data:image/png;base64,{{ base64_encode(file_get_contents(public_path('assets/img/logo2.png'))) }}" 
-             alt="Watermark">
+        <img src="https://imgur.com/a/KMZoww9" alt="Watermark">
     </div>
 </body>
 </html>
