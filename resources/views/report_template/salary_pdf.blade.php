@@ -89,7 +89,7 @@
         <table width="100%">
             <tr>
                 <td width="30%" style="vertical-align: middle;">
-                    <img src="https://imgur.com/a/KMZoww9" alt="Company Logo" class="logo">
+                    <img src="{{ $base64 }}"  alt="Company Logo" class="logo">
                 </td>
                 <td width="80%" style="vertical-align: middle;">
                     <div class="company-info">
@@ -211,7 +211,7 @@
     </div>
 
     <div class="watermark">
-        <img src="https://imgur.com/a/KMZoww9" alt="Watermark">
+        <img src="{{ $base64 }}"  alt="Watermark">
     </div>
 </body>
 </html>
