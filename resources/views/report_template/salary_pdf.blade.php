@@ -89,7 +89,7 @@
         <table width="100%">
             <tr>
                 <td width="30%" style="vertical-align: middle;">
-                    <img src="D:\Sy\hr_ms_laravel_11\public\img\logo.png"alt="Company Logo" class="logo">
+                    <img src="{{ $logoSrc }}" alt="Company Logo" class="logo">
                 </td>
                 <td width="80%" style="vertical-align: middle;">
                     <div class="company-info">
@@ -212,7 +212,7 @@
     </div>
 
     <div class="watermark">
-        <img src="D:\Sy\hr_ms_laravel_11\public\img\logo.png" alt="Watermark">
+        <img src="{{ $logoSrc }}" alt="Watermark">
     </div>
 </body>
 </html>

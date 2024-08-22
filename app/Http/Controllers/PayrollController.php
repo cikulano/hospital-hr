@@ -170,18 +170,23 @@ class PayrollController extends Controller
             ->select('users.*', 'staff_salaries.*')
             ->where('staff_salaries.user_id', $user_id)
             ->first();
-    
+
+        // Convert logo to data URI
+        $logoPath = public_path('img/logo.png');
+        $logoData = base64_encode(file_get_contents($logoPath));
+        $logoSrc = 'data:image/png;base64,' . $logoData;
+
         $pdf = PDF::loadView('report_template.salary_pdf', [
             'users' => $users,
-            'logoPath' => public_path('assets/img/logo.png')
+            'logoSrc' => $logoSrc
         ])->setPaper('a4', 'portrait');
             
-        
         // Construct the PDF file name
         $fileName = "Slip Upah {$users->name}.pdf";
-    
+
         return $pdf->download($fileName);
     }
+
     
 
     /** export Excel */
