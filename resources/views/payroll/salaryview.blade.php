@@ -8,19 +8,26 @@
         <div class="content container-fluid" id="app">
             <!-- Page Header -->
             <div class="page-header">
+
                 <div class="row align-items-center">
                     <div class="col" style="margin-left: -222px;">
                         <h3 class="page-title">Payslip</h3>
                         <ul class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="{{ route('form/salary/page') }}">Dashboard</a></li>
+                            <li class="breadcrumb-item"><a href="{{ secure_route('form/salary/page') }}">Dashboard</a></li>
                             <li class="breadcrumb-item active">Payslip</li>
                         </ul>
                     </div>
                     <div class="col-auto float-right ml-auto">
                         <div class="btn-group btn-group-sm">
-                            <button class="btn btn-white" style="color: green"><i class="fa fa-file-excel-o"></i><a href="{{ url("extra/report/excel/?user_id=$users->user_id") }}"> Excel</a></button>
-                            <button class="btn btn-white" style="color: red"><i class="fa fa-file-pdf-o"></i> <a href="{{ url("extra/report/pdf/?user_id=$users->user_id") }}">PDF</a></button>
-                            <button class="btn btn-white" style="color: black"><i class="fa fa-print fa-lg"></i><a href="" @click.prevent="printme" target="_blank"> Print</a></button>
+                            <a href="{{ secure_url('extra/report/excel', ['user_id' => $users->user_id]) }}" class="btn btn-white text-success">
+                                <i class="fa fa-file-excel-o"></i> Excel
+                            </a>
+                            <a href="{{ secure_url('extra/report/pdf', ['user_id' => $users->user_id]) }}" class="btn btn-white text-danger">
+                                <i class="fa fa-file-pdf-o"></i> PDF
+                            </a>
+                            <button @click.prevent="printme" class="btn btn-white text-dark">
+                                <i class="fa fa-print fa-lg"></i> Print
+                            </button>
                         </div>
                     </div>
                 </div>

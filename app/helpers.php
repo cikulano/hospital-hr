@@ -19,3 +19,15 @@ if (!function_exists('secure_route')) {
         return route($name, $parameters, $absolute);
     }
 }
+
+if (!function_exists('secure_url')) {
+    function secure_url($path, $parameters = [])
+    {
+        if (config('app.env') === 'production') {
+            return url($path, $parameters, true);
+        }
+        return url($path, $parameters);
+    }
+}
+
+
