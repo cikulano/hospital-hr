@@ -13,6 +13,7 @@
             font-size: 12px;
             line-height: 1.4;
             color: #333;
+            position: relative;
         }
         .header {
             margin-bottom: 20px;
@@ -60,18 +61,25 @@
         }
         .watermark {
             position: fixed;
-            bottom: 0;
-            right: 0;
-            opacity: 0.1;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
             z-index: -1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
-
+        .watermark img {
+            max-width: 60%;
+            max-height: 60%;
+            opacity: 0.1;
+        }
         .personal-title {
         font-weight: bold;
-        padding-right: 10px; /* Adjust spacing as needed */
-        width: 19%;
+        padding-right: 10px; 
+        width: 20%;
         }
-
         .personal-value {
             width: 30%;
         }
@@ -83,9 +91,15 @@
             width: 50%;
             text-align: right;
         }
+        .alternate-row {
+        background-color: #f9f9f9;
+    }
     </style>
 </head>
 <body>
+    <div class="watermark">
+        <img src="{{ $logoSrc }}" alt="Watermark">
+    </div>
     <div class="header">
         <table width="100%">
             <tr>
@@ -96,7 +110,7 @@
                     <div class="company-info">
                         <h2>PT. PERTAMINA BINA MEDIKA</h2>
                         <h2>(P E R T A M E D I K A)</h2>
-                        <h2>S L I P U P A H</h2>
+                        <h2>S L I P  U P A H</h2>
                     </div>
                 </td>
             </tr>
@@ -127,9 +141,7 @@
 
     <div class="divider"></div>
 
-    <!-- Keep your existing salary and deduction tables here -->
-    <!-- Salary Information -->
-    
+     <!-- Salary Information -->
     <?php
         $lembur = (int)$users->da * (int)$users->conveyance;
         $shift = (int)$users->hra * (int)$users->allowance;
@@ -139,21 +151,21 @@
 
     <div class="salary-info">
         <h4 class="section-header">Informasi Pendapatan</h4>
-        <table >
+        <table>
             <tr>
                 <td class="salary-info-label">THP</td>
                 <td class="salary-info-value">Rp {{ number_format($users->basic) }}</td>
             </tr>
             <tr>
-                <td class="salary-info-label">Tunjangan Lembur</td>
+                <td class="salary-info-label">Kompensasi Lembur</td>
                 <td class="salary-info-value">Rp {{ number_format($lembur) }}</td>
             </tr>
             <tr>
-                <td class="salary-info-label">Tunjangan Shift</td>
+                <td class="salary-info-label">Kompensasi Shift</td>
                 <td class="salary-info-value">Rp {{ number_format($shift) }}</td>
             </tr>
             <tr>
-                <td class="salary-info-label">Tunjangan OnSite</td>
+                <td class="salary-info-label">Kompensasi OnSite</td>
                 <td class="salary-info-value">Rp {{ number_format($onsite) }}</td>
             </tr>
             <tr>
@@ -185,10 +197,10 @@
                 <td class="salary-info-value">Rp {{ number_format($JHT) }}</td>
             </tr>
             <tr>
-            <tr>
                 <td class="salary-info-label">Iuran JP 1%</td>
                 <td class="salary-info-value">Rp {{ number_format($JP) }}</td>
             </tr>
+            <tr>
                 <td class="salary-info-label">Iuran BPJS Kesehatan 1%</td>
                 <td class="salary-info-value">Rp {{ number_format($BPJSKes) }}</td>
             </tr>
@@ -210,10 +222,6 @@
 
     <div class="footer">
         SDM RSPJ
-    </div>
-
-    <div class="watermark">
-        <img src="{{ $logoSrc }}" alt="Watermark">
     </div>
 </body>
 </html>

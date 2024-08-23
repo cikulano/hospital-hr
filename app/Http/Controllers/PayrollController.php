@@ -12,6 +12,7 @@ use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Support\Facades\Storage;
 
 
+
 class PayrollController extends Controller
 {
     /** view page salary */
@@ -162,14 +163,9 @@ class PayrollController extends Controller
         return view('payroll.payrollitems');
     }
 
-    /** report pdf */
-    
+    /** report pdf */  
     public function reportPDF(Request $request)
     {
-        if (!auth()->check()) {
-            return redirect()->route('login')->with('error', 'Please login to access this page.');
-        }
-
         $user_id = $request->user_id;
         $users = DB::table('users')
             ->join('staff_salaries', 'users.user_id', 'staff_salaries.user_id')
@@ -177,23 +173,20 @@ class PayrollController extends Controller
             ->where('staff_salaries.user_id', $user_id)
             ->first();
     
-        // Prepare the logo
-        $logoPath = public_path('img/logo.png');
-        $logoType = pathinfo($logoPath, PATHINFO_EXTENSION);
-        $logoData = file_get_contents($logoPath);
-        $logoBase64 = base64_encode($logoData);
-        $logoSrc = 'data:image/' . $logoType . ';base64,' . $logoBase64;
-    
         $pdf = PDF::loadView('report_template.salary_pdf', [
             'users' => $users,
-            'logoSrc' => $logoSrc
+            'logoSrc' => 'data:image/png;base64,' . base64_encode(file_get_contents(public_path('img/logo.png')))
         ])->setPaper('a4', 'portrait');
             
         $fileName = "Slip Upah {$users->name}.pdf";
+        $pdfContent = $pdf->output();
+    
+        // Send email
+        Mail::to($users->email)->send(new SalarySlipMail($pdfContent, $fileName));
     
         return $pdf->download($fileName);
     }
-
+    
     /** show salary report */
     public function salaryReportHtml($user_id)
     {
@@ -210,6 +203,7 @@ class PayrollController extends Controller
         return view('report_template.salary_html', compact('users', 'logoSrc'));
     }
 
+    /** show salary report */
     public function salaryReportPdfHtml($user_id)
     {
         $users = DB::table('users')
@@ -224,8 +218,6 @@ class PayrollController extends Controller
 
         return view('report_template.salary_pdf', compact('users', 'logoSrc'));
     }
-
-    
     
     /** export Excel */
     public function reportExcel(Request $request)

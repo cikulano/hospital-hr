@@ -115,7 +115,7 @@
 				<li class="nav-item dropdown">
 					<a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
 						<i class="fa fa-bell-o"></i>
-						<span class="badge badge-pill">3</span> 
+						<span class="badge badge-pill"></span> 
 					</a>
 					<div class="dropdown-menu notifications">
 						<div class="topnav-dropdown-header">
@@ -124,7 +124,7 @@
 						</div>
 						<div class="noti-content">
 							<ul class="notification-list">
-								<li class="notification-message">
+								<!-- <li class="notification-message">
 									<a href="activities.html">
 										<div class="media">
 											<span class="avatar">
@@ -188,10 +188,10 @@
 											</div>
 										</div>
 									</a>
-								</li>
+								</li> -->
 							</ul>
 						</div>
-						<div class="topnav-dropdown-footer"> <a href="activities.html">View all Notifications</a> </div>
+						<!-- <div class="topnav-dropdown-footer"> <a href="activities.html">View all Notifications</a> </div> -->
 					</div>
 				</li>
 				<!-- /Notifications -->
@@ -199,9 +199,9 @@
 				<!-- Message Notifications -->
 				<li class="nav-item dropdown">
 					<a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
-						<i class="fa fa-comment-o"></i> <span class="badge badge-pill">8</span>
+						<i class="fa fa-comment-o"></i> <span class="badge badge-pill"></span>
 					</a>
-					<div class="dropdown-menu notifications">
+					<!-- <div class="dropdown-menu notifications">
 						<div class="topnav-dropdown-header">
 							<span class="notification-title">Messages</span> 
 							<a href="javascript:void(0)" class="clear-noti"> Clear All </a>
@@ -296,7 +296,7 @@
 							</ul>
 						</div>
 						<div class="topnav-dropdown-footer"> <a href="chat.html">View all Messages</a> </div>
-					</div>
+					</div> -->
 				</li>
 				<!-- /Message Notifications -->
 				<li class="nav-item dropdown has-arrow main-drop">
@@ -308,7 +308,7 @@
 					</a>
 					<div class="dropdown-menu">
 						<a class="dropdown-item" href="{{ secure_route('profile_user') }}">My Profile</a>
-						<a class="dropdown-item" href="{{ secure_route('company/settings/page') }}">Settings</a>
+						<!-- <a class="dropdown-item" href="{{ secure_route('company/settings/page') }}">Settings</a> -->
 						<a class="dropdown-item" href="{{ secure_route('logout') }}">Logout</a>
 					</div>
 				</li>

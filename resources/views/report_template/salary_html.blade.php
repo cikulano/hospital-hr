@@ -76,11 +76,11 @@
                                                 <td class="text-right">Rp {{ number_format($users->basic) }}</td>
                                             </tr>
                                             <tr>
-                                                <td><strong>Tunjangan Lembur</strong></td>
+                                                <td><strong>Kompensasi Lembur</strong></td>
                                                 <td class="text-right">Rp {{ number_format($lembur) }}</td>
                                             </tr>
                                             <tr>
-                                                <td><strong>Tunjangan Shift</strong></td>
+                                                <td><strong>Kompensasi Shift</strong></td>
                                                 <td class="text-right">Rp {{ number_format($shift) }}</td>
                                             </tr>
                                             <tr>
@@ -146,6 +146,12 @@
     </div>
 
     <div class="text-center mt-4">
+        <a href="{{ url()->previous() }}" class="btn btn-secondary mr-2">
+            <i class="fas fa-arrow-left"></i> Back
+        </a>
+        <!-- <a href="{{ url('/') }}" class="btn btn-info mr-2">
+            <i class="fas fa-home"></i> Home
+        </a> -->
         <button id="generatePdf" class="btn btn-primary">
             <i class="fas fa-file-pdf"></i> Generate PDF
         </button>

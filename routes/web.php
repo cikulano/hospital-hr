@@ -227,7 +227,9 @@ Route::group(['namespace' => 'App\Http\Controllers'],function()
         Route::get('extra/report/pdf', 'reportPDF')->middleware('auth');    
         Route::get('extra/report/excel', 'reportExcel')->middleware('auth');
         Route::get('extra/report/html/{user_id}', 'salaryReportHtml')->middleware('auth')->name('extra.report.html');
-        Route::get('extra/report/pdf-html/{user_id}', 'salaryReportPdfHtml')->middleware('auth')->name('salary.pdf.html');  
+        Route::get('extra/report/pdf-html/{user_id}', 'salaryReportPdfHtml')->middleware('auth')->name('salary.pdf.html');
+        Route::get('extra/report/email', 'emailPDF')->middleware('auth')->name('extra.report.email');
+  
 
      });
 
