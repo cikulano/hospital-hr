@@ -187,7 +187,7 @@
                                     <td hidden class="salary">{{ $items->basic }}</td>
 
                                     <td class="text-center">
-                                        <a class="btn btn-sm btn-success" href="{{ url('form/salary/view/'.$items->user_id) }}" target="_blank">Generate Slip</a>
+                                        <a class="btn btn-sm btn-success" href="{{ route('extra.report.html', ['user_id' => $items->user_id]) }}" target="_blank">Generate Slip</a>
                                     </td>
 
                                     <td class="text-center">

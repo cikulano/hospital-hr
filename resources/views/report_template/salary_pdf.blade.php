@@ -49,6 +49,7 @@
             font-weight: bold;
             text-transform: uppercase;
             padding: 5px;
+            font-size: 16px;
         }
         .amount {
             text-align: right;

@@ -195,29 +195,38 @@ class PayrollController extends Controller
     }
 
     /** show salary report */
-    public function salaryReportHtml(Request $request)
+    public function salaryReportHtml($user_id)
     {
-        $user_id = $request->user_id;
         $users = DB::table('users')
             ->join('staff_salaries', 'users.user_id', 'staff_salaries.user_id')
             ->select('users.*', 'staff_salaries.*')
             ->where('staff_salaries.user_id', $user_id)
             ->first();
 
-        // Prepare the logo
         $logoPath = public_path('img/logo.png');
-        $logoSrc = '';
-        if (file_exists($logoPath)) {
-            $logoData = base64_encode(file_get_contents($logoPath));
-            $logoSrc = 'data:image/png;base64,' . $logoData;
-        }
+        $logoData = base64_encode(file_get_contents($logoPath));
+        $logoSrc = 'data:image/png;base64,' . $logoData;
 
         return view('report_template.salary_html', compact('users', 'logoSrc'));
     }
-    
+
+    public function salaryReportPdfHtml($user_id)
+    {
+        $users = DB::table('users')
+            ->join('staff_salaries', 'users.user_id', 'staff_salaries.user_id')
+            ->select('users.*', 'staff_salaries.*')
+            ->where('staff_salaries.user_id', $user_id)
+            ->first();
+
+        $logoPath = public_path('img/logo.png');
+        $logoData = base64_encode(file_get_contents($logoPath));
+        $logoSrc = 'data:image/png;base64,' . $logoData;
+
+        return view('report_template.salary_pdf', compact('users', 'logoSrc'));
+    }
 
     
-
+    
     /** export Excel */
     public function reportExcel(Request $request)
     {
