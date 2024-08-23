@@ -166,39 +166,53 @@ class PayrollController extends Controller
     
     public function reportPDF(Request $request)
     {
-        try {
-
-            if (!auth()->check()) {
-                return redirect()->route('login')->with('error', 'Please login to access this page.');
-            }
-    
-            $user_id = $request->user_id;
-            $users = DB::table('users')
-                ->join('staff_salaries', 'users.user_id', 'staff_salaries.user_id')
-                ->select('users.*', 'staff_salaries.*')
-                ->where('staff_salaries.user_id', $user_id)
-                ->first();
-        
-            // Prepare the logo
-            $logoPath = public_path('img/logo.png');
-            $logoType = pathinfo($logoPath, PATHINFO_EXTENSION);
-            $logoData = file_get_contents($logoPath);
-            $logoBase64 = base64_encode($logoData);
-            $logoSrc = 'data:image/' . $logoType . ';base64,' . $logoBase64;
-        
-            $pdf = PDF::loadView('report_template.salary_pdf', [
-                'users' => $users,
-                'logoSrc' => $logoSrc
-            ])->setPaper('a4', 'portrait');
-                
-            $fileName = "Slip Upah {$users->name}.pdf";
-        
-            return $pdf->download($fileName);
-        } catch (\Exception $e) {
-            \Log::error('PDF Generation Error: ' . $e->getMessage());
-            return back()->with('error', 'An error occurred while generating the PDF. Please try again.');
+        if (!auth()->check()) {
+            return redirect()->route('login')->with('error', 'Please login to access this page.');
         }
-        
+
+        $user_id = $request->user_id;
+        $users = DB::table('users')
+            ->join('staff_salaries', 'users.user_id', 'staff_salaries.user_id')
+            ->select('users.*', 'staff_salaries.*')
+            ->where('staff_salaries.user_id', $user_id)
+            ->first();
+    
+        // Prepare the logo
+        $logoPath = public_path('img/logo.png');
+        $logoType = pathinfo($logoPath, PATHINFO_EXTENSION);
+        $logoData = file_get_contents($logoPath);
+        $logoBase64 = base64_encode($logoData);
+        $logoSrc = 'data:image/' . $logoType . ';base64,' . $logoBase64;
+    
+        $pdf = PDF::loadView('report_template.salary_pdf', [
+            'users' => $users,
+            'logoSrc' => $logoSrc
+        ])->setPaper('a4', 'portrait');
+            
+        $fileName = "Slip Upah {$users->name}.pdf";
+    
+        return $pdf->download($fileName);
+    }
+
+    /** show salary report */
+    public function salaryReportHtml(Request $request)
+    {
+        $user_id = $request->user_id;
+        $users = DB::table('users')
+            ->join('staff_salaries', 'users.user_id', 'staff_salaries.user_id')
+            ->select('users.*', 'staff_salaries.*')
+            ->where('staff_salaries.user_id', $user_id)
+            ->first();
+
+        // Prepare the logo
+        $logoPath = public_path('img/logo.png');
+        $logoSrc = '';
+        if (file_exists($logoPath)) {
+            $logoData = base64_encode(file_get_contents($logoPath));
+            $logoSrc = 'data:image/png;base64,' . $logoData;
+        }
+
+        return view('report_template.salary_html', compact('users', 'logoSrc'));
     }
     
 

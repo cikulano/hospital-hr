@@ -22,9 +22,11 @@
                             <a href="{{ url('extra/report/excel') }}?user_id={{ $users->user_id }}" class="btn btn-white text-success">
                                 <i class="fa fa-file-excel-o"></i> Excel
                             </a>
-                            <a href="{{ url('extra/report/pdf') }}?user_id={{ $users->user_id }}" class="btn btn-white text-danger">
+                            
+                            <a href="{{ route('extra.report.html', ['user_id' => $users->user_id]) }}" class="btn btn-white text-danger" target="_blank">
                                 <i class="fa fa-file-pdf-o"></i> PDF
                             </a>
+
                             <button @click.prevent="printme" class="btn btn-white text-dark">
                                 <i class="fa fa-print fa-lg"></i> Print
                             </button>

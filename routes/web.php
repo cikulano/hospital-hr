@@ -225,7 +225,8 @@ Route::group(['namespace' => 'App\Http\Controllers'],function()
         Route::get('form/salary/view/{user_id}', 'salaryView')->middleware('auth');
         Route::get('form/payroll/items', 'payrollItems')->middleware('auth')->name('form/payroll/items');    
         Route::get('extra/report/pdf', 'reportPDF')->middleware('auth');    
-        Route::get('extra/report/excel', 'reportExcel')->middleware('auth');    
+        Route::get('extra/report/excel', 'reportExcel')->middleware('auth');
+        Route::get('extra/report/html', 'salaryReportHtml')->middleware('auth')->name('extra.report.html');    
 
      });
 
