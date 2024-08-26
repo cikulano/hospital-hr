@@ -106,12 +106,12 @@
                                 <div class="col-sm-6"> 
                                     <div class="form-group">
                                         <label>Full Name</label>
-                                        <input class="form-control @error('name') is-invalid @enderror" type="text" id="" name="name" value="{{ old('name') }}" placeholder="Enter Name">
+                                        <input class="form-control @error('name') is-invalid @enderror" type="text" id="name" name="name" value="{{ old('name') }}" placeholder="Enter Name">
                                     </div>
                                 </div>
                                 <div class="col-sm-6"> 
                                     <label>Emaill Address</label>
-                                    <input class="form-control" type="email" id="" name="email" placeholder="Enter Email">
+                                    <input class="form-control" type="email" id="email" name="email" placeholder="Enter Email">
                                 </div>
                             </div>
                             <div class="row"> 
@@ -139,7 +139,7 @@
                                 <div class="col-sm-6"> 
                                     <div class="form-group">
                                         <label>Phone</label>
-                                        <input class="form-control" type="tel" id="" name="phone" placeholder="Enter Phone">
+                                        <input class="form-control" type="tel" id="phone" name="phone" placeholder="Enter Phone">
                                     </div>
                                 </div>
                                 <div class="col-sm-6"> 
@@ -164,7 +164,7 @@
                                 </div>
                                 <div class="col-sm-6"> 
                                     <label>Photo</label>
-                                    <input class="form-control" type="file" id="image" name="image">
+                                    <input class="form-control" type="file" id="image_a" name="image">
                                 </div>
                             </div>
                             <br>
@@ -263,7 +263,7 @@
                                 </div>
                                 <div class="col-sm-6"> 
                                     <label>Photo</label>
-                                    <input class="form-control" type="file" id="image" name="images">
+                                    <input class="form-control" type="file" id="image_e" name="images">
                                     <input type="hidden" name="hidden_image" id="e_image" value="">
                                     <div class="form-text">Allowed file types: png, jpg, jpeg.</div>
                                 </div>
