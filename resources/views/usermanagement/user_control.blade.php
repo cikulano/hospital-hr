@@ -44,12 +44,12 @@
                 <div class="col-sm-6 col-md-3"> 
                     <div class="form-group form-focus select-focus">
                         <select class="select floating" id="search_department"> 
-                            <option value="">Select Department</option>
+                            <option value="">Select Lokasi</option>
                             @foreach ($department as $dept)
                                 <option value="{{ $dept->department }}">{{ $dept->department }}</option>
                             @endforeach
                         </select>
-                        <label class="focus-label">Department</label>
+                        <label class="focus-label">Lokasi</label>
                     </div>
                 </div>
                 <div class="col-sm-6 col-md-3">  
@@ -203,8 +203,14 @@
                     <div class="modal-body">
                         <form action="{{ route('update') }}" method="POST" enctype="multipart/form-data">
                             @csrf
-                            <input type="hidden" name="user_id" id="e_id" value="">
+                            <input type="hidden" name="old_user_id" id="e_old_id" value="">
                             <div class="row"> 
+                                <div class="col-sm-6"> 
+                                    <div class="form-group">
+                                        <label>User ID</label>
+                                        <input class="form-control" type="text" name="user_id" id="e_user_id" value="" />
+                                    </div>
+                                </div>
                                 <div class="col-sm-6"> 
                                     <div class="form-group">
                                         <label>Name</label>
@@ -406,7 +412,8 @@
         $(document).on('click','.userUpdate',function()
         {
             var _this = $(this).parents('tr');
-            $('#e_id').val(_this.find('.user_id').text());
+            $('#e_old_id').val(_this.find('.user_id').text());
+            $('#e_user_id').val(_this.find('.user_id').text());
             $('#e_name').val(_this.find('.name').text());
             $('#e_email').val(_this.find('.email').text());
             $('#e_role_name').val(_this.find('.role_name').text()).change();

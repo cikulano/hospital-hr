@@ -357,6 +357,7 @@ class UserManagementController extends Controller
     }
     
     /** update record */
+    
     public function update(Request $request)
     {
         DB::beginTransaction();
@@ -364,21 +365,22 @@ class UserManagementController extends Controller
         try {
             // Validate the request
             $request->validate([
-                'user_id'    => 'required|string|exists:users,user_id', // Ensure user_id exists
-                'name'       => 'required|string|max:255',
-                'email'      => 'required|string|email|max:255|unique:users,email,' . $request->user_id . ',user_id',
-                'phone'      => 'required|min:11|numeric',
-                'role_name'  => 'required|string|max:255',
-                'position'   => 'required|string|max:255',
-                'department' => 'required|string|max:255',
-                'status'     => 'required|string|max:255',
-                'image'      => 'nullable|image',
+                'old_user_id' => 'required|string|exists:users,user_id',
+                'user_id'     => 'required|string|max:255|unique:users,user_id,' . $request->old_user_id . ',user_id',
+                'name'        => 'required|string|max:255',
+                'email'       => 'required|string|email|max:255|unique:users,email,' . $request->old_user_id . ',user_id',
+                'phone'       => 'required|min:11|numeric',
+                'role_name'   => 'required|string|max:255',
+                'position'    => 'required|string|max:255',
+                'department'  => 'required|string|max:255',
+                'status'      => 'required|string|max:255',
+                'image'       => 'nullable|image',
             ]);
-            
 
-            // Find the user by user_id
-            $user = User::where('user_id', $request->user_id)->firstOrFail();
+            // Find the user by old user_id
+            $user = User::where('user_id', $request->old_user_id)->firstOrFail();
 
+            // Handle image upload if needed
             $image_name = $user->avatar;
             $image = $request->file('image');  // Ensure 'image' matches the form field name
 
@@ -398,6 +400,7 @@ class UserManagementController extends Controller
 
             // Update user details
             $user->update([
+                'user_id'      => $request->user_id,
                 'name'         => $request->name,
                 'email'        => $request->email,
                 'role_name'    => $request->role_name,
@@ -419,6 +422,7 @@ class UserManagementController extends Controller
             return redirect()->back()->withErrors(['error' => $e->getMessage()]);
         }
     }
+
 
     
     /** delete record */
@@ -516,12 +520,3 @@ class UserManagementController extends Controller
         }
     }
 }
-
-
-
-
-
-
-
-
-
