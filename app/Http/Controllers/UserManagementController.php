@@ -56,28 +56,28 @@ class UserManagementController extends Controller
         $users =  DB::table('users');
         $totalRecords = $users->count();
 
-        $user_name   = $request->user_name;
-        $type_role   = $request->type_role;
-        $type_status = $request->type_status;
+        $user_name  = $request->user_name;
+        $position   = $request->position;
+        $department = $request->department;
 
         /** search for name */
         if(!empty($user_name)) {
-            $users->when($user_name,function($query) use ($user_name){
-                $query->where('name','LIKE','%'.$user_name.'%');
+            $users->when($user_name, function($query) use ($user_name) {
+                $query->where('name', 'LIKE', '%'.$user_name.'%');
             });
         }
 
-        /** search for type_role */
-        if(!empty($type_role)) {
-            $users->when($type_role,function($query) use ($type_role){
-                $query->where('role_name',$type_role);
+        /** search for position */
+        if(!empty($position)) {
+            $users->when($position, function($query) use ($position) {
+                $query->where('position', $position);
             });
         }
 
-        /** search for status */
-        if(!empty($type_status)) {
-            $users->when($type_status,function($query) use ($type_status){
-                $query->where('status',$type_status);
+        /** search for department */
+        if(!empty($department)) {
+            $users->when($department, function($query) use ($department) {
+                $query->where('department', $department);
             });
         }
 

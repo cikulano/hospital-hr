@@ -26,35 +26,34 @@
             <div class="row filter-row">
                 <div class="col-sm-6 col-md-3">  
                     <div class="form-group form-focus">
-                        <input type="text" class="form-control floating" id="user_name" name="user_name">
+                        <input type="text" class="form-control floating" id="search_user_name" name="user_name">
                         <label class="focus-label">User Name</label>
                     </div>
                 </div>
                 <div class="col-sm-6 col-md-3"> 
                     <div class="form-group form-focus select-focus">
-                        <select class="select floating" id="type_role"> 
-                            <option selected disabled>-- Select Role Name --</option>
-                            @foreach ($role_name as $name)
-                                <option value="{{ $name->role_type }}">{{ $name->role_type }}</option>
+                        <select class="select floating" id="search_position"> 
+                            <option value="">Select Position</option>
+                            @foreach ($position as $pos)
+                                <option value="{{ $pos->position }}">{{ $pos->position }}</option>
                             @endforeach
                         </select>
-                        <label class="focus-label">Role Name</label>
+                        <label class="focus-label">Position</label>
                     </div>
                 </div>
                 <div class="col-sm-6 col-md-3"> 
                     <div class="form-group form-focus select-focus">
-                        <select class="select floating" id="type_status"> 
-                            <option selected disabled> --Select --</option>
-                            @foreach ($status_user as $status )
-                            <option value="{{ $status->type_name }}">{{ $status->type_name }}</option>
+                        <select class="select floating" id="search_department"> 
+                            <option value="">Select Department</option>
+                            @foreach ($department as $dept)
+                                <option value="{{ $dept->department }}">{{ $dept->department }}</option>
                             @endforeach
                         </select>
-                        <label class="focus-label">Status</label>
+                        <label class="focus-label">Department</label>
                     </div>
                 </div>
-
                 <div class="col-sm-6 col-md-3">  
-                    <button type="sumit" class="btn btn-success btn-block btn_search"> Search </button>  
+                    <a href="#" class="btn btn-success btn-block btn_search"> Search </a>  
                 </div>
             </div>
 
@@ -106,12 +105,12 @@
                                 <div class="col-sm-6"> 
                                     <div class="form-group">
                                         <label>Full Name</label>
-                                        <input class="form-control @error('name') is-invalid @enderror" type="text" id="name" name="name" value="{{ old('name') }}" placeholder="Enter Name">
+                                        <input class="form-control @error('name') is-invalid @enderror" type="text" id="" name="name" value="{{ old('name') }}" placeholder="Enter Name">
                                     </div>
                                 </div>
                                 <div class="col-sm-6"> 
                                     <label>Emaill Address</label>
-                                    <input class="form-control" type="email" id="email" name="email" placeholder="Enter Email">
+                                    <input class="form-control" type="email" id="" name="email" placeholder="Enter Email">
                                 </div>
                             </div>
                             <div class="row"> 
@@ -139,7 +138,7 @@
                                 <div class="col-sm-6"> 
                                     <div class="form-group">
                                         <label>Phone</label>
-                                        <input class="form-control" type="tel" id="phone" name="phone" placeholder="Enter Phone">
+                                        <input class="form-control" type="tel" id="" name="phone" placeholder="Enter Phone">
                                     </div>
                                 </div>
                                 <div class="col-sm-6"> 
@@ -164,7 +163,7 @@
                                 </div>
                                 <div class="col-sm-6"> 
                                     <label>Photo</label>
-                                    <input class="form-control" type="file" id="image_a" name="image">
+                                    <input class="form-control" type="file" id="image" name="image">
                                 </div>
                             </div>
                             <br>
@@ -263,7 +262,7 @@
                                 </div>
                                 <div class="col-sm-6"> 
                                     <label>Photo</label>
-                                    <input class="form-control" type="file" id="image_e" name="images">
+                                    <input class="form-control" type="file" id="image" name="images">
                                     <input type="hidden" name="hidden_image" id="e_image" value="">
                                     <div class="form-text">Allowed file types: png, jpg, jpeg.</div>
                                 </div>
@@ -335,17 +334,17 @@
                 searching: true,
                 ajax: {
                     url:"{{ route('get-users-data') }}",
-                    data:function(data) {
-                        // read valus for search
-                        var user_name   = $('#user_name').val();
-                        var type_role   = $('#type_role').val();
-                        var type_status = $('#type_status').val();
-                        data.user_name   = user_name;
-                        data.type_role   = type_role;
-                        data.type_status = type_status;
+                    data: function(data) {
+                        // read values for search
+                        var user_name  = $('#search_user_name').val();
+                        var position   = $('#search_position').val();
+                        var department = $('#search_department').val();
+                        data.user_name  = user_name;
+                        data.position   = position;
+                        data.department = department;
                     }
                 },
-                
+                                
                 columns: [{
                         data: 'no',
                         name: 'no',
@@ -429,6 +428,7 @@
             $('.e_id').val(id);
         });
     </script>
+
     @endsection
 
 @endsection
