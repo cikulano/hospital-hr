@@ -176,7 +176,7 @@
     </div>
 
     <?php
-        $pajak = ((int)$users->tds/100) * (int)$users->basic;
+        $pajak = (int)$users->tds;
         $JHT = (int)$users->basic * 0.02;
         $JP = (int)$users->basic * 0.01;
         $BPJSKes = (int)$users->basic * 0.01;
@@ -189,7 +189,7 @@
         <h4 class="section-header">Informasi Potongan</h4>
         <table>
             <tr>
-                <td class="salary-info-label"> Iuran Pajak {{ ($users->tds) }} %</td>
+                <td class="salary-info-label"> Iuran Pajak {{ ($users->tds) }} </td>
                 <td class="salary-info-value">Rp {{ number_format($pajak) }}</td>
             </tr>
             <tr>

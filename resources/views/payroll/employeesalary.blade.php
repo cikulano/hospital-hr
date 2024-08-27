@@ -355,7 +355,7 @@
                                 <div class="col-sm-6">  
                                     <h4 class="text-primary">Deduction</h4>
                                     <div class="form-group">
-                                        <label>Pajak (Dalam %)</label>
+                                        <label>Pajak</label>
                                         <input class="form-control @error('tds') is-invalid @enderror" type="number" name="tds" id="tds" value="{{ old('tds') }}" placeholder="Masukan Pajak %">
                                         @error('tds')
                                             <span class="invalid-feedback" role="alert">
@@ -482,7 +482,7 @@
                                 <div class="col-sm-6">  
                                     <h4 class="text-primary">Deductions</h4>
                                     <div class="form-group">
-                                        <label>Pajak (%)</label>
+                                        <label>Pajak </label>
                                         <input class="form-control" type="text" name="tds" id="e_tds" value="">
                                     </div> 
                                     <div class="form-group">

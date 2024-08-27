@@ -429,7 +429,6 @@
             $('.e_id').val(id);
         });
     </script>
-
     @endsection
 
 @endsection
