@@ -226,9 +226,9 @@
                                 <div class="col-sm-6"> 
                                     <div class="form-group">
                                         <label>Pilih Pekerja</label>
-                                        <select class="select select2s-hidden-accessible @error('name') is-invalid @enderror custom-select" tabindex="-1" aria-hidden="true" id="name" name="name">
+                                        <select class="select select2s-hidden-accessible @error('name') is-invalid @enderror" style="width: 100%;" tabindex="-1" aria-hidden="true" id="name" name="name">
                                             <option value="">-- Select --</option>
-                                            @foreach ($userList as $key=>$user )
+                                            @foreach ($userList as $user)
                                                 <option value="{{ $user->name }}" data-employee_id="{{ $user->user_id }}">{{ $user->name }}</option>
                                             @endforeach
                                         </select>
@@ -351,7 +351,7 @@
                                         type="number" 
                                         id="tds" 
                                         value="{{ old('tds') }}" 
-                                        placeholder="Masukan Pajak %">
+                                        placeholder="Masukan Pajak">
                                         @error('tds')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>

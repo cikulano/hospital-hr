@@ -18,11 +18,21 @@ class PayrollController extends Controller
     /** view page salary */
     public function salary()
     {
-        $users            = DB::table('users')->join('staff_salaries', 'users.user_id', '=', 'staff_salaries.user_id')->select('users.*', 'staff_salaries.*')->get(); 
-        $userList         = DB::table('users')->get();
+        $users = DB::table('users')
+            ->join('staff_salaries', 'users.user_id', '=', 'staff_salaries.user_id')
+            ->select('users.*', 'staff_salaries.*')
+            ->get();
+    
+        $userList = DB::table('users')
+            ->whereNotIn('user_id', function($query) {
+                $query->select('user_id')->from('staff_salaries');
+            })
+            ->get();
+    
         $permission_lists = DB::table('permission_lists')->get();
-        return view('payroll.employeesalary',compact('users','userList','permission_lists'));
-    }
+    
+        return view('payroll.employeesalary', compact('users', 'userList', 'permission_lists'));
+    }    
 
      /** save record */
      public function saveRecord(Request $request)
