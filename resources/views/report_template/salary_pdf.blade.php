@@ -9,14 +9,14 @@
             margin: 2cm;
         }
         body {
-            font-family: Arial, sans-serif;
-            font-size: 12px;
-            line-height: 1.4;
+            font-family: Roboto, Arial, sans-serif;
+            font-size: 14px;
+            line-height: 1.6;
             color: #333;
             position: relative;
         }
         .header {
-            margin-bottom: 20px;
+            margin-bottom: 30px;
         }
         .logo {
             width: 100%;
@@ -28,35 +28,36 @@
             text-align: center;
         }
         .company-info h2 {
-            color: #006400;
+            color: #3498db;
             margin: 0;
-            font-size: 16px;
+            font-size: 18px;
         }
         .divider {
-            border-top: 1px solid #006400;
-            margin: 10px 0;
+            border-top: 1px solid #3498db;
+            margin: 20px 0;
         }
         table {
             width: 100%;
             border-collapse: collapse;
         }
         td, th {
-            padding: 5px;
+            padding: 8px;
             border-bottom: 1px solid #eee;
             vertical-align: top;
         }
         .section-header {
-            background-color: #e0f0e0;
+            background-color: rgba(240, 248, 255, 0.7);
             font-weight: bold;
             text-transform: uppercase;
-            padding: 5px;
+            padding: 10px;
             font-size: 16px;
+            color: #3498db;
         }
         .amount {
             text-align: right;
         }
         .footer {
-            margin-top: 20px;
+            margin-top: 30px;
             text-align: right;
         }
         .watermark {
@@ -75,25 +76,35 @@
             max-height: 60%;
             opacity: 0.1;
         }
-        .personal-title {
-        font-weight: bold;
-        padding-right: 10px; 
-        width: 20%;
+        .personal-info {
+            display: flex;
+            flex-wrap: wrap;
         }
-        .personal-value {
-            width: 30%;
+        .personal-info-item {
+            width: 50%;
+            margin-bottom: 10px;
+        }
+        .personal-title {
+            font-weight: bold;
+            padding-right: 10px; 
         }
         .salary-info-label {
-            width: 50%;
+            width: 70%;
             text-align: left;
         }
         .salary-info-value {
-            width: 50%;
+            width: 30%;
             text-align: right;
         }
         .alternate-row {
-        background-color: #f9f9f9;
-    }
+            background-color: rgba(249, 249, 249, 0.5);
+        }
+        .summary-section {
+            margin-top: 20px;
+            border: 2px solid #3498db;
+            padding: 7px;
+            background-color: rgba(240, 248, 255, 0.7);
+        }
     </style>
 </head>
 <body>
@@ -120,28 +131,32 @@
     <div class="divider"></div>
 
     <!-- Personal Information -->
-    <table>
-    <tr>
-        <td class="personal-title">Nopeg</td>
-        <td>: {{ $users->user_id }}</td>
-        <td class="personal-title">Nama Pekerja</td>
-        <td>: {{ $users->name }}</td>
-    </tr>
-    <tr>
-        <td class="personal-title">Fungsi</td>
-        <td>: {{ $users->position }}</td>
-        <td class="personal-title">Unit</td>
-        <td>: {{ $users->department }}</td>
-    </tr>
-    <tr>
-        <td class="personal-title">Periode Slip Upah</td>
-        <td colspan="3">: {{ \Carbon\Carbon::now()->locale('id')->isoFormat('MMMM YYYY') }}</td>
-    </tr>
-</table>
+    <div class="personal-info">
+        <div class="personal-info-item">
+            <span class="personal-title">Nopeg:</span>
+            <span>{{ $users->user_id }}</span>
+        </div>
+        <div class="personal-info-item">
+            <span class="personal-title">Nama Pekerja:</span>
+            <span>{{ $users->name }}</span>
+        </div>
+        <div class="personal-info-item">
+            <span class="personal-title">Fungsi:</span>
+            <span>{{ $users->position }}</span>
+        </div>
+        <div class="personal-info-item">
+            <span class="personal-title">Unit:</span>
+            <span>{{ $users->department }}</span>
+        </div>
+        <div class="personal-info-item">
+            <span class="personal-title">Periode Slip Upah:</span>
+            <span>{{ \Carbon\Carbon::now()->locale('id')->isoFormat('MMMM YYYY') }}</span>
+        </div>
+    </div>
 
     <div class="divider"></div>
 
-     <!-- Salary Information -->
+    <!-- Salary Information -->
     <?php
         $lembur = (int)$users->da * (int)$users->conveyance;
         $shift = (int)$users->hra * (int)$users->allowance;
@@ -156,7 +171,7 @@
                 <td class="salary-info-label">THP</td>
                 <td class="salary-info-value">Rp {{ number_format($users->basic) }}</td>
             </tr>
-            <tr>
+            <tr class="alternate-row">
                 <td class="salary-info-label">Kompensasi Lembur</td>
                 <td class="salary-info-value">Rp {{ number_format($lembur) }}</td>
             </tr>
@@ -164,12 +179,12 @@
                 <td class="salary-info-label">Kompensasi Shift</td>
                 <td class="salary-info-value">Rp {{ number_format($shift) }}</td>
             </tr>
-            <tr>
+            <tr class="alternate-row">
                 <td class="salary-info-label">Kompensasi OnSite</td>
                 <td class="salary-info-value">Rp {{ number_format($onsite) }}</td>
             </tr>
             <tr>
-                <td class="salary-info-label"><strong>Total Salary</strong></td>
+                <td class="salary-info-label"><strong>Total Pendapatan</strong></td>
                 <td class="salary-info-value"><strong>Rp {{ number_format($totalPendapatan) }}</strong></td>
             </tr>
         </table>
@@ -189,10 +204,10 @@
         <h4 class="section-header">Informasi Potongan</h4>
         <table>
             <tr>
-                <td class="salary-info-label"> Iuran Pajak {{ ($users->tds) }} </td>
+                <td class="salary-info-label">Iuran Pajak </td>
                 <td class="salary-info-value">Rp {{ number_format($pajak) }}</td>
             </tr>
-            <tr>
+            <tr class="alternate-row">
                 <td class="salary-info-label">Iuran JHT 2%</td>
                 <td class="salary-info-value">Rp {{ number_format($JHT) }}</td>
             </tr>
@@ -200,7 +215,7 @@
                 <td class="salary-info-label">Iuran JP 1%</td>
                 <td class="salary-info-value">Rp {{ number_format($JP) }}</td>
             </tr>
-            <tr>
+            <tr class="alternate-row">
                 <td class="salary-info-label">Iuran BPJS Kesehatan 1%</td>
                 <td class="salary-info-value">Rp {{ number_format($BPJSKes) }}</td>
             </tr>
@@ -211,15 +226,14 @@
         </table>
     </div>
 
-    <div class="section-header">
+    <div class="summary-section">
         <table>
             <tr>
-                <td class="salary-info-label"><strong>Total Pendapatan</strong></td>
+                <td class="salary-info-label"><strong>Pendapatan Bersih</strong></td>
                 <td class="salary-info-value"><strong>Rp {{ number_format($total) }}</strong></td>
             </tr>
         </table>
     </div>
-
     <div class="footer">
         SDM RSPJ
     </div>

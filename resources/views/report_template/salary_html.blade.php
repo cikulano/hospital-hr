@@ -101,7 +101,7 @@
                                     <table class="table table-bordered">
                                         <tbody>
                                             @php
-                                                $pajak = ((int)$users->tds) ;
+                                                $pajak = ((int)$users->tds/100) * (int)$users->basic;
                                                 $JHT = (int)$users->basic * 0.02;
                                                 $JP = (int)$users->basic * 0.01;
                                                 $BPJSKes = (int)$users->basic * 0.01;
@@ -109,7 +109,7 @@
                                                 $total = $totalPendapatan - $totalPotongan;
                                             @endphp
                                             <tr>
-                                                <td><strong>Iuran Pajak {{ ($users->tds) }}</strong></td>
+                                                <td><strong>Iuran Pajak {{ ($users->tds) }}%</strong></td>
                                                 <td class="text-right">Rp {{ number_format($pajak) }}</td>
                                             </tr>
                                             <tr>

@@ -220,15 +220,15 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        <form action="{{ secure_route('form/salary/save') }}" method="POST" id="add_salary_form">
+                        <form action="{{ secure_route('form/salary/save') }}" method="POST">
                             @csrf
                             <div class="row"> 
                                 <div class="col-sm-6"> 
                                     <div class="form-group">
                                         <label>Pilih Pekerja</label>
-                                        <select class="select select2s-hidden-accessible @error('name') is-invalid @enderror" style="width: 100%;" tabindex="-1" aria-hidden="true" id="name" name="name">
+                                        <select class="select select2s-hidden-accessible @error('name') is-invalid @enderror custom-select" tabindex="-1" aria-hidden="true" id="name" name="name">
                                             <option value="">-- Select --</option>
-                                            @foreach ($userList as $user)
+                                            @foreach ($userList as $key=>$user )
                                                 <option value="{{ $user->name }}" data-employee_id="{{ $user->user_id }}">{{ $user->name }}</option>
                                             @endforeach
                                         </select>
@@ -250,12 +250,12 @@
                                         <input 
                                             class="form-control @error('basic') is-invalid @enderror" 
                                             type="text" 
+                                            name="basic" 
                                             id="basic" 
                                             value="{{ old('basic') }}" 
                                             placeholder="Masukan THP"
                                             inputmode="numeric"
                                             data-type="currency">
-                                        <input type="hidden" name="basic" id="basic_hidden">
                                         @error('basic')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
@@ -298,11 +298,11 @@
                                         <input 
                                         class="form-control @error('conveyance') is-invalid @enderror" 
                                         type="text"  
+                                        name="conveyance" 
                                         id="conveyance" 
                                         value="{{ old('conveyance') }}" 
                                         placeholder="Masukan Jumlah Kompensasi"
                                         data-type="currency">
-                                        <input type="hidden" name="conveyance" id="conveyance_hidden">
                                         @error('conveyance')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
@@ -314,11 +314,11 @@
                                         <input 
                                         class="form-control @error('allowance') is-invalid @enderror" 
                                         type="text"  
+                                        name="allowance" 
                                         id="allowance" 
                                         value="{{ old('allowance') }}" 
                                         placeholder="Masukan Rate Lembur"
                                         data-type="currency">
-                                        <input type="hidden" name="allowance" id="allowance_hidden">
                                         @error('allowance')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
@@ -330,11 +330,11 @@
                                         <input 
                                         class="form-control @error('medical_allowance') is-invalid @enderror" 
                                         type="text" 
+                                        name="medical_allowance" 
                                         id="medical_allowance" 
                                         value="{{ old('medical_allowance') }}" 
                                         placeholder="Masukan Rate Shift"
                                         data-type="currency">
-                                        <input type="hidden" name="medical_allowance" id="medical_allowance_hidden">
                                         @error('medical_allowance')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
@@ -348,10 +348,12 @@
                                         <label>Pajak</label>
                                         <input 
                                         class="form-control @error('tds') is-invalid @enderror" 
-                                        type="number" 
+                                        type="text" 
+                                        name="tds" 
                                         id="tds" 
                                         value="{{ old('tds') }}" 
-                                        placeholder="Masukan Pajak">
+                                        placeholder="Masukan Pajak"
+                                        data-type="currency">
                                         @error('tds')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
@@ -390,7 +392,7 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        <form action="{{ secure_route('form/salary/update') }}" method="POST" id="edit_salary_form">
+                        <form action="{{ secure_route('form/salary/update') }}" method="POST">
                             @csrf
                             <input class="form-control" type="hidden" name="id" id="e_id" value="" readonly>
                             <div class="row"> 
@@ -411,8 +413,7 @@
                                     <h4 class="text-primary">Earnings</h4>
                                     <div class="form-group">
                                         <label>THP</label>
-                                        <input class="form-control" type="text" id="e_basic" value="" data-type="currency">
-                                        <input type="hidden" name="basic" id="e_basic_hidden">
+                                        <input class="form-control" type="text" name="basic" id="e_basic" value="" data-type="currency">
                                     </div>
                                     <div class="form-group">
                                         <label>Jam Lembur (Jam)</label>
@@ -424,30 +425,43 @@
                                     </div>
                                     <div class="form-group">
                                         <label>Kompensasi Onsite</label>
-                                        <input class="form-control" type="text" id="e_conveyance" value="" data-type="currency">
-                                        <input type="hidden" name="conveyance" id="e_conveyance_hidden">
+                                        <input class="form-control" type="text"  name="conveyance" id="e_conveyance" value="" data-type="currency">
                                     </div>
                                     <div class="form-group">
                                         <label>Rate Lembur</label>
-                                        <input class="form-control" type="text" id="e_allowance" value="" data-type="currency">
-                                        <input type="hidden" name="allowance" id="e_allowance_hidden">
+                                        <input class="form-control" type="text"  name="allowance" id="e_allowance" value="" data-type="currency">
                                     </div>
                                     <div class="form-group">
                                         <label>Rate Shift</label>
-                                        <input class="form-control" type="text" id="e_medical_allowance" value="" data-type="currency">
-                                        <input type="hidden" name="medical_allowance" id="e_medical_allowance_hidden">
+                                        <input class="form-control" type="text" name="medical_allowance" id="e_medical_allowance" value="" data-type="currency">
                                     </div>
                                 </div>
                                 <div class="col-sm-6">  
                                     <h4 class="text-primary">Deductions</h4>
                                     <div class="form-group">
-                                        <label>Pajak </label>
-                                        <input class="form-control" type="text" name="tds" id="e_tds" value="">
+                                        <label>Pajak (%)</label>
+                                        <input class="form-control" type="text" name="tds" id="e_tds" value="" data-type="currency">
                                     </div> 
                                     <div class="form-group">
                                         <label>Proporsional (Hari)</label>
                                         <input class="form-control" type="text" name="esi" id="e_esi" value="">
                                     </div>
+                                    <!-- <div class="form-group">
+                                        <label>PF</label>
+                                        <input class="form-control" type="text" name="pf" id="e_pf" value="">
+                                    </div> -->
+                                    <!-- <div class="form-group">
+                                        <label>Leave</label>
+                                        <input class="form-control" type="text" name="leave" id="e_leave" value="">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Prof. Tax</label>
+                                        <input class="form-control" type="text" name="prof_tax" id="e_prof_tax" value="">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Loan</label>
+                                        <input class="form-control" type="text" name="labour_welfare" id="e_labour_welfare" value="">
+                                    </div> -->
                                 </div>
                             </div>
                             <div class="submit-section">
@@ -526,11 +540,6 @@
                 $('#e_leave').val(_this.find('.leave').text());
                 $('#e_prof_tax').val(_this.find('.prof_tax').text());
                 $('#e_labour_welfare').val(_this.find('.labour_welfare').text());
-                // Format currency fields
-                formatCurrency($('#e_basic')[0]);
-                formatCurrency($('#e_conveyance')[0]);
-                formatCurrency($('#e_allowance')[0]);
-                formatCurrency($('#e_medical_allowance')[0]);
             });
         </script>
          {{-- delete js --}}
@@ -571,60 +580,40 @@
                 var original_len = input_val.length;
                 var caret_pos = input.selectionStart;
 
-                // Remove all non-digit characters
-                var numericValue = input_val.replace(/\D/g, '');
+                if (input_val.indexOf(".") >= 0) {
+                    var decimal_pos = input_val.indexOf(".");
+                    var left_side = input_val.substring(0, decimal_pos);
+                    var right_side = input_val.substring(decimal_pos);
 
-                if (numericValue.length === 0) { return; }
+                    left_side = formatNumber(left_side);
+                    right_side = formatNumber(right_side);
 
-                // Format the number with commas
-                var formattedValue = formatNumber(numericValue);
+                    if (blur === "blur") {
+                        right_side += "00";
+                    }
 
-                // Add "Rp" prefix and decimal part
-                input_val = "Rp " + formattedValue;
+                    right_side = right_side.substring(0, 2);
+                    input_val = "Rp " + left_side + "." + right_side;
 
-                if (blur === "blur") {
-                    input_val += "";
+                } else {
+                    input_val = formatNumber(input_val);
+                    input_val = "Rp " + input_val;
+
+                    if (blur === "blur") {
+                        input_val += "";
+                    }
                 }
 
                 input.value = input_val;
-
-                // Update hidden field with numeric value
-                var hiddenField = document.getElementById(input.id + '_hidden');
-                if (hiddenField) {
-                    hiddenField.value = numericValue;
-                }
 
                 var updated_len = input_val.length;
                 caret_pos = updated_len - original_len + caret_pos;
                 input.setSelectionRange(caret_pos, caret_pos);
             }
-
-            // Function to strip currency formatting
-            function stripCurrencyFormatting(value) {
-                return value.replace(/[^\d]/g, '');
-            }
-
-            // Add form submission event listeners
-            document.getElementById('add_salary_form').addEventListener('submit', function(e) {
-                prepareFormForSubmission(this);
-            });
-
-            document.getElementById('edit_salary_form').addEventListener('submit', function(e) {
-                prepareFormForSubmission(this);
-            });
-
-            function prepareFormForSubmission(form) {
-                var currencyInputs = form.querySelectorAll('input[data-type="currency"]');
-                currencyInputs.forEach(function(input) {
-                    var hiddenInput = document.getElementById(input.id + '_hidden');
-                    if (hiddenInput) {
-                        hiddenInput.value = stripCurrencyFormatting(input.value);
-                    }
-                });
-            }
         });
     </script>
 
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
     $(document).ready(function() {
         var $table = $('table.datatable');
