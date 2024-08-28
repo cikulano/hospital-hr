@@ -109,7 +109,7 @@
                                                 $total = $totalPendapatan - $totalPotongan;
                                             @endphp
                                             <tr>
-                                                <td><strong>Iuran Pajak {{ ($users->tds) }}</strong></td>
+                                                <td><strong>Iuran Pajak</strong></td>
                                                 <td class="text-right">Rp {{ number_format($pajak) }}</td>
                                             </tr>
                                             <tr>
