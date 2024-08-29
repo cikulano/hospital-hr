@@ -39,7 +39,7 @@
                     <div class="card-body">
                         <div class="row mb-4">
                             <div class="col-sm-6">
-                                <h4 class="payslip-title">Slip Upah {{ \Carbon\Carbon::now()->locale('id')->isoFormat('MMMM') }}</h4>
+                                <h4 class="payslip-title">Slip Upah {{ \Carbon\Carbon::createFromDate(null, 8)->subMonth()->locale('id')->isoFormat('MMMM YYYY') }}</h4>
                             </div>
                             <div class="col-sm-6 text-right">
                                 <!-- <h3 class="text-uppercase">Payslip #49029</h3> -->

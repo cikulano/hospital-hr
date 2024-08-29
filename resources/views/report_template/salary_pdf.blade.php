@@ -146,8 +146,9 @@
             <span>{{ $users->name }}</span>
         </div>
         <div class="personal-info-item">
-            <span class="personal-title">Periode Slip Upah:</span>
-            <span>{{ \Carbon\Carbon::now()->locale('id')->isoFormat('MMMM') }}</span>
+            <span class="personal-title">Bulan:</span>
+            <span><span>{{ \Carbon\Carbon::createFromDate(null, 8)->subMonth()->locale('id')->isoFormat('MMMM YYYY') }}</span>
+            </span>
         </div>
         <div class="personal-info-item">
             <span class="personal-title">Nopeg:</span>
