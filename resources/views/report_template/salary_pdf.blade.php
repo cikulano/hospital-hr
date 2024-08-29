@@ -159,12 +159,18 @@
     <div class="divider"></div>
 
     <!-- Salary Information -->
+<!-- Salary Information -->
     <?php
         $lembur = (int)$users->da;
         $shift = (int)$users->hra;
         $transport = (int)$users->allowance;
         $onsite = (int)$users->medical_allowance;
-        $totalPendapatan = (int)$users->basic + $lembur + $shift + $onsite + $transport;
+        $totalPendapatan = (int)$users->basic + $lembur + $shift + $onsite;
+        
+        // Only add transport to total if department is "Kantor Pusat Pertamina"
+        if ($users->department === "Kantor Pusat Pertamina") {
+            $totalPendapatan += $transport;
+        }
         
         $pajak = (int)$users->tds;
         $JHT = (int)$users->basic * 0.02;
@@ -182,10 +188,6 @@
                 <td class="salary-info-label">THP</td>
                 <td class="salary-info-value">Rp {{ number_format($users->basic) }}</td>
             </tr>
-            <!-- <tr>
-                <td class="salary-info-label">Upah Proporsional</td>
-                <td class="salary-info-value">Rp {{ number_format($users->basic) }}</td>
-            </tr> -->
             <tr>
                 <td class="salary-info-label">Uang Lembur</td>
                 <td class="salary-info-value">Rp {{ number_format($lembur) }}</td>
@@ -194,10 +196,12 @@
                 <td class="salary-info-label">Tunjangan Shift</td>
                 <td class="salary-info-value">Rp {{ number_format($shift) }}</td>
             </tr>
+            @if($users->department === "Kantor Pusat Pertamina")
             <tr>
                 <td class="salary-info-label">Transportasi</td>
                 <td class="salary-info-value">Rp {{ number_format($transport) }}</td>
             </tr>
+            @endif
             <tr>
                 <td class="salary-info-label">Kompensasi Lain-lain</td>
                 <td class="salary-info-value">Rp {{ number_format($onsite) }}</td>

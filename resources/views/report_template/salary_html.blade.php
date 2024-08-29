@@ -70,8 +70,12 @@
                                                 $shift = (int)$users->hra ;
                                                 $onsite = (int)$users->medical_allowance;
                                                 $transport = (int)$users->allowance;
-                                                $totalPendapatan = (int)$users->basic + $lembur + $shift + $onsite + $transport;
-                
+                                                $totalPendapatan = (int)$users->basic + $lembur + $shift + $onsite;
+                                                
+                                                // Only add transport to total if department is "Kantor Pusat Pertamina"
+                                                if ($users->department === "Kantor Pusat Pertamina") {
+                                                    $totalPendapatan += $transport;
+                                                }
                                             @endphp
                                             <tr>
                                                 <td><strong>THP</strong></td>
@@ -85,10 +89,12 @@
                                                 <td><strong>Tunjangan Shift</strong></td>
                                                 <td class="text-right">Rp {{ number_format($shift) }}</td>
                                             </tr>
+                                            @if($users->department === "Kantor Pusat Pertamina")
                                             <tr>
                                                 <td><strong>Transportasi</strong></td>
                                                 <td class="text-right">Rp {{ number_format($transport) }}</td>
                                             </tr>
+                                            @endif
                                             <tr>
                                                 <td><strong>Kompensasi Lain-lain</strong></td>
                                                 <td class="text-right">Rp {{ number_format($onsite) }}</td>
@@ -101,6 +107,7 @@
                                     </table>
                                 </div>
                             </div>
+
                             <div class="col-sm-6">
                                 <div>
                                     <h4 class="mb-3"><strong>Potongan</strong></h4>
