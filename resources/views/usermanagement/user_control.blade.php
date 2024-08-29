@@ -17,6 +17,19 @@
                     </div>
                     <div class="col-auto float-right ml-auto">
                         <a href="#" class="btn add-btn" data-toggle="modal" data-target="#add_user"><i class="fa fa-plus"></i> Add User</a>
+                        <a href="{{ route('user.format.download') }}" class="btn btn-info">
+                            <i class="fa fa-download"></i> Download Format
+                        </a>
+                        <form action="{{ route('user.import') }}" method="POST" enctype="multipart/form-data" class="d-inline">
+                            @csrf
+                            <input type="file" name="file" id="file" class="d-none">
+                            <label for="file" class="btn btn-secondary mb-0">
+                                <i class="fa fa-upload"></i> Choose File
+                            </label>
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fa fa-file-excel-o"></i> Import Excel
+                            </button>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -433,6 +446,13 @@
             var id = _this.find('.id').data('id');
             console.log('Deleting user with ID:', id);
             $('.e_id').val(id);
+        });
+    </script>
+
+    <script>
+        document.getElementById('file').addEventListener('change', function() {
+            let fileName = this.files[0].name;
+            this.nextElementSibling.textContent = fileName;
         });
     </script>
 

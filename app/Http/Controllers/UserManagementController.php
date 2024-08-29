@@ -17,6 +17,9 @@ use Carbon\Carbon;
 use Session;
 use Auth;
 use Hash;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Imports\UsersImport;
+use App\Exports\UserFormatExport;
 
 class UserManagementController extends Controller
 {
@@ -457,8 +460,6 @@ class UserManagementController extends Controller
             return redirect()->back();
         }
     }
-    
-
 
     /** view change password */
     public function changePasswordView()
@@ -519,4 +520,37 @@ class UserManagementController extends Controller
             return redirect()->back();
         }
     }
+
+    public function downloadFormat()
+    {
+        return Excel::download(new UserFormatExport, 'user_import_format.xlsx');
+    }
+
+    public function importUser(Request $request)
+    {
+        $request->validate([
+            'file' => 'required|mimes:xlsx,xls',
+        ]);
+
+        try {
+            Excel::import(new UsersImport, $request->file('file'));
+            Toastr::success('User data imported successfully :)', 'Success');
+        } catch (\Maatwebsite\Excel\Validators\ValidationException $e) {
+            $failures = $e->failures();
+            
+            foreach ($failures as $failure) {
+                $failure->row(); // row that went wrong
+                $failure->attribute(); // either heading key (if using heading row concern) or column index
+                $failure->errors(); // Actual error messages from Laravel validator
+                $failure->values(); // The values of the row that has failed.
+            }
+            
+            Toastr::error('Error importing user data. Please check your Excel file.', 'Error');
+        } catch (\Exception $e) {
+            Toastr::error('Error importing user data: ' . $e->getMessage(), 'Error');
+        }
+
+        return redirect()->back();
+    }
+
 }

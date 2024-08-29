@@ -10,8 +10,8 @@ use Maatwebsite\Excel\Facades\Excel;
 use App\Models\StaffSalary;
 use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Support\Facades\Storage;
-
-
+use App\Imports\SalaryImport;
+use App\Exports\SalaryFormatExport;
 
 class PayrollController extends Controller
 {
@@ -19,9 +19,9 @@ class PayrollController extends Controller
     public function salary()
     {
         $users = DB::table('users')
-            ->join('staff_salaries', 'users.user_id', '=', 'staff_salaries.user_id')
-            ->select('users.*', 'staff_salaries.*')
-            ->get();
+        ->rightJoin('staff_salaries', 'users.user_id', '=', 'staff_salaries.user_id')
+        ->select('users.*', 'staff_salaries.*')
+        ->get();    
     
         $userList = DB::table('users')
             ->whereNotIn('user_id', function($query) {
@@ -182,22 +182,25 @@ class PayrollController extends Controller
             ->select('users.*', 'staff_salaries.*')
             ->where('staff_salaries.user_id', $user_id)
             ->first();
-    
-        $pdf = PDF::loadView('report_template.salary_pdf', [
-            'users' => $users,
-            'logoSrc' => 'data:image/png;base64,' . base64_encode(file_get_contents(public_path('img/logo.png')))
-        ])->setPaper('a4', 'portrait');
+
+            $logo1Src = 'data:image/png;base64,' . base64_encode(file_get_contents(public_path('img/logo.png')));
+            $logo2Src = 'data:image/png;base64,' . base64_encode(file_get_contents(public_path('img/logo2.png')));
+        
+            $pdf = PDF::loadView('report_template.salary_pdf', [
+                'users' => $users,
+                'logo1Src' => $logo1Src,
+                'logo2Src' => $logo2Src
+            ])->setPaper('a4', 'portrait');
             
         $fileName = "Slip Upah {$users->name}.pdf";
         $pdfContent = $pdf->output();
-    
+
         // Send email
         Mail::to($users->email)->send(new SalarySlipMail($pdfContent, $fileName));
-    
+
         return $pdf->download($fileName);
     }
-    
-    /** show salary report */
+
     public function salaryReportHtml($user_id)
     {
         $users = DB::table('users')
@@ -206,14 +209,12 @@ class PayrollController extends Controller
             ->where('staff_salaries.user_id', $user_id)
             ->first();
 
-        $logoPath = public_path('img/logo.png');
-        $logoData = base64_encode(file_get_contents($logoPath));
-        $logoSrc = 'data:image/png;base64,' . $logoData;
-
-        return view('report_template.salary_html', compact('users', 'logoSrc'));
+            $logo1Src = 'data:image/png;base64,' . base64_encode(file_get_contents(public_path('img/logo.png')));
+            $logo2Src = 'data:image/png;base64,' . base64_encode(file_get_contents(public_path('img/logo2.png')));
+        
+            return view('report_template.salary_html', compact('users', 'logo1Src', 'logo2Src'));
     }
 
-    /** show salary report */
     public function salaryReportPdfHtml($user_id)
     {
         $users = DB::table('users')
@@ -222,12 +223,12 @@ class PayrollController extends Controller
             ->where('staff_salaries.user_id', $user_id)
             ->first();
 
-        $logoPath = public_path('img/logo.png');
-        $logoData = base64_encode(file_get_contents($logoPath));
-        $logoSrc = 'data:image/png;base64,' . $logoData;
-
-        return view('report_template.salary_pdf', compact('users', 'logoSrc'));
+            $logo1Src = 'data:image/png;base64,' . base64_encode(file_get_contents(public_path('img/logo.png')));
+            $logo2Src = 'data:image/png;base64,' . base64_encode(file_get_contents(public_path('img/logo2.png')));
+        
+            return view('report_template.salary_pdf', compact('users', 'logo1Src', 'logo2Src'));
     }
+
     
     /** export Excel */
     public function reportExcel(Request $request)
@@ -240,6 +241,29 @@ class PayrollController extends Controller
             ->where('staff_salaries.user_id',$user_id)->get();
             
             return Excel::download(new SalaryExcel($user_id),'ReportDetailSalary'.'.xlsx');
-    }  
+    }
+
+    /** Import Excel */
+    public function importSalary(Request $request)
+    {
+        $request->validate([
+            'file' => 'required|mimes:xlsx,xls',
+        ]);
+
+        try {
+            Excel::import(new SalaryImport, $request->file('file'));
+            Toastr::success('Salary data imported successfully :)', 'Success');
+        } catch (\Exception $e) {
+            Toastr::error('Error importing salary data: ' . $e->getMessage(), 'Error');
+        }
+
+        return redirect()->back();
+    }
+
+    public function downloadFormat()
+    {
+        return Excel::download(new SalaryFormatExport, 'salary_import_format.xlsx');
+    }
+        
 
 }

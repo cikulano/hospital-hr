@@ -39,7 +39,7 @@
                     <div class="card-body">
                         <div class="row mb-4">
                             <div class="col-sm-6">
-                                <h4 class="payslip-title">Slip Upah {{ \Carbon\Carbon::now()->locale('id')->isoFormat('MMMM YYYY') }}</h4>
+                                <h4 class="payslip-title">Slip Upah {{ \Carbon\Carbon::now()->locale('id')->isoFormat('MMMM') }}</h4>
                             </div>
                             <div class="col-sm-6 text-right">
                                 <!-- <h3 class="text-uppercase">Payslip #49029</h3> -->
@@ -49,7 +49,7 @@
                         <div class="row mb-4">
                             <div class="col-sm-6">
                                 @if(!empty($users->avatar))
-                                    <img src="{{ $logoSrc }}" alt="Company Logo" style="max-width: 150px;">
+                                    <img src="{{ $logo2Src }}" alt="Company Logo" style="max-width: 150px;">
                                 @endif
                             </div>
                             <div class="col-sm-6 text-right">
@@ -66,25 +66,31 @@
                                     <table class="table table-bordered">
                                         <tbody>
                                             @php
-                                                $lembur = (int)$users->da * (int)$users->conveyance;
-                                                $shift = (int)$users->hra * (int)$users->allowance;
+                                                $lembur = (int)$users->da ;
+                                                $shift = (int)$users->hra ;
                                                 $onsite = (int)$users->medical_allowance;
-                                                $totalPendapatan = (int)$users->basic + $lembur + $shift + $onsite;
+                                                $transport = (int)$users->allowance;
+                                                $totalPendapatan = (int)$users->basic + $lembur + $shift + $onsite + $transport;
+                
                                             @endphp
                                             <tr>
                                                 <td><strong>THP</strong></td>
                                                 <td class="text-right">Rp {{ number_format($users->basic) }}</td>
                                             </tr>
                                             <tr>
-                                                <td><strong>Kompensasi Lembur</strong></td>
+                                                <td><strong>Uang Lembur</strong></td>
                                                 <td class="text-right">Rp {{ number_format($lembur) }}</td>
                                             </tr>
                                             <tr>
-                                                <td><strong>Kompensasi Shift</strong></td>
+                                                <td><strong>Tunjangan Shift</strong></td>
                                                 <td class="text-right">Rp {{ number_format($shift) }}</td>
                                             </tr>
                                             <tr>
-                                                <td><strong>Kompensasi OnSite</strong></td>
+                                                <td><strong>Transportasi</strong></td>
+                                                <td class="text-right">Rp {{ number_format($transport) }}</td>
+                                            </tr>
+                                            <tr>
+                                                <td><strong>Kompensasi Lain-lain</strong></td>
                                                 <td class="text-right">Rp {{ number_format($onsite) }}</td>
                                             </tr>
                                             <tr class="table-primary">
@@ -105,23 +111,23 @@
                                                 $JHT = (int)$users->basic * 0.02;
                                                 $JP = (int)$users->basic * 0.01;
                                                 $BPJSKes = (int)$users->basic * 0.01;
-                                                $totalPotongan = $pajak + $JHT + $JP + $BPJSKes;
+                                                $totalPotongan =  $JHT + $JP + $BPJSKes;
                                                 $total = $totalPendapatan - $totalPotongan;
                                             @endphp
                                             <tr>
-                                                <td><strong>Iuran Pajak</strong></td>
+                                                <td><strong>Pajak</strong></td>
                                                 <td class="text-right">Rp {{ number_format($pajak) }}</td>
                                             </tr>
                                             <tr>
-                                                <td><strong>Iuran JHT 2%</strong></td>
+                                                <td><strong>BPJSTK JHT</strong></td>
                                                 <td class="text-right">Rp {{ number_format($JHT) }}</td>
                                             </tr>
                                             <tr>
-                                                <td><strong>Iuran JP 1%</strong></td>
+                                                <td><strong>BPJSTK JP </strong></td>
                                                 <td class="text-right">Rp {{ number_format($JP) }}</td>
                                             </tr>
                                             <tr>
-                                                <td><strong>Iuran BPJS Kesehatan 1%</strong></td>
+                                                <td><strong>BPJS Kesehatan </strong></td>
                                                 <td class="text-right">Rp {{ number_format($BPJSKes) }}</td>
                                             </tr>
                                             <tr class="table-danger">

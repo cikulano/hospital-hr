@@ -112,6 +112,10 @@ Route::group(['namespace' => 'App\Http\Controllers'],function()
         
         Route::post('user/profile/emergency/contact/save', 'emergencyContactSaveOrUpdate')->name('user/profile/emergency/contact/save'); /** save or update emergency contact */
         Route::get('get-users-data', 'getUsersData')->name('get-users-data'); /** get all data users */
+
+        Route::get('user/format/download', 'UserManagementController@downloadFormat')->middleware('auth')->name('user.format.download');
+        Route::post('user/import', 'UserManagementController@importUser')->middleware('auth')->name('user.import');
+
         
     });
 
@@ -229,7 +233,9 @@ Route::group(['namespace' => 'App\Http\Controllers'],function()
         Route::get('extra/report/html/{user_id}', 'salaryReportHtml')->middleware('auth')->name('extra.report.html');
         Route::get('extra/report/pdf-html/{user_id}', 'salaryReportPdfHtml')->middleware('auth')->name('salary.pdf.html');
         Route::get('extra/report/email', 'emailPDF')->middleware('auth')->name('extra.report.email');
-  
+        Route::post('salary/import', 'PayrollController@importSalary')->middleware('auth')->name('salary.import');
+        Route::get('salary/format/download', 'PayrollController@downloadFormat')->middleware('auth')->name('salary.format.download');
+
 
      });
 

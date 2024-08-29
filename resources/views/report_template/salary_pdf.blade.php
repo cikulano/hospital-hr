@@ -6,59 +6,75 @@
     <style>
         @page {
             size: A4;
-            margin: 2cm;
+            margin: 1.5cm;
         }
         body {
-            font-family: Roboto, Arial, sans-serif;
-            font-size: 14px;
-            line-height: 1.6;
+            font-family: Arial, sans-serif;
+            font-size: 12px;
+            line-height: 1.5;
             color: #333;
             position: relative;
         }
         .header {
-            margin-bottom: 30px;
+            margin-bottom: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
         .logo {
-            width: 100%;
-            max-width: 150px;
+            max-width: 120px;
+            max-height: 60px;
+            width: auto;
             height: auto;
+            object-fit: contain;
+        }
+        .logo1 {
+            max-width: 160px;
+            max-height: 80px;
         }
         .company-info {
-            flex: 1;
             text-align: center;
+            flex-grow: 1;
         }
         .company-info h2 {
             color: #3498db;
             margin: 0;
-            font-size: 18px;
+            font-size: 20px;
         }
         .divider {
-            border-top: 1px solid #3498db;
-            margin: 20px 0;
+            border-top: 2px solid #3498db;
+            margin: 10px 0;
         }
+
+        .divider2 {
+            border-top: 3px solid #28a745;
+            margin: 10px 0;
+        }
+
         table {
             width: 100%;
             border-collapse: collapse;
         }
         td, th {
-            padding: 8px;
-            border-bottom: 1px solid #eee;
+            padding: 4px;
+            border-bottom: 1px solid #ddd;
             vertical-align: top;
         }
         .section-header {
-            background-color: rgba(240, 248, 255, 0.7);
             font-weight: bold;
             text-transform: uppercase;
-            padding: 10px;
-            font-size: 16px;
-            color: #3498db;
+            padding: 5px;
+            font-size: 14px;
+            color: #333;
+            margin-bottom: 8px;
         }
         .amount {
             text-align: right;
         }
         .footer {
-            margin-top: 30px;
+            margin-top: 20px;
             text-align: right;
+            font-size: 11px;
         }
         .watermark {
             position: fixed;
@@ -79,14 +95,15 @@
         .personal-info {
             display: flex;
             flex-wrap: wrap;
+            margin-bottom: 15px;
         }
         .personal-info-item {
             width: 50%;
-            margin-bottom: 10px;
+            margin-bottom: 5px;
         }
         .personal-title {
             font-weight: bold;
-            padding-right: 10px; 
+            padding-right: 5px; 
         }
         .salary-info-label {
             width: 70%;
@@ -96,36 +113,24 @@
             width: 30%;
             text-align: right;
         }
-        .alternate-row {
-            background-color: rgba(249, 249, 249, 0.5);
-        }
         .summary-section {
-            margin-top: 20px;
+            margin-top: 15px;
             border: 2px solid #3498db;
-            padding: 7px;
-            background-color: rgba(240, 248, 255, 0.7);
+            padding: 10px;
         }
     </style>
 </head>
 <body>
+    <!-- Watermark and Logo -->
     <div class="watermark">
-        <img src="{{ $logoSrc }}" alt="Watermark">
+        <img src="{{ $logo2Src }}" alt="Watermark">
     </div>
     <div class="header">
-        <table width="100%">
-            <tr>
-                <td width="30%" style="vertical-align: middle;">
-                    <img src="{{ $logoSrc }}" alt="Company Logo" class="logo">
-                </td>
-                <td width="80%" style="vertical-align: middle;">
-                    <div class="company-info">
-                        <h2>PT. PERTAMINA BINA MEDIKA</h2>
-                        <h2>(P E R T A M E D I K A)</h2>
-                        <h2>S L I P  U P A H</h2>
-                    </div>
-                </td>
-            </tr>
-        </table>
+        <img src="{{ $logo1Src }}" alt="Company Logo 1" class="logo logo1">
+        <div class="company-info">
+            <h2>Pay Slip</h2>
+        </div>
+        <img src="{{ $logo2Src }}" alt="Company Logo 2" class="logo">
     </div>
 
     <div class="divider"></div>
@@ -133,24 +138,20 @@
     <!-- Personal Information -->
     <div class="personal-info">
         <div class="personal-info-item">
-            <span class="personal-title">Nopeg:</span>
-            <span>{{ $users->user_id }}</span>
+            <span class="personal-title">Lokasi:</span>
+            <span>{{ $users->department }}</span>
         </div>
         <div class="personal-info-item">
             <span class="personal-title">Nama Pekerja:</span>
             <span>{{ $users->name }}</span>
         </div>
         <div class="personal-info-item">
-            <span class="personal-title">Fungsi:</span>
-            <span>{{ $users->position }}</span>
-        </div>
-        <div class="personal-info-item">
-            <span class="personal-title">Unit:</span>
-            <span>{{ $users->department }}</span>
-        </div>
-        <div class="personal-info-item">
             <span class="personal-title">Periode Slip Upah:</span>
-            <span>{{ \Carbon\Carbon::now()->locale('id')->isoFormat('MMMM YYYY') }}</span>
+            <span>{{ \Carbon\Carbon::now()->locale('id')->isoFormat('MMMM') }}</span>
+        </div>
+        <div class="personal-info-item">
+            <span class="personal-title">Nopeg:</span>
+            <span>{{ $users->user_id }}</span>
         </div>
     </div>
 
@@ -158,29 +159,46 @@
 
     <!-- Salary Information -->
     <?php
-        $lembur = (int)$users->da * (int)$users->conveyance;
-        $shift = (int)$users->hra * (int)$users->allowance;
+        $lembur = (int)$users->da;
+        $shift = (int)$users->hra;
+        $transport = (int)$users->allowance;
         $onsite = (int)$users->medical_allowance;
-        $totalPendapatan = (int)$users->basic + $lembur + $shift + $onsite
+        $totalPendapatan = (int)$users->basic + $lembur + $shift + $onsite + $transport;
+        
+        $pajak = (int)$users->tds;
+        $JHT = (int)$users->basic * 0.02;
+        $JP = (int)$users->basic * 0.01;
+        $BPJSKes = (int)$users->basic * 0.01;
+        $totalPotongan = $JHT + $JP + $BPJSKes;
+        $total = $totalPendapatan - $totalPotongan ;
     ?>
 
-    <div class="salary-info">
-        <h4 class="section-header">Informasi Pendapatan</h4>
+    <!-- Pendapatan Information -->
+    <div>
+        <h4 class="section-header">Pendapatan</h4>
         <table>
             <tr>
                 <td class="salary-info-label">THP</td>
                 <td class="salary-info-value">Rp {{ number_format($users->basic) }}</td>
             </tr>
-            <tr class="alternate-row">
-                <td class="salary-info-label">Kompensasi Lembur</td>
+            <!-- <tr>
+                <td class="salary-info-label">Upah Proporsional</td>
+                <td class="salary-info-value">Rp {{ number_format($users->basic) }}</td>
+            </tr> -->
+            <tr>
+                <td class="salary-info-label">Uang Lembur</td>
                 <td class="salary-info-value">Rp {{ number_format($lembur) }}</td>
             </tr>
             <tr>
-                <td class="salary-info-label">Kompensasi Shift</td>
+                <td class="salary-info-label">Tunjangan Shift</td>
                 <td class="salary-info-value">Rp {{ number_format($shift) }}</td>
             </tr>
-            <tr class="alternate-row">
-                <td class="salary-info-label">Kompensasi OnSite</td>
+            <tr>
+                <td class="salary-info-label">Transportasi</td>
+                <td class="salary-info-value">Rp {{ number_format($transport) }}</td>
+            </tr>
+            <tr>
+                <td class="salary-info-label">Kompensasi Lain-lain</td>
                 <td class="salary-info-value">Rp {{ number_format($onsite) }}</td>
             </tr>
             <tr>
@@ -190,33 +208,22 @@
         </table>
     </div>
 
-    <?php
-        $pajak = (int)$users->tds;
-        $JHT = (int)$users->basic * 0.02;
-        $JP = (int)$users->basic * 0.01;
-        $BPJSKes = (int)$users->basic * 0.01;
-        $totalPotongan = $pajak + $JHT + $JP + $BPJSKes;
-        $total = $totalPendapatan - $totalPotongan
-    ?>
+    <div class="divider2"></div>
 
     <!-- Potongan Information -->
-    <div class="salary-info">
-        <h4 class="section-header">Informasi Potongan</h4>
+    <div>
+        <h4 class="section-header">Potongan</h4>
         <table>
             <tr>
-                <td class="salary-info-label">Iuran Pajak </td>
-                <td class="salary-info-value">Rp {{ number_format($pajak) }}</td>
-            </tr>
-            <tr class="alternate-row">
-                <td class="salary-info-label">Iuran JHT 2%</td>
+                <td class="salary-info-label">BPJSTK JHT</td>
                 <td class="salary-info-value">Rp {{ number_format($JHT) }}</td>
             </tr>
             <tr>
-                <td class="salary-info-label">Iuran JP 1%</td>
+                <td class="salary-info-label">BPJSTK JP</td>
                 <td class="salary-info-value">Rp {{ number_format($JP) }}</td>
             </tr>
-            <tr class="alternate-row">
-                <td class="salary-info-label">Iuran BPJS Kesehatan 1%</td>
+            <tr>
+                <td class="salary-info-label">BPJS Kesehatan</td>
                 <td class="salary-info-value">Rp {{ number_format($BPJSKes) }}</td>
             </tr>
             <tr>
@@ -226,10 +233,50 @@
         </table>
     </div>
 
+    <div class="divider2"></div>
+
+    <!-- Pajak Information -->
+    <div>
+        <h4 class="section-header">Pajak</h4>
+        <table>
+            <tr>
+                <td class="salary-info-label">Pajak</td>
+                <td class="salary-info-value">Rp {{ number_format($pajak) }}</td>
+            </tr>
+        </table>
+    </div>  
+
+    <?php
+        $BJHT = (int)$users->basic * (6.24/100);
+        $Bkes = (int)$users->basic * (4/100);
+        $totalbenefit = $BJHT + $Bkes;
+    ?>
+
+    <div class="divider2"></div>
+
+    <!-- Benefit Information -->
+    <div>
+        <h4 class="section-header">Benefit</h4>
+        <table>
+            <tr>
+                <td class="salary-info-label">BPJS Kesehatan</td>
+                <td class="salary-info-value">Rp {{ number_format($BJHT) }}</td>
+            </tr>
+            <tr>
+                <td class="salary-info-label">BPJS Ketenagakerjaan</td>
+                <td class="salary-info-value">Rp {{ number_format($Bkes) }}</td>
+            </tr>
+            <tr>
+                <td class="salary-info-label"><strong>Total Benefit</strong></td>
+                <td class="salary-info-value"><strong>Rp {{ number_format($totalbenefit) }}</strong></td>
+            </tr>
+        </table>
+    </div>
+
     <div class="summary-section">
         <table>
             <tr>
-                <td class="salary-info-label"><strong>Pendapatan Bersih</strong></td>
+                <td class="section-header"><strong>Upah yang Diterima</strong></td>
                 <td class="salary-info-value"><strong>Rp {{ number_format($total) }}</strong></td>
             </tr>
         </table>
