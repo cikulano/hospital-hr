@@ -429,30 +429,30 @@
                                         <input class="form-control" type="text" name="basic" id="e_basic" value="" data-type="currency">
                                     </div>
                                     <div class="form-group">
-                                        <label>Jam Lembur (Jam)</label>
-                                        <input class="form-control" type="text"  name="da" id="e_da" value="">
+                                        <label>Lembur</label>
+                                        <input class="form-control" type="text"  name="da" id="e_da" value="" data-type="currency">
                                     </div>
                                     <div class="form-group">
-                                        <label>Hari Shift (Hari)</label>
-                                        <input class="form-control" type="text"  name="hra" id="e_hra" value="">
+                                        <label>Shift</label>
+                                        <input class="form-control" type="text"  name="hra" id="e_hra" value="" data-type="currency">
                                     </div>
-                                    <div class="form-group">
+                                    <!-- <div class="form-group">
                                         <label>Kompensasi Onsite</label>
                                         <input class="form-control" type="text"  name="conveyance" id="e_conveyance" value="" data-type="currency">
-                                    </div>
+                                    </div> -->
                                     <div class="form-group">
-                                        <label>Rate Lembur</label>
+                                        <label>Transport</label>
                                         <input class="form-control" type="text"  name="allowance" id="e_allowance" value="" data-type="currency">
                                     </div>
                                     <div class="form-group">
-                                        <label>Rate Shift</label>
+                                        <label>Kompensasi Lain-lain</label>
                                         <input class="form-control" type="text" name="medical_allowance" id="e_medical_allowance" value="" data-type="currency">
                                     </div>
                                 </div>
                                 <div class="col-sm-6">  
                                     <h4 class="text-primary">Deductions</h4>
                                     <div class="form-group">
-                                        <label>Pajak </label>
+                                        <label>Pajak</label>
                                         <input class="form-control" type="text" name="tds" id="e_tds" value="" data-type="currency">
                                     </div> 
                                     <div class="form-group">

@@ -179,6 +179,7 @@
         </div>
         <div class="personal-info-item">
             <span class="personal-title">Bulan</span>
+            <!-- <span class="personal-value">{{ \Carbon\Carbon::now()->subMonth()->locale('id')->isoFormat('MMMM YYYY') }}</span> -->
             <span class="personal-value">{{ \Carbon\Carbon::now()->locale('id')->isoFormat('MMMM YYYY') }}</span>
         </div>
         <div class="personal-info-item">
