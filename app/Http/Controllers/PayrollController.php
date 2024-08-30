@@ -99,15 +99,8 @@ class PayrollController extends Controller
     {
         $users = DB::table('users')
                 ->join('staff_salaries', 'users.user_id', 'staff_salaries.user_id')
-                // ->join('profile_information', 'users.user_id', 'profile_information.user_id')
                 ->select('users.*', 'staff_salaries.*')
                 ->where('staff_salaries.user_id',$user_id)->first();
-        // if (!empty($users)) {
-        //     return view('payroll.salaryview',compact('users'));
-        // } else {
-        //     Toastr::warning('Please update information user :)','Warning');
-        //     return redirect()->route('profile_user');
-        // }
 
         return view('payroll.salaryview',compact('users'));
     }
@@ -116,33 +109,30 @@ class PayrollController extends Controller
     public function updateRecord(Request $request)
     {
         DB::beginTransaction();
-        try{
+        try {
             $update = [
-
                 'id'      => $request->id,
                 'name'    => $request->name,
-                // 'salary'  => $request->salary,
-                'basic'   => $request->basic,
-                'da'      => $request->da,
-                'hra'     => $request->hra,
-                'conveyance' => $request->conveyance,
-                'allowance'  => $request->allowance,
-                'medical_allowance'  => $request->medical_allowance,
-                'tds'  => $request->tds,
-                'esi'  => $request->esi,
-                'pf'   => $request->pf,
+                'basic'   => $this->currencyToFloat($request->basic),
+                'da'      => $this->currencyToFloat($request->da),
+                'hra'     => $this->currencyToFloat($request->hra),
+                'conveyance' => $this->currencyToFloat($request->conveyance),
+                'allowance'  => $this->currencyToFloat($request->allowance),
+                'medical_allowance'  => $this->currencyToFloat($request->medical_allowance),
+                'tds'  => $this->currencyToFloat($request->tds),
+                'esi'  => $this->currencyToFloat($request->esi),
+                'pf'   => $this->currencyToFloat($request->pf),
                 'leave'     => $request->leave,
-                'prof_tax'  => $request->prof_tax,
-                'labour_welfare'  => $request->labour_welfare,
+                'prof_tax'  => $this->currencyToFloat($request->prof_tax),
+                'labour_welfare'  => $this->currencyToFloat($request->labour_welfare),
             ];
 
-
-            StaffSalary::where('id',$request->id)->update($update);
+            StaffSalary::where('id', $request->id)->update($update);
             DB::commit();
             Toastr::success('Salary updated successfully :)','Success');
             return redirect()->back();
 
-        }catch(\Exception $e){
+        } catch(\Exception $e) {
             DB::rollback();
             Toastr::error('Salary update fail :)','Error');
             return redirect()->back();
@@ -382,6 +372,7 @@ class PayrollController extends Controller
     
         return response()->json($response);
     }
+    
     
 
 

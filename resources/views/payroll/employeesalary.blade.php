@@ -452,29 +452,13 @@
                                 <div class="col-sm-6">  
                                     <h4 class="text-primary">Deductions</h4>
                                     <div class="form-group">
-                                        <label>Pajak (%)</label>
+                                        <label>Pajak </label>
                                         <input class="form-control" type="text" name="tds" id="e_tds" value="" data-type="currency">
                                     </div> 
                                     <div class="form-group">
                                         <label>Proporsional (Hari)</label>
                                         <input class="form-control" type="text" name="esi" id="e_esi" value="">
                                     </div>
-                                    <!-- <div class="form-group">
-                                        <label>PF</label>
-                                        <input class="form-control" type="text" name="pf" id="e_pf" value="">
-                                    </div> -->
-                                    <!-- <div class="form-group">
-                                        <label>Leave</label>
-                                        <input class="form-control" type="text" name="leave" id="e_leave" value="">
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Prof. Tax</label>
-                                        <input class="form-control" type="text" name="prof_tax" id="e_prof_tax" value="">
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Loan</label>
-                                        <input class="form-control" type="text" name="labour_welfare" id="e_labour_welfare" value="">
-                                    </div> -->
                                 </div>
                             </div>
                             <div class="submit-section">
@@ -624,13 +608,15 @@
             }
         });
     </script>
+
+    {{-- Search js --}}
     <script>
-    $(document).ready(function() {
+        $(document).ready(function() {
         var $table = $('table.datatable');
         var $rows = $table.find('tbody tr');
 
         $('#employeeSearch').on('input', function() {
-            var input = $(this).val().toLowerCase();
+            var input = $(this).val().toLowerCase().trim(); // Trim spaces
             var results = [];
 
             $rows.each(function() {
@@ -638,6 +624,10 @@
                 var name = $row.find('td:eq(0) a:last').text().toLowerCase();
                 var noPeg = $row.find('td:eq(1)').text().toLowerCase();
 
+                // Add any additional fields you want to search
+                // Example: var email = $row.find('td:eq(2)').text().toLowerCase();
+
+                // Search across multiple fields
                 if (name.indexOf(input) > -1 || noPeg.indexOf(input) > -1) {
                     results.push({ name: name, noPeg: noPeg, $element: $row });
                 }
@@ -654,7 +644,7 @@
                             $('#employeeSearch').val(result.name + ' (' + result.noPeg + ')');
                             $list.hide();
                             $rows.hide();
-                            result.$element.show();
+                            result.$element.show(); // Show the matched row
                         }
                     }).appendTo($list);
                 });
@@ -662,9 +652,9 @@
             } else {
                 $list.hide();
                 if (input.length === 0) {
-                    $rows.show();
+                    $rows.show(); // Show all rows if input is empty
                 } else {
-                    $rows.hide();
+                    $rows.hide(); // Hide all rows if no match
                 }
             }
         });
@@ -675,6 +665,7 @@
             }
         });
     });
+
     </script>
 
     <script>

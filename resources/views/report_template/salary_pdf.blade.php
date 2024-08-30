@@ -93,17 +93,49 @@
             opacity: 0.1;
         }
         .personal-info {
-            display: flex;
-            flex-wrap: wrap;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            grid-gap: 10px;
             margin-bottom: 15px;
+            font-size: 14px;
         }
         .personal-info-item {
-            width: 50%;
-            margin-bottom: 5px;
+            display: flex;
+            align-items: baseline;
         }
         .personal-title {
             font-weight: bold;
-            padding-right: 5px; 
+            min-width: 50px; /* Adjust as needed for alignment */
+            text-align: left;
+            padding-right: 5px;
+        }
+        .personal-title-name {
+            font-weight: bold;
+            min-width: 100px; /* Adjust as needed for alignment */
+            text-align: left;
+            padding-right: 5px;
+            margin-left: 8px;
+        }
+        .personal-value {
+            flex: 1;
+            text-align: left;
+        }
+        .personal-value::before {
+            content: ': ';
+            margin-right: 3px;
+        }
+        .right-aligned {
+            grid-column: 2;
+            text-align: right;
+        }
+        .name-id-group {
+            display: flex;
+            justify-content: flex-end; /* Aligns to the right */
+            width: 100%;
+        }
+        .name-id-item {
+            width: 50%;
+            padding-left: 10px; /* Adds some space on the left */
         }
         .salary-info-label {
             width: 70%;
@@ -128,7 +160,7 @@
     <div class="header">
         <img src="{{ $logo1Src }}" alt="Company Logo 1" class="logo logo1">
         <div class="company-info">
-            <h2>Pay Slip</h2>
+            <h3>Pay Slip</h3>
         </div>
         <img src="{{ $logo2Src }}" alt="Company Logo 2" class="logo">
     </div>
@@ -138,31 +170,26 @@
     <!-- Personal Information -->
     <div class="personal-info">
         <div class="personal-info-item">
-            <span class="personal-title">Lokasi:</span>
-            <span>{{ $users->department }}</span>
+            <span class="personal-title">Lokasi</span>
+            <span class="personal-value">{{ $users->department }}</span>
         </div>
         <div class="personal-info-item">
-            <span class="personal-title">Nama Pekerja:</span>
-            <span>{{ $users->name }}</span>
+            <span class="personal-title-name">Nama Pekerja</span>
+            <span class="personal-value">{{ $users->name }}</span>
         </div>
         <div class="personal-info-item">
-            <span class="personal-title">Bulan:</span>
-                <span>
-                    <!-- {{ \Carbon\Carbon::now()->subMonth()->locale('id')->isoFormat('MMMM YYYY') }} -->
-                    {{ \Carbon\Carbon::now()->locale('id')->isoFormat('MMMM YYYY') }}
-                </span>
-            </span>
+            <span class="personal-title">Bulan</span>
+            <span class="personal-value">{{ \Carbon\Carbon::now()->locale('id')->isoFormat('MMMM YYYY') }}</span>
         </div>
         <div class="personal-info-item">
-            <span class="personal-title">Nopeg:</span>
-            <span>{{ $users->user_id }}</span>
+            <span class="personal-title-name">Nopeg</span>
+            <span class="personal-value">{{ $users->user_id }}</span>
         </div>
     </div>
 
     <div class="divider"></div>
 
     <!-- Salary Information -->
-<!-- Salary Information -->
     <?php
         $lembur = (int)$users->da;
         $shift = (int)$users->hra;
@@ -288,9 +315,6 @@
                 <td class="salary-info-value"><strong> {{ number_format($total) }}</strong></td>
             </tr>
         </table>
-    </div>
-    <div class="footer">
-        SDM RSPJ
     </div>
 </body>
 </html>
