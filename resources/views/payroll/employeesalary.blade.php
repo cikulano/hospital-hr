@@ -611,29 +611,74 @@
 
     {{-- Search js --}}
     <script>
-        $(document).ready(function() {
-        var $table = $('table.datatable');
-        var $rows = $table.find('tbody tr');
+    $(document).ready(function() {
+        // Check if DataTable already exists
+        if ($.fn.DataTable.isDataTable('table.datatable')) {
+            // Destroy existing DataTable
+            $('table.datatable').DataTable().destroy();
+        }
+
+        // Initialize DataTable
+        var table = $('table.datatable').DataTable({
+            "pageLength": 10,
+            "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]]
+        });
 
         $('#employeeSearch').on('input', function() {
-            var input = $(this).val().toLowerCase().trim(); // Trim spaces
+            var searchTerm = $(this).val().toLowerCase().trim();
+            
+            if (searchTerm === '') {
+                // If search box is empty, reset the table to show all data
+                table.search('').columns().search('').draw();
+            } else {
+                // Otherwise, perform the search
+                table.search(searchTerm).draw();
+            }
+
+            updateAutocomplete(searchTerm);
+        });
+
+        // Custom filtering function
+        $.fn.dataTable.ext.search.push(function(settings, data, dataIndex) {
+            var searchTerm = $('#employeeSearch').val().toLowerCase().trim();
+            
+            // If search term is empty, show all rows
+            if (searchTerm === '') {
+                return true;
+            }
+
+            var name = $(data[0]).text().toLowerCase(); // Extracting text from HTML content
+            var noPeg = data[1].toLowerCase();
+            var email = data[2].toLowerCase();
+            var department = data[3].toLowerCase();
+
+            return name.indexOf(searchTerm) > -1 || 
+                noPeg.indexOf(searchTerm) > -1 ||
+                email.indexOf(searchTerm) > -1 ||
+                department.indexOf(searchTerm) > -1;
+        });
+
+        // Autocomplete functionality
+        var $list = $('#employeeList');
+
+        function updateAutocomplete(input) {
             var results = [];
 
-            $rows.each(function() {
-                var $row = $(this);
-                var name = $row.find('td:eq(0) a:last').text().toLowerCase();
-                var noPeg = $row.find('td:eq(1)').text().toLowerCase();
+            table.rows().every(function(rowIdx, tableLoop, rowLoop) {
+                var data = this.data();
+                var name = $(data[0]).text().toLowerCase();
+                var noPeg = data[1].toLowerCase();
+                var email = data[2].toLowerCase();
+                var department = data[3].toLowerCase();
 
-                // Add any additional fields you want to search
-                // Example: var email = $row.find('td:eq(2)').text().toLowerCase();
-
-                // Search across multiple fields
-                if (name.indexOf(input) > -1 || noPeg.indexOf(input) > -1) {
-                    results.push({ name: name, noPeg: noPeg, $element: $row });
+                if (name.indexOf(input) > -1 || 
+                    noPeg.indexOf(input) > -1 ||
+                    email.indexOf(input) > -1 ||
+                    department.indexOf(input) > -1) {
+                    results.push({ name: name, noPeg: noPeg, rowIdx: rowIdx });
                 }
             });
 
-            var $list = $('#employeeList');
             $list.empty();
 
             if (results.length > 0 && input.length > 0) {
@@ -641,31 +686,24 @@
                     $('<li>', {
                         html: result.name + ' <span class="text-muted">(' + result.noPeg + ')</span>',
                         click: function() {
-                            $('#employeeSearch').val(result.name + ' (' + result.noPeg + ')');
+                            $('#employeeSearch').val(result.name.trim());
                             $list.hide();
-                            $rows.hide();
-                            result.$element.show(); // Show the matched row
+                            table.search(result.name.trim()).draw();
                         }
                     }).appendTo($list);
                 });
                 $list.show();
             } else {
                 $list.hide();
-                if (input.length === 0) {
-                    $rows.show(); // Show all rows if input is empty
-                } else {
-                    $rows.hide(); // Hide all rows if no match
-                }
             }
-        });
+        }
 
         $(document).on('click', function(e) {
             if (!$(e.target).closest('.form-group').length) {
-                $('#employeeList').hide();
+                $list.hide();
             }
         });
     });
-
     </script>
 
     <script>

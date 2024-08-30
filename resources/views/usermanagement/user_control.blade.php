@@ -388,18 +388,6 @@
                         data: 'phone_number',
                         name: 'phone_number'
                     },
-                    // {
-                    //     data: 'join_date',
-                    //     name: 'join_date',
-                    // },
-                    // {
-                    //     data: 'last_login',
-                    //     name: 'last_login',
-                    // },
-                    // {
-                    //     data: 'role_name',
-                    //     name: 'role_name',
-                    // },
                     {
                         data: 'status',
                         name: 'status',
