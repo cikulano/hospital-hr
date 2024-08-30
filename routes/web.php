@@ -235,8 +235,6 @@ Route::group(['namespace' => 'App\Http\Controllers'],function()
         Route::get('extra/report/email', 'emailPDF')->middleware('auth')->name('extra.report.email');
         Route::post('salary/import', 'PayrollController@importSalary')->middleware('auth')->name('salary.import');
         Route::get('salary/format/download', 'PayrollController@downloadFormat')->middleware('auth')->name('salary.format.download');
-
-
      });
 
     // ---------------------------- reports  ----------------------------//

@@ -147,7 +147,10 @@
         </div>
         <div class="personal-info-item">
             <span class="personal-title">Bulan:</span>
-            <span><span>{{ \Carbon\Carbon::createFromDate(null, 8)->subMonth()->locale('id')->isoFormat('MMMM YYYY') }}</span>
+                <span>
+                    <!-- {{ \Carbon\Carbon::now()->subMonth()->locale('id')->isoFormat('MMMM YYYY') }} -->
+                    {{ \Carbon\Carbon::now()->locale('id')->isoFormat('MMMM YYYY') }}
+                </span>
             </span>
         </div>
         <div class="personal-info-item">
@@ -186,29 +189,29 @@
         <table>
             <tr>
                 <td class="salary-info-label">THP</td>
-                <td class="salary-info-value">Rp {{ number_format($users->basic) }}</td>
+                <td class="salary-info-value">{{ number_format($users->basic) }}</td>
             </tr>
             <tr>
                 <td class="salary-info-label">Uang Lembur</td>
-                <td class="salary-info-value">Rp {{ number_format($lembur) }}</td>
+                <td class="salary-info-value">{{ number_format($lembur) }}</td>
             </tr>
             <tr>
                 <td class="salary-info-label">Tunjangan Shift</td>
-                <td class="salary-info-value">Rp {{ number_format($shift) }}</td>
+                <td class="salary-info-value">{{ number_format($shift) }}</td>
             </tr>
             @if($users->department === "Kantor Pusat Pertamina")
             <tr>
                 <td class="salary-info-label">Transportasi</td>
-                <td class="salary-info-value">Rp {{ number_format($transport) }}</td>
+                <td class="salary-info-value"> {{ number_format($transport) }}</td>
             </tr>
             @endif
             <tr>
                 <td class="salary-info-label">Kompensasi Lain-lain</td>
-                <td class="salary-info-value">Rp {{ number_format($onsite) }}</td>
+                <td class="salary-info-value"> {{ number_format($onsite) }}</td>
             </tr>
             <tr>
                 <td class="salary-info-label"><strong>Total Pendapatan</strong></td>
-                <td class="salary-info-value"><strong>Rp {{ number_format($totalPendapatan) }}</strong></td>
+                <td class="salary-info-value"><strong> {{ number_format($totalPendapatan) }}</strong></td>
             </tr>
         </table>
     </div>
@@ -221,19 +224,19 @@
         <table>
             <tr>
                 <td class="salary-info-label">BPJSTK JHT</td>
-                <td class="salary-info-value">Rp {{ number_format($JHT) }}</td>
+                <td class="salary-info-value"> {{ number_format($JHT) }}</td>
             </tr>
             <tr>
                 <td class="salary-info-label">BPJSTK JP</td>
-                <td class="salary-info-value">Rp {{ number_format($JP) }}</td>
+                <td class="salary-info-value"> {{ number_format($JP) }}</td>
             </tr>
             <tr>
                 <td class="salary-info-label">BPJS Kesehatan</td>
-                <td class="salary-info-value">Rp {{ number_format($BPJSKes) }}</td>
+                <td class="salary-info-value"> {{ number_format($BPJSKes) }}</td>
             </tr>
             <tr>
                 <td class="salary-info-label"><strong>Total Potongan</strong></td>
-                <td class="salary-info-value"><strong>Rp {{ number_format($totalPotongan) }}</strong></td>
+                <td class="salary-info-value"><strong> {{ number_format($totalPotongan) }}</strong></td>
             </tr>
         </table>
     </div>
@@ -246,7 +249,7 @@
         <table>
             <tr>
                 <td class="salary-info-label">Pajak</td>
-                <td class="salary-info-value">Rp {{ number_format($pajak) }}</td>
+                <td class="salary-info-value"> {{ number_format($pajak) }}</td>
             </tr>
         </table>
     </div>  
@@ -265,15 +268,15 @@
         <table>
             <tr>
                 <td class="salary-info-label">BPJS Kesehatan</td>
-                <td class="salary-info-value">Rp {{ number_format($BJHT) }}</td>
+                <td class="salary-info-value"> {{ number_format($BJHT) }}</td>
             </tr>
             <tr>
                 <td class="salary-info-label">BPJS Ketenagakerjaan</td>
-                <td class="salary-info-value">Rp {{ number_format($Bkes) }}</td>
+                <td class="salary-info-value"> {{ number_format($Bkes) }}</td>
             </tr>
             <tr>
                 <td class="salary-info-label"><strong>Total Benefit</strong></td>
-                <td class="salary-info-value"><strong>Rp {{ number_format($totalbenefit) }}</strong></td>
+                <td class="salary-info-value"><strong> {{ number_format($totalbenefit) }}</strong></td>
             </tr>
         </table>
     </div>
@@ -282,7 +285,7 @@
         <table>
             <tr>
                 <td class="section-header"><strong>Upah yang Diterima</strong></td>
-                <td class="salary-info-value"><strong>Rp {{ number_format($total) }}</strong></td>
+                <td class="salary-info-value"><strong> {{ number_format($total) }}</strong></td>
             </tr>
         </table>
     </div>
