@@ -198,6 +198,13 @@
         $transport = (int)$users->allowance;
         $onsite = (int)$users->medical_allowance;
         $totalPendapatan = (int)$users->basic + $lembur + $shift + $onsite;
+
+        $pajak = (int)$users->tds;
+        $JHT = (int)$users->basic * 0.02;
+        $JP = (int)$users->basic * 0.01;
+        $BPJSKes = (int)$users->pf;
+        $proporsional = (int) $users->esi;
+        $totalPotongan = $JHT + $JP + $BPJSKes ;
         
         // Only add transport to total if department is "Kantor Pusat Pertamina"
         if ($users->department === "Kantor Pusat Pertamina") {
@@ -211,15 +218,16 @@
 
         // Only add to total if proportional is not 0
         if ($users->esi != 0) {
-            $totalPotongan += (int) $users->esi;
-        }   
+            $totalPotongan += $proporsional;
+        }
+
+        if ($users->department === "Pertamina Hulu Rokan") {
+            $totalPotongan -= $JHT;
+            $totalPotongan -= $JP;
+            $totalPotongan -= $BPJSKes;
+        }
         
-        $pajak = (int)$users->tds;
-        $JHT = (int)$users->basic * 0.02;
-        $JP = (int)$users->basic * 0.01;
-        $BPJSKes = (int)$users->pf;
-        $totalPotongan = $JHT + $JP + $BPJSKes ;
-        $total = $totalPendapatan - $totalPotongan ;
+        $total = $totalPendapatan - $totalPotongan;
     ?>
 
     <!-- Pendapatan Information -->
@@ -270,25 +278,45 @@
             @if($users->esi != 0)
             <tr>
                 <td class="salary-info-label">Proporsional</td>
-                <td class="salary-info-value"> {{ number_format($proporsiona) }}</td>
+                <td class="salary-info-value">{{ number_format($proporsional) }}</td>
             </tr>
-            @endif        
+            @endif
+            
+            @if($users->department != "Pertamina Hulu Rokan")
             <tr>
                 <td class="salary-info-label">BPJSTK JHT</td>
-                <td class="salary-info-value"> {{ number_format($JHT) }}</td>
+                <td class="salary-info-value">{{ number_format($JHT) }}</td>
             </tr>
             <tr>
                 <td class="salary-info-label">BPJSTK JP</td>
-                <td class="salary-info-value"> {{ number_format($JP) }}</td>
+                <td class="salary-info-value">{{ number_format($JP) }}</td>
             </tr>
             <tr>
                 <td class="salary-info-label">BPJS Kesehatan</td>
-                <td class="salary-info-value"> {{ number_format($BPJSKes) }}</td>
+                <td class="salary-info-value">{{ number_format($BPJSKes) }}</td>
             </tr>
             <tr>
                 <td class="salary-info-label"><strong>Total Potongan</strong></td>
-                <td class="salary-info-value"><strong> {{ number_format($totalPotongan) }}</strong></td>
+                <td class="salary-info-value"><strong>{{ number_format($totalPotongan) }}</strong></td>
             </tr>
+            @else
+            <tr>
+                <td class="salary-info-label">BPJSTK JHT</td>
+                <td class="salary-info-value">{{ number_format(0) }}</td>
+            </tr>
+            <tr>
+                <td class="salary-info-label">BPJSTK JP</td>
+                <td class="salary-info-value">{{ number_format(0) }}</td>
+            </tr>
+            <tr>
+                <td class="salary-info-label">BPJS Kesehatan</td>
+                <td class="salary-info-value">{{ number_format(0) }}</td>
+            </tr>
+            <tr>
+                <td class="salary-info-label"><strong>Total Potongan</strong></td>
+                <td class="salary-info-value"><strong>{{ number_format($proporsional) }}</strong></td>
+            </tr>
+            @endif
         </table>
     </div>
 
@@ -306,9 +334,21 @@
     </div>  
 
     <?php
-        $BJHT = (int)$users->basic * (6.24/100);
-        $Bkes = (int)$users->basic * (4/100);
+        $BJHT = (int)$users->basic * (6.24 / 100);
+        $Bkes = (int)$users->basic * (4 / 100);
         $totalbenefit = $BJHT + $Bkes;
+        $BJP = 0; // Initialize BJP to prevent undefined variable error
+
+        if ($users->department === "Pertamina Hulu Rokan") {
+            $BJHT = (int)$users->basic * (5.7 / 100);
+            $BJP = (int)$users->basic * (3 / 100);
+            $Bkes = (int)$users->basic * (5 / 100);
+            $totalbenefit = $BJHT + $Bkes + $BJP;
+        } else {
+            $BJHT = (int)$users->basic * (6.24 / 100);
+            $Bkes = (int)$users->basic * (4 / 100);
+            $totalbenefit = $BJHT + $Bkes;
+        }
     ?>
 
     <div class="divider2"></div>
@@ -317,12 +357,23 @@
     <div>
         <h4 class="section-header">Benefit</h4>
         <table>
+            @if($users->department === "Pertamina Hulu Rokan")
             <tr>
-                <td class="salary-info-label">BPJS Kesehatan</td>
+                <td class="salary-info-label">BPJS JHT</td>
                 <td class="salary-info-value"> {{ number_format($BJHT) }}</td>
             </tr>
             <tr>
+                <td class="salary-info-label">BPJS JP</td>
+                <td class="salary-info-value"> {{ number_format($BJP) }}</td>
+            </tr>
+            @else
+            <tr>
                 <td class="salary-info-label">BPJS Ketenagakerjaan</td>
+                <td class="salary-info-value"> {{ number_format($BJHT) }}</td>
+            </tr>
+            @endif
+            <tr>
+                <td class="salary-info-label">BPJS Kesehatan</td>
                 <td class="salary-info-value"> {{ number_format($Bkes) }}</td>
             </tr>
             <tr>
@@ -331,6 +382,7 @@
             </tr>
         </table>
     </div>
+
 
     <div class="summary-section">
         <table>

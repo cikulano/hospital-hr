@@ -63,30 +63,52 @@
                             </div>
                         </div>
 
+                        <!-- Salary Information -->
+                        <?php
+                            $lembur = (int)$users->da;
+                            $shift = (int)$users->hra;
+                            $keahlian = (int)$users->conveyance;
+                            $transport = (int)$users->allowance;
+                            $onsite = (int)$users->medical_allowance;
+                            $totalPendapatan = (int)$users->basic + $lembur + $shift + $onsite;
+
+                            $pajak = (int)$users->tds;
+                            $JHT = (int)$users->basic * 0.02;
+                            $JP = (int)$users->basic * 0.01;
+                            $BPJSKes = (int)$users->pf;
+                            $proporsional = (int) $users->esi;
+                            $totalPotongan = $JHT + $JP + $BPJSKes ;
+                            
+                            // Only add transport to total if department is "Kantor Pusat Pertamina"
+                            if ($users->department === "Kantor Pusat Pertamina") {
+                                $totalPendapatan += $transport;
+                            }
+
+                            // Only add if there are Tunjangan Keahlian
+                            if ($users->conveyance != 0) {
+                                $totalPendapatan += $keahlian;
+                            }
+
+                            // Only add to total if proportional is not 0
+                            if ($users->esi != 0) {
+                                $totalPotongan += $proporsional;
+                            }
+
+                            if ($users->department === "Pertamina Hulu Rokan") {
+                                $totalPotongan -= $JHT;
+                                $totalPotongan -= $JP;
+                                $totalPotongan -= $BPJSKes;
+                            }
+                            
+                            $total = $totalPendapatan - $totalPotongan;
+                        ?>
+
                         <div class="row">
                             <div class="col-sm-6">
                                 <div>
                                     <h4 class="mb-3"><strong>Pendapatan</strong></h4>
                                     <table class="table table-bordered">
                                         <tbody>
-                                            <?php
-                                                $lembur = (int)$users->da ;
-                                                $shift = (int)$users->hra ;
-                                                $onsite = (int)$users->medical_allowance;
-                                                $transport = (int)$users->allowance;
-                                                $keahlian = (int)$users->conveyance;
-                                                $totalPendapatan = (int)$users->basic + $lembur + $shift + $onsite;
-                                                
-                                                // Only add transport to total if department is "Kantor Pusat Pertamina"
-                                                if ($users->department === "Kantor Pusat Pertamina") {
-                                                    $totalPendapatan += $transport;
-                                                }
-
-                                                if ($users->conveyance != 0) {
-                                                    $totalPendapatan += $keahlian;
-                                                }
-
-                                            ?>
                                             <tr>
                                                 <td><strong>THP</strong></td>
                                                 <td class="text-right">Rp {{ number_format($users->basic) }}</td>
@@ -107,8 +129,8 @@
                                             @endif
                                             @if($users->conveyance != 0)
                                             <tr>
-                                                <td class="salary-info-label">Tunjangan Keahlian</td>
-                                                <td class="salary-info-value"> {{ number_format($keahlian) }}</td>
+                                                <td><strong>Tunjangan Keahlian</strong></td>
+                                                <td class="text-right"> {{ number_format($keahlian) }}</td>
                                             </tr>
                                             @endif
                                             <tr>
@@ -129,38 +151,48 @@
                                     <h4 class="mb-3"><strong>Potongan</strong></h4>
                                     <table class="table table-bordered">
                                         <tbody>
-                                            <?php
-                                                $pajak = (int)$users->tds;
-                                                $JHT = (int)$users->basic * 0.02;
-                                                $JP = (int)$users->basic * 0.01;
-                                                $BPJSKes = (int)$users->pf;
-                                                $proporsional = (int)$users->esi;
-                                                $totalPotongan =  $JHT + $JP + $BPJSKes + $proporsional;
-                                                $total = $totalPendapatan - $totalPotongan;
-                                            ?>
-                                            <tr>
-                                                <td><strong>Pajak</strong></td>
-                                                <td class="text-right">Rp {{ number_format($pajak) }}</td>
-                                            </tr>
-                                            <tr>
-                                                <td><strong>BPJSTK JHT</strong></td>
-                                                <td class="text-right">Rp {{ number_format($JHT) }}</td>
-                                            </tr>
-                                            <tr>
-                                                <td><strong>BPJSTK JP </strong></td>
-                                                <td class="text-right">Rp {{ number_format($JP) }}</td>
-                                            </tr>
-                                            <tr>
-                                                <td><strong>BPJS Kesehatan </strong></td>
-                                                <td class="text-right">Rp {{ number_format($BPJSKes) }}</td>
-                                            </tr>
-                                            <tr>
-                                                <td><strong>Proporsional </strong></td>
-                                                <td class="text-right">Rp {{ number_format($proporsional) }}</td>
-                                            </tr>
-                                            <tr class="table-danger">
-                                                <td><strong>Total Potongan</strong></td>
-                                                <td class="text-right"><strong>Rp {{ number_format($totalPotongan) }}</strong></td>
+                                        @if($users->esi != 0)
+                                        <tr>
+                                        <td><strong>Proporsional</strong></td>
+                                            <td class="text-right">{{ number_format($proporsional) }}</td>
+                                        </tr>
+                                        @endif
+                                        
+                                        @if($users->department != "Pertamina Hulu Rokan")
+                                        <tr>
+                                        <td><strong>BPJSTK JHT</strong></td>
+                                            <td class="text-right">Rp {{ number_format($JHT) }}</td>
+                                        </tr>
+                                        <tr>
+                                        <td><strong>BPJSTK JP</strong></td>
+                                            <td class="text-right">Rp {{ number_format($JP) }}</td>
+                                        </tr>
+                                        <tr>
+                                        <td><strong>BPJS Kesehatan</strong></td>
+                                            <td class="text-right">Rp {{ number_format($BPJSKes) }}</td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>Total Potongan</strong></td>
+                                            <td class="text-right"><strong>Rp {{ number_format($totalPotongan) }}</strong></td>
+                                        </tr>
+                                        @else
+                                        <tr>
+                                            <td><strong>BPJSTK JHT</strong></td>
+                                            <td class="text-right">Rp {{ number_format(0) }}</td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>BPJSTK JP</strong></td>
+                                            <td class="text-right">Rp {{ number_format(0) }}</td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>BPJS Kesehatan</strong></td>
+                                            <td class="text-right">Rp {{ number_format(0) }}</td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>Total Potongan</strong></td>
+                                            <td class="text-right"><strong>Rp {{ number_format($proporsional) }}</strong></td>
+                                        </tr>
+                                        @endif
                                             </tr>
                                         </tbody>
                                     </table>
