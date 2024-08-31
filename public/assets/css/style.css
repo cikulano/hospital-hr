@@ -4698,6 +4698,85 @@ html.menu-opened body {
 	text-transform: uppercase;
 }
 
+.btn-edit, .btn-delete {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	width: 30px; /* Adjust size as needed */
+	height: 30px; /* Adjust size as needed */
+	border-radius: 50%;
+	color: #fff;
+	font-size: 14px; /* Adjust size as needed */
+	text-align: center;
+	line-height: 30px; /* Adjust to center icon vertically */
+	text-decoration: none;
+	transition: background-color 0.3s;
+}
+
+.btn-edit {
+	background-color: #007bff; /* Blue color */
+}
+
+.btn-edit:hover {
+	background-color: #0056b3; /* Darker blue for hover */
+}
+
+.btn-delete {
+	background-color: #dc3545; /* Red color */
+}
+
+.btn-delete:hover {
+	background-color: #c82333; /* Darker red for hover */
+}
+
+.btn-edit i, .btn-delete i {
+	font-size: 16px; /* Adjust icon size as needed */
+}
+
+.dropdown-menu {
+	position: absolute;
+	top: 100%;
+	left: 0;
+	z-index: 1000;
+	display: none;
+	float: left;
+	min-width: 10rem;
+	padding: .5rem 0;
+	margin: .125rem 0 0;
+	font-size: 1rem;
+	color: #212529;
+	text-align: left;
+	list-style: none;
+	background-color: #fff;
+	background-clip: padding-box;
+	border: 1px solid rgba(0,0,0,.15);
+	border-radius: .25rem;
+}
+.dropdown-menu li {
+	padding: .25rem 1.5rem;
+	cursor: pointer;
+}
+.dropdown-menu li:hover {
+	background-color: #f8f9fa;
+}
+.text-muted {
+	color: #6c757d;
+}
+
+.custom-blue {
+background-color: #007bff; /* Example blue color */
+color: white;
+}
+
+.custom-blue:hover {
+	background-color: #0056b3; /* Darker shade of blue on hover */
+}
+
+.custom-select {
+width: 100%; /* Full width */
+max-width: 300px; /* Adjust to a standard width */
+}
+
 /*-----------------
 	33. Attendance
 -----------------------*/

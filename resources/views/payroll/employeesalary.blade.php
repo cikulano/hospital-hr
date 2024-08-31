@@ -3,87 +3,6 @@
     {{-- message --}}
     {!! Toastr::message() !!}
 
-    <style>
-    .btn-edit, .btn-delete {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        width: 30px; /* Adjust size as needed */
-        height: 30px; /* Adjust size as needed */
-        border-radius: 50%;
-        color: #fff;
-        font-size: 14px; /* Adjust size as needed */
-        text-align: center;
-        line-height: 30px; /* Adjust to center icon vertically */
-        text-decoration: none;
-        transition: background-color 0.3s;
-    }
-
-    .btn-edit {
-        background-color: #007bff; /* Blue color */
-    }
-
-    .btn-edit:hover {
-        background-color: #0056b3; /* Darker blue for hover */
-    }
-
-    .btn-delete {
-        background-color: #dc3545; /* Red color */
-    }
-
-    .btn-delete:hover {
-        background-color: #c82333; /* Darker red for hover */
-    }
-
-    .btn-edit i, .btn-delete i {
-        font-size: 16px; /* Adjust icon size as needed */
-    }
-
-    .dropdown-menu {
-        position: absolute;
-        top: 100%;
-        left: 0;
-        z-index: 1000;
-        display: none;
-        float: left;
-        min-width: 10rem;
-        padding: .5rem 0;
-        margin: .125rem 0 0;
-        font-size: 1rem;
-        color: #212529;
-        text-align: left;
-        list-style: none;
-        background-color: #fff;
-        background-clip: padding-box;
-        border: 1px solid rgba(0,0,0,.15);
-        border-radius: .25rem;
-    }
-    .dropdown-menu li {
-        padding: .25rem 1.5rem;
-        cursor: pointer;
-    }
-    .dropdown-menu li:hover {
-        background-color: #f8f9fa;
-    }
-    .text-muted {
-        color: #6c757d;
-    }
-
-    .custom-blue {
-    background-color: #007bff; /* Example blue color */
-    color: white;
-    }
-
-    .custom-blue:hover {
-        background-color: #0056b3; /* Darker shade of blue on hover */
-    }
-
-    .custom-select {
-    width: 100%; /* Full width */
-    max-width: 300px; /* Adjust to a standard width */
-    }
-    </style>
-
     <!-- Page Wrapper -->
     <div class="page-wrapper">
         <!-- Page Content -->
@@ -277,14 +196,14 @@
                                     </div>
 
                                     <div class="form-group">
-                                        <label>Jam Lembur</label>
+                                        <label>Uang Lembur</label>
                                         <input 
                                         class="form-control @error('da') is-invalid @enderror" 
                                         type="number"  
                                         name="da" 
                                         id="da" 
                                         value="{{ old('da') }}" 
-                                        placeholder="Masukan Jam Lembur">
+                                        placeholder="Masukan Uang Lembur">
                                         @error('da')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
@@ -292,14 +211,14 @@
                                         @enderror
                                     </div>
                                     <div class="form-group">
-                                        <label>Hari Shift</label>
+                                        <label>Tunjangan Shift</label>
                                         <input 
                                         class="form-control @error('hra') is-invalid @enderror" 
                                         type="number"  
                                         name="hra" 
                                         id="hra" 
                                         value="{{ old('hra') }}" 
-                                        placeholder="Masukan Hari Shift">
+                                        placeholder="Masukan Tunjangan Shift">
                                         @error('hra')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
@@ -307,14 +226,14 @@
                                         @enderror
                                     </div>
                                     <div class="form-group">
-                                        <label>Kompensasi Onsite</label>
+                                        <label>Insentif Keahlian</label>
                                         <input 
                                         class="form-control @error('conveyance') is-invalid @enderror" 
                                         type="text"  
                                         name="conveyance" 
                                         id="conveyance" 
                                         value="{{ old('conveyance') }}" 
-                                        placeholder="Masukan Jumlah Kompensasi"
+                                        placeholder="Masukan Jumlah Insentif"
                                         data-type="currency">
                                         @error('conveyance')
                                             <span class="invalid-feedback" role="alert">
@@ -323,7 +242,7 @@
                                         @enderror
                                     </div>
                                     <div class="form-group">
-                                        <label>Masukan Rate Lembur (Per Jam)</label>
+                                        <label>Transport</label>
                                         <input 
                                         class="form-control @error('allowance') is-invalid @enderror" 
                                         type="text"  
@@ -339,7 +258,7 @@
                                         @enderror
                                     </div>
                                     <div class="form-group">
-                                        <label>Masukan Rate Shift (Per Hari)</label>
+                                        <label>Kompensasi Lain-Lain</label>
                                         <input 
                                         class="form-control @error('medical_allowance') is-invalid @enderror" 
                                         type="text" 
@@ -374,9 +293,18 @@
                                         @enderror
                                     </div> 
                                     <div class="form-group">
-                                        <label>Proporsional (Dalam Hari)</label>
+                                        <label>Proporsional</label>
                                         <input class="form-control @error('esi') is-invalid @enderror" type="number" name="esi" id="esi" value="{{ old('esi') }}" placeholder="Masukan Hari Proporsional">
                                         @error('esi')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                    </div>
+                                    <div class="form-group">
+                                        <label>BPJS Kesehatan</label>
+                                        <input class="form-control @error('pf') is-invalid @enderror" type="number" name="pf" id="pf" value="{{ old('pf') }}" placeholder="Masukan Nilai BPJS Kesehatan">
+                                        @error('pf')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
                                             </span>
@@ -436,10 +364,10 @@
                                         <label>Shift</label>
                                         <input class="form-control" type="text"  name="hra" id="e_hra" value="" data-type="currency">
                                     </div>
-                                    <!-- <div class="form-group">
-                                        <label>Kompensasi Onsite</label>
+                                    <div class="form-group">
+                                        <label>Insentif Keahlian</label>
                                         <input class="form-control" type="text"  name="conveyance" id="e_conveyance" value="" data-type="currency">
-                                    </div> -->
+                                    </div>
                                     <div class="form-group">
                                         <label>Transport</label>
                                         <input class="form-control" type="text"  name="allowance" id="e_allowance" value="" data-type="currency">
@@ -456,8 +384,12 @@
                                         <input class="form-control" type="text" name="tds" id="e_tds" value="" data-type="currency">
                                     </div> 
                                     <div class="form-group">
-                                        <label>Proporsional (Hari)</label>
+                                        <label>Proporsional</label>
                                         <input class="form-control" type="text" name="esi" id="e_esi" value="">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>BPJS Keshatan</label>
+                                        <input class="form-control" type="text" name="pf" id="pf" value="">
                                     </div>
                                 </div>
                             </div>

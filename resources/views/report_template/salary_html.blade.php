@@ -31,6 +31,7 @@
         }
     </style>
 </head>
+
 <body>
     <div class="container mt-5" id="report-content">
         <div class="row justify-content-center">
@@ -48,7 +49,7 @@
                                 <!-- <h3 class="text-uppercase">Payslip #49029</h3> -->
                             </div>
                         </div>
-
+                        
                         <div class="row mb-4">
                             <div class="col-sm-6">
                                 @if(!empty($users->avatar))
@@ -68,18 +69,24 @@
                                     <h4 class="mb-3"><strong>Pendapatan</strong></h4>
                                     <table class="table table-bordered">
                                         <tbody>
-                                            @php
+                                            <?php
                                                 $lembur = (int)$users->da ;
                                                 $shift = (int)$users->hra ;
                                                 $onsite = (int)$users->medical_allowance;
                                                 $transport = (int)$users->allowance;
+                                                $keahlian = (int)$users->conveyance;
                                                 $totalPendapatan = (int)$users->basic + $lembur + $shift + $onsite;
                                                 
                                                 // Only add transport to total if department is "Kantor Pusat Pertamina"
                                                 if ($users->department === "Kantor Pusat Pertamina") {
                                                     $totalPendapatan += $transport;
                                                 }
-                                            @endphp
+
+                                                if ($users->conveyance != 0) {
+                                                    $totalPendapatan += $keahlian;
+                                                }
+
+                                            ?>
                                             <tr>
                                                 <td><strong>THP</strong></td>
                                                 <td class="text-right">Rp {{ number_format($users->basic) }}</td>
@@ -96,6 +103,12 @@
                                             <tr>
                                                 <td><strong>Transportasi</strong></td>
                                                 <td class="text-right">Rp {{ number_format($transport) }}</td>
+                                            </tr>
+                                            @endif
+                                            @if($users->conveyance != 0)
+                                            <tr>
+                                                <td class="salary-info-label">Tunjangan Keahlian</td>
+                                                <td class="salary-info-value"> {{ number_format($keahlian) }}</td>
                                             </tr>
                                             @endif
                                             <tr>
@@ -116,14 +129,15 @@
                                     <h4 class="mb-3"><strong>Potongan</strong></h4>
                                     <table class="table table-bordered">
                                         <tbody>
-                                            @php
+                                            <?php
                                                 $pajak = (int)$users->tds;
                                                 $JHT = (int)$users->basic * 0.02;
                                                 $JP = (int)$users->basic * 0.01;
-                                                $BPJSKes = (int)$users->basic * 0.01;
-                                                $totalPotongan =  $JHT + $JP + $BPJSKes;
+                                                $BPJSKes = (int)$users->pf;
+                                                $proporsional = (int)$users->esi;
+                                                $totalPotongan =  $JHT + $JP + $BPJSKes + $proporsional;
                                                 $total = $totalPendapatan - $totalPotongan;
-                                            @endphp
+                                            ?>
                                             <tr>
                                                 <td><strong>Pajak</strong></td>
                                                 <td class="text-right">Rp {{ number_format($pajak) }}</td>
@@ -139,6 +153,10 @@
                                             <tr>
                                                 <td><strong>BPJS Kesehatan </strong></td>
                                                 <td class="text-right">Rp {{ number_format($BPJSKes) }}</td>
+                                            </tr>
+                                            <tr>
+                                                <td><strong>Proporsional </strong></td>
+                                                <td class="text-right">Rp {{ number_format($proporsional) }}</td>
                                             </tr>
                                             <tr class="table-danger">
                                                 <td><strong>Total Potongan</strong></td>

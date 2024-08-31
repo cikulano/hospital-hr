@@ -194,6 +194,7 @@
     <?php
         $lembur = (int)$users->da;
         $shift = (int)$users->hra;
+        $keahlian = (int)$users->conveyance;
         $transport = (int)$users->allowance;
         $onsite = (int)$users->medical_allowance;
         $totalPendapatan = (int)$users->basic + $lembur + $shift + $onsite;
@@ -202,12 +203,22 @@
         if ($users->department === "Kantor Pusat Pertamina") {
             $totalPendapatan += $transport;
         }
+
+        // Only add if there are Tunjangan Keahlian
+        if ($users->conveyance != 0) {
+            $totalPendapatan += $keahlian;
+        }
+
+        // Only add to total if proportional is not 0
+        if ($users->esi != 0) {
+            $totalPotongan += (int) $users->esi;
+        }   
         
         $pajak = (int)$users->tds;
         $JHT = (int)$users->basic * 0.02;
         $JP = (int)$users->basic * 0.01;
-        $BPJSKes = (int)$users->basic * 0.01;
-        $totalPotongan = $JHT + $JP + $BPJSKes;
+        $BPJSKes = (int)$users->pf;
+        $totalPotongan = $JHT + $JP + $BPJSKes ;
         $total = $totalPendapatan - $totalPotongan ;
     ?>
 
@@ -233,6 +244,12 @@
                 <td class="salary-info-value"> {{ number_format($transport) }}</td>
             </tr>
             @endif
+            @if($users->conveyance != 0)
+            <tr>
+                <td class="salary-info-label">Tunjangan Keahlian</td>
+                <td class="salary-info-value"> {{ number_format($keahlian) }}</td>
+            </tr>
+            @endif
             <tr>
                 <td class="salary-info-label">Kompensasi Lain-lain</td>
                 <td class="salary-info-value"> {{ number_format($onsite) }}</td>
@@ -250,6 +267,12 @@
     <div>
         <h4 class="section-header">Potongan</h4>
         <table>
+            @if($users->esi != 0)
+            <tr>
+                <td class="salary-info-label">Proporsional</td>
+                <td class="salary-info-value"> {{ number_format($proporsiona) }}</td>
+            </tr>
+            @endif        
             <tr>
                 <td class="salary-info-label">BPJSTK JHT</td>
                 <td class="salary-info-value"> {{ number_format($JHT) }}</td>

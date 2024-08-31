@@ -48,6 +48,7 @@ class PayrollController extends Controller
             'medical_allowance' => 'required|string|max:255',
             'tds' => 'required|string|max:255',
             'esi' => 'required|string|max:255',
+            'pf' => 'required|string|max:255',
         ]);
  
         DB::beginTransaction();
