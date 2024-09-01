@@ -35,6 +35,18 @@
                                 <i class="fa fa-file-excel-o"></i> Import Excel
                             </button>
                         </form>
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Bulk Download PDF
+                            </button>
+                            <div class="dropdown-menu">
+                                @foreach($departments as $department)
+                                    @if($department !== null)
+                                        <a class="dropdown-item" href="{{ url('/bulk-download-pdf/' . urlencode($department)) }}">{{ $department }}</a>
+                                    @endif
+                                @endforeach
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

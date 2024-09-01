@@ -6,9 +6,10 @@
     <style>
         @page {
             size: A4;
-            margin: 1.5cm;
+            margin: 0;
         }
         body {
+            margin: 1cm;
             font-family: Arial, sans-serif;
             font-size: 12px;
             line-height: 1.5;
@@ -20,6 +21,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
+            position: relative;
         }
         .logo {
             max-width: 120px;
@@ -27,10 +29,16 @@
             width: auto;
             height: auto;
             object-fit: contain;
+            position: absolute;
+            top: 0;
         }
         .logo1 {
             max-width: 160px;
             max-height: 80px;
+            left: 0;
+        }
+        .logo2 {
+            right: 0;
         }
         .company-info {
             text-align: center;
@@ -77,20 +85,13 @@
             font-size: 11px;
         }
         .watermark {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-        .watermark img {
-            max-width: 60%;
-            max-height: 60%;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) rotate(-45deg);
             opacity: 0.1;
+            font-size: 100px;
+            z-index: -1;
         }
         .personal-info {
             display: grid;
@@ -105,16 +106,9 @@
         }
         .personal-title {
             font-weight: bold;
-            min-width: 50px; /* Adjust as needed for alignment */
+            min-width: 100px;
             text-align: left;
             padding-right: 5px;
-        }
-        .personal-title-name {
-            font-weight: bold;
-            min-width: 100px; /* Adjust as needed for alignment */
-            text-align: left;
-            padding-right: 5px;
-            margin-left: 8px;
         }
         .personal-value {
             flex: 1;
@@ -130,12 +124,12 @@
         }
         .name-id-group {
             display: flex;
-            justify-content: flex-end; /* Aligns to the right */
+            justify-content: flex-end;
             width: 100%;
         }
         .name-id-item {
             width: 50%;
-            padding-left: 10px; /* Adds some space on the left */
+            padding-left: 10px;
         }
         .salary-info-label {
             width: 70%;
@@ -162,7 +156,7 @@
         <div class="company-info">
             <h3>Pay Slip</h3>
         </div>
-        <img src="{{ $logo2Src }}" alt="Company Logo 2" class="logo">
+        <img src="{{ $logo2Src }}" alt="Company Logo 2" class="logo logo2">
     </div>
 
     <div class="divider"></div>
@@ -174,16 +168,15 @@
             <span class="personal-value">{{ $users->department }}</span>
         </div>
         <div class="personal-info-item">
-            <span class="personal-title-name">Nama Pekerja</span>
+            <span class="personal-title">Nama Pekerja</span>
             <span class="personal-value">{{ $users->name }}</span>
         </div>
         <div class="personal-info-item">
             <span class="personal-title">Bulan</span>
-            <!-- <span class="personal-value">{{ \Carbon\Carbon::now()->subMonth()->locale('id')->isoFormat('MMMM YYYY') }}</span> -->
             <span class="personal-value">{{ \Carbon\Carbon::now()->locale('id')->isoFormat('MMMM YYYY') }}</span>
         </div>
         <div class="personal-info-item">
-            <span class="personal-title-name">Nopeg</span>
+            <span class="personal-title">Nopeg</span>
             <span class="personal-value">{{ $users->user_id }}</span>
         </div>
     </div>

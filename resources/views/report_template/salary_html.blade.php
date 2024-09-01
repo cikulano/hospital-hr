@@ -52,6 +52,7 @@
                         
                         <div class="row mb-4">
                             <div class="col-sm-6">
+
                                 @if(!empty($users->avatar))
                                     <img src="{{ $logo2Src }}" alt="Company Logo" style="max-width: 150px;">
                                 @endif
@@ -215,9 +216,9 @@
         <a href="{{ url()->previous() }}" class="btn btn-secondary mr-2">
             <i class="fas fa-arrow-left"></i> Back
         </a>
-        <!-- <a href="{{ url('/') }}" class="btn btn-info mr-2">
+        <a href="{{ secure_route('home') }}" class="btn btn-info mr-2">
             <i class="fas fa-home"></i> Home
-        </a> -->
+        </a>
         <button id="generatePdf" class="btn btn-primary">
             <i class="fas fa-file-pdf"></i> Generate PDF
         </button>

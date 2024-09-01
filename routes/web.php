@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\PayrollController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -236,6 +236,7 @@ Route::group(['namespace' => 'App\Http\Controllers'],function()
         Route::post('salary/import', 'PayrollController@importSalary')->middleware('auth')->name('salary.import');
         Route::get('salary/format/download', 'PayrollController@downloadFormat')->middleware('auth')->name('salary.format.download');
         Route::get('search/employees', 'searchEmployees')->middleware('auth')->name('search.employees');
+        Route::get('bulk-download-pdf/{department}', [PayrollController::class, 'bulkDownloadPDF'])->middleware('auth')->name('payroll.bulk.download.pdf');
      });
 
     // ---------------------------- reports  ----------------------------//
@@ -322,3 +323,5 @@ Route::group(['namespace' => 'App\Http\Controllers'],function()
         Route::post('bank/information/save', 'saveRecord')->middleware('auth')->name('bank/information/save');
     });
 });
+
+

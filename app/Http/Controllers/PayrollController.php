@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use DB;
 use PDF;
+use ZipArchive;
 use App\Exports\SalaryExcel;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Models\StaffSalary;
@@ -13,7 +14,7 @@ use Illuminate\Support\Facades\Storage;
 use App\Imports\SalaryImport;
 use App\Exports\SalaryFormatExport;
 use Carbon\Carbon;
-
+use Illuminate\Support\Facades\Mail;
 class PayrollController extends Controller
 {
     /** view page salary */
@@ -31,9 +32,10 @@ class PayrollController extends Controller
             ->get();
     
         $permission_lists = DB::table('permission_lists')->get();
+        $departments = DB::table('users')->distinct()->pluck('department');
     
-        return view('payroll.employeesalary', compact('users', 'userList', 'permission_lists'));
-    }    
+        return view('payroll.employeesalary', compact('users', 'userList', 'permission_lists', 'departments'));
+    }   
 
      /** save record */
      public function saveRecord(Request $request)
@@ -364,7 +366,39 @@ class PayrollController extends Controller
         return response()->json($response);
     }
     
+    public function bulkDownloadPDF($department)
+    {
+        $department = urldecode($department);
+        $users = DB::table('users')->where('department', $department)->get();
+        
+        $zip = new ZipArchive;
+        $fileName = 'salary_slips_' . str_replace(' ', '_', $department) . '.zip';
+        
+        if ($zip->open(public_path($fileName), ZipArchive::CREATE) === TRUE) {
+            foreach ($users as $user) {
+                $pdf = $this->generatePDF($user->user_id);
+                // Ensure the paper size is set here as well
+                $pdf->setPaper('A4', 'portrait');
+                $zip->addFromString($user->name . '_salary_slip.pdf', $pdf->output());
+            }
+            $zip->close();
+        }
+        
+        return response()->download(public_path($fileName))->deleteFileAfterSend(true);
+    }
+
+    private function generatePDF($user_id)
+    {
+        $users = DB::table('staff_salaries')
+            ->join('users', 'staff_salaries.user_id', '=', 'users.user_id')
+            ->where('staff_salaries.user_id', $user_id)
+            ->first();
     
-
-
+        $logo1Src = 'data:image/png;base64,' . base64_encode(file_get_contents(public_path('img/logo.png')));
+        $logo2Src = 'data:image/png;base64,' . base64_encode(file_get_contents(public_path('img/logo2.png')));
+    
+        $pdf = PDF::loadView('report_template.salary_pdf', compact('users', 'logo1Src', 'logo2Src'));
+        $pdf->setPaper('A4', 'portrait');
+        return $pdf;
+    }
 }
