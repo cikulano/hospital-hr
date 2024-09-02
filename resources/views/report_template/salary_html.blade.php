@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>Payslip</title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" rel="stylesheet">
@@ -219,8 +220,11 @@
         <a href="{{ secure_route('home') }}" class="btn btn-info mr-2">
             <i class="fas fa-home"></i> Home
         </a>
-        <button id="generatePdf" class="btn btn-primary">
+        <button id="generatePdf" class="btn btn-primary mr-2">
             <i class="fas fa-file-pdf"></i> Generate PDF
+        </button>
+        <button id="sendEmail" class="btn btn-success">
+            <i class="fas fa-envelope"></i> Send to Email
         </button>
     </div>
 
@@ -245,6 +249,33 @@
 
                     html2pdf().set(opt).from(element).save();
                 });
+        });
+
+        document.getElementById('sendEmail').addEventListener('click', function() {
+            fetch('{{ route("salary.send.email", ["user_id" => $users->user_id]) }}', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+                },
+            })
+            .then(response => {
+                if (!response.ok) {
+                    return response.json().then(err => Promise.reject(err));
+                }
+                return response.json();
+            })
+            .then(data => {
+                if (data.success) {
+                    alert('Salary slip has been sent to your email.');
+                } else {
+                    alert('Failed to send email: ' + data.message);
+                }
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+                alert('An error occurred: ' + (error.message || 'Please try again.'));
+            });
         });
     </script>
 </body>

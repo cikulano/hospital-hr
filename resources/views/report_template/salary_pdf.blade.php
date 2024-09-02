@@ -4,192 +4,40 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <title>Employee Salary Report</title>
     <style>
-        @page {
-            size: A4;
-            margin: 0;
-        }
-        body {
-            margin: 1cm;
-            font-family: Arial, sans-serif;
-            font-size: 12px;
-            line-height: 1.5;
-            color: #333;
-            position: relative;
-        }
-        .header {
-            margin-bottom: 10px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            position: relative;
-        }
-        .logo {
-            max-width: 120px;
-            max-height: 60px;
-            width: auto;
-            height: auto;
-            object-fit: contain;
-            position: absolute;
-            top: 0;
-        }
-        .logo1 {
-            max-width: 160px;
-            max-height: 80px;
-            left: 0;
-        }
-        .logo2 {
-            right: 0;
-        }
-        .company-info {
-            text-align: center;
-            flex-grow: 1;
-        }
-        .company-info h2 {
-            color: #3498db;
-            margin: 0;
-            font-size: 20px;
-        }
-        .divider {
-            border-top: 2px solid #3498db;
-            margin: 10px 0;
-        }
-
-        .divider2 {
-            border-top: 3px solid #28a745;
-            margin: 10px 0;
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-        td, th {
-            padding: 4px;
-            border-bottom: 1px solid #ddd;
-            vertical-align: top;
-        }
-        .section-header {
-            font-weight: bold;
-            text-transform: uppercase;
-            padding: 5px;
-            font-size: 14px;
-            color: #333;
-            margin-bottom: 8px;
-        }
-        .amount {
-            text-align: right;
-        }
-        .footer {
-            margin-top: 20px;
-            text-align: right;
-            font-size: 11px;
-        }
-        .watermark {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%) rotate(-45deg);
-            opacity: 0.1;
-            font-size: 100px;
-            z-index: -1;
-        }
-        .personal-info {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            grid-gap: 10px;
-            margin-bottom: 15px;
-            font-size: 14px;
-        }
-        .personal-info-item {
-            display: flex;
-            align-items: baseline;
-        }
-        .personal-title {
-            font-weight: bold;
-            min-width: 50px; /* Adjust as needed for alignment */
-            text-align: left;
-            padding-right: 5px;
-        }
-        .personal-title-name {
-            font-weight: bold;
-            min-width: 100px; /* Adjust as needed for alignment */
-            text-align: left;
-            padding-right: 5px;
-            margin-left: 8px;
-        }
-        .personal-value {
-            flex: 1;
-            text-align: left;
-        }
-        .personal-value::before {
-            content: ': ';
-            margin-right: 3px;
-        }
-        .right-aligned {
-            grid-column: 2;
-            text-align: right;
-        }
-        .name-id-group {
-            display: flex;
-            justify-content: flex-end; /* Aligns to the right */
-            width: 100%;
-        }
-        .name-id-item {
-            width: 50%;
-            padding-left: 10px; /* Adds some space on the left */
-        }
-        .salary-info-label {
-            width: 70%;
-            text-align: left;
-        }
-        .salary-info-value {
-            width: 30%;
-            text-align: right;
-        }
-        .summary-section {
-            margin-top: 15px;
-            border: 2px solid #3498db;
-            padding: 10px;
-        }
+        @page { size: A4; margin: 0; }
     </style>
 </head>
-<body>
+<body style="margin: 2cm; font-family: Arial, sans-serif; font-size: 12px; line-height: 1.5; color: #333; position: relative;">
     <!-- Watermark and Logo -->
-    <div class="watermark">
+    <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%) rotate(-45deg); opacity: 0.1; font-size: 100px; z-index: -1;">
         <img src="{{ $logo2Src }}" alt="Watermark">
     </div>
-    <div class="header">
-        <img src="{{ $logo1Src }}" alt="Company Logo 1" class="logo logo1">
-        <div class="company-info">
-            <h3>Pay Slip</h3>
+    <div style="margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center; position: relative;">
+        <img src="{{ $logo1Src }}" alt="Company Logo 1" style="max-width: 160px; max-height: 80px; width: auto; height: auto; object-fit: contain; position: absolute; top: 0; left: 0;">
+        <div style="text-align: center; flex-grow: 1;">
+            <h3 style="color: #3498db; margin: 0; font-size: 30px;">Pay Slip</h3>
         </div>
-        <img src="{{ $logo2Src }}" alt="Company Logo 2" class="logo logo2">
+        <img src="{{ $logo2Src }}" alt="Company Logo 2" style="max-width: 120px; max-height: 50px; width: auto; height: auto; object-fit: contain; position: absolute; top: 0; right: 0;">
     </div>
 
-    <div class="divider"></div>
-
+    <div style="border-top: 2px solid #3498db; margin: 10px 0;"></div>
     <!-- Personal Information -->
-    <div class="personal-info">
-        <div class="personal-info-item">
-            <span class="personal-title">Lokasi</span>
-            <span class="personal-value">{{ $users->department }}</span>
-        </div>
-        <div class="personal-info-item">
-            <span class="personal-title-name">Nama Pekerja</span>
-            <span class="personal-value">{{ $users->name }}</span>
-        </div>
-        <div class="personal-info-item">
-            <span class="personal-title">Bulan</span>
-            <!-- <span class="personal-value">{{ \Carbon\Carbon::now()->subMonth()->locale('id')->isoFormat('MMMM YYYY') }}</span> -->
-            <span class="personal-value">{{ \Carbon\Carbon::now()->locale('id')->isoFormat('MMMM YYYY') }}</span>
-        </div>
-        <div class="personal-info-item">
-            <span class="personal-title-name">Nopeg</span>
-            <span class="personal-value">{{ $users->user_id }}</span>
-        </div>
-    </div>
+    <table style="width: 100%;">
+        <tr>
+            <td style="width: 15%;"><strong>Lokasi</strong></td>
+            <td style="width: 35%;">: {{ $users->department }}</td>
+            <td style="width: 25%; padding-left: 60px;"><strong>Nama Pekerja</strong></td>
+            <td style="width: 35%;">: {{ $users->name }}</td>
+        </tr>
+        <tr>
+            <td><strong>Bulan</strong></td>
+            <td>: {{ \Carbon\Carbon::now()->locale('id')->isoFormat('MMMM YYYY') }}</td>
+            <td style="padding-left: 60px;"><strong>Nopeg</strong></td>
+            <td>: {{ $users->user_id }}</td>
+        </tr>
+    </table>
 
-    <div class="divider"></div>
+    <div style="border-top: 2px solid #3498db; margin: 10px 0;"></div>
 
     <!-- Salary Information -->
     <?php
@@ -233,103 +81,103 @@
 
     <!-- Pendapatan Information -->
     <div>
-        <h4 class="section-header">Pendapatan</h4>
-        <table>
+        <h4 style="font-weight: bold; text-transform: uppercase; padding: 5px; font-size: 14px; color: #333; margin-bottom: 8px;">Pendapatan</h4>
+        <table style="width: 100%; border-collapse: collapse;">
             <tr>
-                <td class="salary-info-label">THP</td>
-                <td class="salary-info-value">{{ number_format($users->basic) }}</td>
+                <td style="width: 70%; text-align: left; padding: 4px; border-bottom: 1px solid #ddd;">THP</td>
+                <td style="width: 30%; text-align: right; padding: 4px; border-bottom: 1px solid #ddd;">{{ number_format($users->basic) }}</td>
             </tr>
             <tr>
-                <td class="salary-info-label">Uang Lembur</td>
-                <td class="salary-info-value">{{ number_format($lembur) }}</td>
+                <td style="width: 70%; text-align: left; padding: 4px; border-bottom: 1px solid #ddd;">Uang Lembur</td>
+                <td style="width: 30%; text-align: right; padding: 4px; border-bottom: 1px solid #ddd;">{{ number_format($lembur) }}</td>
             </tr>
             <tr>
-                <td class="salary-info-label">Tunjangan Shift</td>
-                <td class="salary-info-value">{{ number_format($shift) }}</td>
+                <td style="width: 70%; text-align: left; padding: 4px; border-bottom: 1px solid #ddd;">Tunjangan Shift</td>
+                <td style="width: 30%; text-align: right; padding: 4px; border-bottom: 1px solid #ddd;">{{ number_format($shift) }}</td>
             </tr>
             @if($users->department === "Kantor Pusat Pertamina")
             <tr>
-                <td class="salary-info-label">Transportasi</td>
-                <td class="salary-info-value"> {{ number_format($transport) }}</td>
+                <td style="width: 70%; text-align: left; padding: 4px; border-bottom: 1px solid #ddd;">Transportasi</td>
+                <td style="width: 30%; text-align: right; padding: 4px; border-bottom: 1px solid #ddd;">{{ number_format($transport) }}</td>
             </tr>
             @endif
             @if($users->conveyance != 0)
             <tr>
-                <td class="salary-info-label">Tunjangan Keahlian</td>
-                <td class="salary-info-value"> {{ number_format($keahlian) }}</td>
+                <td style="width: 70%; text-align: left; padding: 4px; border-bottom: 1px solid #ddd;">Tunjangan Keahlian</td>
+                <td style="width: 30%; text-align: right; padding: 4px; border-bottom: 1px solid #ddd;">{{ number_format($keahlian) }}</td>
             </tr>
             @endif
             <tr>
-                <td class="salary-info-label">Kompensasi Lain-lain</td>
-                <td class="salary-info-value"> {{ number_format($onsite) }}</td>
+                <td style="width: 70%; text-align: left; padding: 4px; border-bottom: 1px solid #ddd;">Kompensasi Lain-lain</td>
+                <td style="width: 30%; text-align: right; padding: 4px; border-bottom: 1px solid #ddd;">{{ number_format($onsite) }}</td>
             </tr>
             <tr>
-                <td class="salary-info-label"><strong>Total Pendapatan</strong></td>
-                <td class="salary-info-value"><strong> {{ number_format($totalPendapatan) }}</strong></td>
+                <td style="width: 70%; text-align: left; padding: 4px; border-bottom: 1px solid #ddd;"><strong>Total Pendapatan</strong></td>
+                <td style="width: 30%; text-align: right; padding: 4px; border-bottom: 1px solid #ddd;"><strong>{{ number_format($totalPendapatan) }}</strong></td>
             </tr>
         </table>
     </div>
 
-    <div class="divider2"></div>
+    <div style="border-top: 3px solid #28a745; margin: 10px 0;"></div>
 
     <!-- Potongan Information -->
     <div>
-        <h4 class="section-header">Potongan</h4>
-        <table>
+        <h4 style="font-weight: bold; text-transform: uppercase; padding: 5px; font-size: 14px; color: #333; margin-bottom: 8px;">Potongan</h4>
+        <table style="width: 100%; border-collapse: collapse;">
             @if($users->esi != 0)
             <tr>
-                <td class="salary-info-label">Proporsional</td>
-                <td class="salary-info-value">{{ number_format($proporsional) }}</td>
+                <td style="width: 70%; text-align: left; padding: 4px; border-bottom: 1px solid #ddd;">Proporsional</td>
+                <td style="width: 30%; text-align: right; padding: 4px; border-bottom: 1px solid #ddd;">{{ number_format($proporsional) }}</td>
             </tr>
             @endif
             
             @if($users->department != "Pertamina Hulu Rokan")
             <tr>
-                <td class="salary-info-label">BPJSTK JHT</td>
-                <td class="salary-info-value">{{ number_format($JHT) }}</td>
+                <td style="width: 70%; text-align: left; padding: 4px; border-bottom: 1px solid #ddd;">BPJSTK JHT</td>
+                <td style="width: 30%; text-align: right; padding: 4px; border-bottom: 1px solid #ddd;">{{ number_format($JHT) }}</td>
             </tr>
             <tr>
-                <td class="salary-info-label">BPJSTK JP</td>
-                <td class="salary-info-value">{{ number_format($JP) }}</td>
+                <td style="width: 70%; text-align: left; padding: 4px; border-bottom: 1px solid #ddd;">BPJSTK JP</td>
+                <td style="width: 30%; text-align: right; padding: 4px; border-bottom: 1px solid #ddd;">{{ number_format($JP) }}</td>
             </tr>
             <tr>
-                <td class="salary-info-label">BPJS Kesehatan</td>
-                <td class="salary-info-value">{{ number_format($BPJSKes) }}</td>
+                <td style="width: 70%; text-align: left; padding: 4px; border-bottom: 1px solid #ddd;">BPJS Kesehatan</td>
+                <td style="width: 30%; text-align: right; padding: 4px; border-bottom: 1px solid #ddd;">{{ number_format($BPJSKes) }}</td>
             </tr>
             <tr>
-                <td class="salary-info-label"><strong>Total Potongan</strong></td>
-                <td class="salary-info-value"><strong>{{ number_format($totalPotongan) }}</strong></td>
+                <td style="width: 70%; text-align: left; padding: 4px; border-bottom: 1px solid #ddd;"><strong>Total Potongan</strong></td>
+                <td style="width: 30%; text-align: right; padding: 4px; border-bottom: 1px solid #ddd;"><strong>{{ number_format($totalPotongan) }}</strong></td>
             </tr>
             @else
             <tr>
-                <td class="salary-info-label">BPJSTK JHT</td>
-                <td class="salary-info-value">{{ number_format(0) }}</td>
+                <td style="width: 70%; text-align: left; padding: 4px; border-bottom: 1px solid #ddd;">BPJSTK JHT</td>
+                <td style="width: 30%; text-align: right; padding: 4px; border-bottom: 1px solid #ddd;">{{ number_format(0) }}</td>
             </tr>
             <tr>
-                <td class="salary-info-label">BPJSTK JP</td>
-                <td class="salary-info-value">{{ number_format(0) }}</td>
+                <td style="width: 70%; text-align: left; padding: 4px; border-bottom: 1px solid #ddd;">BPJSTK JP</td>
+                <td style="width: 30%; text-align: right; padding: 4px; border-bottom: 1px solid #ddd;">{{ number_format(0) }}</td>
             </tr>
             <tr>
-                <td class="salary-info-label">BPJS Kesehatan</td>
-                <td class="salary-info-value">{{ number_format(0) }}</td>
+                <td style="width: 70%; text-align: left; padding: 4px; border-bottom: 1px solid #ddd;">BPJS Kesehatan</td>
+                <td style="width: 30%; text-align: right; padding: 4px; border-bottom: 1px solid #ddd;">{{ number_format(0) }}</td>
             </tr>
             <tr>
-                <td class="salary-info-label"><strong>Total Potongan</strong></td>
-                <td class="salary-info-value"><strong>{{ number_format($proporsional) }}</strong></td>
+                <td style="width: 70%; text-align: left; padding: 4px; border-bottom: 1px solid #ddd;"><strong>Total Potongan</strong></td>
+                <td style="width: 30%; text-align: right; padding: 4px; border-bottom: 1px solid #ddd;"><strong>{{ number_format($proporsional) }}</strong></td>
             </tr>
             @endif
         </table>
     </div>
 
-    <div class="divider2"></div>
+    <div style="border-top: 3px solid #28a745; margin: 10px 0;"></div>
 
     <!-- Pajak Information -->
     <div>
-        <h4 class="section-header">Pajak</h4>
-        <table>
+        <h4 style="font-weight: bold; text-transform: uppercase; padding: 5px; font-size: 14px; color: #333; margin-bottom: 8px;">Pajak</h4>
+        <table style="width: 100%; border-collapse: collapse;">
             <tr>
-                <td class="salary-info-label">Pajak</td>
-                <td class="salary-info-value"> {{ number_format($pajak) }}</td>
+                <td style="width: 70%; text-align: left; padding: 4px; border-bottom: 1px solid #ddd;">Pajak</td>
+                <td style="width: 30%; text-align: right; padding: 4px; border-bottom: 1px solid #ddd;">{{ number_format($pajak) }}</td>
             </tr>
         </table>
     </div>  
@@ -352,44 +200,43 @@
         }
     ?>
 
-    <div class="divider2"></div>
+    <div style="border-top: 3px solid #28a745; margin: 10px 0;"></div>
 
     <!-- Benefit Information -->
     <div>
-        <h4 class="section-header">Benefit</h4>
-        <table>
+        <h4 style="font-weight: bold; text-transform: uppercase; padding: 5px; font-size: 14px; color: #333; margin-bottom: 8px;">Benefit</h4>
+        <table style="width: 100%; border-collapse: collapse;">
             @if($users->department === "Pertamina Hulu Rokan")
             <tr>
-                <td class="salary-info-label">BPJS JHT</td>
-                <td class="salary-info-value"> {{ number_format($BJHT) }}</td>
+                <td style="width: 70%; text-align: left; padding: 4px; border-bottom: 1px solid #ddd;">BPJS JHT</td>
+                <td style="width: 30%; text-align: right; padding: 4px; border-bottom: 1px solid #ddd;">{{ number_format($BJHT) }}</td>
             </tr>
             <tr>
-                <td class="salary-info-label">BPJS JP</td>
-                <td class="salary-info-value"> {{ number_format($BJP) }}</td>
+                <td style="width: 70%; text-align: left; padding: 4px; border-bottom: 1px solid #ddd;">BPJS JP</td>
+                <td style="width: 30%; text-align: right; padding: 4px; border-bottom: 1px solid #ddd;">{{ number_format($BJP) }}</td>
             </tr>
             @else
             <tr>
-                <td class="salary-info-label">BPJS Ketenagakerjaan</td>
-                <td class="salary-info-value"> {{ number_format($BJHT) }}</td>
+                <td style="width: 70%; text-align: left; padding: 4px; border-bottom: 1px solid #ddd;">BPJS Ketenagakerjaan</td>
+                <td style="width: 30%; text-align: right; padding: 4px; border-bottom: 1px solid #ddd;">{{ number_format($BJHT) }}</td>
             </tr>
             @endif
             <tr>
-                <td class="salary-info-label">BPJS Kesehatan</td>
-                <td class="salary-info-value"> {{ number_format($Bkes) }}</td>
+                <td style="width: 70%; text-align: left; padding: 4px; border-bottom: 1px solid #ddd;">BPJS Kesehatan</td>
+                <td style="width: 30%; text-align: right; padding: 4px; border-bottom: 1px solid #ddd;">{{ number_format($Bkes) }}</td>
             </tr>
             <tr>
-                <td class="salary-info-label"><strong>Total Benefit</strong></td>
-                <td class="salary-info-value"><strong> {{ number_format($totalbenefit) }}</strong></td>
+                <td style="width: 70%; text-align: left; padding: 4px; border-bottom: 1px solid #ddd;"><strong>Total Benefit</strong></td>
+                <td style="width: 30%; text-align: right; padding: 4px; border-bottom: 1px solid #ddd;"><strong>{{ number_format($totalbenefit) }}</strong></td>
             </tr>
         </table>
     </div>
 
-
-    <div class="summary-section">
-        <table>
+    <div style="margin-top: 15px; border: 2px solid #3498db; padding: 10px;">
+        <table style="width: 100%; border-collapse: collapse;">
             <tr>
-                <td class="section-header"><strong>Upah yang Diterima</strong></td>
-                <td class="salary-info-value"><strong> {{ number_format($total) }}</strong></td>
+                <td style="font-weight: bold; text-transform: uppercase; padding: 5px; font-size: 14px; color: #333;"><strong>Upah yang Diterima</strong></td>
+                <td style="width: 30%; text-align: right; padding: 4px;"><strong>{{ number_format($total) }}</strong></td>
             </tr>
         </table>
     </div>

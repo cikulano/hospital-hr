@@ -15,6 +15,11 @@ use App\Imports\SalaryImport;
 use App\Exports\SalaryFormatExport;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Mail;
+use App\Models\User;
+use App\Mail\SalarySlipMail;
+use Exception;
+use Illuminate\Support\Facades\Log;
+
 class PayrollController extends Controller
 {
     /** view page salary */
@@ -425,4 +430,45 @@ class PayrollController extends Controller
 
         return $pdf;
     }
+
+    public function sendEmail($user_id)
+{
+    try {
+        $user = User::where('user_id', $user_id)->firstOrFail();
+        Log::info('User found', ['user_id' => $user_id, 'email' => $user->email]);
+
+        $users = DB::table('users')
+            ->join('staff_salaries', 'users.user_id', 'staff_salaries.user_id')
+            ->select('users.*', 'staff_salaries.*')
+            ->where('staff_salaries.user_id', $user_id)
+            ->first();
+
+        if (!$users) {
+            throw new Exception('User salary information not found');
+        }
+
+        $logo1Src = 'data:image/png;base64,' . base64_encode(file_get_contents(public_path('img/logo.png')));
+        $logo2Src = 'data:image/png;base64,' . base64_encode(file_get_contents(public_path('img/logo2.png')));
+
+        $pdfHtml = view('report_template.salary_pdf', compact('users', 'logo1Src', 'logo2Src'))->render();
+        Log::info('PDF HTML generated');
+
+        $pdf = PDF::loadHTML($pdfHtml);
+        $pdfContent = $pdf->output();
+        Log::info('PDF generated');
+
+        $fileName = 'Slip Upah ' . $user->name . '.pdf';
+
+        Mail::to($user->email)->send(new SalarySlipMail($user, $pdfContent, $fileName));
+        Log::info('Email sent successfully');
+
+        return response()->json(['success' => true, 'message' => 'Email sent successfully']);
+    } catch (Exception $e) {
+        Log::error('Email sending failed', [
+            'error' => $e->getMessage(),
+            'trace' => $e->getTraceAsString()
+        ]);
+        return response()->json(['success' => false, 'message' => 'Failed to send email: ' . $e->getMessage()], 500);
+    }
+}
 }

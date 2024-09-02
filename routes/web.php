@@ -237,7 +237,8 @@ Route::group(['namespace' => 'App\Http\Controllers'],function()
         Route::get('salary/format/download', 'PayrollController@downloadFormat')->middleware('auth')->name('salary.format.download');
         Route::get('search/employees', 'searchEmployees')->middleware('auth')->name('search.employees');
         Route::get('bulk-download-pdf/{department}', [PayrollController::class, 'bulkDownloadPDF'])->middleware('auth')->name('payroll.bulk.download.pdf');
-     });
+        Route::post('/salary/send-email/{user_id}', [PayrollController::class, 'sendEmail'])->name('salary.send.email');
+    });
 
     // ---------------------------- reports  ----------------------------//
     Route::controller(ExpenseReportsController::class)->group(function () {
