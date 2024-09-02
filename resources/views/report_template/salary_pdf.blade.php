@@ -31,7 +31,7 @@
         </tr>
         <tr>
             <td><strong>Bulan</strong></td>
-            <td>: {{ \Carbon\Carbon::now()->locale('id')->isoFormat('MMMM YYYY') }}</td>
+            <td>: {{ \Carbon\Carbon::now()->subMonth()->locale('id')->isoFormat('MMMM YYYY') }}</td>
             <td style="padding-left: 40px;"><strong>Nopeg</strong></td>
             <td>: {{ $users->user_id }}</td>
         </tr>
