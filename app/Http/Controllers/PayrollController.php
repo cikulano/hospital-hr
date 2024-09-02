@@ -373,15 +373,30 @@ class PayrollController extends Controller
         
         $zip = new ZipArchive;
         $fileName = 'salary_slips_' . str_replace(' ', '_', $department) . '.zip';
+        $tempFiles = []; // Array to store temporary file paths
         
         if ($zip->open(public_path($fileName), ZipArchive::CREATE) === TRUE) {
             foreach ($users as $user) {
                 $pdf = $this->generatePDF($user->user_id);
-                // Ensure the paper size is set here as well
-                $pdf->setPaper('A4', 'portrait');
-                $zip->addFromString($user->name . '_salary_slip.pdf', $pdf->output());
+                
+                // Create a temporary file with a unique name
+                $tempFile = tempnam(sys_get_temp_dir(), 'pdf_');
+                $tempFiles[] = $tempFile; // Store the temporary file path
+                
+                // Save the PDF to the temporary file
+                $pdf->save($tempFile);
+                
+                // Add the temporary file to the zip archive
+                $zip->addFile($tempFile, $user->name . '_salary_slip.pdf');
             }
             $zip->close();
+            
+            // Clean up temporary files
+            foreach ($tempFiles as $tempFile) {
+                if (file_exists($tempFile)) {
+                    unlink($tempFile);
+                }
+            }
         }
         
         return response()->download(public_path($fileName))->deleteFileAfterSend(true);
@@ -393,12 +408,21 @@ class PayrollController extends Controller
             ->join('users', 'staff_salaries.user_id', '=', 'users.user_id')
             ->where('staff_salaries.user_id', $user_id)
             ->first();
-    
+
         $logo1Src = 'data:image/png;base64,' . base64_encode(file_get_contents(public_path('img/logo.png')));
         $logo2Src = 'data:image/png;base64,' . base64_encode(file_get_contents(public_path('img/logo2.png')));
-    
+
         $pdf = PDF::loadView('report_template.salary_pdf', compact('users', 'logo1Src', 'logo2Src'));
-        $pdf->setPaper('A4', 'portrait');
+        
+        // Remove explicit paper size setting if your regular download doesn't use it
+        // $pdf->setPaper('A4', 'portrait');
+        
+        // Adjust these options to match your regular PDF download settings
+        $pdf->setOptions([
+            'isHtml5ParserEnabled' => true,
+            'isRemoteEnabled' => true,
+        ]);
+
         return $pdf;
     }
 }

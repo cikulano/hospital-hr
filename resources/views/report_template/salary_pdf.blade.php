@@ -106,9 +106,16 @@
         }
         .personal-title {
             font-weight: bold;
-            min-width: 100px;
+            min-width: 50px; /* Adjust as needed for alignment */
             text-align: left;
             padding-right: 5px;
+        }
+        .personal-title-name {
+            font-weight: bold;
+            min-width: 100px; /* Adjust as needed for alignment */
+            text-align: left;
+            padding-right: 5px;
+            margin-left: 8px;
         }
         .personal-value {
             flex: 1;
@@ -124,12 +131,12 @@
         }
         .name-id-group {
             display: flex;
-            justify-content: flex-end;
+            justify-content: flex-end; /* Aligns to the right */
             width: 100%;
         }
         .name-id-item {
             width: 50%;
-            padding-left: 10px;
+            padding-left: 10px; /* Adds some space on the left */
         }
         .salary-info-label {
             width: 70%;
@@ -168,15 +175,16 @@
             <span class="personal-value">{{ $users->department }}</span>
         </div>
         <div class="personal-info-item">
-            <span class="personal-title">Nama Pekerja</span>
+            <span class="personal-title-name">Nama Pekerja</span>
             <span class="personal-value">{{ $users->name }}</span>
         </div>
         <div class="personal-info-item">
             <span class="personal-title">Bulan</span>
+            <!-- <span class="personal-value">{{ \Carbon\Carbon::now()->subMonth()->locale('id')->isoFormat('MMMM YYYY') }}</span> -->
             <span class="personal-value">{{ \Carbon\Carbon::now()->locale('id')->isoFormat('MMMM YYYY') }}</span>
         </div>
         <div class="personal-info-item">
-            <span class="personal-title">Nopeg</span>
+            <span class="personal-title-name">Nopeg</span>
             <span class="personal-value">{{ $users->user_id }}</span>
         </div>
     </div>
