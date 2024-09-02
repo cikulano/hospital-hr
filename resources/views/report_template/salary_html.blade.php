@@ -190,7 +190,7 @@
                                             <td><strong>BPJS Kesehatan</strong></td>
                                             <td class="text-right">Rp {{ number_format(0) }}</td>
                                         </tr>
-                                        <tr>
+                                        <tr class="table-primary">
                                             <td><strong>Total Potongan</strong></td>
                                             <td class="text-right"><strong>Rp {{ number_format($proporsional) }}</strong></td>
                                         </tr>
@@ -229,6 +229,7 @@
     </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
         document.getElementById('generatePdf').addEventListener('click', function() {
             // Make an AJAX request to get the PDF HTML
@@ -252,6 +253,15 @@
         });
 
         document.getElementById('sendEmail').addEventListener('click', function() {
+            Swal.fire({
+                title: 'Sending Email...',
+                text: 'Please wait while we send the email.',
+                allowOutsideClick: false,
+                didOpen: () => {
+                    Swal.showLoading();
+                }
+            });
+
             fetch('{{ route("salary.send.email", ["user_id" => $users->user_id]) }}', {
                 method: 'POST',
                 headers: {
@@ -266,17 +276,32 @@
                 return response.json();
             })
             .then(data => {
+                Swal.close();
                 if (data.success) {
-                    alert('Salary slip has been sent to your email.');
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Email Sent',
+                        text: 'Salary slip has been sent to your email.'
+                    });
                 } else {
-                    alert('Failed to send email: ' + data.message);
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Failed to Send Email',
+                        text: data.message
+                    });
                 }
             })
             .catch((error) => {
+                Swal.close();
                 console.error('Error:', error);
-                alert('An error occurred: ' + (error.message || 'Please try again.'));
+                Swal.fire({
+                    icon: 'error',
+                    title: 'An Error Occurred',
+                    text: error.message || 'Please try again.'
+                });
             });
         });
     </script>
 </body>
+
 </html>

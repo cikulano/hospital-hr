@@ -7,9 +7,9 @@
         @page { size: A4; margin: 0; }
     </style>
 </head>
-<body style="margin: 2cm; font-family: Arial, sans-serif; font-size: 12px; line-height: 1.5; color: #333; position: relative;">
+<body style="margin: 1.5cm; font-family: Arial, sans-serif; font-size: 12px; line-height: 1.5; color: #333; position: relative;">
     <!-- Watermark and Logo -->
-    <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%) rotate(-45deg); opacity: 0.1; font-size: 100px; z-index: -1;">
+    <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); opacity: 0.1; font-size: 200px; z-index: -1;">
         <img src="{{ $logo2Src }}" alt="Watermark">
     </div>
     <div style="margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center; position: relative;">
@@ -26,13 +26,13 @@
         <tr>
             <td style="width: 15%;"><strong>Lokasi</strong></td>
             <td style="width: 35%;">: {{ $users->department }}</td>
-            <td style="width: 25%; padding-left: 60px;"><strong>Nama Pekerja</strong></td>
+            <td style="width: 20%; padding-left: 40px;"><strong>Nama Pekerja</strong></td>
             <td style="width: 35%;">: {{ $users->name }}</td>
         </tr>
         <tr>
             <td><strong>Bulan</strong></td>
             <td>: {{ \Carbon\Carbon::now()->locale('id')->isoFormat('MMMM YYYY') }}</td>
-            <td style="padding-left: 60px;"><strong>Nopeg</strong></td>
+            <td style="padding-left: 40px;"><strong>Nopeg</strong></td>
             <td>: {{ $users->user_id }}</td>
         </tr>
     </table>

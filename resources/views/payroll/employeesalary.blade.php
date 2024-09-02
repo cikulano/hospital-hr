@@ -19,23 +19,7 @@
                     </div>
 
                     <div class="col-auto float-right ml-auto">
-                        <a href="#" class="btn custom-blue" data-toggle="modal" data-target="#add_salary">
-                            <i class="fa fa-plus"></i> Add Salary
-                        </a>
-                        <a href="{{ secure_route('salary.format.download') }}" class="btn btn-info">
-                            <i class="fa fa-download"></i> Download Format
-                        </a>
-                        <form action="{{ secure_route('salary.import') }}" method="POST" enctype="multipart/form-data" class="d-inline">
-                            @csrf
-                            <input type="file" name="file" id="file" class="d-none">
-                            <label for="file" class="btn btn-secondary mb-0">
-                                <i class="fa fa-upload"></i> Choose File
-                            </label>
-                            <button type="submit" class="btn btn-primary">
-                                <i class="fa fa-file-excel-o"></i> Import Excel
-                            </button>
-                        </form>
-                        <div class="btn-group">
+                    <div class="btn-group">
                             <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 Bulk Download PDF
                             </button>
@@ -47,6 +31,22 @@
                                 @endforeach
                             </div>
                         </div>
+                        <a href="#" class="btn custom-blue" data-toggle="modal" data-target="#add_salary">
+                            <i class="fa fa-plus"></i> Add Salary
+                        </a>
+                        <!-- <a href="{{ secure_route('salary.format.download') }}" class="btn btn-info">
+                            <i class="fa fa-download"></i> Download Format
+                        </a>
+                        <form action="{{ secure_route('salary.import') }}" method="POST" enctype="multipart/form-data" class="d-inline">
+                            @csrf
+                            <input type="file" name="file" id="file" class="d-none">
+                            <label for="file" class="btn btn-secondary mb-0">
+                                <i class="fa fa-upload"></i> Choose File
+                            </label>
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fa fa-file-excel-o"></i> Import Excel
+                            </button>
+                        </form> -->
                     </div>
                 </div>
             </div>
