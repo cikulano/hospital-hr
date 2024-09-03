@@ -17,7 +17,7 @@
                     </div>
                     <div class="col-auto float-right ml-auto">
                         <a href="#" class="btn add-btn" data-toggle="modal" data-target="#add_user"><i class="fa fa-plus"></i> Add User</a>
-                        <a href="{{ route('user.format.download') }}" class="btn btn-info">
+                        <!-- <a href="{{ route('user.format.download') }}" class="btn btn-info">
                             <i class="fa fa-download"></i> Download Format
                         </a>
                         <form action="{{ route('user.import') }}" method="POST" enctype="multipart/form-data" class="d-inline">
@@ -29,7 +29,7 @@
                             <button type="submit" class="btn btn-primary">
                                 <i class="fa fa-file-excel-o"></i> Import Excel
                             </button>
-                        </form>
+                        </form> -->
                     </div>
                 </div>
             </div>
@@ -86,9 +86,6 @@
                                     <th>Email</th>
                                     <th>Position</th>
                                     <th>Phone</th>
-                                    <!-- <th>Join Date</th> -->
-                                    <!-- <th>Last Login</th> -->
-                                    <!-- <th>Role</th> -->
                                     <th>Status</th>
                                     <th class="text-center">Lokasi</th>
                                     <th>Action</th>
@@ -399,6 +396,12 @@
                     {
                         data: 'action',
                         name: 'action',
+                        orderable: false,
+                        searchable: false,
+                        render: function(data, type, row) {
+                            return '<button class="btn btn-sm btn-info userUpdate mr-1" data-toggle="modal" data-target="#edit_user" data-id="' + row.id + '"><i class="fa fa-pencil"></i></button>' +
+                                   '<button class="btn btn-sm btn-danger userDelete" data-toggle="modal" data-target="#delete_user" data-id="' + row.id + '"><i class="fa fa-trash-o"></i></button>';
+                        }
                     },
                 ]
             });

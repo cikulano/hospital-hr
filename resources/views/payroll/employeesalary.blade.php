@@ -104,11 +104,11 @@
                                     <td>
                                         <h2 class="table-avatar">
                                             <a href="{{ secure_asset('employee/profile/'.$items->user_id) }}" class="avatar">
-                                                @if($items->avatar)
+                                                <!-- @if($items->avatar) -->
                                                     <img alt="" src="{{ asset_url('/assets/images/'. $items->avatar) }}">
-                                                @else
+                                                <!-- @else
                                                     <img alt="" src="{{ asset_url('/assets/images/photo_defaults.jpg') }}">
-                                                @endif
+                                                @endif -->
                                             </a>
                                             <a href="{{ url('employee/profile/'.$items->user_id) }}">{{ $items->name }}<span>{{ $items->position }}</span></a>
                                         </h2>
@@ -447,28 +447,42 @@
                 </div>
             </div>
         </div>
+
+     <!-- Add this at the end of the file, just before the closing </div> tag of "page-wrapper" -->
+        <div id="downloadModal" class="modal fade" tabindex="-1" role="dialog">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                <div class="modal-body text-center">
+                    <div id="downloadSpinner" class="spinner-border text-primary" role="status">
+                        <span class="sr-only">Loading...</span>
+                    </div>
+                    <h5 class="mt-3">Downloading PDFs for <span id="departmentName"></span>...</h5>
+                    <p class="text-muted">This may take a few moments.</p>
+                </div>
+            </div>
+            </div>
+        </div>
         <!-- /Delete Salary Modal -->
     </div>
     <!-- /Page Wrapper -->
     @section('script')
+
         <script>
-            $(document).ready(function() {
-                $('.select2s-hidden-accessible').select2({
-                    closeOnSelect: false
-                });
+        document.addEventListener('DOMContentLoaded', function() {
+            // Wrap all existing JavaScript code here
+            
+            // Select2 initialization
+            $('.select2s-hidden-accessible').select2({
+                closeOnSelect: false
             });
-        </script>
-        <script>
-            // select auto id and email
-            $('#name').on('change',function()
-            {
+
+            // Employee ID and email auto-select
+            $('#name').on('change', function() {
                 $('#employee_id').val($(this).find(':selected').data('employee_id'));
             });
-        </script>
-        {{-- update js --}}
-        <script>
-            $(document).on('click','.userSalary',function()
-            {
+
+            // Update salary
+            $(document).on('click', '.userSalary', function() {
                 var _this = $(this).parents('tr');
                 $('#e_id').val(_this.find('.id').text());
                 $('#e_name').val(_this.find('.name').text());
@@ -486,22 +500,15 @@
                 $('#e_prof_tax').val(_this.find('.prof_tax').text());
                 $('#e_labour_welfare').val(_this.find('.labour_welfare').text());
             });
-        </script>
-         {{-- delete js --}}
-    <script>
-        $(document).on('click','.salaryDelete',function()
-        {
-            var _this = $(this).parents('tr');
-            $('.e_id').val(_this.find('.id').text());
-        });
-    </script>
 
-    {{-- Curency js --}}
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Select all input fields with data-type="currency"
+            // Delete salary
+            $(document).on('click', '.salaryDelete', function() {
+                var _this = $(this).parents('tr');
+                $('.e_id').val(_this.find('.id').text());
+            });
+
+            // Currency formatting
             var currencyInputs = document.querySelectorAll('input[data-type="currency"]');
-
             currencyInputs.forEach(function(input) {
                 input.addEventListener('keyup', function() {
                     formatCurrency(this);
@@ -555,201 +562,185 @@
                 caret_pos = updated_len - original_len + caret_pos;
                 input.setSelectionRange(caret_pos, caret_pos);
             }
-        });
-    </script>
 
-    {{-- Search js --}}
-    <script>
-    $(document).ready(function() {
-        // Check if DataTable already exists
-        if ($.fn.DataTable.isDataTable('table.datatable')) {
-            // Destroy existing DataTable
-            $('table.datatable').DataTable().destroy();
-        }
-
-        // Initialize DataTable
-        var table = $('table.datatable').DataTable({
-            "pageLength": 10,
-            "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]]
-        });
-
-        $('#employeeSearch').on('input', function() {
-            var searchTerm = $(this).val().toLowerCase().trim();
-            
-            if (searchTerm === '') {
-                // If search box is empty, reset the table to show all data
-                table.search('').columns().search('').draw();
-            } else {
-                // Otherwise, perform the search
-                table.search(searchTerm).draw();
-            }
-
-            updateAutocomplete(searchTerm);
-        });
-
-        // Custom filtering function
-        $.fn.dataTable.ext.search.push(function(settings, data, dataIndex) {
-            var searchTerm = $('#employeeSearch').val().toLowerCase().trim();
-            
-            // If search term is empty, show all rows
-            if (searchTerm === '') {
-                return true;
-            }
-
-            var name = $(data[0]).text().toLowerCase(); // Extracting text from HTML content
-            var noPeg = data[1].toLowerCase();
-            var email = data[2].toLowerCase();
-            var department = data[3].toLowerCase();
-
-            return name.indexOf(searchTerm) > -1 || 
-                noPeg.indexOf(searchTerm) > -1 ||
-                email.indexOf(searchTerm) > -1 ||
-                department.indexOf(searchTerm) > -1;
-        });
-
-        // Autocomplete functionality
-        var $list = $('#employeeList');
-
-        function updateAutocomplete(input) {
-            var results = [];
-
-            table.rows().every(function(rowIdx, tableLoop, rowLoop) {
-                var data = this.data();
-                var name = $(data[0]).text().toLowerCase();
-                var noPeg = data[1].toLowerCase();
-                var email = data[2].toLowerCase();
-                var department = data[3].toLowerCase();
-
-                if (name.indexOf(input) > -1 || 
-                    noPeg.indexOf(input) > -1 ||
-                    email.indexOf(input) > -1 ||
-                    department.indexOf(input) > -1) {
-                    results.push({ name: name, noPeg: noPeg, rowIdx: rowIdx });
+            // DataTable initialization and search functionality
+            $(document).ready(function() {
+                // Check if DataTable already exists
+                if ($.fn.DataTable.isDataTable('table.datatable')) {
+                    // Destroy existing DataTable
+                    $('table.datatable').DataTable().destroy();
                 }
-            });
 
-            $list.empty();
-
-            if (results.length > 0 && input.length > 0) {
-                $.each(results, function(i, result) {
-                    $('<li>', {
-                        html: result.name + ' <span class="text-muted">(' + result.noPeg + ')</span>',
-                        click: function() {
-                            $('#employeeSearch').val(result.name.trim());
-                            $list.hide();
-                            table.search(result.name.trim()).draw();
-                        }
-                    }).appendTo($list);
+                // Initialize DataTable
+                var table = $('table.datatable').DataTable({
+                    "pageLength": 10,
+                    "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]]
                 });
-                $list.show();
-            } else {
-                $list.hide();
-            }
-        }
 
-        $(document).on('click', function(e) {
-            if (!$(e.target).closest('.form-group').length) {
-                $list.hide();
-            }
-        });
-    });
-    </script>
-
-    <script>
-        document.getElementById('file').addEventListener('change', function() {
-            let fileName = this.files[0].name;
-            this.nextElementSibling.textContent = fileName;
-        });
-    </script>
-
-    <!-- Add this at the end of the file, just before the closing </div> tag of "page-wrapper" -->
-    <div id="downloadModal" class="modal fade" tabindex="-1" role="dialog">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content">
-                <div class="modal-body text-center">
-                    <div id="downloadSpinner" class="spinner-border text-primary" role="status">
-                        <span class="sr-only">Loading...</span>
-                    </div>
-                    <h5 class="mt-3">Downloading PDFs for <span id="departmentName"></span>...</h5>
-                    <p class="text-muted">This may take a few moments.</p>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <script>
-    $(document).ready(function() {
-        $('.bulk-download').on('click', function(e) {
-            e.preventDefault();
-            var url = $(this).attr('href');
-            var department = $(this).data('department');
-            
-            // Show the modal with spinner
-            $('#departmentName').text(department);
-            $('#downloadModal').modal('show');
-
-            // Start the download
-            $.ajax({
-                url: url,
-                method: 'GET',
-                xhrFields: {
-                    responseType: 'blob'
-                },
-                success: function(data, status, xhr) {
-                    var filename = "";
-                    var disposition = xhr.getResponseHeader('Content-Disposition');
-                    if (disposition && disposition.indexOf('attachment') !== -1) {
-                        var filenameRegex = /filename[^;=\n]*=((['"]).*?\2|[^;\n]*)/;
-                        var matches = filenameRegex.exec(disposition);
-                        if (matches != null && matches[1]) filename = matches[1].replace(/['"]/g, '');
-                    }
-
-                    var blob = new Blob([data], { type: xhr.getResponseHeader('Content-Type') });
-                    if (typeof window.navigator.msSaveBlob !== 'undefined') {
-                        // IE workaround for "HTML7007: One or more blob URLs were revoked by closing the blob for which they were created. These URLs will no longer resolve as the data backing the URL has been freed."
-                        window.navigator.msSaveBlob(blob, filename);
-                    } else {
-                        var URL = window.URL || window.webkitURL;
-                        var downloadUrl = URL.createObjectURL(blob);
-
-                        if (filename) {
-                            // use HTML5 a[download] attribute to specify filename
-                            var a = document.createElement("a");
-                            // safari doesn't support this yet
-                            if (typeof a.download === 'undefined') {
-                                window.location = downloadUrl;
-                            } else {
-                                a.href = downloadUrl;
-                                a.download = filename;
-                                document.body.appendChild(a);
-                                a.click();
-                            }
-                        } else {
-                            window.location = downloadUrl;
-                        }
-
-                        setTimeout(function () { URL.revokeObjectURL(downloadUrl); }, 100); // cleanup
-                    }
-
-                    // Hide spinner, show success message
-                    $('#downloadSpinner').hide();
-                    $('.modal-body').html('<i class="fa fa-check-circle text-success fa-3x"></i><h5 class="mt-3">Download Complete!</h5>');
+                $('#employeeSearch').on('input', function() {
+                    var searchTerm = $(this).val().toLowerCase().trim();
                     
-                    // Close modal after 2 seconds
-                    setTimeout(function() {
-                        $('#downloadModal').modal('hide');
-                        // Reset modal content
-                        $('.modal-body').html('<div id="downloadSpinner" class="spinner-border text-primary" role="status"><span class="sr-only">Loading...</span></div><h5 class="mt-3">Downloading PDFs for <span id="departmentName"></span>...</h5><p class="text-muted">This may take a few moments.</p>');
-                    }, 2000);
-                },
-                error: function(xhr, status, error) {
-                    // Handle error
-                    $('#downloadSpinner').hide();
-                    $('.modal-body').html('<i class="fa fa-times-circle text-danger fa-3x"></i><h5 class="mt-3">Download Failed</h5><p>Error: ' + error + '</p>');
+                    if (searchTerm === '') {
+                        // If search box is empty, reset the table to show all data
+                        table.search('').columns().search('').draw();
+                    } else {
+                        // Otherwise, perform the search
+                        table.search(searchTerm).draw();
+                    }
+
+                    updateAutocomplete(searchTerm);
+                });
+
+                // Custom filtering function
+                $.fn.dataTable.ext.search.push(function(settings, data, dataIndex) {
+                    var searchTerm = $('#employeeSearch').val().toLowerCase().trim();
+                    
+                    // If search term is empty, show all rows
+                    if (searchTerm === '') {
+                        return true;
+                    }
+
+                    var name = $(data[0]).text().toLowerCase(); // Extracting text from HTML content
+                    var noPeg = data[1].toLowerCase();
+                    var email = data[2].toLowerCase();
+                    var department = data[3].toLowerCase();
+
+                    return name.indexOf(searchTerm) > -1 || 
+                        noPeg.indexOf(searchTerm) > -1 ||
+                        email.indexOf(searchTerm) > -1 ||
+                        department.indexOf(searchTerm) > -1;
+                });
+
+                // Autocomplete functionality
+                var $list = $('#employeeList');
+
+                function updateAutocomplete(input) {
+                    var results = [];
+
+                    table.rows().every(function(rowIdx, tableLoop, rowLoop) {
+                        var data = this.data();
+                        var name = $(data[0]).text().toLowerCase();
+                        var noPeg = data[1].toLowerCase();
+                        var email = data[2].toLowerCase();
+                        var department = data[3].toLowerCase();
+
+                        if (name.indexOf(input) > -1 || 
+                            noPeg.indexOf(input) > -1 ||
+                            email.indexOf(input) > -1 ||
+                            department.indexOf(input) > -1) {
+                            results.push({ name: name, noPeg: noPeg, rowIdx: rowIdx });
+                        }
+                    });
+
+                    $list.empty();
+
+                    if (results.length > 0 && input.length > 0) {
+                        $.each(results, function(i, result) {
+                            $('<li>', {
+                                html: result.name + ' <span class="text-muted">(' + result.noPeg + ')</span>',
+                                click: function() {
+                                    $('#employeeSearch').val(result.name.trim());
+                                    $list.hide();
+                                    table.search(result.name.trim()).draw();
+                                }
+                            }).appendTo($list);
+                        });
+                        $list.show();
+                    } else {
+                        $list.hide();
+                    }
                 }
+
+                $(document).on('click', function(e) {
+                    if (!$(e.target).closest('.form-group').length) {
+                        $list.hide();
+                        }
+                    });
+                });
+
+            // File input change event
+            var fileInput = document.getElementById('file');
+            if (fileInput) {
+                fileInput.addEventListener('change', function() {
+                    let fileName = this.files[0].name;
+                    this.nextElementSibling.textContent = fileName;
+                });
+            }
+
+            // Bulk download functionality
+            $(document).ready(function() {
+                $('.bulk-download').on('click', function(e) {
+                    e.preventDefault();
+                    var url = $(this).attr('href');
+                    var department = $(this).data('department');
+                    
+                    // Show the modal with spinner
+                    $('#departmentName').text(department);
+                    $('#downloadModal').modal('show');
+
+                    // Start the download
+                    $.ajax({
+                        url: url,
+                        method: 'GET',
+                        xhrFields: {
+                            responseType: 'blob'
+                        },
+                        success: function(data, status, xhr) {
+                            var filename = "";
+                            var disposition = xhr.getResponseHeader('Content-Disposition');
+                            if (disposition && disposition.indexOf('attachment') !== -1) {
+                                var filenameRegex = /filename[^;=\n]*=((['"]).*?\2|[^;\n]*)/;
+                                var matches = filenameRegex.exec(disposition);
+                                if (matches != null && matches[1]) filename = matches[1].replace(/['"]/g, '');
+                            }
+
+                            var blob = new Blob([data], { type: xhr.getResponseHeader('Content-Type') });
+                            if (typeof window.navigator.msSaveBlob !== 'undefined') {
+                                // IE workaround for "HTML7007: One or more blob URLs were revoked by closing the blob for which they were created. These URLs will no longer resolve as the data backing the URL has been freed."
+                                window.navigator.msSaveBlob(blob, filename);
+                            } else {
+                                var URL = window.URL || window.webkitURL;
+                                var downloadUrl = URL.createObjectURL(blob);
+
+                                if (filename) {
+                                    // use HTML5 a[download] attribute to specify filename
+                                    var a = document.createElement("a");
+                                    // safari doesn't support this yet
+                                    if (typeof a.download === 'undefined') {
+                                        window.location = downloadUrl;
+                                    } else {
+                                        a.href = downloadUrl;
+                                        a.download = filename;
+                                        document.body.appendChild(a);
+                                        a.click();
+                                    }
+                                } else {
+                                    window.location = downloadUrl;
+                                }
+
+                                setTimeout(function () { URL.revokeObjectURL(downloadUrl); }, 100); // cleanup
+                            }
+
+                            // Hide spinner, show success message
+                            $('#downloadSpinner').hide();
+                            $('.modal-body').html('<i class="fa fa-check-circle text-success fa-3x"></i><h5 class="mt-3">Download Complete!</h5>');
+                            
+                            // Close modal after 2 seconds
+                            setTimeout(function() {
+                                $('#downloadModal').modal('hide');
+                                // Reset modal content
+                                $('.modal-body').html('<div id="downloadSpinner" class="spinner-border text-primary" role="status"><span class="sr-only">Loading...</span></div><h5 class="mt-3">Downloading PDFs for <span id="departmentName"></span>...</h5><p class="text-muted">This may take a few moments.</p>');
+                            }, 2000);
+                        },
+                        error: function(xhr, status, error) {
+                            // Handle error
+                            $('#downloadSpinner').hide();
+                            $('.modal-body').html('<i class="fa fa-times-circle text-danger fa-3x"></i><h5 class="mt-3">Download Failed</h5><p>Error: ' + error + '</p>');
+                            }
+                        });
+                    });
+                });
             });
-        });
-    });
-    </script>
-@endsection
+        </script>
+    @endsection
 @endsection
