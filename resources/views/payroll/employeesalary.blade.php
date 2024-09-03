@@ -19,14 +19,14 @@
                     </div>
 
                     <div class="col-auto float-right ml-auto">
-                    <div class="btn-group">
+                        <div class="btn-group">
                             <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 Bulk Download PDF
                             </button>
                             <div class="dropdown-menu">
                                 @foreach($departments as $department)
                                     @if($department !== null)
-                                        <a class="dropdown-item" href="{{ url('/bulk-download-pdf/' . urlencode($department)) }}">{{ $department }}</a>
+                                        <a class="dropdown-item bulk-download" href="{{ route('payroll.bulk.download.pdf', ['department' => urlencode($department)]) }}" data-department="{{ $department }}">{{ $department }}</a>
                                     @endif
                                 @endforeach
                             </div>
@@ -92,7 +92,6 @@
                                     <th hidden></th>
                                     <th >Email</th>
                                     <th >Department</th>
-                                    <!-- <th>Role</th> -->
                                     <th >Salary</th>
                                     <th hidden></th>
                                     <th class="text-center">Payslip</th>
@@ -104,7 +103,13 @@
                                 <tr>
                                     <td>
                                         <h2 class="table-avatar">
-                                            <a href="{{ secure_asset('employee/profile/'.$items->user_id) }}" class="avatar"><img alt="" src="{{ asset_url('/assets/images/'. $items->avatar) }}"></a>
+                                            <a href="{{ secure_asset('employee/profile/'.$items->user_id) }}" class="avatar">
+                                                @if($items->avatar)
+                                                    <img alt="" src="{{ asset_url('/assets/images/'. $items->avatar) }}">
+                                                @else
+                                                    <img alt="" src="{{ asset_url('/assets/images/photo_defaults.jpg') }}">
+                                                @endif
+                                            </a>
                                             <a href="{{ url('employee/profile/'.$items->user_id) }}">{{ $items->name }}<span>{{ $items->position }}</span></a>
                                         </h2>
                                     </td>
@@ -656,5 +661,95 @@
             this.nextElementSibling.textContent = fileName;
         });
     </script>
-    @endsection
+
+    <!-- Add this at the end of the file, just before the closing </div> tag of "page-wrapper" -->
+    <div id="downloadModal" class="modal fade" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-body text-center">
+                    <div id="downloadSpinner" class="spinner-border text-primary" role="status">
+                        <span class="sr-only">Loading...</span>
+                    </div>
+                    <h5 class="mt-3">Downloading PDFs for <span id="departmentName"></span>...</h5>
+                    <p class="text-muted">This may take a few moments.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+    $(document).ready(function() {
+        $('.bulk-download').on('click', function(e) {
+            e.preventDefault();
+            var url = $(this).attr('href');
+            var department = $(this).data('department');
+            
+            // Show the modal with spinner
+            $('#departmentName').text(department);
+            $('#downloadModal').modal('show');
+
+            // Start the download
+            $.ajax({
+                url: url,
+                method: 'GET',
+                xhrFields: {
+                    responseType: 'blob'
+                },
+                success: function(data, status, xhr) {
+                    var filename = "";
+                    var disposition = xhr.getResponseHeader('Content-Disposition');
+                    if (disposition && disposition.indexOf('attachment') !== -1) {
+                        var filenameRegex = /filename[^;=\n]*=((['"]).*?\2|[^;\n]*)/;
+                        var matches = filenameRegex.exec(disposition);
+                        if (matches != null && matches[1]) filename = matches[1].replace(/['"]/g, '');
+                    }
+
+                    var blob = new Blob([data], { type: xhr.getResponseHeader('Content-Type') });
+                    if (typeof window.navigator.msSaveBlob !== 'undefined') {
+                        // IE workaround for "HTML7007: One or more blob URLs were revoked by closing the blob for which they were created. These URLs will no longer resolve as the data backing the URL has been freed."
+                        window.navigator.msSaveBlob(blob, filename);
+                    } else {
+                        var URL = window.URL || window.webkitURL;
+                        var downloadUrl = URL.createObjectURL(blob);
+
+                        if (filename) {
+                            // use HTML5 a[download] attribute to specify filename
+                            var a = document.createElement("a");
+                            // safari doesn't support this yet
+                            if (typeof a.download === 'undefined') {
+                                window.location = downloadUrl;
+                            } else {
+                                a.href = downloadUrl;
+                                a.download = filename;
+                                document.body.appendChild(a);
+                                a.click();
+                            }
+                        } else {
+                            window.location = downloadUrl;
+                        }
+
+                        setTimeout(function () { URL.revokeObjectURL(downloadUrl); }, 100); // cleanup
+                    }
+
+                    // Hide spinner, show success message
+                    $('#downloadSpinner').hide();
+                    $('.modal-body').html('<i class="fa fa-check-circle text-success fa-3x"></i><h5 class="mt-3">Download Complete!</h5>');
+                    
+                    // Close modal after 2 seconds
+                    setTimeout(function() {
+                        $('#downloadModal').modal('hide');
+                        // Reset modal content
+                        $('.modal-body').html('<div id="downloadSpinner" class="spinner-border text-primary" role="status"><span class="sr-only">Loading...</span></div><h5 class="mt-3">Downloading PDFs for <span id="departmentName"></span>...</h5><p class="text-muted">This may take a few moments.</p>');
+                    }, 2000);
+                },
+                error: function(xhr, status, error) {
+                    // Handle error
+                    $('#downloadSpinner').hide();
+                    $('.modal-body').html('<i class="fa fa-times-circle text-danger fa-3x"></i><h5 class="mt-3">Download Failed</h5><p>Error: ' + error + '</p>');
+                }
+            });
+        });
+    });
+    </script>
+@endsection
 @endsection

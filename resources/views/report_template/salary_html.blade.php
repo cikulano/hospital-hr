@@ -42,8 +42,8 @@
                         <div class="row mb-4">
                             <div class="col-sm-6">
                                 <h4 class="payslip-title">
-                                    <!-- Slip Upah {{ \Carbon\Carbon::now()->subMonth()->locale('id')->isoFormat('MMMM YYYY') }}  -->
-                                    Slip Upah {{ \Carbon\Carbon::now()->locale('id')->isoFormat('MMMM YYYY') }}
+                                    Slip Upah {{ \Carbon\Carbon::now()->subMonth()->locale('id')->isoFormat('MMMM YYYY') }} 
+                                    <!-- Slip Upah {{ \Carbon\Carbon::now()->locale('id')->isoFormat('MMMM YYYY') }} -->
                                 </h4>
                             </div>
                             <div class="col-sm-6 text-right">
