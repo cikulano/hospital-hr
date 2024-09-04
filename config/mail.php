@@ -14,7 +14,7 @@ return [
     |
     */
 
-    'default' => env('MAIL_MAILER', 'log'),
+    'default' => env('MAIL_MAILER', 'resend'),
 
     /*
     |--------------------------------------------------------------------------
@@ -96,6 +96,17 @@ return [
         ],
 
     ],
+
+    'transporters' => [
+    'resend' => [
+        'host' => 'api.resend.com', // The API endpoint for Resend.
+        'port' => 443, // The port number for secure connections (HTTPS).
+        'encryption' => 'tls', // Encryption method for secure email transport.
+        'username' => env('RESEND_API_KEY'), // Your Resend API key. Use the `env` function to fetch it from the `.env` file.
+        'password' => '', // Typically, for API-based services like Resend, you may not need a password.
+    ],
+],
+
 
     /*
     |--------------------------------------------------------------------------
