@@ -29,6 +29,7 @@
         .net-salary {
             font-size: 1.2em;
             color: #28a745;
+            text-align: right;
         }
     </style>
 </head>
@@ -199,33 +200,33 @@
                                         </tbody>
                                     </table>
                                 </div>
-                            </div>
+                                <div class="mt-3">
+                                    <p class="net-salary"><strong>Net Salary: Rp {{ number_format($total) }}</strong></p>
+                                </div>
+                            </div> 
                         </div>
-
-                        <div class="row mt-4">
-                            <div class="col-sm-12 text-right">
-                                <p class="net-salary"><strong>Net Salary: Rp {{ number_format($total) }}</strong></p>
-                            </div>
-                        </div>
+                    </div>
+                </div>
+                <div class="row mt-4">
+                    <div class="col-sm-6 text-left">
+                        <a href="{{ url()->previous() }}" class="btn btn-secondary mr-2">
+                            <i class="fas fa-arrow-left"></i> Back
+                        </a>
+                        <a href="{{ secure_route('home') }}" class="btn btn-info">
+                            <i class="fas fa-home"></i> Home
+                        </a>
+                    </div>
+                    <div class="col-sm-6 text-right">
+                        <button id="generatePdf" class="btn btn-primary mr-2">
+                            <i class="fas fa-file-pdf"></i> PDF
+                        </button>
+                        <!-- <button id="sendEmail" class="btn btn-success">
+                            <i class="fas fa-envelope"></i> Email
+                        </button> -->
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-
-    <div class="text-center mt-4">
-        <a href="{{ url()->previous() }}" class="btn btn-secondary mr-2">
-            <i class="fas fa-arrow-left"></i> Back
-        </a>
-        <a href="{{ secure_route('home') }}" class="btn btn-info mr-2">
-            <i class="fas fa-home"></i> Home
-        </a>
-        <button id="generatePdf" class="btn btn-primary mr-2">
-            <i class="fas fa-file-pdf"></i> Generate PDF
-        </button>
-        <button id="sendEmail" class="btn btn-success">
-            <i class="fas fa-envelope"></i> Send to Email
-        </button>
     </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
