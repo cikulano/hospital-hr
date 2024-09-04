@@ -3,7 +3,11 @@
         'name' => 'laravel/laravel',
         'pretty_version' => 'dev-main',
         'version' => 'dev-main',
+<<<<<<< HEAD
         'reference' => '646fc9f2cda1232af68a109d46a2486c390d9a46',
+=======
+        'reference' => 'fb5cad74954b411f3f8cc3f8157591796244f4f5',
+>>>>>>> 15010c241c6d1d52dc0bca6cea00caa24f71b72d
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -436,7 +440,11 @@
         'laravel/laravel' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
+<<<<<<< HEAD
             'reference' => '646fc9f2cda1232af68a109d46a2486c390d9a46',
+=======
+            'reference' => 'fb5cad74954b411f3f8cc3f8157591796244f4f5',
+>>>>>>> 15010c241c6d1d52dc0bca6cea00caa24f71b72d
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
@@ -944,6 +952,24 @@
             'reference' => '91039bc1faa45ba123c4328958e620d382ec7088',
             'type' => 'library',
             'install_path' => __DIR__ . '/../ramsey/uuid',
+            'aliases' => array(),
+            'dev_requirement' => false,
+        ),
+        'resend/resend-laravel' => array(
+            'pretty_version' => 'v0.14.0',
+            'version' => '0.14.0.0',
+            'reference' => '74a5a00efc17935918b6f20f2eb4553ecad3b164',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../resend/resend-laravel',
+            'aliases' => array(),
+            'dev_requirement' => false,
+        ),
+        'resend/resend-php' => array(
+            'pretty_version' => 'v0.12.0',
+            'version' => '0.12.0.0',
+            'reference' => '37fb79bb8160ce2de521bf37484ba59e89236521',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../resend/resend-php',
             'aliases' => array(),
             'dev_requirement' => false,
         ),
