@@ -20,6 +20,7 @@ class SalaryFormatExport implements FromArray, WithHeadings
         return [
             'user_id',
             'name',
+            'salary',
             'basic',
             'da',
             'hra',

@@ -34,7 +34,7 @@
                         <a href="#" class="btn custom-blue" data-toggle="modal" data-target="#add_salary">
                             <i class="fa fa-plus"></i> Add Salary
                         </a>
-                        <!-- <a href="{{ secure_route('salary.format.download') }}" class="btn btn-info">
+                        <a href="{{ secure_route('salary.format.download') }}" class="btn btn-info">
                             <i class="fa fa-download"></i> Download Format
                         </a>
                         <form action="{{ secure_route('salary.import') }}" method="POST" enctype="multipart/form-data" class="d-inline">
@@ -46,7 +46,7 @@
                             <button type="submit" class="btn btn-primary">
                                 <i class="fa fa-file-excel-o"></i> Import Excel
                             </button>
-                        </form> -->
+                        </form>
                     </div>
                 </div>
             </div>
@@ -130,7 +130,7 @@
                                     <td hidden class="labour_welfare">{{ $items->labour_welfare }}</td>
                                     <td >{{ $items->email }}</td>
                                     <td >{{ $items->department }}</td>
-                                    <td >Rp {{ number_format($items->basic, 0, ',', '.') }}</td>
+                                    <td >Rp {{ number_format($items->salary, 0, ',', '.') }}</td>
                                     <td hidden class="salary">{{ $items->basic }}</td>
 
                                     <td class="text-center">
@@ -311,8 +311,8 @@
                                     </div> 
                                     <div class="form-group">
                                         <label>Proporsional</label>
-                                        <input class="form-control @error('esi') is-invalid @enderror" type="number" name="esi" id="esi" value="{{ old('esi') }}" placeholder="Masukan Hari Proporsional">
-                                        @error('esi')
+                                        <input class="form-control @error('labour_welfare') is-invalid @enderror" type="number" name="labour_welfare" id="labour_welfare" value="{{ old('labour_welfare') }}" placeholder="Masukan Hari Proporsional">
+                                        @error('labour_welfare')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
                                             </span>
@@ -402,7 +402,7 @@
                                     </div> 
                                     <div class="form-group">
                                         <label>Proporsional</label>
-                                        <input class="form-control" type="text" name="esi" id="e_esi" value="">
+                                        <input class="form-control" type="text" name="labour_welfare" id="e_labour_welfare" value="">
                                     </div>
                                     <div class="form-group">
                                         <label>BPJS Keshatan</label>

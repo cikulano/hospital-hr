@@ -13,6 +13,7 @@ class SalaryImport implements ToModel, WithHeadingRow
         return new StaffSalary([
             'user_id' => $row['user_id'],
             'name' => $row['name'],
+            'salary' => $row['salary'],
             'basic' => $row['basic'],
             'da' => $row['da'],
             'hra' => $row['hra'],

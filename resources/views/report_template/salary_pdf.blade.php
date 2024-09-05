@@ -79,10 +79,10 @@
         $totalPendapatan = (int)$users->basic + $lembur + $shift + $onsite;
 
         $pajak = (int)$users->tds;
-        $JHT = (int)$users->basic * 0.02;
-        $JP = (int)$users->basic * 0.01;
+        $JHT = (int)$users->leave;
+        $JP = (int)$users->prof_tax;
         $BPJSKes = (int)$users->pf;
-        $proporsional = (int) $users->esi;
+        $proporsional = (int) $users->labour_welfare;
         $totalPotongan = $JHT + $JP + $BPJSKes ;
         
         // Only add transport to total if department is "Kantor Pusat Pertamina"
@@ -96,7 +96,7 @@
         }
 
         // Only add to total if proportional is not 0
-        if ($users->esi != 0) {
+        if ($users->labour_welfare != 0) {
             $totalPotongan += $proporsional;
         }
 
@@ -106,7 +106,7 @@
             $totalPotongan -= $BPJSKes;
         }
         
-        $total = $totalPendapatan - $totalPotongan;
+        $total = $users->salary;
     ?>
 
     <!-- Pendapatan Information -->
@@ -154,7 +154,7 @@
     <div>
         <h4 style="font-weight: bold; text-transform: uppercase; padding: 2px; font-size: 14px; color: #333; margin-bottom: 8px;">Potongan</h4>
         <table style="width: 100%; border-collapse: collapse;">
-            @if($users->esi != 0)
+            @if($users->labour_welfare != 0)
             <tr>
                 <td style="width: 70%; text-align: left; padding: 4px; border-bottom: 1px solid #ddd;">Proporsional</td>
                 <td style="width: 30%; text-align: right; padding: 4px; border-bottom: 1px solid #ddd;">{{ number_format($proporsional) }}</td>

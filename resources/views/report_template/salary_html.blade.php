@@ -68,18 +68,18 @@
 
                         <!-- Salary Information -->
                         <?php
-                            $lembur = (int)$users->da;
-                            $shift = (int)$users->hra;
-                            $keahlian = (int)$users->conveyance;
-                            $transport = (int)$users->allowance;
-                            $onsite = (int)$users->medical_allowance;
-                            $totalPendapatan = (int)$users->basic + $lembur + $shift + $onsite;
+                            $lembur = $users->da;
+                            $shift = $users->hra;
+                            $keahlian = $users->conveyance;
+                            $transport = $users->allowance;
+                            $onsite = $users->medical_allowance;
+                            $totalPendapatan = $users->basic + $lembur + $shift + $onsite;
 
-                            $pajak = (int)$users->tds;
-                            $JHT = (int)$users->basic * 0.02;
-                            $JP = (int)$users->basic * 0.01;
-                            $BPJSKes = (int)$users->pf;
-                            $proporsional = (int) $users->esi;
+                            $pajak = $users->tds;
+                            $JHT = $users->leave;
+                            $JP = $users->prof_tax;
+                            $BPJSKes = $users->pf;
+                            $proporsional = $users->labour_welfare;
                             $totalPotongan = $JHT + $JP + $BPJSKes ;
                             
                             // Only add transport to total if department is "Kantor Pusat Pertamina"
@@ -93,7 +93,7 @@
                             }
 
                             // Only add to total if proportional is not 0
-                            if ($users->esi != 0) {
+                            if ($users->labour_welfare != 0) {
                                 $totalPotongan += $proporsional;
                             }
 
@@ -103,7 +103,7 @@
                                 $totalPotongan -= $BPJSKes;
                             }
                             
-                            $total = $totalPendapatan - $totalPotongan;
+                            $total = $users->salary;
                         ?>
 
                         <div class="row">
@@ -154,7 +154,7 @@
                                     <h4 class="mb-3"><strong>Potongan</strong></h4>
                                     <table class="table table-bordered">
                                         <tbody>
-                                        @if($users->esi != 0)
+                                        @if($users->labour_welfare != 0)
                                         <tr>
                                         <td><strong>Proporsional</strong></td>
                                             <td class="text-right">{{ number_format($proporsional) }}</td>
