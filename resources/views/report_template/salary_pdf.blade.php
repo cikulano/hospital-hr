@@ -4,20 +4,50 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <title>Employee Salary Report</title>
     <style>
-        @page { size: A4; margin: 0; }
+        @page { size: A4; margin: 1cm; }
+        body { margin: 0; padding: 0 1cm; font-family: Arial, sans-serif; font-size: 12px; line-height: 1.5; color: #333; }
+        .header { 
+            display: table;
+            width: 100%;
+            margin-bottom: 20px;
+        }
+        .header-cell {
+            display: table-cell;
+            vertical-align: middle;
+        }
+        .logo { 
+            max-width: 120px;
+            max-height: 60px;
+            width: auto;
+            height: auto;
+        }
+        .title { 
+            text-align: center;
+        }
+        h3 { 
+            color: #3498db; 
+            margin: 0; 
+            font-size: 24px; 
+        }
     </style>
 </head>
-<body style="margin: 1.5cm; font-family: Arial, sans-serif; font-size: 12px; line-height: 1.5; color: #333; position: relative;">
-    <!-- Watermark and Logo -->
+<body>
+    <!-- Watermark -->
     <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); opacity: 0.1; font-size: 200px; z-index: -1;">
         <img src="{{ $logo2Src }}" alt="Watermark">
     </div>
-    <div style="margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center; position: relative;">
-        <img src="{{ $logo1Src }}" alt="Company Logo 1" style="max-width: 160px; max-height: 80px; width: auto; height: auto; object-fit: contain; position: absolute; top: 0; left: 0;">
-        <div style="text-align: center; flex-grow: 1;">
-            <h3 style="color: #3498db; margin: 0; font-size: 30px;">Pay Slip</h3>
+
+    <!-- Header -->
+    <div class="header">
+        <div class="header-cell" style="width: 25%;">
+            <img src="{{ $logo1Src }}" alt="Company Logo 1" class="logo">
         </div>
-        <img src="{{ $logo2Src }}" alt="Company Logo 2" style="max-width: 120px; max-height: 50px; width: auto; height: auto; object-fit: contain; position: absolute; top: 0; right: 0;">
+        <div class="header-cell title" style="width: 50%;">
+            <h3>Pay Slip</h3>
+        </div>
+        <div class="header-cell" style="width: 25%; text-align: right;">
+            <img src="{{ $logo2Src }}" alt="Company Logo 2" class="logo">
+        </div>
     </div>
 
     <div style="border-top: 2px solid #3498db; margin: 10px 0;"></div>
@@ -26,7 +56,7 @@
         <tr>
             <td style="width: 15%;"><strong>Lokasi</strong></td>
             <td style="width: 35%;">: {{ $users->department }}</td>
-            <td style="width: 20%; padding-left: 40px;"><strong>Nama Pekerja</strong></td>
+            <td style="width: 25%; padding-left: 40px;"><strong>Nama Pekerja</strong></td>
             <td style="width: 35%;">: {{ $users->name }}</td>
         </tr>
         <tr>
@@ -122,7 +152,7 @@
 
     <!-- Potongan Information -->
     <div>
-        <h4 style="font-weight: bold; text-transform: uppercase; padding: 5px; font-size: 14px; color: #333; margin-bottom: 8px;">Potongan</h4>
+        <h4 style="font-weight: bold; text-transform: uppercase; padding: 2px; font-size: 14px; color: #333; margin-bottom: 8px;">Potongan</h4>
         <table style="width: 100%; border-collapse: collapse;">
             @if($users->esi != 0)
             <tr>
@@ -169,7 +199,7 @@
         </table>
     </div>
 
-    <div style="border-top: 3px solid #28a745; margin: 10px 0;"></div>
+    <div style="border-top: 3px solid #28a745; margin: 5px 0;"></div>
 
     <!-- Pajak Information -->
     <div>
@@ -200,7 +230,7 @@
         }
     ?>
 
-    <div style="border-top: 3px solid #28a745; margin: 10px 0;"></div>
+    <div style="border-top: 3px solid #28a745; margin: 5px 0;"></div>
 
     <!-- Benefit Information -->
     <div>

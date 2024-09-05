@@ -348,8 +348,9 @@
 	<script src="{{ asset_url('assets/js/bootstrap.min.js') }}"></script>
 
 	<!-- Chart JS -->
-	<script src="{{ asset_url('assets/plugins/morris/morris.min.js') }}"></script>
-	<script src="{{ asset_url('assets/plugins/raphael/raphael.min.js') }}"></script>
+	<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+	<!-- <script src="{{ asset_url('assets/plugins/raphael/raphael.min.js') }}"></script>
+	<script src="{{ asset_url('assets/plugins/morris/morris.min.js') }}"></script> -->
 	<script src="{{ asset_url('assets/js/chart.js') }}"></script>
 	<script src="{{ asset_url('assets/js/Chart.min.js') }}"></script>
 	<script src="{{ asset_url('assets/js/line-chart.js') }}"></script>	

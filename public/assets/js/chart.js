@@ -1,73 +1,50 @@
-$(document).ready(function() {
+document.addEventListener('DOMContentLoaded', function() {
 
-    // Bar Chart
-    if ($('#bar-charts').length > 0) {
-        Morris.Bar({
-            element: 'bar-charts',
-            data: [
-                { y: '2006', a: 100, b: 90 },
-                { y: '2007', a: 75,  b: 65 },
-                { y: '2008', a: 50,  b: 40 },
-                { y: '2009', a: 75,  b: 65 },
-                { y: '2010', a: 50,  b: 40 },
-                { y: '2011', a: 75,  b: 65 },
-                { y: '2012', a: 100, b: 90 }
-            ],
-            xkey: 'y',
-            ykeys: ['a', 'b'],
-            labels: ['Total Income', 'Total Outcome'],
-            lineColors: ['#f43b48','#453a94'],
-            lineWidth: '3px',
-            barColors: ['#f43b48','#453a94'],
-            resize: true,
-            redraw: true
-        });
+    function initializeCharts() {
+        console.log('Initializing charts');
+        
+        if (typeof Chart === 'undefined') {
+            console.error('Chart.js is not defined. Make sure it is loaded correctly.');
+            return;
+        }
+
+        // Bar Chart
+        if (document.getElementById('bar-charts')) {
+            console.log('Initializing bar chart');
+            try {
+                new Chart(document.getElementById('bar-charts'), {
+                    type: 'bar',
+                    data: {
+                        labels: ['2006', '2007', '2008', '2009', '2010', '2011', '2012'],
+                        datasets: [{
+                            label: 'Total Income',
+                            data: [100, 75, 50, 75, 50, 75, 100],
+                            backgroundColor: '#f43b48'
+                        }, {
+                            label: 'Total Outcome',
+                            data: [90, 65, 40, 65, 40, 65, 90],
+                            backgroundColor: '#453a94'
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        scales: {
+                            y: {
+                                beginAtZero: true
+                            }
+                        }
+                    }
+                });
+            } catch (error) {
+                console.error('Error initializing bar chart:', error);
+            }
+        } else {
+            console.warn('Bar chart container not found');
+        }
+
+        // Add similar blocks for line charts and other charts as needed
     }
-    
-    // Line Chart for graph-container
-    if ($('#graph-container').length) {
-        new Morris.Line({
-            element: 'graph-container',
-            data: [
-                { y: '2006', a: 50, b: 90 },
-                { y: '2007', a: 75,  b: 65 },
-                { y: '2008', a: 50,  b: 40 },
-                { y: '2009', a: 75,  b: 65 },
-                { y: '2010', a: 50,  b: 40 },
-                { y: '2011', a: 75,  b: 65 },
-                { y: '2012', a: 100, b: 50 }
-            ],
-            xkey: 'y',
-            ykeys: ['a', 'b'],
-            labels: ['Total Sales', 'Total Revenue'],
-            lineColors: ['#f43b48','#453a94'],
-            lineWidth: '3px',
-            resize: true,
-            redraw: true
-        });
-    }
-    
-    // Line Chart for line-charts
-    if ($('#line-charts').length) {
-        Morris.Line({
-            element: 'line-charts',
-            data: [
-                { y: '2006', a: 50, b: 90 },
-                { y: '2007', a: 75,  b: 65 },
-                { y: '2008', a: 50,  b: 40 },
-                { y: '2009', a: 75,  b: 65 },
-                { y: '2010', a: 50,  b: 40 },
-                { y: '2011', a: 75,  b: 65 },
-                { y: '2012', a: 100, b: 50 }
-            ],
-            xkey: 'y',
-            ykeys: ['a', 'b'],
-            labels: ['Total Sales', 'Total Revenue'],
-            lineColors: ['#f43b48','#453a94'],
-            lineWidth: '3px',
-            resize: true,
-            redraw: true
-        });
-    }
-    
+
+    // Initialize charts immediately
+    initializeCharts();
 });

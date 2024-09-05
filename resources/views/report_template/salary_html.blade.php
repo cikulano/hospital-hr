@@ -220,9 +220,9 @@
                         <button id="generatePdf" class="btn btn-primary mr-2">
                             <i class="fas fa-file-pdf"></i> PDF
                         </button>
-                        <!-- <button id="sendEmail" class="btn btn-success">
+                        <button id="sendEmail" class="btn btn-success">
                             <i class="fas fa-envelope"></i> Email
-                        </button> -->
+                        </button>
                     </div>
                 </div>
             </div>
