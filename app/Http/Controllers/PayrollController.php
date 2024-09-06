@@ -255,88 +255,88 @@ class PayrollController extends Controller
         return Excel::download(new SalaryFormatExport, 'salary_import_format.xlsx');
     }
 
+    /** Search Function */
     public function getSalaryData(Request $request)
     {
         $draw = $request->get('draw');
         $start = $request->get("start");
         $rowperpage = $request->get("length");
-    
+
         $columnIndex_arr = $request->get('order');
         $columnName_arr = $request->get('columns');
         $order_arr = $request->get('order');
         $search_arr = $request->get('search');
-    
+
         $columnIndex = $columnIndex_arr[0]['column'];
         $columnName = $columnName_arr[$columnIndex]['data'];
         $columnSortOrder = $order_arr[0]['dir'];
         $searchValue = $search_arr['value'];
-    
+
         $user_name = $request->user_name;
         $position = $request->position;
         $department = $request->department;
-    
-        $totalRecords = StaffSalary::select('count(*) as allcount')
-            ->join('users', 'staff_salaries.user_id', '=', 'users.user_id')
-            ->count();
-    
-        $totalRecordswithFilter = StaffSalary::select('count(*) as allcount')
-            ->join('users', 'staff_salaries.user_id', '=', 'users.user_id')
-            ->where(function ($query) use ($searchValue, $user_name, $position, $department) {
-                $query->where('users.name', 'like', '%' . $searchValue . '%')
+
+        $query = StaffSalary::select(
+            'staff_salaries.*', 
+            'users.name', 
+            'users.email', 
+            'users.position', 
+            'users.department', 
+            'users.avatar'
+        )
+        ->join('users', 'staff_salaries.user_id', '=', 'users.user_id');
+
+        // Apply search filters
+        if ($searchValue || $user_name || $position || $department) {
+            $query->where(function ($q) use ($searchValue, $user_name, $position, $department) {
+                if ($searchValue) {
+                    $q->where('users.name', 'like', '%' . $searchValue . '%')
                     ->orWhere('users.user_id', 'like', '%' . $searchValue . '%')
                     ->orWhere('users.email', 'like', '%' . $searchValue . '%');
-    
+                }
                 if ($user_name) {
-                    $query->where('users.name', 'like', '%' . $user_name . '%');
+                    $q->where('users.name', 'like', '%' . $user_name . '%');
                 }
                 if ($position) {
-                    $query->where('users.position', $position);
+                    $q->where('users.position', $position);
                 }
                 if ($department) {
-                    $query->where('users.department', $department);
+                    $q->where('users.department', $department);
                 }
-            })
-            ->count();
-    
-        $records = StaffSalary::select('staff_salaries.*', 'users.name', 'users.email', 'users.position', 'users.department', 'users.avatar')
-            ->join('users', 'staff_salaries.user_id', '=', 'users.user_id')
-            ->where(function ($query) use ($searchValue, $user_name, $position, $department) {
-                $query->where('users.name', 'like', '%' . $searchValue . '%')
-                    ->orWhere('users.user_id', 'like', '%' . $searchValue . '%')
-                    ->orWhere('users.email', 'like', '%' . $searchValue . '%');
-    
-                if ($user_name) {
-                    $query->where('users.name', 'like', '%' . $user_name . '%');
-                }
-                if ($position) {
-                    $query->where('users.position', $position);
-                }
-                if ($department) {
-                    $query->where('users.department', $department);
-                }
-            })
-            ->skip($start)
-            ->take($rowperpage)
-            ->get();
-    
+            });
+        }
+
+        $totalRecords = $query->count();
+        $totalRecordswithFilter = $totalRecords; // Since we've already applied the filters
+
+        // Apply sorting
+        if ($columnName && $columnSortOrder) {
+            $query->orderBy($columnName, $columnSortOrder);
+        }
+
+        // Apply pagination
+        $records = $query->skip($start)
+                        ->take($rowperpage)
+                        ->get();
+
         $data_arr = [];
-    
+
         foreach ($records as $record) {
             $avatar = asset_url('/assets/images/' . $record->avatar);
             $name = '<h2 class="table-avatar">
                         <a href="'.secure_asset('employee/profile/'.$record->user_id).'" class="avatar"><img alt="" src="'.$avatar.'"></a>
                         <a href="'.url('employee/profile/'.$record->user_id).'">'.$record->name.'<span>'.$record->position.'</span></a>
-                     </h2>';
-    
+                    </h2>';
+
             $generate_slip = '<a class="btn btn-sm btn-success" href="'.route('extra.report.html', ['user_id' => $record->user_id]).'" target="_blank">Generate Slip</a>';
-    
+
             $action = '<a class="userSalary btn-edit" href="#" data-toggle="modal" data-target="#edit_salary">
-                          <i class="fa fa-pencil"></i>
-                       </a>
-                       <a class="salaryDelete btn-delete" href="#" data-toggle="modal" data-target="#delete_salary">
-                          <i class="fa fa-trash-o"></i>
-                       </a>';
-    
+                        <i class="fa fa-pencil"></i>
+                    </a>
+                    <a class="salaryDelete btn-delete" href="#" data-toggle="modal" data-target="#delete_salary">
+                        <i class="fa fa-trash-o"></i>
+                    </a>';
+
             $data_arr[] = [
                 "name" => $name,
                 "user_id" => $record->user_id,
@@ -360,14 +360,14 @@ class PayrollController extends Controller
                 "action" => $action
             ];
         }
-    
+
         $response = [
             "draw" => intval($draw),
             "iTotalRecords" => $totalRecords,
             "iTotalDisplayRecords" => $totalRecordswithFilter,
             "aaData" => $data_arr
         ];
-    
+
         return response()->json($response);
     }
     
