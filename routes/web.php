@@ -223,7 +223,7 @@ Route::group(['namespace' => 'App\Http\Controllers'],function()
     // ------------------------ form payroll  ----------------------------//
     Route::controller(PayrollController::class)->group(function () {
         Route::get('form/salary/page', 'salary')->middleware('auth')->name('form/salary/page');
-        Route::post('form/salary/save','saveRecord')->middleware('auth')->name('form/salary/save');
+        Route::post('form/salary/save', 'saveRecord')->middleware('auth')->name('form/salary/save');
         Route::post('form/salary/update', 'updateRecord')->middleware('auth')->name('form/salary/update');
         Route::post('form/salary/delete', 'deleteRecord')->middleware('auth')->name('form/salary/delete');
         Route::get('form/salary/view/{user_id}', 'salaryView')->middleware('auth');

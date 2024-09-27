@@ -15,22 +15,23 @@ class CreateStaffSalariesTable extends Migration
     {
         Schema::create('staff_salaries', function (Blueprint $table) {
             $table->id();
-            $table->string('name')->nullable();
-            $table->string('user_id')->nullable();
-            $table->string('salary')->nullable();
-            $table->string('basic')->nullable();
-            $table->string('da')->nullable();
-            $table->string('hra')->nullable();
-            $table->string('conveyance')->nullable();
-            $table->string('allowance')->nullable();
-            $table->string('medical_allowance')->nullable();
-            $table->string('tds')->nullable();
-            $table->string('esi')->nullable();
-            $table->string('pf')->nullable();
-            $table->string('leave')->nullable();
-            $table->string('prof_tax')->nullable();
-            $table->string('labour_welfare')->nullable();
+            $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
+            $table->decimal('salary', 15, 2)->nullable();
+            $table->decimal('thp', 15, 2)->nullable();
+            $table->decimal('lembur', 15, 2)->nullable();
+            $table->decimal('shift', 15, 2)->nullable();
+            $table->decimal('tunjangan_keahlian', 15, 2)->nullable();
+            $table->decimal('transport', 15, 2)->nullable();
+            $table->decimal('kompensasi', 15, 2)->nullable();
+            $table->decimal('pajak', 15, 2)->nullable();
+            $table->decimal('potongan_bpjskes', 15, 2)->nullable();
+            $table->decimal('potongan_jp', 15, 2)->nullable();
+            $table->decimal('potongan_jht', 15, 2)->nullable();
+            $table->decimal('benefit_bpjskes', 15, 2)->nullable();
+            $table->decimal('benefit_jp', 15, 2)->nullable();
+            $table->decimal('benefit_jht', 15, 2)->nullable();
             $table->timestamps();
+            
         });
     }
 

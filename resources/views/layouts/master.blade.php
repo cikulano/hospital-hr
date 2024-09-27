@@ -32,6 +32,7 @@
 	<link rel="stylesheet" href="{{ asset_url('assets/css/toastr.min.css') }}">
 	<script src="{{ asset_url('assets/js/toastr_jquery.min.js') }}"></script>
 	<script src="{{ asset_url('assets/js/toastr.min.js') }}"></script>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
 </head>
 
 <body>
@@ -379,5 +380,8 @@
 	<script src="{{ asset_url('assets/js/app.js') }}"></script>
 	
 	@yield('script')
+
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+	{!! Toastr::message() !!}
 
 </html>

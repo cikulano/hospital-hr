@@ -12,6 +12,8 @@ use App\Models\User;
 use Carbon\Carbon;
 use Session;
 use Brian2694\Toastr\Facades\Toastr;
+use App\Models\StaffSalary;
+
 
 class LoginController extends Controller
 {

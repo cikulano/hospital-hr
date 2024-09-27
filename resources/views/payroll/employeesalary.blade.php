@@ -17,13 +17,12 @@
                             <li class="breadcrumb-item active">Salary</li>
                         </ul>
                     </div>
-
                     <div class="col-auto float-right ml-auto">
                         <div class="btn-group">
                             <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Bulk Download PDF
+                                <i class="fa fa-file-pdf-o"></i>
                             </button>
-                            <div class="dropdown-menu">
+                            <div class="dropdown-menu dropdown-menu-right">
                                 @foreach($departments as $department)
                                     @if($department !== null)
                                         <a class="dropdown-item bulk-download" href="{{ route('payroll.bulk.download.pdf', ['department' => urlencode($department)]) }}" data-department="{{ $department }}">{{ $department }}</a>
@@ -32,24 +31,32 @@
                             </div>
                         </div>
                         <a href="#" class="btn custom-blue" data-toggle="modal" data-target="#add_salary">
-                            <i class="fa fa-plus"></i> Add Salary
+                            <i class="fa fa-plus"></i>
                         </a>
-                        <a href="{{ secure_route('salary.format.download') }}" class="btn btn-info">
-                            <i class="fa fa-download"></i> Download Format
-                        </a>
-                        <form action="{{ secure_route('salary.import') }}" method="POST" enctype="multipart/form-data" class="d-inline">
-                            @csrf
-                            <input type="file" name="file" id="file" class="d-none">
-                            <label for="file" class="btn btn-secondary mb-0">
-                                <i class="fa fa-upload"></i> Choose File
-                            </label>
-                            <button type="submit" class="btn btn-primary">
-                                <i class="fa fa-file-excel-o"></i> Import Excel
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="fa fa-file-excel-o"></i>
                             </button>
-                        </form>
+                            <div class="dropdown-menu dropdown-menu-right">
+                                <a href="{{ secure_route('salary.format.download') }}" class="dropdown-item">
+                                    <i class="fa fa-download"></i> Download Format
+                                </a>
+                                <form action="{{ secure_route('salary.import') }}" method="POST" enctype="multipart/form-data">
+                                    @csrf
+                                    <label for="file" class="dropdown-item mb-0" style="cursor: pointer;">
+                                        <i class="fa fa-upload"></i> Choose File
+                                        <input type="file" name="file" id="file" class="d-none">
+                                    </label>
+                                    <button type="submit" class="dropdown-item">
+                                        <i class="fa fa-file-excel-o"></i> Import Excel
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
+                     
 
             <!-- Search Filter -->
             <div class="row filter-row">
@@ -60,9 +67,19 @@
                         <ul id="employeeList" class="dropdown-menu" style="display:none;"></ul>
                     </div>
                 </div>
-                                
+                <div class="col-sm-6 col-md-3 col-lg-3 col-xl-2 col-12">
+                    <div class="form-group form-focus select-focus">
+                        <select class="select floating" id="departmentFilter"> 
+                            <option value=""> -- Select Department -- </option>
+                            @foreach($departments as $id => $department)
+                                <option value="{{ $department }}">{{ $department }}</option>
+                            @endforeach
+                        </select>
+                        <label class="focus-label">Department</label>
+                    </div>
+                </div>
                 <div class="col-sm-6 col-md-3 col-lg-3 col-xl-2 col-12">  
-                    <a href="#" class="btn btn-success btn-block"> Search </a>  
+                    <a href="#" class="btn btn-success btn-block" id="searchBtn"> Search </a>  
                 </div>     
             </div>
             <!-- /Search Filter --> 
@@ -104,34 +121,32 @@
                                     <td>
                                         <h2 class="table-avatar">
                                             <a href="{{ secure_asset('employee/profile/'.$items->user_id) }}" class="avatar">
-                                                <!-- @if($items->avatar) -->
-                                                    <img alt="" src="{{ asset_url('/assets/images/'. $items->avatar) }}">
-                                                <!-- @else
-                                                    <img alt="" src="{{ asset_url('/assets/images/photo_defaults.jpg') }}">
-                                                @endif -->
+                                                <img alt="" src="{{ asset_url('/assets/images/'. $items->avatar) }}">
                                             </a>
-                                            <a href="{{ url('employee/profile/'.$items->user_id) }}">{{ $items->name }}<span>{{ $items->position }}</span></a>
+                                            <a href="{{ url('employee/profile/'.$items->user_id) }}">{{ $items->name }}<span>{{ $items->position_name }}</span></a>
                                         </h2>
                                     </td>
                                     <td >{{ $items->user_id }}</td>
                                     <td hidden class="id">{{ $items->id }}</td>
                                     <td hidden class="name">{{ $items->name }}</td>
-                                    <td hidden class="basic">{{ $items->basic }}</td>
-                                    <td hidden class="da">{{ $items->da }}</td>
-                                    <td hidden class="hra">{{ $items->hra }}</td>
-                                    <td hidden class="conveyance">{{ $items->conveyance }}</td>
-                                    <td hidden class="allowance">{{ $items->allowance }}</td>
-                                    <td hidden class="medical_allowance">{{ $items->medical_allowance }}</td>
-                                    <td hidden class="tds">{{ $items->tds }}</td>
-                                    <td hidden class="esi">{{ $items->esi }}</td>
-                                    <td hidden class="pf">{{ $items->pf }}</td>
-                                    <td hidden class="leave">{{ $items->leave }}</td>
-                                    <td hidden class="prof_tax">{{ $items->prof_tax }}</td>
-                                    <td hidden class="labour_welfare">{{ $items->labour_welfare }}</td>
+                                    <td hidden class="salary">{{ $items->salary }}</td>
+                                    <td hidden class="thp">{{ $items->thp }}</td>
+                                    <td hidden class="lembur">{{ $items->lembur }}</td>
+                                    <td hidden class="shift">{{ $items->shift }}</td>
+                                    <td hidden class="tunjangan_keahlian">{{ $items->tunjangan_keahlian }}</td>
+                                    <td hidden class="transport">{{ $items->transport }}</td>
+                                    <td hidden class="kompensasi">{{ $items->kompensasi }}</td>
+                                    <td hidden class="pajak">{{ $items->pajak }}</td>
+                                    <td hidden class="potongan_bpjskes">{{ $items->potongan_bpjskes }}</td>
+                                    <td hidden class="potongan_jp">{{ $items->potongan_jp }}</td>
+                                    <td hidden class="potongan_jht">{{ $items->potongan_jht }}</td>
+                                    <td hidden class="benefit_bpjskes">{{ $items->benefit_bpjskes }}</td>
+                                    <td hidden class="benefit_jp">{{ $items->benefit_jp }}</td>
+                                    <td hidden class="benefit_jht">{{ $items->benefit_jht }}</td>
                                     <td >{{ $items->email }}</td>
-                                    <td >{{ $items->department }}</td>
+                                    <td >{{ $items->department_name }}</td>
                                     <td >Rp {{ number_format($items->salary, 0, ',', '.') }}</td>
-                                    <td hidden class="salary">{{ $items->basic }}</td>
+                                    <td hidden class="salary">{{ $items->salary }}</td>
 
                                     <td class="text-center">
                                         <a class="btn btn-sm btn-success" href="{{ route('extra.report.html', ['user_id' => $items->user_id]) }}" target="_blank">Generate Slip</a>
@@ -175,157 +190,82 @@
                                 <div class="col-sm-6"> 
                                     <div class="form-group">
                                         <label>Pilih Pekerja</label>
-                                        <select class="select select2s-hidden-accessible @error('name') is-invalid @enderror custom-select" tabindex="-1" aria-hidden="true" id="name" name="name">
+                                        <select class="select select2s-hidden-accessible @error('user_id') is-invalid @enderror custom-select" tabindex="-1" aria-hidden="true" id="user_id" name="user_id">
                                             <option value="">-- Select --</option>
                                             @foreach ($userList as $key=>$user )
-                                                <option value="{{ $user->name }}" data-employee_id="{{ $user->user_id }}">{{ $user->name }}</option>
+                                                <option value="{{ $user->id }}">{{ $user->name }}</option>
                                             @endforeach
                                         </select>
                                     </div>
-                                    @error('name')
+                                    @error('user_id')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>
                                     @enderror
                                 </div>
-                                <input class="form-control" type="hidden" name="user_id" id="employee_id" readonly>
                             </div>
                             <div class="row"> 
                                 <div class="col-sm-6"> 
                                     <h4 class="text-primary">Earnings</h4>
                                     
                                     <div class="form-group">
+                                        <label>Salary</label>
+                                        <input class="form-control" type="text" name="salary" id="salary" value="{{ old('salary') }}" placeholder="Enter Salary" data-type="currency">
+                                    </div>
+                                    <div class="form-group">
                                         <label>THP</label>
-                                        <input 
-                                            class="form-control @error('basic') is-invalid @enderror" 
-                                            type="text" 
-                                            name="basic" 
-                                            id="basic" 
-                                            value="{{ old('basic') }}" 
-                                            placeholder="Masukan THP"
-                                            inputmode="numeric"
-                                            data-type="currency">
-                                        @error('basic')
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                        @enderror
-                                    </div>
-
-                                    <div class="form-group">
-                                        <label>Uang Lembur</label>
-                                        <input 
-                                        class="form-control @error('da') is-invalid @enderror" 
-                                        type="number"  
-                                        name="da" 
-                                        id="da" 
-                                        value="{{ old('da') }}" 
-                                        placeholder="Masukan Uang Lembur">
-                                        @error('da')
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                        @enderror
+                                        <input class="form-control" type="text" name="thp" id="thp" value="{{ old('thp') }}" placeholder="Enter THP" data-type="currency">
                                     </div>
                                     <div class="form-group">
-                                        <label>Tunjangan Shift</label>
-                                        <input 
-                                        class="form-control @error('hra') is-invalid @enderror" 
-                                        type="number"  
-                                        name="hra" 
-                                        id="hra" 
-                                        value="{{ old('hra') }}" 
-                                        placeholder="Masukan Tunjangan Shift">
-                                        @error('hra')
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                        @enderror
+                                        <label>Lembur</label>
+                                        <input class="form-control" type="text" name="lembur" id="lembur" value="{{ old('lembur') }}" placeholder="Enter Lembur" data-type="currency">
                                     </div>
                                     <div class="form-group">
-                                        <label>Insentif Keahlian</label>
-                                        <input 
-                                        class="form-control @error('conveyance') is-invalid @enderror" 
-                                        type="text"  
-                                        name="conveyance" 
-                                        id="conveyance" 
-                                        value="{{ old('conveyance') }}" 
-                                        placeholder="Masukan Jumlah Insentif"
-                                        data-type="currency">
-                                        @error('conveyance')
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                        @enderror
+                                        <label>Shift</label>
+                                        <input class="form-control" type="text" name="shift" id="shift" value="{{ old('shift') }}" placeholder="Enter Shift" data-type="currency">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Tunjangan Keahlian</label>
+                                        <input class="form-control" type="text" name="tunjangan_keahlian" id="tunjangan_keahlian" value="{{ old('tunjangan_keahlian') }}" placeholder="Enter Tunjangan Keahlian" data-type="currency">
                                     </div>
                                     <div class="form-group">
                                         <label>Transport</label>
-                                        <input 
-                                        class="form-control @error('allowance') is-invalid @enderror" 
-                                        type="text"  
-                                        name="allowance" 
-                                        id="allowance" 
-                                        value="{{ old('allowance') }}" 
-                                        placeholder="Masukan Rate Lembur"
-                                        data-type="currency">
-                                        @error('allowance')
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                        @enderror
+                                        <input class="form-control" type="text" name="transport" id="transport" value="{{ old('transport') }}" placeholder="Enter Transport" data-type="currency">
                                     </div>
                                     <div class="form-group">
-                                        <label>Kompensasi Lain-Lain</label>
-                                        <input 
-                                        class="form-control @error('medical_allowance') is-invalid @enderror" 
-                                        type="text" 
-                                        name="medical_allowance" 
-                                        id="medical_allowance" 
-                                        value="{{ old('medical_allowance') }}" 
-                                        placeholder="Masukan Rate Shift"
-                                        data-type="currency">
-                                        @error('medical_allowance')
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                        @enderror
+                                        <label>Kompensasi</label>
+                                        <input class="form-control" type="text" name="kompensasi" id="kompensasi" value="{{ old('kompensasi') }}" placeholder="Enter Kompensasi" data-type="currency">
                                     </div>
                                 </div>
                                 <div class="col-sm-6">  
-                                    <h4 class="text-primary">Deduction</h4>
+                                    <h4 class="text-primary">Deductions</h4>
                                     <div class="form-group">
                                         <label>Pajak</label>
-                                        <input 
-                                        class="form-control @error('tds') is-invalid @enderror" 
-                                        type="text" 
-                                        name="tds" 
-                                        id="tds" 
-                                        value="{{ old('tds') }}" 
-                                        placeholder="Masukan Pajak"
-                                        data-type="currency">
-                                        @error('tds')
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                        @enderror
-                                    </div> 
-                                    <div class="form-group">
-                                        <label>Proporsional</label>
-                                        <input class="form-control @error('labour_welfare') is-invalid @enderror" type="number" name="labour_welfare" id="labour_welfare" value="{{ old('labour_welfare') }}" placeholder="Masukan Hari Proporsional">
-                                        @error('labour_welfare')
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                        @enderror
+                                        <input class="form-control" type="text" name="pajak" id="pajak" value="{{ old('pajak') }}" placeholder="Enter Pajak" data-type="currency">
                                     </div>
                                     <div class="form-group">
-                                        <label>BPJS Kesehatan</label>
-                                        <input class="form-control @error('pf') is-invalid @enderror" type="number" name="pf" id="pf" value="{{ old('pf') }}" placeholder="Masukan Nilai BPJS Kesehatan">
-                                        @error('pf')
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                        @enderror
+                                        <label>Potongan BPJS Kesehatan</label>
+                                        <input class="form-control" type="text" name="potongan_bpjskes" id="potongan_bpjskes" value="{{ old('potongan_bpjskes') }}" placeholder="Enter Potongan BPJS Kesehatan" data-type="currency">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Potongan JP</label>
+                                        <input class="form-control" type="text" name="potongan_jp" id="potongan_jp" value="{{ old('potongan_jp') }}" placeholder="Enter Potongan JP" data-type="currency">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Potongan JHT</label>
+                                        <input class="form-control" type="text" name="potongan_jht" id="potongan_jht" value="{{ old('potongan_jht') }}" placeholder="Enter Potongan JHT" data-type="currency">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Benefit BPJS Kesehatan</label>
+                                        <input class="form-control" type="text" name="benefit_bpjskes" id="benefit_bpjskes" value="{{ old('benefit_bpjskes') }}" placeholder="Enter Benefit BPJS Kesehatan" data-type="currency">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Benefit JP</label>
+                                        <input class="form-control" type="text" name="benefit_jp" id="benefit_jp" value="{{ old('benefit_jp') }}" placeholder="Enter Benefit JP" data-type="currency">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Benefit JHT</label>
+                                        <input class="form-control" type="text" name="benefit_jht" id="benefit_jht" value="{{ old('benefit_jht') }}" placeholder="Enter Benefit JHT" data-type="currency">
                                     </div>
                                 </div>
                             </div>
@@ -357,56 +297,71 @@
                                 <div class="col-sm-6"> 
                                     <div class="form-group">
                                         <label>Name Staff</label>
-                                        <input class="form-control " type="text" name="name" id="e_name" value="" readonly>
+                                        <input class="form-control" type="text" name="name" id="e_name" value="" readonly>
                                     </div>
-                                    @error('name')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
                                 </div>
                             </div>
                             <div class="row"> 
                                 <div class="col-sm-6"> 
                                     <h4 class="text-primary">Earnings</h4>
                                     <div class="form-group">
+                                        <label>Salary</label>
+                                        <input class="form-control" type="text" name="salary" id="e_salary" value="" data-type="currency">
+                                    </div>
+                                    <div class="form-group">
                                         <label>THP</label>
-                                        <input class="form-control" type="text" name="basic" id="e_basic" value="" data-type="currency">
+                                        <input class="form-control" type="text" name="thp" id="e_thp" value="" data-type="currency">
                                     </div>
                                     <div class="form-group">
                                         <label>Lembur</label>
-                                        <input class="form-control" type="text"  name="da" id="e_da" value="" data-type="currency">
+                                        <input class="form-control" type="text" name="lembur" id="e_lembur" value="" data-type="currency">
                                     </div>
                                     <div class="form-group">
                                         <label>Shift</label>
-                                        <input class="form-control" type="text"  name="hra" id="e_hra" value="" data-type="currency">
+                                        <input class="form-control" type="text" name="shift" id="e_shift" value="" data-type="currency">
                                     </div>
                                     <div class="form-group">
-                                        <label>Insentif Keahlian</label>
-                                        <input class="form-control" type="text"  name="conveyance" id="e_conveyance" value="" data-type="currency">
+                                        <label>Tunjangan Keahlian</label>
+                                        <input class="form-control" type="text" name="tunjangan_keahlian" id="e_tunjangan_keahlian" value="" data-type="currency">
                                     </div>
                                     <div class="form-group">
                                         <label>Transport</label>
-                                        <input class="form-control" type="text"  name="allowance" id="e_allowance" value="" data-type="currency">
+                                        <input class="form-control" type="text" name="transport" id="e_transport" value="" data-type="currency">
                                     </div>
                                     <div class="form-group">
-                                        <label>Kompensasi Lain-lain</label>
-                                        <input class="form-control" type="text" name="medical_allowance" id="e_medical_allowance" value="" data-type="currency">
+                                        <label>Kompensasi</label>
+                                        <input class="form-control" type="text" name="kompensasi" id="e_kompensasi" value="" data-type="currency">
                                     </div>
                                 </div>
                                 <div class="col-sm-6">  
                                     <h4 class="text-primary">Deductions</h4>
                                     <div class="form-group">
                                         <label>Pajak</label>
-                                        <input class="form-control" type="text" name="tds" id="e_tds" value="" data-type="currency">
-                                    </div> 
-                                    <div class="form-group">
-                                        <label>Proporsional</label>
-                                        <input class="form-control" type="text" name="labour_welfare" id="e_labour_welfare" value="">
+                                        <input class="form-control" type="text" name="pajak" id="e_pajak" value="" data-type="currency">
                                     </div>
                                     <div class="form-group">
-                                        <label>BPJS Keshatan</label>
-                                        <input class="form-control" type="text" name="pf" id="pf" value="">
+                                        <label>Potongan BPJS Kesehatan</label>
+                                        <input class="form-control" type="text" name="potongan_bpjskes" id="e_potongan_bpjskes" value="" data-type="currency">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Potongan JP</label>
+                                        <input class="form-control" type="text" name="potongan_jp" id="e_potongan_jp" value="" data-type="currency">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Potongan JHT</label>
+                                        <input class="form-control" type="text" name="potongan_jht" id="e_potongan_jht" value="" data-type="currency">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Benefit BPJS Kesehatan</label>
+                                        <input class="form-control" type="text" name="benefit_bpjskes" id="e_benefit_bpjskes" value="" data-type="currency">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Benefit JP</label>
+                                        <input class="form-control" type="text" name="benefit_jp" id="e_benefit_jp" value="" data-type="currency">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Benefit JHT</label>
+                                        <input class="form-control" type="text" name="benefit_jht" id="e_benefit_jht" value="" data-type="currency">
                                     </div>
                                 </div>
                             </div>
@@ -487,18 +442,19 @@
                 $('#e_id').val(_this.find('.id').text());
                 $('#e_name').val(_this.find('.name').text());
                 $('#e_salary').val(_this.find('.salary').text());
-                $('#e_basic').val(_this.find('.basic').text());
-                $('#e_da').val(_this.find('.da').text());
-                $('#e_hra').val(_this.find('.hra').text());
-                $('#e_conveyance').val(_this.find('.conveyance').text());
-                $('#e_allowance').val(_this.find('.allowance').text());
-                $('#e_medical_allowance').val(_this.find('.medical_allowance').text());
-                $('#e_tds').val(_this.find('.tds').text());
-                $('#e_esi').val(_this.find('.esi').text());
-                $('#e_pf').val(_this.find('.pf').text());
-                $('#e_leave').val(_this.find('.leave').text());
-                $('#e_prof_tax').val(_this.find('.prof_tax').text());
-                $('#e_labour_welfare').val(_this.find('.labour_welfare').text());
+                $('#e_thp').val(_this.find('.thp').text());
+                $('#e_lembur').val(_this.find('.lembur').text());
+                $('#e_shift').val(_this.find('.shift').text());
+                $('#e_tunjangan_keahlian').val(_this.find('.tunjangan_keahlian').text());
+                $('#e_transport').val(_this.find('.transport').text());
+                $('#e_kompensasi').val(_this.find('.kompensasi').text());
+                $('#e_pajak').val(_this.find('.pajak').text());
+                $('#e_potongan_bpjskes').val(_this.find('.potongan_bpjskes').text());
+                $('#e_potongan_jp').val(_this.find('.potongan_jp').text());
+                $('#e_potongan_jht').val(_this.find('.potongan_jht').text());
+                $('#e_benefit_bpjskes').val(_this.find('.benefit_bpjskes').text());
+                $('#e_benefit_jp').val(_this.find('.benefit_jp').text());
+                $('#e_benefit_jht').val(_this.find('.benefit_jht').text());
             });
 
             // Delete salary

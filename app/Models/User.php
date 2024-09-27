@@ -7,6 +7,10 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use App\Models\StaffSalary;
+use App\Models\roleTypeUser;
+use App\Models\PositionType;
+use App\Models\Department;
 
 class User extends Authenticatable
 {
@@ -21,16 +25,11 @@ class User extends Authenticatable
         'name',
         'user_id',
         'email',
-        'join_date',
-        'last_login',
-        'phone_number',
         'status',
-        'role_name',
-        'email',
-        'role_name',
+        'role_id',
+        'position_id',
+        'department_id',
         'avatar',
-        'position',
-        'department',
         'password',
     ];
 
@@ -60,16 +59,36 @@ class User extends Authenticatable
             $getUser = self::orderBy('user_id', 'desc')->first();
 
             if ($getUser) {
-                $latestID = intval(substr($getUser->user_id, 4));
+                $latestID = intval(substr($getUser->user_id, 1));
                 $nextID = $latestID + 1;
             } else {
                 $nextID = 1;
             }
-            $model->user_id = 'KH_' . sprintf("%04s", $nextID);
+            $model->user_id = 'P' . str_pad($nextID, 4, '0', STR_PAD_LEFT);
             while (self::where('user_id', $model->user_id)->exists()) {
                 $nextID++;
-                $model->user_id = 'KH_' . sprintf("%04s", $nextID);
+                $model->user_id = 'P' . str_pad($nextID, 4, '0', STR_PAD_LEFT);
             }
         });
+    }
+
+    public function role()
+    {
+        return $this->belongsTo(roleTypeUser::class);
+    }
+
+    public function position()
+    {
+        return $this->belongsTo(PositionType::class);
+    }
+
+    public function department()
+    {
+        return $this->belongsTo(Department::class);
+    }
+
+    public function staffSalary()
+    {
+        return $this->hasOne(StaffSalary::class);
     }
 }

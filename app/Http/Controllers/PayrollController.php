@@ -20,25 +20,37 @@ use App\Mail\SalarySlipMail;
 use Exception;
 use Illuminate\Support\Facades\Log;
 
+
 class PayrollController extends Controller
 {
     /** view page salary */
     public function salary()
     {
         $users = DB::table('users')
-        ->rightJoin('staff_salaries', 'users.user_id', '=', 'staff_salaries.user_id')
-        ->select('users.*', 'staff_salaries.*')
-        ->get();    
-    
+            ->rightJoin('staff_salaries', 'users.id', '=', 'staff_salaries.user_id')
+            ->leftJoin('departments', 'users.department_id', '=', 'departments.id')
+            ->leftJoin('position_types', 'users.position_id', '=', 'position_types.id')
+            ->leftJoin('role_type_users', 'users.role_id', '=', 'role_type_users.id')
+            ->select('users.*', 'staff_salaries.*', 
+                    'departments.department as department_name', 
+                    'position_types.position as position_name',
+                    'role_type_users.role_type as role_type')
+            ->get();    
+
         $userList = DB::table('users')
-            ->whereNotIn('user_id', function($query) {
+            ->whereNotIn('users.id', function($query) {
                 $query->select('user_id')->from('staff_salaries');
             })
+            ->leftJoin('position_types', 'users.position_id', '=', 'position_types.id')
+            ->leftJoin('role_type_users', 'users.role_id', '=', 'role_type_users.id')
+            ->select('users.id', 'users.name', 'users.user_id', 
+                    'position_types.position as position_name',
+                    'role_type_users.role_type as role_type')
             ->get();
-    
+
         $permission_lists = DB::table('permission_lists')->get();
-        $departments = DB::table('users')->distinct()->pluck('department');
-    
+        $departments = DB::table('departments')->pluck('department', 'id');
+
         return view('payroll.employeesalary', compact('users', 'userList', 'permission_lists', 'departments'));
     }   
 
@@ -46,39 +58,49 @@ class PayrollController extends Controller
      public function saveRecord(Request $request)
      {
         $request->validate([
-            'name'         => 'required|string|max:255',
-            'basic' => 'required|string|max:255',
-            'da'    => 'required|string|max:255',
-            'hra'    => 'required|string|max:255',
-            'conveyance' => 'required|string|max:255',
-            'allowance'  => 'required|string|max:255',
-            'medical_allowance' => 'required|string|max:255',
-            'tds' => 'required|string|max:255',
-            'esi' => 'required|string|max:255',
-            'pf' => 'required|string|max:255',
+            'user_id'   => 'required|exists:users,id',
+            'salary'    => 'required',
+            'thp'       => 'required',
+            'lembur'    => 'required',
+            'shift'     => 'required',
+            'tunjangan_keahlian' => 'required',
+            'transport' => 'required',
+            'kompensasi' => 'required',
+            'pajak'     => 'required',
+            'potongan_bpjskes' => 'required',
+            'potongan_jp' => 'required',
+            'potongan_jht' => 'required',
+            'benefit_bpjskes' => 'required',
+            'benefit_jp' => 'required',
+            'benefit_jht' => 'required',
         ]);
- 
+
         DB::beginTransaction();
         try {
-            $salary = StaffSalary::updateOrCreate(['user_id' => $request->user_id]);
-            $salary->name              = $request->name;
-            $salary->user_id           = $request->user_id;
-            $salary->basic             = $this->currencyToFloat($request->basic);
-            $salary->da                = $this->currencyToFloat($request->da);
-            $salary->hra               = $this->currencyToFloat($request->hra);
-            $salary->conveyance        = $this->currencyToFloat($request->conveyance);
-            $salary->allowance         = $this->currencyToFloat($request->allowance);
-            $salary->medical_allowance = $this->currencyToFloat($request->medical_allowance);
-            $salary->tds               = $this->currencyToFloat($request->tds);
-            $salary->esi               = $this->currencyToFloat($request->esi);
+            $salary = new StaffSalary();
+            $salary->user_id = $request->user_id;
+            $salary->salary = $this->currencyToFloat($request->salary);
+            $salary->thp = $this->currencyToFloat($request->thp);
+            $salary->lembur = $this->currencyToFloat($request->lembur);
+            $salary->shift = $this->currencyToFloat($request->shift);
+            $salary->tunjangan_keahlian = $this->currencyToFloat($request->tunjangan_keahlian);
+            $salary->transport = $this->currencyToFloat($request->transport);
+            $salary->kompensasi = $this->currencyToFloat($request->kompensasi);
+            $salary->pajak = $this->currencyToFloat($request->pajak);
+            $salary->potongan_bpjskes = $this->currencyToFloat($request->potongan_bpjskes);
+            $salary->potongan_jp = $this->currencyToFloat($request->potongan_jp);
+            $salary->potongan_jht = $this->currencyToFloat($request->potongan_jht);
+            $salary->benefit_bpjskes = $this->currencyToFloat($request->benefit_bpjskes);
+            $salary->benefit_jp = $this->currencyToFloat($request->benefit_jp);
+            $salary->benefit_jht = $this->currencyToFloat($request->benefit_jht);
             $salary->save();
-    
+
             DB::commit();
-            Toastr::success('Create new Salary successfully :)','Success');
+            Toastr::success('Salary added successfully :)','Success');
             return redirect()->back();
         } catch(\Exception $e) {
             DB::rollback();
-            Toastr::error('Add Salary fail :)','Error');
+            Toastr::error('Error adding salary: ' . $e->getMessage(), 'Error');
             return redirect()->back();
         }
      }
@@ -108,28 +130,26 @@ class PayrollController extends Controller
     {
         DB::beginTransaction();
         try {
-            $update = [
-                'id'      => $request->id,
-                'name'    => $request->name,
-                'basic'   => $this->currencyToFloat($request->basic),
-                'da'      => $this->currencyToFloat($request->da),
-                'hra'     => $this->currencyToFloat($request->hra),
-                'conveyance' => $this->currencyToFloat($request->conveyance),
-                'allowance'  => $this->currencyToFloat($request->allowance),
-                'medical_allowance'  => $this->currencyToFloat($request->medical_allowance),
-                'tds'  => $this->currencyToFloat($request->tds),
-                'esi'  => $this->currencyToFloat($request->esi),
-                'pf'   => $this->currencyToFloat($request->pf),
-                'leave'     => $request->leave,
-                'prof_tax'  => $this->currencyToFloat($request->prof_tax),
-                'labour_welfare'  => $this->currencyToFloat($request->labour_welfare),
-            ];
+            $salary = StaffSalary::findOrFail($request->id);
+            $salary->salary = $this->currencyToFloat($request->salary);
+            $salary->thp = $this->currencyToFloat($request->thp);
+            $salary->lembur = $this->currencyToFloat($request->lembur);
+            $salary->shift = $this->currencyToFloat($request->shift);
+            $salary->tunjangan_keahlian = $this->currencyToFloat($request->tunjangan_keahlian);
+            $salary->transport = $this->currencyToFloat($request->transport);
+            $salary->kompensasi = $this->currencyToFloat($request->kompensasi);
+            $salary->pajak = $this->currencyToFloat($request->pajak);
+            $salary->potongan_bpjskes = $this->currencyToFloat($request->potongan_bpjskes);
+            $salary->potongan_jp = $this->currencyToFloat($request->potongan_jp);
+            $salary->potongan_jht = $this->currencyToFloat($request->potongan_jht);
+            $salary->benefit_bpjskes = $this->currencyToFloat($request->benefit_bpjskes);
+            $salary->benefit_jp = $this->currencyToFloat($request->benefit_jp);
+            $salary->benefit_jht = $this->currencyToFloat($request->benefit_jht);
+            $salary->save();
 
-            StaffSalary::where('id', $request->id)->update($update);
             DB::commit();
             Toastr::success('Salary updated successfully :)','Success');
             return redirect()->back();
-
         } catch(\Exception $e) {
             DB::rollback();
             Toastr::error('Salary update fail :)','Error');
@@ -281,10 +301,11 @@ class PayrollController extends Controller
             'users.name', 
             'users.email', 
             'users.position', 
-            'users.department', 
+            'departments.department as department_name', 
             'users.avatar'
         )
-        ->join('users', 'staff_salaries.user_id', '=', 'users.user_id');
+        ->join('users', 'staff_salaries.user_id', '=', 'users.user_id')
+        ->leftJoin('departments', 'users.department_id', '=', 'departments.id');
 
         // Apply search filters
         if ($searchValue || $user_name || $position || $department) {
@@ -301,7 +322,7 @@ class PayrollController extends Controller
                     $q->where('users.position', $position);
                 }
                 if ($department) {
-                    $q->where('users.department', $department);
+                    $q->where('departments.department', $department);
                 }
             });
         }
@@ -341,21 +362,23 @@ class PayrollController extends Controller
                 "name" => $name,
                 "user_id" => $record->user_id,
                 "id" => $record->id,
-                "basic" => $record->basic,
-                "da" => $record->da,
-                "hra" => $record->hra,
-                "conveyance" => $record->conveyance,
-                "allowance" => $record->allowance,
-                "medical_allowance" => $record->medical_allowance,
-                "tds" => $record->tds,
-                "esi" => $record->esi,
-                "pf" => $record->pf,
-                "leave" => $record->leave,
-                "prof_tax" => $record->prof_tax,
-                "labour_welfare" => $record->labour_welfare,
+                "salary" => $record->salary,
+                "thp" => $record->thp,
+                "lembur" => $record->lembur,
+                "shift" => $record->shift,
+                "tunjangan_keahlian" => $record->tunjangan_keahlian,
+                "transport" => $record->transport,
+                "kompensasi" => $record->kompensasi,
+                "pajak" => $record->pajak,
+                "potongan_bpjskes" => $record->potongan_bpjskes,
+                "potongan_jp" => $record->potongan_jp,
+                "potongan_jht" => $record->potongan_jht,
+                "benefit_bpjskes" => $record->benefit_bpjskes,
+                "benefit_jp" => $record->benefit_jp,
+                "benefit_jht" => $record->benefit_jht,
                 "email" => $record->email,
-                "department" => $record->department,
-                "formatted_basic" => 'Rp ' . number_format($record->basic, 0, ',', '.'),
+                "department" => $record->department_name,
+                "formatted_salary" => 'Rp ' . number_format($record->salary, 0, ',', '.'),
                 "generate_slip" => $generate_slip,
                 "action" => $action
             ];
