@@ -275,7 +275,6 @@ class PayrollController extends Controller
         return Excel::download(new SalaryFormatExport, 'salary_import_format.xlsx');
     }
 
-    /** Search Function */
     public function getSalaryData(Request $request)
     {
         $draw = $request->get('draw');
@@ -328,7 +327,7 @@ class PayrollController extends Controller
         }
 
         $totalRecords = $query->count();
-        $totalRecordswithFilter = $totalRecords; // Since we've already applied the filters
+        $totalRecordswithFilter = $totalRecords;
 
         // Apply sorting
         if ($columnName && $columnSortOrder) {
@@ -456,7 +455,6 @@ class PayrollController extends Controller
 
         $pdf = PDF::loadView('report_template.salary_pdf', compact('users', 'logo1Src', 'logo2Src'));
         
-        // Adjust these options to match your regular PDF download settings
         $pdf->setOptions([
             'isHtml5ParserEnabled' => true,
             'isRemoteEnabled' => true,
@@ -466,43 +464,44 @@ class PayrollController extends Controller
     }
 
     public function sendEmail($user_id)
-{
-    try {
-        $user = User::where('user_id', $user_id)->firstOrFail();
-        Log::info('User found', ['user_id' => $user_id, 'email' => $user->email]);
+    {
+        try {
+            $user = User::where('user_id', $user_id)->firstOrFail();
+            Log::info('User found', ['user_id' => $user_id, 'email' => $user->email]);
 
-        $users = DB::table('users')
-            ->join('staff_salaries', 'users.user_id', 'staff_salaries.user_id')
-            ->select('users.*', 'staff_salaries.*')
-            ->where('staff_salaries.user_id', $user_id)
-            ->first();
+            $users = DB::table('users')
+                ->join('staff_salaries', 'users.user_id', 'staff_salaries.user_id')
+                ->select('users.*', 'staff_salaries.*')
+                ->where('staff_salaries.user_id', $user_id)
+                ->first();
 
-        if (!$users) {
-            throw new Exception('User salary information not found');
+            if (!$users) {
+                throw new Exception('User salary information not found');
+            }
+
+            $logo1Src = 'data:image/png;base64,' . base64_encode(file_get_contents(public_path('img/logo.png')));
+            $logo2Src = 'data:image/png;base64,' . base64_encode(file_get_contents(public_path('img/logo2.png')));
+
+            $pdfHtml = view('report_template.salary_pdf', compact('users', 'logo1Src', 'logo2Src'))->render();
+            Log::info('PDF HTML generated');
+
+            $pdf = PDF::loadHTML($pdfHtml);
+            $pdfContent = $pdf->output();
+            Log::info('PDF generated');
+
+            $fileName = 'Slip Upah ' . $user->name . '.pdf';
+
+            Mail::to($user->email)->send(new SalarySlipMail($user, $pdfContent, $fileName));
+            Log::info('Email sent successfully');
+
+            return response()->json(['success' => true, 'message' => 'Email sent successfully']);
+        } catch (Exception $e) {
+            Log::error('Email sending failed', [
+                'error' => $e->getMessage(),
+                'trace' => $e->getTraceAsString()
+            ]);
+            return response()->json(['success' => false, 'message' => 'Failed to send email: ' . $e->getMessage()], 500);
         }
-
-        $logo1Src = 'data:image/png;base64,' . base64_encode(file_get_contents(public_path('img/logo.png')));
-        $logo2Src = 'data:image/png;base64,' . base64_encode(file_get_contents(public_path('img/logo2.png')));
-
-        $pdfHtml = view('report_template.salary_pdf', compact('users', 'logo1Src', 'logo2Src'))->render();
-        Log::info('PDF HTML generated');
-
-        $pdf = PDF::loadHTML($pdfHtml);
-        $pdfContent = $pdf->output();
-        Log::info('PDF generated');
-
-        $fileName = 'Slip Upah ' . $user->name . '.pdf';
-
-        Mail::to($user->email)->send(new SalarySlipMail($user, $pdfContent, $fileName));
-        Log::info('Email sent successfully');
-
-        return response()->json(['success' => true, 'message' => 'Email sent successfully']);
-    } catch (Exception $e) {
-        Log::error('Email sending failed', [
-            'error' => $e->getMessage(),
-            'trace' => $e->getTraceAsString()
-        ]);
-        return response()->json(['success' => false, 'message' => 'Failed to send email: ' . $e->getMessage()], 500);
     }
 }
-}
+
