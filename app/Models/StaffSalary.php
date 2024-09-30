@@ -21,6 +21,7 @@ class StaffSalary extends Model
         'transport',
         'kompensasi',
         'pajak',
+        'proporsional',
         'potongan_bpjskes',
         'potongan_jp',
         'potongan_jht',

@@ -34,7 +34,9 @@ class PayrollController extends Controller
             ->select('users.*', 'staff_salaries.*', 
                     'departments.department as department_name', 
                     'position_types.position as position_name',
-                    'role_type_users.role_type as role_type')
+                    'role_type_users.role_type as role_type',
+                    'users.user_id as nopeg'
+                    )
             ->get();    
 
         $userList = DB::table('users')
@@ -67,6 +69,7 @@ class PayrollController extends Controller
             'transport' => 'required',
             'kompensasi' => 'required',
             'pajak'     => 'required',
+            'proporsional' => 'required',
             'potongan_bpjskes' => 'required',
             'potongan_jp' => 'required',
             'potongan_jht' => 'required',
@@ -87,6 +90,7 @@ class PayrollController extends Controller
             $salary->transport = $this->currencyToFloat($request->transport);
             $salary->kompensasi = $this->currencyToFloat($request->kompensasi);
             $salary->pajak = $this->currencyToFloat($request->pajak);
+            $salary->proporsional = $this->currencyToFloat($request->proporsional);
             $salary->potongan_bpjskes = $this->currencyToFloat($request->potongan_bpjskes);
             $salary->potongan_jp = $this->currencyToFloat($request->potongan_jp);
             $salary->potongan_jht = $this->currencyToFloat($request->potongan_jht);
@@ -139,6 +143,7 @@ class PayrollController extends Controller
             $salary->transport = $this->currencyToFloat($request->transport);
             $salary->kompensasi = $this->currencyToFloat($request->kompensasi);
             $salary->pajak = $this->currencyToFloat($request->pajak);
+            $salary->proporsional = $this->currencyToFloat($request->proporsional);
             $salary->potongan_bpjskes = $this->currencyToFloat($request->potongan_bpjskes);
             $salary->potongan_jp = $this->currencyToFloat($request->potongan_jp);
             $salary->potongan_jht = $this->currencyToFloat($request->potongan_jht);
@@ -182,14 +187,44 @@ class PayrollController extends Controller
         return view('payroll.payrollitems');
     }
 
+    public function salaryReportHtml($user_id)
+    {
+        $users = DB::table('users')
+            ->join('staff_salaries', 'users.id', '=', 'staff_salaries.user_id')
+            ->leftJoin('departments', 'users.department_id', '=', 'departments.id')  // Ensure this join is correct
+            ->select('users.*', 
+            'staff_salaries.*', 
+            'departments.department as department_name',
+            'users.user_id as nopeg'
+            )  // Alias the department column
+            ->where('users.id', $user_id)
+            ->first();
+
+        if (!$users) {
+            Log::error('No user found with id:', ['user_id' => $user_id]);
+            // Consider returning an error or a view with an error message
+        }
+
+        $logo1Src = 'data:image/png;base64,' . base64_encode(file_get_contents(public_path('img/logo.png')));
+        $logo2Src = 'data:image/png;base64,' . base64_encode(file_get_contents(public_path('img/logo2.png')));
+
+        return view('report_template.salary_html', compact('users', 'logo1Src', 'logo2Src'));
+    }
+
     /** report pdf */  
     public function reportPDF(Request $request)
     {
         $user_id = $request->user_id;
         $users = DB::table('users')
-            ->join('staff_salaries', 'users.user_id', 'staff_salaries.user_id')
-            ->select('users.*', 'staff_salaries.*')
-            ->where('staff_salaries.user_id', $user_id)
+            ->join('staff_salaries', 'users.id', '=', 'staff_salaries.user_id')
+            ->leftJoin('departments', 'users.department_id', '=', 'departments.id')
+            ->select(
+                'users.*', 
+                'staff_salaries.*', 
+                'departments.department as department_name',
+                'users.user_id as nopeg'
+            )
+            ->where('users.id', $user_id)
             ->first();
 
             $logo1Src = 'data:image/png;base64,' . base64_encode(file_get_contents(public_path('img/logo.png')));
@@ -210,34 +245,34 @@ class PayrollController extends Controller
         return $pdf->download($fileName);
     }
 
-    public function salaryReportHtml($user_id)
-    {
-        $users = DB::table('users')
-            ->join('staff_salaries', 'users.user_id', 'staff_salaries.user_id')
-            ->select('users.*', 'staff_salaries.*')
-            ->where('staff_salaries.user_id', $user_id)
-            ->first();
-
-            $logo1Src = 'data:image/png;base64,' . base64_encode(file_get_contents(public_path('img/logo.png')));
-            $logo2Src = 'data:image/png;base64,' . base64_encode(file_get_contents(public_path('img/logo2.png')));
-        
-            return view('report_template.salary_html', compact('users', 'logo1Src', 'logo2Src'));
-    }
-
     public function salaryReportPdfHtml($user_id)
     {
         $users = DB::table('users')
-            ->join('staff_salaries', 'users.user_id', 'staff_salaries.user_id')
-            ->select('users.*', 'staff_salaries.*')
-            ->where('staff_salaries.user_id', $user_id)
+            ->join('staff_salaries', 'users.id', '=', 'staff_salaries.user_id')
+            ->leftJoin('departments', 'users.department_id', '=', 'departments.id')
+            ->select(
+                'users.*', 
+                'staff_salaries.*', 
+                'departments.department as department_name',
+                'users.user_id as nopeg'
+            )
+            ->where('users.id', $user_id)
             ->first();
 
-            $logo1Src = 'data:image/png;base64,' . base64_encode(file_get_contents(public_path('img/logo.png')));
-            $logo2Src = 'data:image/png;base64,' . base64_encode(file_get_contents(public_path('img/logo2.png')));
-        
-            return view('report_template.salary_pdf', compact('users', 'logo1Src', 'logo2Src'));
-    }
+        if (!$users) {
+            Log::error('No user found with id:', ['user_id' => $user_id]);
+            return back()->withErrors(['msg' => 'User not found']);
+        }
 
+        $logo1Src = 'data:image/png;base64,' . base64_encode(file_get_contents(public_path('img/logo.png')));
+        $logo2Src = 'data:image/png;base64,' . base64_encode(file_get_contents(public_path('img/logo2.png')));
+
+        return view('report_template.salary_pdf', [
+            'users' => $users,
+            'logo1Src' => $logo1Src,
+            'logo2Src' => $logo2Src
+        ]);
+    }
     
     /** export Excel */
     public function reportExcel(Request $request)
@@ -369,6 +404,7 @@ class PayrollController extends Controller
                 "transport" => $record->transport,
                 "kompensasi" => $record->kompensasi,
                 "pajak" => $record->pajak,
+                "proporsional" => $record->proporsional,
                 "potongan_bpjskes" => $record->potongan_bpjskes,
                 "potongan_jp" => $record->potongan_jp,
                 "potongan_jht" => $record->potongan_jht,
@@ -395,61 +431,93 @@ class PayrollController extends Controller
     
     public function bulkDownloadPDF($department)
     {
-        try {
-            $department = urldecode($department);
-            $users = DB::table('users')->where('department', $department)->get();
-            
-            if ($users->isEmpty()) {
-                throw new \Exception("No users found in department: $department");
+        Log::info("Starting bulk download for department: {$department}");
+
+    try {
+        // Decode the URL-encoded department name
+        $decodedDepartment = urldecode($department);
+
+        // Replace '+' with space and trim
+        $cleanedDepartment = trim(str_replace('+', ' ', $decodedDepartment));
+
+        // Join the users table with the departments table and staff_salaries table
+        $users = User::join('departments', 'users.department_id', '=', 'departments.id')
+        ->join('staff_salaries', 'users.id', '=', 'staff_salaries.user_id')
+        ->where(function($query) use ($cleanedDepartment) {
+            $query->where('departments.department', $cleanedDepartment)
+                  ->orWhere('departments.department', 'like', '%' . str_replace(' ', '%', $cleanedDepartment) . '%');
+        })
+        ->select('users.id as user_id', 'users.name')
+        ->get();
+
+        Log::info("Found " . $users->count() . " users in department: {$cleanedDepartment}");
+
+        if ($users->isEmpty()) {
+            Log::warning("No users with salary information found in department: {$cleanedDepartment}");
+                return response()->json(['error' => 'No users with salary information found in this department'], 404);
             }
-            
-            $zip = new ZipArchive;
-            $fileName = 'salary_slips_' . str_replace(' ', '_', $department) . '.zip';
-            $tempFiles = [];
-            
-            if ($zip->open(public_path($fileName), ZipArchive::CREATE) !== TRUE) {
-                throw new \Exception("Cannot create zip file");
-            }
-            
+
+        $zip = new ZipArchive;
+        $zipFileName = 'salary_slips_' . str_replace(' ', '_', $decodedDepartment) . '.zip';
+        $zipPath = storage_path($zipFileName);
+
+        if ($zip->open($zipPath, ZipArchive::CREATE) === TRUE) {
+            $pdfGeneratedCount = 0;
+            $failedUsers = [];
+
             foreach ($users as $user) {
-                try {
-                    $pdf = $this->generatePDF($user->user_id);
-                    $tempFile = tempnam(sys_get_temp_dir(), 'pdf_');
-                    $tempFiles[] = $tempFile;
-                    $pdf->save($tempFile);
-                    $zip->addFile($tempFile, $user->name . '_salary_slip.pdf');
-                } catch (\Exception $e) {
-                    \Log::error("Error generating PDF for user {$user->user_id}: " . $e->getMessage());
-                    continue;
+                $pdf = $this->generatePDF($user->user_id);
+                if ($pdf) {
+                    $zip->addFromString("salary_slip_{$user->name}_{$user->user_id}.pdf", $pdf->output());
+                    $pdfGeneratedCount++;
+                } else {
+                    $failedUsers[] = $user->user_id;
+                    Log::warning("Failed to generate PDF for user: {$user->user_id}");
                 }
             }
-            
             $zip->close();
-            
-            foreach ($tempFiles as $tempFile) {
-                if (file_exists($tempFile)) {
-                    unlink($tempFile);
-                }
+
+            if ($pdfGeneratedCount === 0) {
+                Log::error("No PDFs were generated for department: {$decodedDepartment}");
+                return response()->json(['error' => 'No salary slips could be generated'], 500);
             }
-            
-            return response()->download(public_path($fileName))->deleteFileAfterSend(true);
-        } catch (\Exception $e) {
-            \Log::error("Bulk download error: " . $e->getMessage());
-            return response()->json(['error' => $e->getMessage()], 500);
+
+            $message = "{$pdfGeneratedCount} PDFs generated successfully.";
+            if (!empty($failedUsers)) {
+                $message .= " Failed to generate PDFs for users: " . implode(', ', $failedUsers);
+            }
+            Log::info($message);
+
+            return response()->download($zipPath)->deleteFileAfterSend(true);
+        } else {
+            throw new Exception("Cannot create zip file");
+        }
+    } catch (\Exception $e) {
+        Log::error('Failed to create bulk download: ' . $e->getMessage());
+        return response()->json(['error' => 'Failed to create bulk download: ' . $e->getMessage()], 500);
         }
     }
 
     private function generatePDF($user_id)
     {
-        $users = DB::table('staff_salaries')
-        ->join('users', 'staff_salaries.user_id', '=', 'users.user_id')
-        ->where('staff_salaries.user_id', $user_id)
+        $users = DB::table('users')
+            ->join('staff_salaries', 'users.id', '=', 'staff_salaries.user_id')
+            ->leftJoin('departments', 'users.department_id', '=', 'departments.id')
+            ->select(
+            'users.*', 
+            'staff_salaries.*', 
+            'departments.department as department_name',
+            'users.user_id as nopeg'
+        )
+        ->where('users.id', $user_id)
         ->first();
 
-        if (!$users) {
-            throw new \Exception("User not found or has no salary information");
-        }
+    if (!$users) {
+        Log::error("No salary information found for user_id: {$user_id}");
+        return null;
+    }
 
+    try {
         $logo1Src = 'data:image/png;base64,' . base64_encode(file_get_contents(public_path('img/logo.png')));
         $logo2Src = 'data:image/png;base64,' . base64_encode(file_get_contents(public_path('img/logo2.png')));
 
@@ -461,6 +529,10 @@ class PayrollController extends Controller
         ]);
 
         return $pdf;
+    } catch (\Exception $e) {
+        Log::error("Error generating PDF for user_id: {$user_id}. Error: " . $e->getMessage());
+        return null;
+        }
     }
 
     public function sendEmail($user_id)
@@ -504,4 +576,3 @@ class PayrollController extends Controller
         }
     }
 }
-

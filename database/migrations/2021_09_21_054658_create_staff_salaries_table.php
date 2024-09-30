@@ -24,6 +24,7 @@ class CreateStaffSalariesTable extends Migration
             $table->decimal('transport', 15, 2)->nullable();
             $table->decimal('kompensasi', 15, 2)->nullable();
             $table->decimal('pajak', 15, 2)->nullable();
+            $table->decimal('proporsional', 15, 2)->nullable();
             $table->decimal('potongan_bpjskes', 15, 2)->nullable();
             $table->decimal('potongan_jp', 15, 2)->nullable();
             $table->decimal('potongan_jht', 15, 2)->nullable();

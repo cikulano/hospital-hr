@@ -126,7 +126,7 @@
                                             <a href="{{ url('employee/profile/'.$items->user_id) }}">{{ $items->name }}<span>{{ $items->position_name }}</span></a>
                                         </h2>
                                     </td>
-                                    <td >{{ $items->user_id }}</td>
+                                    <td >{{ $items->nopeg }}</td>
                                     <td hidden class="id">{{ $items->id }}</td>
                                     <td hidden class="name">{{ $items->name }}</td>
                                     <td hidden class="salary">{{ $items->salary }}</td>
@@ -137,6 +137,7 @@
                                     <td hidden class="transport">{{ $items->transport }}</td>
                                     <td hidden class="kompensasi">{{ $items->kompensasi }}</td>
                                     <td hidden class="pajak">{{ $items->pajak }}</td>
+                                    <td hidden class="proporsional">{{ $items->proporsional }}</td>
                                     <td hidden class="potongan_bpjskes">{{ $items->potongan_bpjskes }}</td>
                                     <td hidden class="potongan_jp">{{ $items->potongan_jp }}</td>
                                     <td hidden class="potongan_jht">{{ $items->potongan_jht }}</td>
@@ -244,6 +245,10 @@
                                         <input class="form-control" type="text" name="pajak" id="pajak" value="{{ old('pajak') }}" placeholder="Enter Pajak" data-type="currency">
                                     </div>
                                     <div class="form-group">
+                                        <label>Proporsional</label>
+                                        <input class="form-control" type="text" name="proporsional" id="proporsional" value="{{ old('proporsional') }}" placeholder="Enter Proporsional" data-type="currency">
+                                    </div>
+                                    <div class="form-group">
                                         <label>Potongan BPJS Kesehatan</label>
                                         <input class="form-control" type="text" name="potongan_bpjskes" id="potongan_bpjskes" value="{{ old('potongan_bpjskes') }}" placeholder="Enter Potongan BPJS Kesehatan" data-type="currency">
                                     </div>
@@ -338,6 +343,10 @@
                                     <div class="form-group">
                                         <label>Pajak</label>
                                         <input class="form-control" type="text" name="pajak" id="e_pajak" value="" data-type="currency">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Proporsional</label>
+                                        <input class="form-control" type="text" name="proporsional" id="e_proporsional" value="" data-type="currency">
                                     </div>
                                     <div class="form-group">
                                         <label>Potongan BPJS Kesehatan</label>
@@ -449,6 +458,7 @@
                 $('#e_transport').val(_this.find('.transport').text());
                 $('#e_kompensasi').val(_this.find('.kompensasi').text());
                 $('#e_pajak').val(_this.find('.pajak').text());
+                $('#e_proporsional').val(_this.find('.proporsional').text());
                 $('#e_potongan_bpjskes').val(_this.find('.potongan_bpjskes').text());
                 $('#e_potongan_jp').val(_this.find('.potongan_jp').text());
                 $('#e_potongan_jht').val(_this.find('.potongan_jht').text());
@@ -698,7 +708,6 @@
                 });
             });
         </script>
-
 
     @endsection
 @endsection

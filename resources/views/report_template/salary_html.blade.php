@@ -43,68 +43,49 @@
                         <div class="row mb-4">
                             <div class="col-sm-6">
                                 <h4 class="payslip-title">
-                                    Slip Upah {{ \Carbon\Carbon::now()->subMonth()->locale('id')->isoFormat('MMMM YYYY') }} 
-                                    <!-- Slip Upah {{ \Carbon\Carbon::now()->locale('id')->isoFormat('MMMM YYYY') }} -->
+                                    Slip Upah {{ \Carbon\Carbon::now()->subMonth()->locale('id')->isoFormat('MMMM YYYY') }}
                                 </h4>
-                            </div>
-                            <div class="col-sm-6 text-right">
-                                <!-- <h3 class="text-uppercase">Payslip #49029</h3> -->
                             </div>
                         </div>
                         
                         <div class="row mb-4">
                             <div class="col-sm-6">
-
-                                @if(!empty($users->avatar))
+                                @if(isset($logo2Src))
                                     <img src="{{ $logo2Src }}" alt="Company Logo" style="max-width: 150px;">
                                 @endif
                             </div>
                             <div class="col-sm-6 text-right">
-                                <h5><strong>{{ $users->name }}</strong></h5>
-                                <p>{{ $users->position }}<br>
-                                NoPeg: {{ $users->user_id }}</p>
+                                <h5><strong>{{ $users->name ?? 'N/A' }}</strong></h5>
+                                <p>{{ $users->department_name ?? 'N/A' }}<br>
+                                NoPeg: {{ $users->nopeg ?? 'N/A' }}</p>
                             </div>
                         </div>
 
                         <!-- Salary Information -->
-                        <?php
-                            $lembur = $users->da;
-                            $shift = $users->hra;
-                            $keahlian = $users->conveyance;
-                            $transport = $users->allowance;
-                            $onsite = $users->medical_allowance;
-                            $totalPendapatan = $users->basic + $lembur + $shift + $onsite;
+                        @php
+                            $salary = $users->salary ?? 0;
+                            $thp = $users->thp ?? 0;
+                            $lembur = $users->lembur ?? 0;
+                            $shift = $users->shift ?? 0;
+                            $keahlian = $users->tunjangan_keahlian ?? 0;
+                            $transport = $users->transport ?? 0;
+                            $kompensasi = $users->kompensasi ?? 0;
+                            $totalPendapatan = $thp + $lembur + $shift + $kompensasi + $transport + $keahlian;
 
-                            $pajak = $users->tds;
-                            $JHT = $users->leave;
-                            $JP = $users->prof_tax;
-                            $BPJSKes = $users->pf;
-                            $proporsional = $users->labour_welfare;
-                            $totalPotongan = $JHT + $JP + $BPJSKes ;
-                            
-                            // Only add transport to total if department is "Kantor Pusat Pertamina"
-                            if ($users->department === "Kantor Pusat Pertamina") {
-                                $totalPendapatan += $transport;
-                            }
+                            $pajak = $users->pajak ?? 0;
+                            $proporsional = $users->proporsional ?? 0;
+                            $JHT = $users->potongan_jht ?? 0;
+                            $JP = $users->potongan_jp ?? 0;
+                            $BPJSKes = $users->potongan_bpjskes ?? 0;
+                            $totalPotongan = $pajak + $JHT + $JP + $BPJSKes;
 
-                            // Only add if there are Tunjangan Keahlian
-                            if ($users->conveyance != 0) {
-                                $totalPendapatan += $keahlian;
-                            }
+                            $benefit_bpjskes = $users->benefit_bpjskes ?? 0;
+                            $benefit_jp = $users->benefit_jp ?? 0;
+                            $benefit_jht = $users->benefit_jht ?? 0;
+                            $totalBenefit = $benefit_bpjskes + $benefit_jp + $benefit_jht;
 
-                            // Only add to total if proportional is not 0
-                            if ($users->labour_welfare != 0) {
-                                $totalPotongan += $proporsional;
-                            }
-
-                            if ($users->department === "Pertamina Hulu Rokan") {
-                                $totalPotongan -= $JHT;
-                                $totalPotongan -= $JP;
-                                $totalPotongan -= $BPJSKes;
-                            }
-                            
-                            $total = $users->salary;
-                        ?>
+                        
+                        @endphp
 
                         <div class="row">
                             <div class="col-sm-6">
@@ -114,7 +95,7 @@
                                         <tbody>
                                             <tr>
                                                 <td><strong>THP</strong></td>
-                                                <td class="text-right">Rp {{ number_format($users->basic) }}</td>
+                                                <td class="text-right">Rp {{ number_format($users->thp ?? 0) }}</td>
                                             </tr>
                                             <tr>
                                                 <td><strong>Uang Lembur</strong></td>
@@ -124,21 +105,21 @@
                                                 <td><strong>Tunjangan Shift</strong></td>
                                                 <td class="text-right">Rp {{ number_format($shift) }}</td>
                                             </tr>
-                                            @if($users->department === "Kantor Pusat Pertamina")
+                                            @if(($users->department_name ?? '') === "Kantor Pusat Pertamina")
                                             <tr>
                                                 <td><strong>Transportasi</strong></td>
                                                 <td class="text-right">Rp {{ number_format($transport) }}</td>
                                             </tr>
                                             @endif
-                                            @if($users->conveyance != 0)
+                                            @if($keahlian != 0)
                                             <tr>
                                                 <td><strong>Tunjangan Keahlian</strong></td>
-                                                <td class="text-right"> {{ number_format($keahlian) }}</td>
+                                                <td class="text-right">Rp {{ number_format($keahlian) }}</td>
                                             </tr>
                                             @endif
                                             <tr>
                                                 <td><strong>Kompensasi Lain-lain</strong></td>
-                                                <td class="text-right">Rp {{ number_format($onsite) }}</td>
+                                                <td class="text-right">Rp {{ number_format($kompensasi) }}</td>
                                             </tr>
                                             <tr class="table-primary">
                                                 <td><strong>Total Salary</strong></td>
@@ -154,54 +135,37 @@
                                     <h4 class="mb-3"><strong>Potongan</strong></h4>
                                     <table class="table table-bordered">
                                         <tbody>
-                                        @if($users->labour_welfare != 0)
                                         <tr>
-                                        <td><strong>Proporsional</strong></td>
-                                            <td class="text-right">{{ number_format($proporsional) }}</td>
+                                            <td><strong>Pajak</strong></td>
+                                            <td class="text-right">Rp {{ number_format($pajak) }}</td>
+                                        </tr>
+                                        @if($proporsional != 0)
+                                        <tr>
+                                            <td><strong>Proporsional</strong></td>
+                                            <td class="text-right">Rp {{ number_format($proporsional) }}</td>
                                         </tr>
                                         @endif
-                                        
-                                        @if($users->department != "Pertamina Hulu Rokan")
                                         <tr>
-                                        <td><strong>BPJSTK JHT</strong></td>
+                                            <td><strong>BPJSTK JHT</strong></td>
                                             <td class="text-right">Rp {{ number_format($JHT) }}</td>
                                         </tr>
                                         <tr>
-                                        <td><strong>BPJSTK JP</strong></td>
+                                            <td><strong>BPJSTK JP</strong></td>
                                             <td class="text-right">Rp {{ number_format($JP) }}</td>
                                         </tr>
                                         <tr>
-                                        <td><strong>BPJS Kesehatan</strong></td>
-                                            <td class="text-right">Rp {{ number_format($BPJSKes) }}</td>
-                                        </tr>
-                                        <tr>
-                                            <td><strong>Total Potongan</strong></td>
-                                            <td class="text-right"><strong>Rp {{ number_format($totalPotongan) }}</strong></td>
-                                        </tr>
-                                        @else
-                                        <tr>
-                                            <td><strong>BPJSTK JHT</strong></td>
-                                            <td class="text-right">Rp {{ number_format(0) }}</td>
-                                        </tr>
-                                        <tr>
-                                            <td><strong>BPJSTK JP</strong></td>
-                                            <td class="text-right">Rp {{ number_format(0) }}</td>
-                                        </tr>
-                                        <tr>
                                             <td><strong>BPJS Kesehatan</strong></td>
-                                            <td class="text-right">Rp {{ number_format(0) }}</td>
+                                            <td class="text-right">Rp {{ number_format($BPJSKes) }}</td>
                                         </tr>
                                         <tr class="table-primary">
                                             <td><strong>Total Potongan</strong></td>
-                                            <td class="text-right"><strong>Rp {{ number_format($proporsional) }}</strong></td>
+                                            <td class="text-right"><strong>Rp {{ number_format($totalPotongan) }}</strong></td>
                                         </tr>
-                                        @endif
-                                            </tr>
                                         </tbody>
                                     </table>
                                 </div>
                                 <div class="mt-3">
-                                    <p class="net-salary"><strong>Net Salary: Rp {{ number_format($total) }}</strong></p>
+                                    <p class="net-salary"><strong>Net Salary: Rp {{ number_format($salary) }}</strong></p>
                                 </div>
                             </div> 
                         </div>
@@ -233,7 +197,7 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
         document.getElementById('generatePdf').addEventListener('click', function() {
-            // Make an AJAX request to get the PDF HTML
+            @if($users)
             fetch('{{ route("salary.pdf.html", ["user_id" => $users->user_id]) }}')
                 .then(response => response.text())
                 .then(html => {
@@ -251,6 +215,9 @@
 
                     html2pdf().set(opt).from(element).save();
                 });
+            @else
+            console.error('User data is not available.');
+            @endif
         });
 
         document.getElementById('sendEmail').addEventListener('click', function() {
