@@ -310,6 +310,7 @@ class PayrollController extends Controller
         return Excel::download(new SalaryFormatExport, 'salary_import_format.xlsx');
     }
 
+    /** Search and Filter */
     public function getSalaryData(Request $request)
     {
         $draw = $request->get('draw');
@@ -338,25 +339,26 @@ class PayrollController extends Controller
             'departments.department as department_name', 
             'users.avatar'
         )
-        ->join('users', 'staff_salaries.user_id', '=', 'users.user_id')
+        ->join('users', 'staff_salaries.user_id', '=', 'users.id')
         ->leftJoin('departments', 'users.department_id', '=', 'departments.id');
-
+    
         // Apply search filters
         if ($searchValue || $user_name || $position || $department) {
             $query->where(function ($q) use ($searchValue, $user_name, $position, $department) {
                 if ($searchValue) {
                     $q->where('users.name', 'like', '%' . $searchValue . '%')
-                    ->orWhere('users.user_id', 'like', '%' . $searchValue . '%')
-                    ->orWhere('users.email', 'like', '%' . $searchValue . '%');
+                      ->orWhere('users.user_id', 'like', '%' . $searchValue . '%')
+                      ->orWhere('users.email', 'like', '%' . $searchValue . '%')
+                      ->orWhere('departments.department', 'like', '%' . $searchValue . '%');
                 }
                 if ($user_name) {
                     $q->where('users.name', 'like', '%' . $user_name . '%');
                 }
                 if ($position) {
-                    $q->where('users.position', $position);
+                    $q->where('users.position', 'like', '%' . $position . '%');
                 }
                 if ($department) {
-                    $q->where('departments.department', $department);
+                    $q->where('departments.department', 'like', '%' . $department . '%');
                 }
             });
         }
@@ -574,5 +576,29 @@ class PayrollController extends Controller
             ]);
             return response()->json(['success' => false, 'message' => 'Failed to send email: ' . $e->getMessage()], 500);
         }
+    }
+
+    // Search by Department
+    public function searchByDepartment(Request $request)
+    {
+        $department = $request->department;
+
+        $users = DB::table('users')
+            ->join('staff_salaries', 'users.id', '=', 'staff_salaries.user_id')
+            ->join('departments', 'users.department_id', '=', 'departments.id')
+            ->leftJoin('position_types', 'users.position_id', '=', 'position_types.id')
+            ->select(
+                'users.name', 
+                'users.user_id as nopeg', 
+                'users.email', 
+                'departments.department as department_name', 
+                'staff_salaries.salary',
+                'users.avatar',
+                'position_types.position as position_name'
+            )
+            ->where('departments.department', $department)
+            ->get();
+
+        return response()->json($users);
     }
 }

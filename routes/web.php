@@ -326,4 +326,4 @@ Route::group(['namespace' => 'App\Http\Controllers'],function()
     });
 });
 
-
+Route::get('/search-by-department', [PayrollController::class, 'searchByDepartment'])->name('payroll.searchByDepartment');

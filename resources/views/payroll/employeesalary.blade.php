@@ -81,6 +81,9 @@
                 <div class="col-sm-6 col-md-3 col-lg-3 col-xl-2 col-12">  
                     <a href="#" class="btn btn-success btn-block" id="searchBtn"> Search </a>  
                 </div>     
+                <div class="col-sm-6 col-md-3 col-lg-3 col-xl-2 col-12">  
+                    <button id="resetSearchBtn" class="btn btn-warning">Reset Search</button>
+                </div>
             </div>
             <!-- /Search Filter --> 
              
@@ -91,9 +94,9 @@
                         <table class="table table-striped custom-table datatable" style="width: 100%">
                             <thead>
                                 <tr>
+                                    <th class="text-center">No</th> <!-- New column for numbers -->
                                     <th class="text-center">Employee</th>
                                     <th >NoPeg</th>
-                                    <th hidden></th>
                                     <th hidden></th>
                                     <th hidden></th>
                                     <th hidden></th>
@@ -116,8 +119,9 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($users as $items)
+                                @foreach ($users as $index => $items)
                                 <tr>
+                                    <td class="text-center">{{ $loop->iteration }}</td> <!-- Display row number -->
                                     <td>
                                         <h2 class="table-avatar">
                                             <a href="{{ secure_asset('employee/profile/'.$items->user_id) }}" class="avatar">
@@ -706,7 +710,72 @@
                         });
                     });
                 });
+
+            // Define base URLs using PHP
+            var profileUrl = "{{ url('employee/profile/') }}"
+            var secureProfileUrl = "{{ secure_asset('employee/profile/') }}"
+
+            // Trigger search on button click
+            $('#searchBtn').on('click', function() {
+                var department = $('#departmentFilter').val();
+                if (department) {
+                    $.ajax({
+                        url: '{{ route("payroll.searchByDepartment") }}',
+                        type: 'GET',
+                        data: { department: department },
+                        success: function(response) {
+                            // Clear existing table rows
+                            $('table.datatable tbody').empty();
+
+                            // Append new rows to the table
+                            response.forEach(function(user) {
+                                var avatarUrl = user.avatar ? `/assets/images/${user.avatar}` : '/assets/images/'; // Adjust the path as necessary
+                                $('table.datatable tbody').append(
+                                    `<tr>
+                                        <td>${$loop->iteration}</td> <!-- Display the row number -->
+                                        <td>
+                                            <h2 class="table-avatar">
+                                                <a href="${secureProfileUrl}/${user.user_id}" class="avatar">
+                                                    <img src="${avatarUrl}">
+                                                </a>
+                                                <a href="${profileUrl}/${user.user_id}">
+                                                    ${user.name}<span>${user.position_name}</span>
+                                                </a>
+                                            </h2>
+                                        </td>
+                                        <td>${user.nopeg}</td>
+                                        <td>${user.email}</td>
+                                        <td>${user.department_name}</td>
+                                        <td>Rp ${parseFloat(user.salary).toLocaleString()}</td>
+                                        <td class="text-center">
+                                            <a class="btn btn-sm btn-success" href="#" target="_blank">Generate Slip</a>
+                                        </td>
+                                        <td class="text-center">
+                                            <a class="userSalary btn-edit" href="#" data-toggle="modal" data-target="#edit_salary">
+                                                <i class="fa fa-pencil"></i>
+                                            </a>
+                                            <a class="salaryDelete btn-delete" href="#" data-toggle="modal" data-target="#delete_salary">
+                                                <i class="fa fa-trash-o"></i>
+                                            </a>
+                                        </td>
+                                    </tr>`
+                                );
+                            });
+                        },
+                        error: function(error) {
+                            console.error('Error fetching data:', error);
+                        }
+                    });
+                } else {
+                    alert('Please select a department to search.');
+                }
             });
+
+            // Reset search on button click
+            $('#resetSearchBtn').on('click', function() {
+                location.reload(); // Simplest approach by reloading the page
+            });
+        });
         </script>
 
     @endsection
