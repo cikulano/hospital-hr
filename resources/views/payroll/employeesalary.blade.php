@@ -728,38 +728,37 @@
                             $('table.datatable tbody').empty();
 
                             // Append new rows to the table
-                            response.forEach(function(user) {
-                                var avatarUrl = user.avatar ? `/assets/images/${user.avatar}` : '/assets/images/'; // Adjust the path as necessary
-                                $('table.datatable tbody').append(
-                                    `<tr>
-                                        <td>${$loop->iteration}</td> <!-- Display the row number -->
-                                        <td>
-                                            <h2 class="table-avatar">
-                                                <a href="${secureProfileUrl}/${user.user_id}" class="avatar">
-                                                    <img src="${avatarUrl}">
-                                                </a>
-                                                <a href="${profileUrl}/${user.user_id}">
-                                                    ${user.name}<span>${user.position_name}</span>
-                                                </a>
-                                            </h2>
-                                        </td>
-                                        <td>${user.nopeg}</td>
-                                        <td>${user.email}</td>
-                                        <td>${user.department_name}</td>
-                                        <td>Rp ${parseFloat(user.salary).toLocaleString()}</td>
-                                        <td class="text-center">
-                                            <a class="btn btn-sm btn-success" href="#" target="_blank">Generate Slip</a>
-                                        </td>
-                                        <td class="text-center">
-                                            <a class="userSalary btn-edit" href="#" data-toggle="modal" data-target="#edit_salary">
-                                                <i class="fa fa-pencil"></i>
+                            response.forEach(function(user, index) {
+                                var avatarUrl = user.avatar ? `/assets/images/${user.avatar}` : '/assets/images/default_avatar.png'; // Adjust the path as necessary
+                                var row = `<tr>
+                                    <td class="text-center">${index + 1}</td> <!-- Display the row number -->
+                                    <td>
+                                        <h2 class="table-avatar">
+                                            <a href="${secureProfileUrl}/${user.user_id}" class="avatar">
+                                                <img src="${avatarUrl}">
                                             </a>
-                                            <a class="salaryDelete btn-delete" href="#" data-toggle="modal" data-target="#delete_salary">
-                                                <i class="fa fa-trash-o"></i>
+                                            <a href="${profileUrl}/${user.user_id}">
+                                                ${user.name}<span>${user.position_name}</span>
                                             </a>
-                                        </td>
-                                    </tr>`
-                                );
+                                        </h2>
+                                    </td>
+                                    <td>${user.nopeg}</td>
+                                    <td>${user.email}</td>
+                                    <td>${user.department_name}</td>
+                                    <td>Rp ${parseFloat(user.salary).toLocaleString()}</td>
+                                    <td class="text-center">
+                                        <a class="btn btn-sm btn-success" href="#" target="_blank">Generate Slip</a>
+                                    </td>
+                                    <td class="text-center">
+                                        <a class="userSalary btn-edit" href="#" data-toggle="modal" data-target="#edit_salary">
+                                            <i class="fa fa-pencil"></i>
+                                        </a>
+                                        <a class="salaryDelete btn-delete" href="#" data-toggle="modal" data-target="#delete_salary">
+                                            <i class="fa fa-trash-o"></i>
+                                        </a>
+                                    </td>
+                                </tr>`;
+                                $('table.datatable tbody').append(row);
                             });
                         },
                         error: function(error) {
