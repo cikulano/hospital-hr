@@ -18,6 +18,9 @@
                         </ul>
                     </div>
                     <div class="col-auto float-right ml-auto">
+                        <a href="#" class="btn custom-blue" data-toggle="modal" data-target="#add_salary">
+                            <i class="fa fa-plus"></i>
+                        </a>
                         <div class="btn-group">
                             <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <i class="fa fa-file-pdf-o"></i>
@@ -30,9 +33,6 @@
                                 @endforeach
                             </div>
                         </div>
-                        <a href="#" class="btn custom-blue" data-toggle="modal" data-target="#add_salary">
-                            <i class="fa fa-plus"></i>
-                        </a>
                         <div class="btn-group">
                             <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <i class="fa fa-file-excel-o"></i>
@@ -60,18 +60,17 @@
 
             <!-- Search Filter -->
             <div class="row filter-row">
-                <div class="col-sm-6 col-md-3 col-lg-3 col-xl-2 col-12">  
+                <div class="col-sm-6 col-md-3 col-lg-3 col-xl-2 col-12"> 
                     <div class="form-group form-focus">
-                        <input type="text" id="employeeSearch" class="form-control floating" autocomplete="off">
-                        <label class="focus-label">Search Employee</label>
-                        <ul id="employeeList" class="dropdown-menu" style="display:none;"></ul>
+                        <input type="text" id="nameSearch" class="form-control floating" autocomplete="off">
+                        <label class="focus-label">Search Name</label>
                     </div>
                 </div>
                 <div class="col-sm-6 col-md-3 col-lg-3 col-xl-2 col-12">
                     <div class="form-group form-focus select-focus">
-                        <select class="select floating" id="departmentFilter"> 
+                        <select class="select floating" id="departmentSearch"> 
                             <option value=""> -- Select Department -- </option>
-                            @foreach($departments as $id => $department)
+                            @foreach($departments as $department)
                                 <option value="{{ $department }}">{{ $department }}</option>
                             @endforeach
                         </select>
@@ -717,63 +716,69 @@
 
             // Trigger search on button click
             $('#searchBtn').on('click', function() {
-                var department = $('#departmentFilter').val();
-                if (department) {
+                var name = $('#nameSearch').val();
+                var department = $('#departmentSearch').val();
+                if (name || department) {
                     $.ajax({
-                        url: '{{ route("payroll.searchByDepartment") }}',
+                        url: '{{ route("payroll.search") }}',
                         type: 'GET',
-                        data: { department: department },
+                        data: { name: name, department: department },
                         success: function(response) {
-                            // Clear existing table rows
-                            $('table.datatable tbody').empty();
-
-                            // Append new rows to the table
-                            response.forEach(function(user, index) {
-                                var avatarUrl = user.avatar ? `/assets/images/${user.avatar}` : '/assets/images/default_avatar.png'; // Adjust the path as necessary
-                                var row = `<tr>
-                                    <td class="text-center">${index + 1}</td> <!-- Display the row number -->
-                                    <td>
-                                        <h2 class="table-avatar">
-                                            <a href="${secureProfileUrl}/${user.user_id}" class="avatar">
-                                                <img src="${avatarUrl}">
-                                            </a>
-                                            <a href="${profileUrl}/${user.user_id}">
-                                                ${user.name}<span>${user.position_name}</span>
-                                            </a>
-                                        </h2>
-                                    </td>
-                                    <td>${user.nopeg}</td>
-                                    <td>${user.email}</td>
-                                    <td>${user.department_name}</td>
-                                    <td>Rp ${parseFloat(user.salary).toLocaleString()}</td>
-                                    <td class="text-center">
-                                        <a class="btn btn-sm btn-success" href="#" target="_blank">Generate Slip</a>
-                                    </td>
-                                    <td class="text-center">
-                                        <a class="userSalary btn-edit" href="#" data-toggle="modal" data-target="#edit_salary">
-                                            <i class="fa fa-pencil"></i>
-                                        </a>
-                                        <a class="salaryDelete btn-delete" href="#" data-toggle="modal" data-target="#delete_salary">
-                                            <i class="fa fa-trash-o"></i>
-                                        </a>
-                                    </td>
-                                </tr>`;
-                                $('table.datatable tbody').append(row);
-                            });
+                            updateTable(response);
                         },
                         error: function(error) {
                             console.error('Error fetching data:', error);
                         }
                     });
                 } else {
-                    alert('Please select a department to search.');
+                    alert('Please enter a name or select a department.');
                 }
             });
 
             // Reset search on button click
             $('#resetSearchBtn').on('click', function() {
-                location.reload(); // Simplest approach by reloading the page
+                $('#nameSearch').val('');
+                $('#departmentSearch').val('');
+                location.reload();
             });
+
+            function updateTable(data) {
+                var tbody = $('table.datatable tbody');
+                tbody.empty();
+                
+                data.forEach(function(user, index) {
+                    var avatarUrl = user.avatar ? `/assets/images/${user.avatar}` : '/assets/images/default_avatar.png';
+                    var row = `
+                        <tr>
+                            <td class="text-center">${index + 1}</td>
+                            <td>
+                                <h2 class="table-avatar">
+                                    <a href="{{ secure_asset('employee/profile/') }}/${user.user_id}" class="avatar">
+                                        <img alt="" src="${avatarUrl}">
+                                    </a>
+                                    <a href="{{ url('employee/profile/') }}/${user.user_id}">${user.name}<span>${user.position_name}</span></a>
+                                </h2>
+                            </td>
+                            <td>${user.nopeg}</td>
+                            <td>${user.email}</td>
+                            <td>${user.department_name}</td>
+                            <td>Rp ${parseFloat(user.salary).toLocaleString()}</td>
+                            <td class="text-center">
+                                <a class="btn btn-sm btn-success" href="{{ route('extra.report.html', '') }}/${user.user_id}" target="_blank">Generate Slip</a>
+                            </td>
+                            <td class="text-center">
+                                <a class="userSalary btn-edit" href="#" data-toggle="modal" data-target="#edit_salary">
+                                    <i class="fa fa-pencil"></i>
+                                </a>
+                                <a class="salaryDelete btn-delete" href="#" data-toggle="modal" data-target="#delete_salary">
+                                    <i class="fa fa-trash-o"></i>
+                                </a>
+                            </td>
+                        </tr>
+                    `;
+                    tbody.append(row);
+                });
+            }
         });
         </script>
 

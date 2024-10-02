@@ -51,7 +51,7 @@ class PayrollController extends Controller
             ->get();
 
         $permission_lists = DB::table('permission_lists')->get();
-        $departments = DB::table('departments')->pluck('department', 'id');
+        $departments = DB::table('departments')->pluck('department');
 
         return view('payroll.employeesalary', compact('users', 'userList', 'permission_lists', 'departments'));
     }   
@@ -598,6 +598,39 @@ class PayrollController extends Controller
             )
             ->where('departments.department', $department)
             ->get();
+
+        return response()->json($users);
+    }
+
+    public function search(Request $request)
+    {
+        $name = $request->name;
+        $department = $request->department;
+
+        $query = DB::table('users')
+            ->join('staff_salaries', 'users.id', '=', 'staff_salaries.user_id')
+            ->leftJoin('departments', 'users.department_id', '=', 'departments.id')
+            ->leftJoin('position_types', 'users.position_id', '=', 'position_types.id')
+            ->select(
+                'users.id as user_id',
+                'users.name',
+                'users.user_id as nopeg',
+                'users.email',
+                'users.avatar',
+                'departments.department as department_name',
+                'position_types.position as position_name',
+                'staff_salaries.salary'
+            );
+
+        if ($name) {
+            $query->where('users.name', 'LIKE', "%{$name}%");
+        }
+
+        if ($department) {
+            $query->where('departments.department', $department);
+        }
+
+        $users = $query->get();
 
         return response()->json($users);
     }
