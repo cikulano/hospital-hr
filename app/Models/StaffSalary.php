@@ -19,6 +19,8 @@ class StaffSalary extends Model
         'shift',
         'tunjangan_keahlian',
         'transport',
+        'poli_sore_sabtu',
+        'oncall',
         'kompensasi',
         'pajak',
         'proporsional',

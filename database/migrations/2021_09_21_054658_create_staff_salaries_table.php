@@ -22,6 +22,8 @@ class CreateStaffSalariesTable extends Migration
             $table->decimal('shift', 15, 2)->nullable();
             $table->decimal('tunjangan_keahlian', 15, 2)->nullable();
             $table->decimal('transport', 15, 2)->nullable();
+            $table->decimal('poli_sore_sabtu', 15, 2)->nullable();
+            $table->decimal('oncall', 15, 2)->nullable();
             $table->decimal('kompensasi', 15, 2)->nullable();
             $table->decimal('pajak', 15, 2)->nullable();
             $table->decimal('proporsional', 15, 2)->nullable();

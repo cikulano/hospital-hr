@@ -68,6 +68,8 @@ class PayrollController extends Controller
             'tunjangan_keahlian' => 'required',
             'transport' => 'required',
             'kompensasi' => 'required',
+            'poli_sore_sabtu' => 'required',
+            'oncall' => 'required',
             'pajak'     => 'required',
             'proporsional' => 'required',
             'potongan_bpjskes' => 'required',
@@ -89,6 +91,8 @@ class PayrollController extends Controller
             $salary->tunjangan_keahlian = $this->currencyToFloat($request->tunjangan_keahlian);
             $salary->transport = $this->currencyToFloat($request->transport);
             $salary->kompensasi = $this->currencyToFloat($request->kompensasi);
+            $salary->poli_sore_sabtu = $this->currencyToFloat($request->poli_sore_sabtu);
+            $salary->oncall = $this->currencyToFloat($request->oncall);
             $salary->pajak = $this->currencyToFloat($request->pajak);
             $salary->proporsional = $this->currencyToFloat($request->proporsional);
             $salary->potongan_bpjskes = $this->currencyToFloat($request->potongan_bpjskes);
@@ -142,6 +146,8 @@ class PayrollController extends Controller
             $salary->tunjangan_keahlian = $this->currencyToFloat($request->tunjangan_keahlian);
             $salary->transport = $this->currencyToFloat($request->transport);
             $salary->kompensasi = $this->currencyToFloat($request->kompensasi);
+            $salary->poli_sore_sabtu = $this->currencyToFloat($request->poli_sore_sabtu);
+            $salary->oncall = $this->currencyToFloat($request->oncall);
             $salary->pajak = $this->currencyToFloat($request->pajak);
             $salary->proporsional = $this->currencyToFloat($request->proporsional);
             $salary->potongan_bpjskes = $this->currencyToFloat($request->potongan_bpjskes);

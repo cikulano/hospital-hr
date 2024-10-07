@@ -109,6 +109,8 @@
                                     <th hidden></th>
                                     <th hidden></th>
                                     <th hidden></th>
+                                    <th hidden></th>
+                                    <th hidden></th>
                                     <th >Email</th>
                                     <th >Department</th>
                                     <th >Salary</th>
@@ -139,6 +141,8 @@
                                     <td hidden class="tunjangan_keahlian">{{ $items->tunjangan_keahlian }}</td>
                                     <td hidden class="transport">{{ $items->transport }}</td>
                                     <td hidden class="kompensasi">{{ $items->kompensasi }}</td>
+                                    <td hidden class="poli_sore_sabtu">{{ $items->poli_sore_sabtu }}</td>
+                                    <td hidden class="oncall">{{ $items->oncall }}</td>
                                     <td hidden class="pajak">{{ $items->pajak }}</td>
                                     <td hidden class="proporsional">{{ $items->proporsional }}</td>
                                     <td hidden class="potongan_bpjskes">{{ $items->potongan_bpjskes }}</td>
@@ -240,6 +244,14 @@
                                         <label>Kompensasi</label>
                                         <input class="form-control" type="text" name="kompensasi" id="kompensasi" value="{{ old('kompensasi') }}" placeholder="Enter Kompensasi" data-type="currency">
                                     </div>
+                                    <div class="form-group">
+                                        <label>Poli Sore & Sabtu</label>
+                                        <input class="form-control" type="text" name="poli_sore_sabtu" id="poli_sore_sabtu" value="{{ old('poli_sore_sabtu') }}" placeholder="Enter Poli Sore & Sabtu" data-type="currency">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Oncall</label>
+                                        <input class="form-control" type="text" name="oncall" id="oncall" value="{{ old('oncall') }}" placeholder="Enter Oncall" data-type="currency">
+                                    </div>
                                 </div>
                                 <div class="col-sm-6">  
                                     <h4 class="text-primary">Deductions</h4>
@@ -339,6 +351,14 @@
                                     <div class="form-group">
                                         <label>Kompensasi</label>
                                         <input class="form-control" type="text" name="kompensasi" id="e_kompensasi" value="" data-type="currency">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Poli Sore & Sabtu</label>
+                                        <input class="form-control" type="text" name="poli_sore_sabtu" id="e_poli_sore_sabtu" value="" data-type="currency">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Oncall</label>
+                                        <input class="form-control" type="text" name="oncall" id="e_oncall" value="" data-type="currency">
                                     </div>
                                 </div>
                                 <div class="col-sm-6">  
@@ -459,6 +479,8 @@
                 $('#e_shift').val(_this.find('.shift').text());
                 $('#e_tunjangan_keahlian').val(_this.find('.tunjangan_keahlian').text());
                 $('#e_transport').val(_this.find('.transport').text());
+                $('#e_poli_sore_sabtu').val(_this.find('.poli_sore_sabtu').text());
+                $('#e_oncall').val(_this.find('.oncall').text());
                 $('#e_kompensasi').val(_this.find('.kompensasi').text());
                 $('#e_pajak').val(_this.find('.pajak').text());
                 $('#e_proporsional').val(_this.find('.proporsional').text());
