@@ -69,15 +69,25 @@
                             $shift = $users->shift ?? 0;
                             $keahlian = $users->tunjangan_keahlian ?? 0;
                             $transport = $users->transport ?? 0;
-                            $kompensasi = $users->kompensasi ?? 0;
-                            $totalPendapatan = $thp + $lembur + $shift + $kompensasi + $transport + $keahlian;
+                            $kompensasi = $users->kompensasi ?? 0;  
+                            $poli_sore_sabtu = $users->poli_sore_sabtu ?? 0;
+                            $oncall = $users->oncall ?? 0;
+                            $totalPendapatan = $thp + $lembur + $shift + $kompensasi + $transport + $keahlian + $poli_sore_sabtu + $oncall;
+
+                            if($users->name == "Ripan Julhakim"){
+                                $totalPendapatan = $totalPendapatan - $thp;
+                            }
 
                             $pajak = $users->pajak ?? 0;
                             $proporsional = $users->proporsional ?? 0;
                             $JHT = $users->potongan_jht ?? 0;
                             $JP = $users->potongan_jp ?? 0;
                             $BPJSKes = $users->potongan_bpjskes ?? 0;
-                            $totalPotongan = $pajak + $JHT + $JP + $BPJSKes;
+                            $totalPotongan = $JHT + $JP + $BPJSKes;
+
+                            if($users->department_name == "Kantor Pusat Pertamina"){
+                                $totalPendapatan = $totalPendapatan + $proporsional;
+                            }
 
                             $benefit_bpjskes = $users->benefit_bpjskes ?? 0;
                             $benefit_jp = $users->benefit_jp ?? 0;
@@ -93,10 +103,12 @@
                                     <h4 class="mb-3"><strong>Pendapatan</strong></h4>
                                     <table class="table table-bordered">
                                         <tbody>
+                                        @if($users->name != "Ripan Julhakim")
                                             <tr>
                                                 <td><strong>THP</strong></td>
                                                 <td class="text-right">Rp {{ number_format($users->thp ?? 0) }}</td>
                                             </tr>
+                                        @endif
                                             <tr>
                                                 <td><strong>Uang Lembur</strong></td>
                                                 <td class="text-right">Rp {{ number_format($lembur) }}</td>
@@ -110,11 +122,29 @@
                                                 <td><strong>Transportasi</strong></td>
                                                 <td class="text-right">Rp {{ number_format($transport) }}</td>
                                             </tr>
+                                            @if($proporsional != 0)
+                                            <tr>
+                                                <td><strong>Proporsional</strong></td>
+                                                <td class="text-right">Rp {{ number_format($proporsional) }}</td>
+                                                </tr>
+                                                @endif
                                             @endif
                                             @if($keahlian != 0)
                                             <tr>
                                                 <td><strong>Tunjangan Keahlian</strong></td>
                                                 <td class="text-right">Rp {{ number_format($keahlian) }}</td>
+                                            </tr>
+                                            @endif
+                                            @if($poli_sore_sabtu != 0)
+                                            <tr>
+                                                <td><strong>Poli Sore & Sabtu</strong></td>
+                                                <td class="text-right">Rp {{ number_format($poli_sore_sabtu) }}</td>
+                                            </tr>
+                                            @endif
+                                            @if($oncall != 0)
+                                            <tr>
+                                                <td><strong>Oncall</strong></td>
+                                                <td class="text-right">Rp {{ number_format($oncall) }}</td>
                                             </tr>
                                             @endif
                                             <tr>
@@ -139,11 +169,13 @@
                                             <td><strong>Pajak</strong></td>
                                             <td class="text-right">Rp {{ number_format($pajak) }}</td>
                                         </tr>
+                                        @if($users->department_name !== "Kantor Pusat Pertamina" and $users->name !== "Ripan Julhakim")
                                         @if($proporsional != 0)
                                         <tr>
                                             <td><strong>Proporsional</strong></td>
                                             <td class="text-right">Rp {{ number_format($proporsional) }}</td>
                                         </tr>
+                                        @endif
                                         @endif
                                         <tr>
                                             <td><strong>BPJSTK JHT</strong></td>

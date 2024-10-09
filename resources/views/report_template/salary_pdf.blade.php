@@ -78,14 +78,24 @@
         $keahlian = $users->tunjangan_keahlian ?? 0;
         $transport = $users->transport ?? 0;
         $kompensasi = $users->kompensasi ?? 0;
-        $totalPendapatan = $thp + $lembur + $shift + $kompensasi + $transport + $keahlian;
+        $poli_sore_sabtu = $users->poli_sore_sabtu ?? 0;
+        $oncall = $users->oncall ?? 0;
+        $totalPendapatan = $thp + $lembur + $shift + $kompensasi + $transport + $keahlian + $poli_sore_sabtu + $oncall;
+
+        if($users->name == "Ripan Julhakim"){
+            $totalPendapatan = $totalPendapatan - $thp;
+        }
 
         $pajak = $users->pajak ?? 0;
         $proporsional = $users->proporsional ?? 0;
         $JHT = $users->potongan_jht ?? 0;
         $JP = $users->potongan_jp ?? 0;
         $BPJSKes = $users->potongan_bpjskes ?? 0;
-        $totalPotongan = $pajak + $JHT + $JP + $BPJSKes;
+        $totalPotongan = $JHT + $JP + $BPJSKes;
+
+        if($users->department_name == "Kantor Pusat Pertamina"){
+            $totalPendapatan = $totalPendapatan + $proporsional;
+        }
 
         $benefit_bpjskes = $users->benefit_bpjskes ?? 0;
         $benefit_jp = $users->benefit_jp ?? 0;
@@ -97,10 +107,12 @@
     <div>
         <h4 style="font-weight: bold; text-transform: uppercase; padding: 5px; font-size: 14px; color: #333; margin-bottom: 8px;">Pendapatan</h4>
         <table style="width: 100%; border-collapse: collapse;">
+            @if($users->name != "Ripan Julhakim")
             <tr>
                 <td style="width: 70%; text-align: left; padding: 4px; border-bottom: 1px solid #ddd;">THP</td>
                 <td style="width: 30%; text-align: right; padding: 4px; border-bottom: 1px solid #ddd;">{{ number_format($thp) }}</td>
             </tr>
+            @endif
             <tr>
                 <td style="width: 70%; text-align: left; padding: 4px; border-bottom: 1px solid #ddd;">Uang Lembur</td>
                 <td style="width: 30%; text-align: right; padding: 4px; border-bottom: 1px solid #ddd;">{{ number_format($lembur) }}</td>
@@ -114,11 +126,29 @@
                 <td style="width: 70%; text-align: left; padding: 4px; border-bottom: 1px solid #ddd;">Transportasi</td>
                 <td style="width: 30%; text-align: right; padding: 4px; border-bottom: 1px solid #ddd;">{{ number_format($transport) }}</td>
             </tr>
+            @if($proporsional != 0)
+            <tr>
+                <td style="width: 70%; text-align: left; padding: 4px; border-bottom: 1px solid #ddd;">Proporsional</td>
+                <td style="width: 30%; text-align: right; padding: 4px; border-bottom: 1px solid #ddd;">{{ number_format($proporsional) }}</td>
+            </tr>
+            @endif
             @endif
             @if($keahlian != 0)
             <tr>
                 <td style="width: 70%; text-align: left; padding: 4px; border-bottom: 1px solid #ddd;">Tunjangan Keahlian</td>
                 <td style="width: 30%; text-align: right; padding: 4px; border-bottom: 1px solid #ddd;">{{ number_format($keahlian) }}</td>
+            </tr>
+            @endif
+            @if($poli_sore_sabtu != 0)
+            <tr>
+                <td style="width: 70%; text-align: left; padding: 4px; border-bottom: 1px solid #ddd;">Poli Sore & Sabtu</td>
+                <td style="width: 30%; text-align: right; padding: 4px; border-bottom: 1px solid #ddd;">{{ number_format($poli_sore_sabtu) }}</td>
+            </tr>
+            @endif
+            @if($oncall != 0)
+            <tr>
+                <td style="width: 70%; text-align: left; padding: 4px; border-bottom: 1px solid #ddd;">Oncall</td>
+                <td style="width: 30%; text-align: right; padding: 4px; border-bottom: 1px solid #ddd;">{{ number_format($oncall) }}</td>
             </tr>
             @endif
             <tr>
@@ -138,12 +168,14 @@
     <div>
         <h4 style="font-weight: bold; text-transform: uppercase; padding: 2px; font-size: 14px; color: #333; margin-bottom: 8px;">Potongan</h4>
         <table style="width: 100%; border-collapse: collapse;">
+        @if($users->department_name !== "Kantor Pusat Pertamina" and $users->name !== "Ripan Julhakim")
             @if($proporsional != 0)
             <tr>
                 <td style="width: 70%; text-align: left; padding: 4px; border-bottom: 1px solid #ddd;">Proporsional</td>
                 <td style="width: 30%; text-align: right; padding: 4px; border-bottom: 1px solid #ddd;">{{ number_format($proporsional) }}</td>
             </tr>
             @endif
+        @endif
             <tr>
                 <td style="width: 70%; text-align: left; padding: 4px; border-bottom: 1px solid #ddd;">BPJSTK JHT</td>
                 <td style="width: 30%; text-align: right; padding: 4px; border-bottom: 1px solid #ddd;">{{ number_format($JHT) }}</td>
